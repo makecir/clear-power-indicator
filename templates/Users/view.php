@@ -45,7 +45,6 @@
                 <div class="table-responsive">
                     <table>
                         <tr>
-                            <th><?= __('Id') ?></th>
                             <th><?= __('User Id') ?></th>
                             <th><?= __('Iidx Id') ?></th>
                             <th><?= __('Class Sp') ?></th>
@@ -62,7 +61,6 @@
                         </tr>
                         <?php foreach ($user->user_detail as $userDetail) : ?>
                         <tr>
-                            <td><?= h($userDetail->id) ?></td>
                             <td><?= h($userDetail->user_id) ?></td>
                             <td><?= h($userDetail->iidx_id) ?></td>
                             <td><?= h($userDetail->class_sp) ?></td>
