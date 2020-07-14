@@ -31,6 +31,7 @@ class User extends Entity
     protected $_accessible = [
         'username' => true,
         'password' => true,
+        'email' => true,
         'created_at' => true,
         'modified_at' => true,
         'user_detail' => true,
@@ -51,5 +52,5 @@ class User extends Entity
             return (new DefaultPasswordHasher())->hash($password);
         }
     }
-    
+
 }

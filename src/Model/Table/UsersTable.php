@@ -74,6 +74,11 @@ class UsersTable extends Table
             ->notEmptyString('password');
 
         $validator
+            ->scalar('email')
+            ->maxLength('email', 128)
+            ->allowEmptyString('email');
+
+        $validator
             ->dateTime('created_at')
             ->notEmptyDateTime('created_at');
 

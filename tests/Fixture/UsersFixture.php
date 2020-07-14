@@ -20,6 +20,7 @@ class UsersFixture extends TestFixture
         'id' => ['type' => 'integer', 'length' => 16, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'username' => ['type' => 'string', 'length' => 16, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
         'password' => ['type' => 'string', 'length' => 256, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
+        'email' => ['type' => 'string', 'length' => 128, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
         'created_at' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => 'current_timestamp()', 'comment' => ''],
         'modified_at' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => false, 'default' => 'current_timestamp()', 'comment' => ''],
         '_constraints' => [
@@ -44,6 +45,7 @@ class UsersFixture extends TestFixture
                 'id' => 1,
                 'username' => 'Lorem ipsum do',
                 'password' => 'Lorem ipsum dolor sit amet',
+                'email' => 'hoge@example.com',
                 'created_at' => '2020-07-14 00:46:36',
                 'modified_at' => '2020-07-14 00:46:36',
             ],
