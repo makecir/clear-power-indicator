@@ -34,7 +34,7 @@ class User extends Entity
         'email' => true,
         'created_at' => true,
         'modified_at' => true,
-        'user_detail' => true,
+        'user_details' => true,
     ];
 
     /**

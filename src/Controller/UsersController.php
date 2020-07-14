@@ -56,7 +56,7 @@ class UsersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Scores', 'UserDetail'],
+            'contain' => ['Scores', 'UserDetails'],
         ];
         $users = $this->paginate($this->Users);
 
@@ -73,7 +73,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['UserDetail','Scores'],
+            'contain' => ['UserDetails','Scores'],
         ]);
 
         $this->set(compact('user'));
@@ -111,7 +111,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Scores', 'UserDetail'],
+            'contain' => ['Scores', 'UserDetails'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
