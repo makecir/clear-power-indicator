@@ -46,6 +46,12 @@ class UsersTable extends Table
         $this->hasMany('UserDetail', [
             'foreignKey' => 'user_id',
         ]);
+
+        $this->belongsToMany('Scores', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'score_id',
+            'joinTable' => 'users_scores',
+        ]);
     }
 
     /**
