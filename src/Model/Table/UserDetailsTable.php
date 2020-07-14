@@ -1,0 +1,121 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Model\Table;
+
+use Cake\ORM\Query;
+use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+
+/**
+ * UserDetails Model
+ *
+ * @property \App\Model\Table\IidxesTable&\Cake\ORM\Association\BelongsTo $Iidxes
+ * @property \App\Model\Table\TwittersTable&\Cake\ORM\Association\BelongsTo $Twitters
+ *
+ * @method \App\Model\Entity\UserDetail newEmptyEntity()
+ * @method \App\Model\Entity\UserDetail newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\UserDetail[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\UserDetail get($primaryKey, $options = [])
+ * @method \App\Model\Entity\UserDetail findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\UserDetail patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\UserDetail[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\UserDetail|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\UserDetail saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\UserDetail[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\UserDetail[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\UserDetail[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\UserDetail[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ */
+class UserDetailsTable extends Table
+{
+    /**
+     * Initialize method
+     *
+     * @param array $config The configuration for the Table.
+     * @return void
+     */
+    public function initialize(array $config): void
+    {
+        parent::initialize($config);
+
+        $this->setTable('user_details');
+        $this->setDisplayField('user_id');
+        $this->setPrimaryKey('user_id');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+        ]);
+
+    }
+
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator): Validator
+    {
+        $validator
+            ->scalar('user_id')
+            ->maxLength('user_id', 16)
+            ->allowEmptyString('user_id', null, 'create');
+
+        $validator
+            ->scalar('dj_name')
+            ->maxLength('dj_name', 8)
+            ->allowEmptyString('dj_name');
+
+        $validator
+            ->notEmptyString('class_sp');
+
+        $validator
+            ->notEmptyString('class_dp');
+
+        $validator
+            ->notEmptyString('arena_sp');
+
+        $validator
+            ->notEmptyString('arena_dp');
+
+        $validator
+            ->scalar('bio')
+            ->maxLength('bio', 240)
+            ->allowEmptyString('bio');
+
+        $validator
+            ->numeric('rating')
+            ->allowEmptyString('rating');
+
+        $validator
+            ->dateTime('update_at')
+            ->notEmptyDateTime('update_at');
+
+        $validator
+            ->dateTime('created_at')
+            ->notEmptyDateTime('created_at');
+
+        $validator
+            ->dateTime('modified_at')
+            ->notEmptyDateTime('modified_at');
+
+        return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->existsIn(['iidx_id'], 'Iidxes'));
+        $rules->add($rules->existsIn(['twitter_id'], 'Twitters'));
+
+        return $rules;
+    }
+}
