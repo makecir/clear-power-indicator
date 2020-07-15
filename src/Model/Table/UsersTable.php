@@ -52,6 +52,19 @@ class UsersTable extends Table
             'targetForeignKey' => 'score_id',
             'joinTable' => 'users_scores',
         ]);
+        
+        $this->belongsToMany('FollowUsers', [
+            'className' => 'Users',
+            'foreignKey' => 'follow_user_id',
+            'propertyName' => 'following_users',
+            'joinTable' => 'followings',
+        ]);
+        $this->belongsToMany('FollowedUsers', [
+            'className' => 'Users',
+            'foreignKey' => 'followed_user_id',
+            'propertyName' => 'followed_users',
+            'joinTable' => 'followings',
+        ]);
     }
 
     /**
@@ -105,6 +118,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['username']));
+        $rules->add($rules->isUnique(['email']));
 
         return $rules;
     }
