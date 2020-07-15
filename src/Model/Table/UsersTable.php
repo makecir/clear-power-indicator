@@ -50,7 +50,11 @@ class UsersTable extends Table
         $this->belongsToMany('Scores', [
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'score_id',
-            'joinTable' => 'users_scores',
+            'joinTable' => 'user_lamps',
+        ]);
+        
+        $this->hasMany('UserLamps', [
+            'foreignKey' => 'user_id',
         ]);
         
         $this->belongsToMany('FollowUsers', [
@@ -59,6 +63,7 @@ class UsersTable extends Table
             'propertyName' => 'following_users',
             'joinTable' => 'followings',
         ]);
+
         $this->belongsToMany('FollowedUsers', [
             'className' => 'Users',
             'foreignKey' => 'followed_user_id',

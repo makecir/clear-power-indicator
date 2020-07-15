@@ -59,6 +59,7 @@ class UsersController extends AppController
             'contain' => [
                 'Scores', 
                 'UserDetails',
+                'UserLamps',
                 'FollowUsers' => ['UserDetails'],
                 'FollowedUsers' => ['UserDetails'],
             ],
