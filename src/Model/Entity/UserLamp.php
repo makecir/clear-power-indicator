@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property int $user_id
  * @property int $score_id
  * @property int $lamp
+ * @property \Cake\I18n\FrozenTime $created_at
+ * @property \Cake\I18n\FrozenTime $modified_at
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Score $score
@@ -30,5 +32,7 @@ class UserLamp extends Entity
         'lamp' => true,
         'user' => true,
         'score' => true,
+        'created_at' => true,
+        'modified_at' => true,
     ];
 }
