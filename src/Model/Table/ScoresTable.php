@@ -52,6 +52,9 @@ class ScoresTable extends Table
         $this->hasMany('UserLamps', [
             'foreignKey' => 'score_id',
         ]);
+        $this->hasMany('GhostLamps', [
+            'foreignKey' => 'score_id',
+        ]);
 
     }
 
