@@ -67,6 +67,14 @@ class UserLampsTable extends Table
             ->requirePresence('lamp', 'create')
             ->notEmptyString('lamp');
 
+        $validator
+            ->dateTime('created_at')
+            ->notEmptyDateTime('created_at');
+
+        $validator
+            ->dateTime('modified_at')
+            ->notEmptyDateTime('modified_at');
+
         return $validator;
     }
 
