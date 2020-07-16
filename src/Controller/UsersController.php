@@ -151,8 +151,13 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        // *TODO* 要本人確認
+
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+
+        // user削除時にdetail,follow,lampを消去
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
