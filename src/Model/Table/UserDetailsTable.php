@@ -113,8 +113,8 @@ class UserDetailsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['iidx_id'], 'Iidxes'));
-        $rules->add($rules->existsIn(['twitter_id'], 'Twitters'));
+        // $rules->add($rules->existsIn(['iidx_id'], 'Iidxes'));
+        // $rules->add($rules->existsIn(['twitter_id'], 'Twitters'));
 
         return $rules;
     }
