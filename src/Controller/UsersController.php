@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\ORM\TableRegistry;
+
 /**
  * Users Controller
  *
@@ -96,9 +98,16 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                //user追加時に自動的にuser_detailを生成
+                $userDetailsTable = TableRegistry::getTableLocator()->get('UserDetails');
+                $user_detail = $userDetailsTable->newEmptyEntity();
+                $user_detail->user_id = $user->id;
+                if($userDetailsTable->save($user_detail)){
+                    $this->Flash->success(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Users->delete($user);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -142,8 +151,13 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        // *TODO* 要本人確認
+
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+
+        // user削除時にdetail,follow,lampを消去
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {

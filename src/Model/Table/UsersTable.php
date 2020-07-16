@@ -45,6 +45,8 @@ class UsersTable extends Table
 
         $this->hasOne('UserDetails', [
             'foreignKey' => 'user_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
 
         $this->belongsToMany('Scores', [
@@ -55,6 +57,24 @@ class UsersTable extends Table
         
         $this->hasMany('UserLamps', [
             'foreignKey' => 'user_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
+
+        //関連削除用
+        $this->hasMany('Followings', [
+            'className' => 'Followings',
+            'foreignKey' => 'follow_user_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
+
+        //関連削除用
+        $this->hasMany('Followings', [
+            'className' => 'Followings',
+            'foreignKey' => 'followed_user_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
         
         $this->belongsToMany('FollowUsers', [
@@ -123,7 +143,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->isUnique(['email']));
+        //$rules->add($rules->isUnique(['email']));
 
         return $rules;
     }
