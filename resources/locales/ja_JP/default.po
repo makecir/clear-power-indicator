@@ -242,7 +242,7 @@ msgstr "閲覧"
 #: Users/index.php:32
 #: Users/view.php:78
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: Followings/index.php:38
 #: Scores/index.php:84
