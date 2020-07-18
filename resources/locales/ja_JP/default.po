@@ -282,7 +282,7 @@ msgstr "最後"
 #: UserLamps/index.php:44
 #: Users/index.php:48
 msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
-msgstr ""
+msgstr "{{page}} / {{pages}} ページ、{{count}} 件中 {{current}} 件表示"
 
 #: Followings/view.php:12
 msgid "Delete Following"

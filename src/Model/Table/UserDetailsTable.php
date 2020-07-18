@@ -64,6 +64,11 @@ class UserDetailsTable extends Table
             ->allowEmptyString('user_id', null, 'create');
 
         $validator
+            ->scalar('iidx_id')
+            ->maxLength('iidx_id', 9)
+            ->allowEmptyString('iidx_id');
+
+        $validator
             ->scalar('dj_name')
             ->maxLength('dj_name', 8)
             ->allowEmptyString('dj_name');
@@ -84,6 +89,11 @@ class UserDetailsTable extends Table
             ->scalar('bio')
             ->maxLength('bio', 240)
             ->allowEmptyString('bio');
+
+        $validator
+            ->scalar('twitter_id')
+            ->maxLength('twitter_id', 32)
+            ->allowEmptyString('twitter_id');
 
         $validator
             ->numeric('rating')

@@ -49,7 +49,5 @@ class UserDetail extends Entity
         'update_at' => true,
         'created_at' => true,
         'modified_at' => true,
-        'iidx' => true,
-        'twitter' => true,
     ];
 }
