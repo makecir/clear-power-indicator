@@ -619,6 +619,10 @@ msgstr "ログアウト"
 msgid "Home"
 msgstr "ホーム"
 
+#:
+msgid "Register"
+msgstr "新規登録"
+
 #: Users/view.php:12
 msgid "Delete User"
 msgstr ""

@@ -18,8 +18,9 @@
                     <thead>
                         <tr>
                             <th><?= $this->Paginator->sort('id') ?></th>
-                            <th><?= $this->Paginator->sort('dj_name') ?></th>
                             <th><?= $this->Paginator->sort('username') ?></th>
+                            <th><?= $this->Paginator->sort('dj_name') ?></th>
+                            <th><?= $this->Paginator->sort('class_sp') ?></th>
                             <th><?= $this->Paginator->sort('created_at') ?></th>
                             <th><?= $this->Paginator->sort('modified_at') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -29,8 +30,9 @@
                         <?php foreach ($users as $user): ?>
                         <tr>
                             <td><?= $this->Number->format($user->id) ?></td>
-                            <td><?= h($user->user_detail->dj_name) ?></td>
                             <td><?= h($user->username) ?></td>
+                            <td><?= h($user->user_detail->dj_name) ?></td>
+                            <td><?= h($user->user_detail->sp_class_info) ?></td>
                             <td><?= h($user->created_at) ?></td>
                             <td><?= h($user->modified_at) ?></td>
                             <td class="actions">

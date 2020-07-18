@@ -66,6 +66,13 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <?= $this->Html->link(
+                        __('Register'),
+                        ['controller' => 'Users', 'action' => 'add'],
+                        ['class' => 'nav-link'])
+                    ?>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         *cur_user
