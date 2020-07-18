@@ -52,14 +52,14 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <?= $this->Html->link(
-                        'ホーム',
+                        __('Home'),
                         ['controller' => 'Pages', 'action' => 'display'],
                         ['class' => 'nav-link'])
                     ?>
                 </li>
                 <li class="nav-item">
                     <?= $this->Html->link(
-                        'ユーザー',
+                        __('User'),
                         ['controller' => 'Users', 'action' => 'index'],
                         ['class' => 'nav-link'])
                     ?>
@@ -72,7 +72,7 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
                         <?= $this->Html->link(
-                                'ログアウト',
+                                __('Logout'),
                                 ['controller' => 'Users', 'action' => 'logout'],
                                 ['class' => 'dropdown-item'])
                             ?>
