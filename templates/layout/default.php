@@ -75,14 +75,14 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        *cur_user
+                        <?= $identity->username ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
                         <?= $this->Html->link(
                                 __('Logout'),
                                 ['controller' => 'Users', 'action' => 'logout'],
                                 ['class' => 'dropdown-item'])
-                            ?>
+                        ?>
                     </div>
                 </li>
             </ul>
