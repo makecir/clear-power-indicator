@@ -66,25 +66,37 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <?= $this->Html->link(
-                        __('Register'),
-                        ['controller' => 'Users', 'action' => 'add'],
-                        ['class' => 'nav-link'])
-                    ?>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?= $identity->username ?>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                <?php if($isLoggedIn): ?>
+                    <!-- ログイン中 -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?= $identity->username ?>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                            <?= $this->Html->link(
+                                    __('Logout'),
+                                    ['controller' => 'Users', 'action' => 'logout'],
+                                    ['class' => 'dropdown-item'])
+                            ?>
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <!-- 非ログイン中 -->
+                    <li class="nav-item">
                         <?= $this->Html->link(
-                                __('Logout'),
-                                ['controller' => 'Users', 'action' => 'logout'],
-                                ['class' => 'dropdown-item'])
+                            __('Register'),
+                            ['controller' => 'Users', 'action' => 'add'],
+                            ['class' => 'nav-link'])
                         ?>
-                    </div>
-                </li>
+                    </li>
+                    <li class="nav-item">
+                        <?= $this->Html->link(
+                            __('Login'),
+                            ['controller' => 'Users', 'action' => 'login'],
+                            ['class' => 'nav-link'])
+                        ?>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </header>
