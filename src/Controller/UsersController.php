@@ -24,6 +24,8 @@ class UsersController extends AppController
 
     public function login()
     {
+        $this->Authorization->skipAuthorization();
+
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
@@ -42,6 +44,8 @@ class UsersController extends AppController
 
     public function logout()
     {
+        $this->Authorization->skipAuthorization();
+
         $result = $this->Authentication->getResult();
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
         if ($result->isValid()) {
@@ -57,6 +61,7 @@ class UsersController extends AppController
      */
     public function index()
     {
+        
         $this->paginate = [
             'contain' => [
                 'Scores', 
@@ -80,6 +85,8 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        $this->Authorization->skipAuthorization();
+
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails','Scores'],
         ]);
@@ -94,6 +101,8 @@ class UsersController extends AppController
      */
     public function add()
     {
+        $this->Authorization->skipAuthorization();
+
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -128,18 +137,26 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['Scores', 'UserDetails'],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('edit', $user);
+        if ($result->getStatus()) {
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->set(compact('user'));
+            $scores = $this->Users->Scores->find('list', ['limit' => 200]);
+            $this->set(compact('user', 'scores'));
         }
-        $this->set(compact('user'));
-        $scores = $this->Users->Scores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'scores'));
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'index']);
+        }
     }
 
     /**
