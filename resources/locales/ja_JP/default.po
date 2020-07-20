@@ -638,3 +638,5 @@ msgstr "戻る"
 msgid "Permission denied"
 msgstr "権限がありません"
 
+msgid "remember_me"
+msgstr "ログインを維持"

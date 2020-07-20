@@ -40,6 +40,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Authorization\Policy\OrmResolver;
 
+use Cake\Http\Middleware\EncryptedCookieMiddleware;
+
 /**
  * Application setup class.
  *
@@ -101,6 +103,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this))
 
+            ->add(new EncryptedCookieMiddleware(
+                ['CookieAuth'],
+                Configure::read('Security.cookieSalt')
+            ))
+
             // RoutingMiddleware の後に 認証 を追加
             ->add(new AuthenticationMiddleware($this))
             // 認証 の後に 認可 を追加
@@ -144,6 +151,13 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 "controller" => "Users",
                 "action" => "login", 'plugin' => null, 'prefix' => null
             ]),
+        ]);
+        $authenticationService->loadAuthenticator('Authentication.Cookie',[
+            'cookie' => [
+                'expire' => new \DateTime('+1 Year'),
+                'httpOnly' => true,
+                'secure' => env('HTTPS', true),
+            ],
         ]);
     
         return $authenticationService;
