@@ -619,6 +619,9 @@ msgstr "ログアウト"
 msgid "Home"
 msgstr "ホーム"
 
+msgid "About"
+msgstr "このサイトについて"
+
 #:
 msgid "Register"
 msgstr "新規登録"
@@ -640,3 +643,7 @@ msgstr "権限がありません"
 
 msgid "remember_me"
 msgstr "ログインを維持"
+
+
+
+
