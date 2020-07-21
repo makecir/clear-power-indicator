@@ -6,7 +6,7 @@
 ?>
 <div class="users index content">
     <div class="card border-secondary mb-3">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 <?= __('Users') ?>
             </h5>

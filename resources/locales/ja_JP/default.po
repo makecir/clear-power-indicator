@@ -644,6 +644,15 @@ msgstr "権限がありません"
 msgid "remember_me"
 msgstr "ログインを維持"
 
+msgid "Player"
+msgstr "プレーヤー"
 
+msgid "Lamps Detail"
+msgstr "ランプ詳細"
 
+msgid "Recommended"
+msgstr "リコメンド"
+
+msgid "Better than expected"
+msgstr "逆リコメンド"
 

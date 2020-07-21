@@ -132,5 +132,8 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
         <?php endforeach; ?>
     <?php endif; ?>
 
+    <!-- using basic js -->
+    <?= $this->Html->script('basic.js') ?>
+
 </body>
 </html>
