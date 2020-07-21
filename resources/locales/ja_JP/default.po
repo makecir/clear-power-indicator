@@ -511,12 +511,12 @@ msgstr ""
 
 #: UserDetails/view.php:42
 #: Users/view.php:50
-msgid "Class Sp"
+msgid "Grade Sp"
 msgstr "SP段位"
 
 #: UserDetails/view.php:46
 #: Users/view.php:51
-msgid "Class Dp"
+msgid "Grade Dp"
 msgstr "DP段位"
 
 #: UserDetails/view.php:50

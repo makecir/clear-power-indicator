@@ -39,8 +39,8 @@ class UserDetail extends Entity
     protected $_accessible = [
         'iidx_id' => true,
         'dj_name' => true,
-        'class_sp' => true,
-        'class_dp' => true,
+        'grade_sp' => true,
+        'grade_dp' => true,
         'arena_sp' => true,
         'arena_dp' => true,
         'bio' => true,
@@ -55,8 +55,8 @@ class UserDetail extends Entity
         return TableRegistry::getTableLocator()->get('UserDetails');
     }
 
-    function _getSpClassInfo(){
-        $sp_class_info = [
+    function _getSpGradeInfo(){
+        $sp_grade_info = [
             0 => "-",
             //11 => "七級",
             //12 => "六級",
@@ -78,7 +78,7 @@ class UserDetail extends Entity
             28 => "中伝", 
             29 => "皆伝"
         ];
-        return $sp_class_info[$this->class_sp ?? 0];
+        return $sp_grade_info[$this->grade_sp ?? 0];
     }
 
     function _getSpArenaInfo(){
@@ -105,7 +105,7 @@ class UserDetail extends Entity
             29 => "A2",
             29 => "A1",
         ];
-        return $sp_class_info[$this->class_sp ?? 0];
+        return $sp_Arena_info[$this->arena_sp ?? 0];
     }
 
 }

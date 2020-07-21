@@ -74,10 +74,10 @@ class UserDetailsTable extends Table
             ->allowEmptyString('dj_name');
 
         $validator
-            ->notEmptyString('class_sp');
+            ->notEmptyString('grade_sp');
 
         $validator
-            ->notEmptyString('class_dp');
+            ->notEmptyString('grade_dp');
 
         $validator
             ->notEmptyString('arena_sp');
@@ -130,7 +130,7 @@ class UserDetailsTable extends Table
     }
 
     // 未使用
-    public $class_dict = [
+    public $grade_dict = [
         0 => "-",
         1 => "七級",
         2 => "六級",

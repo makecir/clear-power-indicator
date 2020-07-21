@@ -20,7 +20,7 @@
                             <th><?= __('username') ?></th>
                             <th><?= __('IIDX ID') ?></th>
                             <th><?= __('DJ NAME') ?></th>
-                            <th><?= __('Class Sp') ?></th>
+                            <th><?= __('Grade Sp') ?></th>
                             <th><?= __('created_at') ?></th>
                             <th><?= __('modified_at') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
@@ -33,7 +33,7 @@
                             <td><?= h($user->username) ?></td>
                             <td><?= h($user->user_detail->iidx_id) ?></td>
                             <td><?= h($user->user_detail->dj_name) ?></td>
-                            <td><?= h($user->user_detail->sp_class_info) ?></td>
+                            <td><?= h($user->user_detail->sp_grade_info) ?></td>
                             <td><?= h($user->created_at) ?></td>
                             <td><?= h($user->modified_at) ?></td>
                             <td class="actions">

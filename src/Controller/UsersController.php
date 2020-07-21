@@ -61,17 +61,6 @@ class UsersController extends AppController
      */
     public function index()
     {
-        
-        // $this->paginate = [
-        //     'contain' => [
-        //         'Scores', 
-        //         'UserDetails',
-        //         'UserLamps',
-        //         'FollowUsers' => ['UserDetails'],
-        //         'FollowedUsers' => ['UserDetails'],
-        //     ],
-        // ];
-        // $users = $this->paginate($this->Users);
         $users = $this->Users->find('all', [
             'contain' => [
                 'Scores', 
