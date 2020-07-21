@@ -62,7 +62,17 @@ class UsersController extends AppController
     public function index()
     {
         
-        $this->paginate = [
+        // $this->paginate = [
+        //     'contain' => [
+        //         'Scores', 
+        //         'UserDetails',
+        //         'UserLamps',
+        //         'FollowUsers' => ['UserDetails'],
+        //         'FollowedUsers' => ['UserDetails'],
+        //     ],
+        // ];
+        // $users = $this->paginate($this->Users);
+        $users = $this->Users->find('all', [
             'contain' => [
                 'Scores', 
                 'UserDetails',
@@ -70,10 +80,11 @@ class UsersController extends AppController
                 'FollowUsers' => ['UserDetails'],
                 'FollowedUsers' => ['UserDetails'],
             ],
-        ];
-        $users = $this->paginate($this->Users);
+        ]);
+        $dtables=['user-index'];
 
-        $this->set(compact('users'));
+
+        $this->set(compact('users','dtables'));
     }
 
     /**
@@ -90,7 +101,6 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails','Scores'],
         ]);
-
         $this->set(compact('user'));
     }
 

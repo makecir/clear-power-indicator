@@ -12,17 +12,17 @@
             </h5>
         </div>
         <div class="card-body text-dark">
-            <?= $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'button float-right']) ?>
             <div class="table-responsive">
-                <table>
+                <table id="users-index" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><?= $this->Paginator->sort('id') ?></th>
-                            <th><?= $this->Paginator->sort('username') ?></th>
-                            <th><?= $this->Paginator->sort('dj_name') ?></th>
-                            <th><?= $this->Paginator->sort('class_sp') ?></th>
-                            <th><?= $this->Paginator->sort('created_at') ?></th>
-                            <th><?= $this->Paginator->sort('modified_at') ?></th>
+                            <th><?= __('id') ?></th>
+                            <th><?= __('username') ?></th>
+                            <th><?= __('IIDX ID') ?></th>
+                            <th><?= __('DJ NAME') ?></th>
+                            <th><?= __('Class Sp') ?></th>
+                            <th><?= __('created_at') ?></th>
+                            <th><?= __('modified_at') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
@@ -31,6 +31,7 @@
                         <tr>
                             <td><?= $this->Number->format($user->id) ?></td>
                             <td><?= h($user->username) ?></td>
+                            <td><?= h($user->user_detail->iidx_id) ?></td>
                             <td><?= h($user->user_detail->dj_name) ?></td>
                             <td><?= h($user->user_detail->sp_class_info) ?></td>
                             <td><?= h($user->created_at) ?></td>
@@ -44,16 +45,6 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-            </div>
-            <div class="paginator">
-                <ul class="pagination">
-                    <?= $this->Paginator->first('<< ' . __('first')) ?>
-                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                    <?= $this->Paginator->numbers() ?>
-                    <?= $this->Paginator->next(__('next') . ' >') ?>
-                    <?= $this->Paginator->last(__('last') . ' >>') ?>
-                </ul>
-                <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
             </div>
         </div>
     </div>
