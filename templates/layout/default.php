@@ -117,6 +117,9 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
         </div>
     </main>
     <footer>
+        <div class="container mb-2" style="text-align:center">
+            ここにフッター
+        </div>
     </footer>
 
     <!-- using bootstrap js -->

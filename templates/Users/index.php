@@ -7,9 +7,9 @@
 <div class="users index content">
     <div class="card border-secondary mb-3">
         <div class="card-header">
-            <h5 class="mb-0">
+            <h4 class="mb-0">
                 <?= __('Users') ?>
-            </h5>
+            </h4>
         </div>
         <div class="card-body text-dark">
             <div class="table-responsive">
@@ -33,7 +33,7 @@
                             <td><?= h($user->username) ?></td>
                             <td><?= h($user->user_detail->iidx_id) ?></td>
                             <td><?= h($user->user_detail->dj_name) ?></td>
-                            <td><?= h($user->user_detail->sp_grade_info) ?></td>
+                            <td><?= h($user->user_detail->grade_sp_info) ?></td>
                             <td><?= h($user->created_at) ?></td>
                             <td><?= h($user->modified_at) ?></td>
                             <td class="actions">

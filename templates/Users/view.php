@@ -7,13 +7,47 @@
 <div class="users view content">
     <div class="card border-secondary mb-3">
         <div class="card-header">
-            <h5 class="mb-0">
-                <?= __('Player') ?>
-            </h5>
+            <h4 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h4>
+            <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
         </div>
         <div class="card-body text-dark">
-
-
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <h4 class="card-text"><?= __('CP')." : ".$user->user_detail->rating ?></h4>
+                    </div>
+                    <div class="mb-2">
+                        <h5 class="card-title" style="display:inline;">段位 : </h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6> -->
+                        <h5 class="card-text" style="display:inline;">
+                            <?= $user->user_detail->grade_sp_info ?> /
+                            <?= $user->user_detail->grade_dp_info ?>
+                        </h5>
+                    </div>
+                    <div class="mb-2">
+                        <h5 class="card-title" style="display:inline;">アリーナ : </h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6> -->
+                        <h5 class="card-text" style="display:inline;">
+                            <?= $user->user_detail->arena_sp_info ?> /
+                            <?= $user->user_detail->arena_dp_info ?>
+                        </h5>
+                    </div>
+                    <div class="mb-0">
+                        <p class="card-text">Twitter : 
+                            <a href="https://twitter.com/<?= $user->user_detail->twitter_id ?>" class="card-link" style="display:inline;" target="_blank">
+                                <?= "@".$user->user_detail->twitter_id ?>
+                            </a>
+                            </br>
+                            <?= __('created at')." : ".$user->user_detail->created_at->format('Y/m/d') ?>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+            <?= __('modified at').$user->user_detail->modified_at->format('Y/m/d') ?>
         </div>
     </div>
 
