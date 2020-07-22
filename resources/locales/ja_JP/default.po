@@ -657,8 +657,11 @@ msgstr "権限がありません"
 msgid "remember_me"
 msgstr "ログインを維持"
 
-msgid "Player"
-msgstr "プレーヤー"
+msgid "Created at"
+msgstr "作成日"
+
+msgid "Updated at"
+msgstr "更新日"
 
 msgid "Lamps Detail"
 msgstr "ランプ詳細"

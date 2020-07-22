@@ -38,7 +38,7 @@
                                 <?= "@".$user->user_detail->twitter_id ?>
                             </a>
                             </br>
-                            <?= __('created at')." : ".$user->user_detail->created_at->format('Y/m/d') ?>
+                            <?= __('Created at')." : ".$user->user_detail->created_at->format('Y/m/d') ?>
                         </p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            <?= __('modified at').$user->user_detail->modified_at->format('Y/m/d') ?>
+            <?= __('modified at')." : ".$user->user_detail->modified_at->format('Y/m/d') ?>
         </div>
     </div>
 
