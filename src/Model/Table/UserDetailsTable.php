@@ -64,15 +64,20 @@ class UserDetailsTable extends Table
             ->allowEmptyString('user_id', null, 'create');
 
         $validator
+            ->scalar('iidx_id')
+            ->maxLength('iidx_id', 9)
+            ->allowEmptyString('iidx_id');
+
+        $validator
             ->scalar('dj_name')
             ->maxLength('dj_name', 8)
             ->allowEmptyString('dj_name');
 
         $validator
-            ->notEmptyString('class_sp');
+            ->notEmptyString('grade_sp');
 
         $validator
-            ->notEmptyString('class_dp');
+            ->notEmptyString('grade_dp');
 
         $validator
             ->notEmptyString('arena_sp');
@@ -84,6 +89,11 @@ class UserDetailsTable extends Table
             ->scalar('bio')
             ->maxLength('bio', 240)
             ->allowEmptyString('bio');
+
+        $validator
+            ->scalar('twitter_id')
+            ->maxLength('twitter_id', 32)
+            ->allowEmptyString('twitter_id');
 
         $validator
             ->numeric('rating')
@@ -118,4 +128,28 @@ class UserDetailsTable extends Table
 
         return $rules;
     }
+
+    // 未使用
+    public $grade_dict = [
+        0 => "-",
+        1 => "七級",
+        2 => "六級",
+        3 => "五級",
+        4 => "四級",
+        5 => "三級",
+        6 => "二級",
+        7 => "一級",
+        8 => "初段",
+        9 => "二段",
+        10 => "三段",
+        11 => "四段",
+        12 => "五段",
+        13 => "六段", 
+        14 => "七段", 
+        15 => "八段", 
+        16 => "九段", 
+        17 => "十段", 
+        18 => "中伝", 
+        19 => "皆伝"
+    ];
 }

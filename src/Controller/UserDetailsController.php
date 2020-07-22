@@ -59,9 +59,7 @@ class UserDetailsController extends AppController
             }
             $this->Flash->error(__('The user detail could not be saved. Please, try again.'));
         }
-        $iidxes = $this->UserDetails->Iidxes->find('list', ['limit' => 200]);
-        $twitters = $this->UserDetails->Twitters->find('list', ['limit' => 200]);
-        $this->set(compact('userDetail', 'iidxes', 'twitters'));
+        $this->set(compact('userDetail'));
     }
 
     /**
@@ -85,8 +83,6 @@ class UserDetailsController extends AppController
             }
             $this->Flash->error(__('The user detail could not be saved. Please, try again.'));
         }
-        $iidxes = $this->UserDetails->Iidxes->find('list', ['limit' => 200]);
-        $twitters = $this->UserDetails->Twitters->find('list', ['limit' => 200]);
         $this->set(compact('userDetail'));
     }
 

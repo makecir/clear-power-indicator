@@ -1,0 +1,674 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-07-18 22:34+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/FollowingsController.php:56
+#: Controller/FollowingsController.php:82
+msgid "The following has been saved."
+msgstr ""
+
+#: Controller/FollowingsController.php:60
+#: Controller/FollowingsController.php:86
+msgid "The following could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/FollowingsController.php:105
+msgid "The following has been deleted."
+msgstr ""
+
+#: Controller/FollowingsController.php:107
+msgid "The following could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/GhostLampsController.php:56
+#: Controller/GhostLampsController.php:82
+msgid "The ghost lamp has been saved."
+msgstr ""
+
+#: Controller/GhostLampsController.php:60
+#: Controller/GhostLampsController.php:86
+msgid "The ghost lamp could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/GhostLampsController.php:105
+msgid "The ghost lamp has been deleted."
+msgstr ""
+
+#: Controller/GhostLampsController.php:107
+msgid "The ghost lamp could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/ScoresController.php:53
+#: Controller/ScoresController.php:78
+msgid "The score has been saved."
+msgstr ""
+
+#: Controller/ScoresController.php:57
+#: Controller/ScoresController.php:82
+msgid "The score could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/ScoresController.php:100
+msgid "The score has been deleted."
+msgstr ""
+
+#: Controller/ScoresController.php:102
+msgid "The score could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/UserDetailsController.php:56
+#: Controller/UserDetailsController.php:82
+msgid "The user detail has been saved."
+msgstr ""
+
+#: Controller/UserDetailsController.php:60
+#: Controller/UserDetailsController.php:86
+msgid "The user detail could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UserDetailsController.php:105
+msgid "The user detail has been deleted."
+msgstr ""
+
+#: Controller/UserDetailsController.php:107
+msgid "The user detail could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/UserLampsController.php:56
+#: Controller/UserLampsController.php:82
+msgid "The user lamp has been saved."
+msgstr ""
+
+#: Controller/UserLampsController.php:60
+#: Controller/UserLampsController.php:86
+msgid "The user lamp could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UserLampsController.php:105
+msgid "The user lamp has been deleted."
+msgstr ""
+
+#: Controller/UserLampsController.php:107
+msgid "The user lamp could not be deleted. Please, try again."
+msgstr ""
+
+msgid "Sign In"
+msgstr "ログイン"
+
+msgid "Sign Up"
+msgstr "新規登録"
+
+msgid "successfully signed in."
+msgstr "ログインに成功しました"
+
+msgid "Signed out."
+msgstr "ログアウトしました"
+
+#: Controller/UsersController.php:39
+msgid "Invalid username or password"
+msgstr "ユーザーIDかパスワードが不正です"
+
+#: Controller/UsersController.php:107
+#: Controller/UsersController.php:134
+msgid "The user has been saved."
+msgstr ""
+
+#: Controller/UsersController.php:112
+#: Controller/UsersController.php:138
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:162
+msgid "The user has been deleted."
+msgstr ""
+
+#: Controller/UsersController.php:164
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: Followings/add.php:10
+#: Followings/edit.php:10
+#: Followings/index.php:17
+#: Followings/view.php:10
+#: Scores/add.php:10
+#: Scores/edit.php:10
+#: Scores/index.php:40
+#: Scores/view.php:10
+#: Scores/view.php:138
+#: UserDetails/add.php:10
+#: UserDetails/edit.php:10
+#: UserDetails/index.php:27
+#: UserDetails/view.php:10
+#: UserLamps/add.php:10
+#: UserLamps/edit.php:10
+#: UserLamps/index.php:17
+#: UserLamps/view.php:10
+#: Users/add.php:10
+#: Users/edit.php:10
+#: Users/index.php:19
+#: Users/view.php:10
+#: Users/view.php:60
+msgid "Actions"
+msgstr ""
+
+#: Followings/add.php:11
+#: Followings/edit.php:16
+#: Followings/view.php:13
+msgid "List Followings"
+msgstr ""
+
+#: Followings/add.php:18
+msgid "Add Following"
+msgstr ""
+
+#: Followings/add.php:23
+#: Followings/edit.php:28
+#: Scores/add.php:48
+#: Scores/edit.php:53
+#: UserDetails/add.php:34
+#: UserDetails/edit.php:39
+#: UserLamps/add.php:23
+#: UserLamps/edit.php:28
+#: Users/add.php:26
+#: Users/edit.php:31
+msgid "Submit"
+msgstr "送信"
+
+#: Followings/edit.php:12
+#: Followings/index.php:29
+#: Scores/edit.php:12
+#: Scores/index.php:75
+#: Scores/view.php:151
+#: UserDetails/edit.php:12
+#: UserDetails/index.php:49
+#: UserLamps/edit.php:12
+#: UserLamps/index.php:29
+#: Users/edit.php:12
+#: Users/index.php:33
+#: Users/view.php:79
+msgid "Delete"
+msgstr "削除"
+
+#: Followings/edit.php:14
+#: Followings/index.php:29
+#: Followings/view.php:12
+#: Scores/edit.php:14
+#: Scores/index.php:75
+#: Scores/view.php:12
+#: Scores/view.php:151
+#: UserDetails/edit.php:14
+#: UserDetails/index.php:49
+#: UserDetails/view.php:12
+#: UserLamps/edit.php:14
+#: UserLamps/index.php:29
+#: UserLamps/view.php:12
+#: Users/edit.php:14
+#: Users/index.php:33
+#: Users/view.php:12
+#: Users/view.php:79
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Followings/edit.php:23
+#: Followings/view.php:11
+msgid "Edit Following"
+msgstr ""
+
+#: Followings/index.php:8
+#: Followings/view.php:14
+msgid "New Following"
+msgstr ""
+
+#: Followings/index.php:9
+msgid "Followings"
+msgstr ""
+
+#: Followings/index.php:27
+#: Scores/index.php:73
+#: Scores/view.php:149
+#: UserDetails/index.php:47
+#: UserLamps/index.php:27
+#: Users/index.php:31
+#: Users/view.php:77
+#: View/Helper/PaginatorHelper.php:1268
+msgid "View"
+msgstr "閲覧"
+
+#: Followings/index.php:28
+#: Scores/index.php:74
+#: Scores/view.php:150
+#: UserDetails/index.php:48
+#: UserLamps/index.php:28
+#: Users/index.php:32
+#: Users/view.php:78
+msgid "Edit"
+msgstr "編集"
+
+#: Followings/index.php:38
+#: Scores/index.php:84
+#: UserDetails/index.php:58
+#: UserLamps/index.php:38
+#: Users/index.php:42
+msgid "first"
+msgstr "最初"
+
+#: Followings/index.php:39
+#: Scores/index.php:85
+#: UserDetails/index.php:59
+#: UserLamps/index.php:39
+#: Users/index.php:43
+msgid "previous"
+msgstr "前"
+
+#: Followings/index.php:41
+#: Scores/index.php:87
+#: UserDetails/index.php:61
+#: UserLamps/index.php:41
+#: Users/index.php:45
+msgid "next"
+msgstr "次"
+
+#: Followings/index.php:42
+#: Scores/index.php:88
+#: UserDetails/index.php:62
+#: UserLamps/index.php:42
+#: Users/index.php:46
+msgid "last"
+msgstr "最後"
+
+#: Followings/index.php:44
+#: Scores/index.php:90
+#: UserDetails/index.php:64
+#: UserLamps/index.php:44
+#: Users/index.php:48
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr "{{page}} / {{pages}} ページ、{{count}} 件中 {{current}} 件表示"
+
+#: Followings/view.php:12
+msgid "Delete Following"
+msgstr ""
+
+#: Followings/view.php:22
+msgid "Follow User Id"
+msgstr ""
+
+#: Followings/view.php:26
+msgid "Followed User Id"
+msgstr ""
+
+#: Followings/view.php:30
+#: Scores/view.php:118
+#: Scores/view.php:136
+#: UserDetails/view.php:66
+#: Users/view.php:34
+#: Users/view.php:58
+msgid "Created At"
+msgstr ""
+
+#: Scores/add.php:11
+#: Scores/edit.php:16
+#: Scores/view.php:13
+msgid "List Scores"
+msgstr "譜面一覧"
+
+#: Scores/add.php:18
+msgid "Add Score"
+msgstr ""
+
+#: Scores/edit.php:23
+#: Scores/view.php:11
+msgid "Edit Score"
+msgstr ""
+
+#: Scores/index.php:8
+#: Scores/view.php:14
+msgid "New Score"
+msgstr ""
+
+#: Scores/index.php:9
+msgid "Scores"
+msgstr "譜面一覧"
+
+#: Scores/view.php:12
+msgid "Delete Score"
+msgstr ""
+
+#: Scores/view.php:22
+msgid "Title"
+msgstr "タイトル"
+
+#: Scores/view.php:26
+#: Scores/view.php:132
+#: Users/view.php:30
+msgid "Id"
+msgstr ""
+
+#: Scores/view.php:30
+msgid "Version Num"
+msgstr ""
+
+#: Scores/view.php:34
+msgid "Level"
+msgstr "レベル"
+
+#: Scores/view.php:38
+msgid "Difficulty"
+msgstr "難易度"
+
+#: Scores/view.php:42
+msgid "Notes"
+msgstr "ノーツ"
+
+#: Scores/view.php:46
+msgid "Predicted Easy Rank"
+msgstr ""
+
+#: Scores/view.php:50
+msgid "Predicted Clear Rank"
+msgstr ""
+
+#: Scores/view.php:54
+msgid "Predicted Hard Rank"
+msgstr ""
+
+#: Scores/view.php:58
+msgid "Predicted Exhard Rank"
+msgstr ""
+
+#: Scores/view.php:62
+msgid "Predicted Fc Rank"
+msgstr ""
+
+#: Scores/view.php:66
+msgid "Predicted Aaa Rank"
+msgstr ""
+
+#: Scores/view.php:70
+msgid "Is Deleted"
+msgstr ""
+
+#: Scores/view.php:74
+msgid "Is Rated"
+msgstr ""
+
+#: Scores/view.php:78
+msgid "Easy Intercept"
+msgstr ""
+
+#: Scores/view.php:82
+msgid "Easy Coefficient"
+msgstr ""
+
+#: Scores/view.php:86
+msgid "Clear Intercept"
+msgstr ""
+
+#: Scores/view.php:90
+msgid "Clear Coefficient"
+msgstr ""
+
+#: Scores/view.php:94
+msgid "Hard Intercept"
+msgstr ""
+
+#: Scores/view.php:98
+msgid "Hard Coefficient"
+msgstr ""
+
+#: Scores/view.php:102
+msgid "Exhard Intercept"
+msgstr ""
+
+#: Scores/view.php:106
+msgid "Exhard Coefficient"
+msgstr ""
+
+#: Scores/view.php:110
+msgid "Fc Intercept"
+msgstr ""
+
+#: Scores/view.php:114
+msgid "Fc Coefficient"
+msgstr ""
+
+#: Scores/view.php:122
+#: Scores/view.php:137
+#: UserDetails/view.php:70
+#: Users/view.php:38
+#: Users/view.php:59
+msgid "Modified At"
+msgstr ""
+
+#: Scores/view.php:127
+msgid "Related Users"
+msgstr ""
+
+#: Scores/view.php:133
+#: Users/view.php:22
+msgid "Username"
+msgstr "ユーザーID"
+
+#: Scores/view.php:134
+#: Users/view.php:26
+msgid "Password"
+msgstr "パスワード"
+
+#: Scores/view.php:135
+msgid "Email"
+msgstr "Email"
+
+#: UserDetails/add.php:11
+#: UserDetails/edit.php:16
+#: UserDetails/view.php:13
+msgid "List User Details"
+msgstr ""
+
+#: UserDetails/add.php:18
+msgid "Add User Detail"
+msgstr ""
+
+#: UserDetails/edit.php:23
+#: UserDetails/view.php:11
+msgid "Edit User Detail"
+msgstr ""
+
+#: UserDetails/index.php:8
+#: UserDetails/view.php:14
+msgid "New User Detail"
+msgstr ""
+
+#: UserDetails/index.php:9
+msgid "User Details"
+msgstr ""
+
+#: UserDetails/view.php:12
+msgid "Delete User Detail"
+msgstr ""
+
+#: UserDetails/view.php:22
+#: Users/view.php:48
+msgid "User Id"
+msgstr ""
+
+#: UserDetails/view.php:26
+#: Users/view.php:49
+msgid "Iidx Id"
+msgstr "IIDX ID"
+
+#: UserDetails/view.php:30
+msgid "Dj Name"
+msgstr "DJ NAME"
+
+#: UserDetails/view.php:34
+#: Users/view.php:54
+msgid "Bio"
+msgstr "自己紹介"
+
+#: UserDetails/view.php:38
+#: Users/view.php:55
+msgid "Twitter Id"
+msgstr "twitter"
+
+#: UserDetails/view.php:42
+#: Users/view.php:50
+msgid "Grade Sp"
+msgstr "SP段位"
+
+#: UserDetails/view.php:46
+#: Users/view.php:51
+msgid "Grade Dp"
+msgstr "DP段位"
+
+#: UserDetails/view.php:50
+#: Users/view.php:52
+msgid "Arena Sp"
+msgstr "SPアリーナ"
+
+#: UserDetails/view.php:54
+#: Users/view.php:53
+msgid "Arena Dp"
+msgstr "DPアリーナ"
+
+#: UserDetails/view.php:58
+#: Users/view.php:56
+msgid "Rating"
+msgstr "レーティング"
+
+#: UserDetails/view.php:62
+#: Users/view.php:57
+msgid "Update At"
+msgstr "最終更新"
+
+#: UserLamps/add.php:11
+#: UserLamps/edit.php:16
+#: UserLamps/view.php:13
+msgid "List User Lamps"
+msgstr ""
+
+#: UserLamps/add.php:18
+msgid "Add User Lamp"
+msgstr ""
+
+#: UserLamps/edit.php:23
+#: UserLamps/view.php:11
+msgid "Edit User Lamp"
+msgstr ""
+
+#: UserLamps/index.php:8
+#: UserLamps/view.php:14
+msgid "New User Lamp"
+msgstr ""
+
+#: UserLamps/index.php:9
+msgid "User Lamps"
+msgstr ""
+
+#: UserLamps/view.php:12
+msgid "Delete User Lamp"
+msgstr ""
+
+#: UserLamps/view.php:22
+msgid "User"
+msgstr "ユーザー"
+
+#: UserLamps/view.php:26
+msgid "Score"
+msgstr "譜面"
+
+#: UserLamps/view.php:30
+msgid "Lamp"
+msgstr "ランプ"
+
+#: Users/add.php:11
+#: Users/edit.php:16
+#: Users/view.php:13
+msgid "List Users"
+msgstr ""
+
+#: Users/add.php:18
+msgid "Add User"
+msgstr ""
+
+#: Users/edit.php:23
+#: Users/view.php:11
+msgid "Edit User"
+msgstr ""
+
+#: Users/index.php:8
+#: Users/view.php:14
+msgid "New User"
+msgstr ""
+
+#: Users/index.php:9
+msgid "Users"
+msgstr "ユーザー一覧"
+
+#: Users/login.php:7
+msgid "Please enter your username and password"
+msgstr ""
+
+#: Users/login.php:11
+msgid "Login"
+msgstr "ログイン"
+
+#:
+msgid "Logout"
+msgstr "ログアウト"
+
+#:
+msgid "Home"
+msgstr "ホーム"
+
+msgid "About"
+msgstr "このサイトについて"
+
+#:
+msgid "Register"
+msgstr "新規登録"
+
+
+#: Users/view.php:12
+msgid "Delete User"
+msgstr ""
+
+#: Users/view.php:43
+msgid "Related User Detail"
+msgstr ""
+
+#: layout/error.php:40
+msgid "Back"
+msgstr "戻る"
+
+msgid "Permission denied"
+msgstr "権限がありません"
+
+msgid "remember_me"
+msgstr "ログインを維持"
+
+msgid "Created at"
+msgstr "作成日"
+
+msgid "Updated at"
+msgstr "更新日"
+
+msgid "Lamps Detail"
+msgstr "ランプ詳細"
+
+msgid "Recommended"
+msgstr "リコメンド"
+
+msgid "Better than expected"
+msgstr "逆リコメンド"
+

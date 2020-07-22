@@ -39,8 +39,8 @@ class UserDetail extends Entity
     protected $_accessible = [
         'iidx_id' => true,
         'dj_name' => true,
-        'class_sp' => true,
-        'class_dp' => true,
+        'grade_sp' => true,
+        'grade_dp' => true,
         'arena_sp' => true,
         'arena_dp' => true,
         'bio' => true,
@@ -49,7 +49,116 @@ class UserDetail extends Entity
         'update_at' => true,
         'created_at' => true,
         'modified_at' => true,
-        'iidx' => true,
-        'twitter' => true,
     ];
+
+    public function getTable(){
+        return TableRegistry::getTableLocator()->get('UserDetails');
+    }
+
+    function _getGradeSpInfo(){
+        $sp_grade_dict = [
+            0 => "-",
+            //11 => "七級",
+            //12 => "六級",
+            //13 => "五級",
+            //14 => "四級",
+            //15 => "三級",
+            //16 => "二級",
+            //17 => "一級",
+            //18 => "初段",
+            //19 => "二段",
+            //20 => "三段",
+            //21 => "四段",
+            //22 => "五段",
+            23 => "六段", 
+            24 => "七段", 
+            25 => "八段", 
+            26 => "九段", 
+            27 => "十段", 
+            31 => "中伝", 
+            33 => "皆伝"
+        ];
+        return $sp_grade_dict[$this->grade_sp ?? 0];
+    }
+
+    function _getGradeDpInfo(){
+        $dp_grade_dict = [
+            0 => "-",
+            //11 => "七級",
+            //12 => "六級",
+            //13 => "五級",
+            //14 => "四級",
+            //15 => "三級",
+            //16 => "二級",
+            //17 => "一級",
+            18 => "初段",
+            19 => "二段",
+            20 => "三段",
+            21 => "四段",
+            22 => "五段",
+            23 => "六段", 
+            24 => "七段", 
+            25 => "八段", 
+            26 => "九段", 
+            27 => "十段", 
+            31 => "中伝", 
+            33 => "皆伝"
+        ];
+        return $dp_grade_dict[$this->grade_dp ?? 0];
+    }
+
+    function _getArenaSpInfo(){
+        $sp_Arena_dict = [
+            0 => "-",
+            //11 => "D5",
+            //12 => "D4",
+            //13 => "D3",
+            //14 => "D2",
+            //15 => "D1",
+            //16 => "C5",
+            //17 => "C4",
+            //18 => "C3",
+            //19 => "C2",
+            //20 => "C1",
+            21 => "B5",
+            22 => "B4",
+            23 => "B3", 
+            24 => "B2", 
+            25 => "B1", 
+            26 => "A5", 
+            27 => "A4", 
+            28 => "A3", 
+            29 => "A2",
+            29 => "A1",
+        ];
+        return $sp_Arena_dict[$this->arena_sp ?? 0];
+    }
+
+    function _getArenaDpInfo(){
+        $dp_Arena_dict = [
+            0 => "-",
+            //11 => "D5",
+            //12 => "D4",
+            //13 => "D3",
+            //14 => "D2",
+            //15 => "D1",
+            16 => "C5",
+            17 => "C4",
+            18 => "C3",
+            19 => "C2",
+            20 => "C1",
+            21 => "B5",
+            22 => "B4",
+            23 => "B3", 
+            24 => "B2", 
+            25 => "B1", 
+            26 => "A5", 
+            27 => "A4", 
+            28 => "A3", 
+            29 => "A2",
+            29 => "A1",
+        ];
+        return $dp_Arena_dict[$this->arena_dp ?? 0];
+    }
+
 }
