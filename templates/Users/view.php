@@ -9,6 +9,7 @@
         <div class="card-header">
             <h4 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h4>
             <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
+            <h4 class="card-title" style="display:inline;">　</h4>
         </div>
         <div class="card-body text-dark">
             <div class="row">
@@ -34,9 +35,11 @@
                     </div>
                     <div class="mb-0">
                         <p class="card-text">Twitter : 
-                            <a href="https://twitter.com/<?= $user->user_detail->twitter_id ?>" class="card-link" style="display:inline;" target="_blank">
-                                <?= "@".$user->user_detail->twitter_id ?>
-                            </a>
+                            <?php if(isset($user->user_detail->twitter_id)): ?>
+                                <a href="https://twitter.com/<?= $user->user_detail->twitter_id ?>" class="card-link" style="display:inline;" target="_blank">
+                                    <?= "@".$user->user_detail->twitter_id ?>
+                                </a>
+                            <?php endif; ?>
                             </br>
                             <?= __('Created at')." : ".$user->user_detail->created_at->format('Y/m/d') ?>
                         </p>
