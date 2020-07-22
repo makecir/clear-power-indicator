@@ -93,14 +93,14 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                     <!-- 非ログイン中 -->
                     <li class="nav-item">
                         <?= $this->Html->link(
-                            __('Register'),
+                            __('Sign Up'),
                             ['controller' => 'Users', 'action' => 'add'],
                             ['class' => 'nav-link'])
                         ?>
                     </li>
                     <li class="nav-item">
                         <?= $this->Html->link(
-                            __('Login'),
+                            __('Sign In'),
                             ['controller' => 'Users', 'action' => 'login'],
                             ['class' => 'nav-link'])
                         ?>

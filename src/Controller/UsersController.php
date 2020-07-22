@@ -34,6 +34,7 @@ class UsersController extends AppController
             $redirect = $this->request->getQuery('redirect');
     
             //return $this->redirect($redirect);
+            $this->Flash->success(__('successfully signed in.'));
             return $this->redirect(['action' => 'index']);
         }
         // ユーザーが submit 後、認証失敗した場合は、エラーを表示します
@@ -50,6 +51,7 @@ class UsersController extends AppController
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
         if ($result->isValid()) {
             $this->Authentication->logout();
+            $this->Flash->success(__('Signed out.'));
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

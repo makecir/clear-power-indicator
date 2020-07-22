@@ -104,9 +104,21 @@ msgstr ""
 msgid "The user lamp could not be deleted. Please, try again."
 msgstr ""
 
+msgid "Sign In"
+msgstr "ログイン"
+
+msgid "Sign Up"
+msgstr "新規登録"
+
+msgid "successfully signed in."
+msgstr "ログインに成功しました"
+
+msgid "Signed out."
+msgstr "ログアウトしました"
+
 #: Controller/UsersController.php:39
 msgid "Invalid username or password"
-msgstr ""
+msgstr "ユーザーIDかパスワードが不正です"
 
 #: Controller/UsersController.php:107
 #: Controller/UsersController.php:134
@@ -446,7 +458,7 @@ msgstr ""
 #: Scores/view.php:133
 #: Users/view.php:22
 msgid "Username"
-msgstr "ユーザーネーム"
+msgstr "ユーザーID"
 
 #: Scores/view.php:134
 #: Users/view.php:26
@@ -493,11 +505,11 @@ msgstr ""
 #: UserDetails/view.php:26
 #: Users/view.php:49
 msgid "Iidx Id"
-msgstr "IIDX-ID"
+msgstr "IIDX ID"
 
 #: UserDetails/view.php:30
 msgid "Dj Name"
-msgstr "DJネーム"
+msgstr "DJ NAME"
 
 #: UserDetails/view.php:34
 #: Users/view.php:54
@@ -507,7 +519,7 @@ msgstr "自己紹介"
 #: UserDetails/view.php:38
 #: Users/view.php:55
 msgid "Twitter Id"
-msgstr ""
+msgstr "twitter"
 
 #: UserDetails/view.php:42
 #: Users/view.php:50
@@ -625,6 +637,7 @@ msgstr "このサイトについて"
 #:
 msgid "Register"
 msgstr "新規登録"
+
 
 #: Users/view.php:12
 msgid "Delete User"
