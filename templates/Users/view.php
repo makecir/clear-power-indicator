@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            <?= __('modified at')." : ".$user->user_detail->modified_at->format('Y/m/d') ?>
+            <?= __('Updated at')." : ".$user->user_detail->modified_at->format('Y/m/d') ?>
         </div>
     </div>
 
