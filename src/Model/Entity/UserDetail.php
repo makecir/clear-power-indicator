@@ -54,8 +54,8 @@ class UserDetail extends Entity
     public function getTable(){
         return TableRegistry::getTableLocator()->get('UserDetails');
     }
-
-    function _getGradeSpInfo(){
+    
+    protected function _getGradeSpInfo(){
         $sp_grade_dict = [
             0 => "-",
             //11 => "七級",
@@ -81,7 +81,7 @@ class UserDetail extends Entity
         return $sp_grade_dict[$this->grade_sp ?? 0];
     }
 
-    function _getGradeDpInfo(){
+    protected function _getGradeDpInfo(){
         $dp_grade_dict = [
             0 => "-",
             //11 => "七級",
@@ -107,7 +107,7 @@ class UserDetail extends Entity
         return $dp_grade_dict[$this->grade_dp ?? 0];
     }
 
-    function _getArenaSpInfo(){
+    protected function _getArenaSpInfo(){
         $sp_Arena_dict = [
             0 => "-",
             //11 => "D5",
@@ -134,7 +134,7 @@ class UserDetail extends Entity
         return $sp_Arena_dict[$this->arena_sp ?? 0];
     }
 
-    function _getArenaDpInfo(){
+    protected function _getArenaDpInfo(){
         $dp_Arena_dict = [
             0 => "-",
             //11 => "D5",

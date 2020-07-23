@@ -5,6 +5,8 @@ namespace App\Model\Entity;
 
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Cake\ORM\Entity;
+//use Cake\ORM\Query;
+use Cake\ORM\TableRegistry;
 
 /**
  * User Entity
@@ -51,6 +53,12 @@ class User extends Entity
         if (strlen($password) > 0) {
             return (new DefaultPasswordHasher())->hash($password);
         }
+    }
+
+    public function _getMyLamps()
+    {
+        $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
+        return $query = $UserLamps->find('ownedBy', ['user_id' => $this->id]);
     }
 
 }

@@ -93,6 +93,11 @@ class UsersController extends AppController
             'contain' => ['UserDetails','Scores'],
         ]);
         $this->set(compact('user'));
+        
+        $myLamps=$user->my_lamps;
+        $this->set(compact('myLamps'));
+        //test
+
     }
 
     /**
