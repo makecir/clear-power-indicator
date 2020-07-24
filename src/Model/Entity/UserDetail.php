@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Model\Entity;
-
+use Cake\ORM\TableRegistry;
 use Cake\ORM\Entity;
 
 /**
@@ -160,5 +160,13 @@ class UserDetail extends Entity
         ];
         return $dp_Arena_dict[$this->arena_dp ?? 0];
     }
+
+    // result['s_id']="(int)lamp"
+    public function _getMyLamps()
+    {
+        $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
+        return $query = $UserLamps->find('ownedBy', ['user_id' => $this->user_id]);
+    }
+
 
 }

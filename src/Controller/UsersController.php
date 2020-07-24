@@ -74,7 +74,6 @@ class UsersController extends AppController
         ]);
         $dtables=['user-index'];
 
-
         $this->set(compact('users','dtables'));
     }
 
@@ -94,8 +93,15 @@ class UsersController extends AppController
         ]);
         $this->set(compact('user'));
         
-        $myLamps=$user->my_lamps;
-        $this->set(compact('myLamps'));
+        //loadmodel(score)
+        $my_lamps=$user->user_detail->my_lamps;
+        //$lamp_counts=$this->Score->getLampCounts($my_lamps);
+        //$rec_table=$this->Score->getRec($my_lamps);
+        //$bte_table=$this->Score->getBte($my_lamps);
+        //  //getBte($my_lamps){$own_table=$this->Score->getOwn($my_lamps);return 50%cut($own_table);}
+        
+        
+        $this->set(compact('my_lamps'));
         //test
 
     }
