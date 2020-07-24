@@ -91,15 +91,16 @@ class UsersController extends AppController
         ]);
         $this->set(compact('user'));
         
-        //loadmodel(score)
-        $my_lamps=$user->user_detail->my_lamps;
-        //$lamp_counts=$this->Score->getLampCounts($my_lamps);
-        //$rec_table=$this->Score->getRec($my_lamps,$rating);
-        //$bte_table=$this->Score->getBte($my_lamps,$rating);
+        $this->loadModel('Scores');
+        $this->loadComponent('Indicator');
+        $my_lamps = $user->user_detail->my_lamps;
+        $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
+        //$rec_table=$this->Indicator->getRec($my_lamps,$rating);
+        //$bte_table=$this->Indicator->getBte($my_lamps,$rating);
         //  //getBte($my_lamps){$own_table=$this->Score->getOwn($my_lamps);return 50%cut($own_table);}
         
         
-        $this->set(compact('my_lamps'));
+        $this->set(compact('lamp_counts'));
         //test
 
     }

@@ -172,4 +172,9 @@ class ScoresTable extends Table
 
         return $validator;
     }
+
+    public function findAvailable(Query $query, array $options = [])
+    {
+        return $query->where(['is_deleted' => "0"]);
+    }
 }
