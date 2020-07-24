@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Model
@@ -147,4 +148,14 @@ class UsersTable extends Table
 
         return $rules;
     }
+
+    public function afterSave($event, $user, $options)
+    {
+        //user追加時に自動的にuser_detailを生成
+        $userDetailsTable = TableRegistry::getTableLocator()->get('UserDetails');
+        $user_detail = $userDetailsTable->newEmptyEntity();
+        $user_detail->user_id = $user->id;
+        return $userDetailsTable->save($user_detail);
+    }
+
 }
