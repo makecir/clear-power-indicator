@@ -95,12 +95,12 @@ class UsersController extends AppController
         $this->loadComponent('Indicator');
         $my_lamps = $user->user_detail->my_lamps;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
-        //$rec_table=$this->Indicator->getRec($my_lamps,$rating);
+        $rec_table=$this->Indicator->getRecommendResults($my_lamps,$user->rating);
         //$bte_table=$this->Indicator->getBte($my_lamps,$rating);
         //  //getBte($my_lamps){$own_table=$this->Score->getOwn($my_lamps);return 50%cut($own_table);}
         
         
-        $this->set(compact('lamp_counts'));
+        $this->set(compact('lamp_counts','rec_table'));
         //test
 
     }
