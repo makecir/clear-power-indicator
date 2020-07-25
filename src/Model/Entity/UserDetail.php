@@ -55,7 +55,7 @@ class UserDetail extends Entity
         return TableRegistry::getTableLocator()->get('UserDetails');
     }
     
-    protected function _getGradeSpInfo(){
+    protected function _getGradeSpDict(){
         $sp_grade_dict = [
             0 => "-",
             //11 => "七級",
@@ -78,10 +78,10 @@ class UserDetail extends Entity
             31 => "中伝", 
             33 => "皆伝"
         ];
-        return $sp_grade_dict[$this->grade_sp ?? 0];
+        return $sp_grade_dict;
     }
 
-    protected function _getGradeDpInfo(){
+    protected function _getGradeDpDict(){
         $dp_grade_dict = [
             0 => "-",
             //11 => "七級",
@@ -104,10 +104,10 @@ class UserDetail extends Entity
             31 => "中伝", 
             33 => "皆伝"
         ];
-        return $dp_grade_dict[$this->grade_dp ?? 0];
+        return $dp_grade_dict;
     }
 
-    protected function _getArenaSpInfo(){
+    protected function _getArenaSpDict(){
         $sp_Arena_dict = [
             0 => "-",
             //11 => "D5",
@@ -131,10 +131,10 @@ class UserDetail extends Entity
             29 => "A2",
             29 => "A1",
         ];
-        return $sp_Arena_dict[$this->arena_sp ?? 0];
+        return $sp_Arena_dict;
     }
 
-    protected function _getArenaDpInfo(){
+    protected function _getArenaDpDict(){
         $dp_Arena_dict = [
             0 => "-",
             //11 => "D5",
@@ -158,7 +158,23 @@ class UserDetail extends Entity
             29 => "A2",
             29 => "A1",
         ];
-        return $dp_Arena_dict[$this->arena_dp ?? 0];
+        return $dp_Arena_dict;
+    }
+
+    protected function _getGradeSpInfo(){
+        return $this->grade_sp_dict[$this->grade_sp ?? 0];
+    }
+
+    protected function _getGradeDpInfo(){
+        return $this->grade_dp_dict[$this->grade_dp ?? 0];
+    }
+
+    protected function _getArenaSpInfo(){
+        return $this->arena_sp_dict[$this->arena_sp ?? 0];
+    }
+
+    protected function _getArenaDpInfo(){
+        return $this->arena_dp_dict[$this->arena_dp ?? 0];
     }
 
     // result['s_id']="(int)lamp"

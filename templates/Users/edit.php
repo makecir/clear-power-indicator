@@ -24,13 +24,17 @@
                 <?= $this->Form->create($user) ?>
                 <fieldset>
                     <?php
-                        echo $this->Form->control('user_detail.iidx_id');
+                        echo $this->Form->control('user_detail.iidx_id',
+                            ['type' => 'text']
+                        );
                         echo $this->Form->control('user_detail.dj_name');
-                        echo $this->Form->control('user_detail.grade_sp');
-                        echo $this->Form->control('user_detail.grade_dp');
-                        echo $this->Form->control('user_detail.arena_sp');
-                        echo $this->Form->control('user_detail.arena_dp');
-                        echo $this->Form->control('user_detail.twitter_id');
+                        echo $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict);
+                        echo $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict);
+                        echo $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict);
+                        echo $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict);
+                        echo $this->Form->control('user_detail.twitter_id',
+                            ['type' => 'text']
+                        );
                     ?>
                 </fieldset>
                 <?= $this->Form->button(__('更新'),['class' => 'btn btn-primary my-auto']) ?>

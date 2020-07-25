@@ -617,7 +617,7 @@ msgstr "ユーザー一覧"
 
 #: Users/login.php:7
 msgid "Please enter your username and password"
-msgstr ""
+msgstr "ユーザーIDとパスワードを入力して下さい"
 
 #: Users/login.php:11
 msgid "Login"
