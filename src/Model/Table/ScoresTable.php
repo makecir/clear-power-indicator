@@ -179,6 +179,6 @@ class ScoresTable extends Table
     }
     public function findRated(Query $query, array $options = [])
     {
-        return $query->where(['is_deleted' => "0", 'is_rated' => "0"]);
+        return $query->where(['is_deleted' => "0", 'is_rated' => "1"]);
     }
 }

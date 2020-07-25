@@ -58,7 +58,7 @@ class IndicatorComponent extends Component
         $lamp_num = sizeof($this->lamp_info);
         $ret = array_fill(0, $lamp_num, 0);
         foreach($scores as $score){
-            $ret[$my_lamp[$score->id] ?? 0]+=1;
+            $ret[$my_lamps[$score->id] ?? 0]+=1;
         }
         return $ret;
     }
@@ -70,14 +70,14 @@ class IndicatorComponent extends Component
         $lamp_num = sizeof($this->lamp_info);
         $preds=array();
         foreach($scores as $score){
-            for( $tar = $my_lamps[$score['id']]+1 ; $tar < $lamp_num ; $tar++ ){
+            for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??0];
-                $pred['name'] = $score['name'];
+                $pred['name'] = $score['title'];
                 $pred['cur_lamp'] = $this->lamp_info[$my_lamps[$score['id']]??0];
                 $pred['tar_lamp'] = $this->lamp_info[$tar];
-                $intercept = $this->pred_target[$tar]."_intercept";
-                $coefficient = $this->pred_target[$tar]."_coefficient";
+                $intercept = $score[$this->pred_target[$tar]."_intercept"];
+                $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
                 $preds[] = $pred;
             }
