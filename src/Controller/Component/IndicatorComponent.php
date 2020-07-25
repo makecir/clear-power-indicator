@@ -74,12 +74,12 @@ class IndicatorComponent extends Component
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??0];
                 $pred['name'] = $score['name'];
-                $pred['cur_lamp'] = $this->lamp_info[$my_lamps[$score['id']]];
+                $pred['cur_lamp'] = $this->lamp_info[$my_lamps[$score['id']]??0];
                 $pred['tar_lamp'] = $this->lamp_info[$tar];
                 $intercept = $this->pred_target[$tar]."_intercept";
                 $coefficient = $this->pred_target[$tar]."_coefficient";
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
-                $preds[]=$pred;
+                $preds[] = $pred;
             }
         }
         return $preds;

@@ -672,3 +672,12 @@ msgstr "リコメンド"
 msgid "Better than expected"
 msgstr "逆リコメンド"
 
+msgid "CP update"
+msgstr "CP更新"
+
+msgid "Record Playdaya"
+msgstr "プレイデータ登録"
+
+msgid "Player edit"
+msgstr "プレイヤー情報更新"
+

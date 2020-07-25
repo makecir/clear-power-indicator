@@ -4,32 +4,39 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+
+<div class="users view content">
+    <div class="card border-secondary mb-3">
+        <div class="card-header">
+            <h4 class="card-title" style="display:inline;"><?= __('CP update') ?> / <?= __('Record Playdaya') ?></h4>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Edit User') ?></legend>
-                <?php
-                    echo $this->Form->control('username');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('created_at');
-                    echo $this->Form->control('modified_at');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="card-body text-dark">
+            
+        </div>
+    </div>
+    <div class="card border-secondary mb-3">
+        <div class="card-header">
+            <h4 class="card-title" style="display:inline;"><?= __('Player edit') ?></h4>
+        </div>
+        <div class="card-body text-dark">
+            
+            <div class="userDetails form content">
+                <?= $this->Form->create($user->user_detail) ?>
+                <fieldset>
+                    <?php
+                        echo $this->Form->control('iidx_id');
+                        echo $this->Form->control('dj_name');
+                        echo $this->Form->control('grade_sp');
+                        echo $this->Form->control('grade_dp');
+                        echo $this->Form->control('arena_sp');
+                        echo $this->Form->control('arena_dp');
+                        echo $this->Form->control('twitter_id');
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('更新'),['class' => 'btn btn-primary my-auto']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+
         </div>
     </div>
 </div>

@@ -89,19 +89,16 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails','Scores'],
         ]);
-        $this->set(compact('user'));
         
         $this->loadModel('Scores');
         $this->loadComponent('Indicator');
         $my_lamps = $user->user_detail->my_lamps;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
-        $rec_table=$this->Indicator->getRecommendResults($my_lamps,$user->rating);
-        //$bte_table=$this->Indicator->getBte($my_lamps,$rating);
-        //  //getBte($my_lamps){$own_table=$this->Score->getOwn($my_lamps);return 50%cut($own_table);}
+        // $detail_table = $this->Indicator->getLampList($my_lamps,$user->rating);
+        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->rating);
+        // $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$rating);
         
-        
-        $this->set(compact('lamp_counts','rec_table'));
-        //test
+        $this->set(compact('user', 'lamp_counts', 'rec_table'));
 
     }
 
@@ -147,14 +144,12 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
-    
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
             $this->set(compact('user'));
-            $scores = $this->Users->Scores->find('list', ['limit' => 200]);
-            $this->set(compact('user', 'scores'));
+            //$this->set("userDetail", $name);
         }
         else{
             $this->Flash->error($result->getReason());

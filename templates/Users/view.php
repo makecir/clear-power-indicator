@@ -7,18 +7,23 @@
 <div class="users view content">
     <div class="card border-secondary mb-3">
         <div class="card-header">
-            <h4 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h4>
+            <h3 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h3>
             <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
             <h4 class="card-title" style="display:inline;">　</h4>
+            <?= $this->Html->link(
+                __('更新'),
+                ['action' => 'edit', $user->id],
+                ['class' => 'btn btn-outline-primary my-auto', 'style' => "float:right;display:inline;"])
+            ?>
         </div>
         <div class="card-body text-dark">
             <div class="row">
                 <div class="col-md-4">
                     <div class="mb-4">
-                        <h4 class="card-text"><?= __('CP')." : ".$user->user_detail->rating ?></h4>
+                        <h3 class="card-text" style="display:inline;"><?= __('CP')." : ".$user->user_detail->rating ?></h3>
                     </div>
                     <div class="mb-2">
-                        <h5 class="card-title" style="display:inline;">段位 : </h5>
+                        <h5 class="card-title" style="display:inline;">段位</h5>
                         <!-- <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6> -->
                         <h5 class="card-text" style="display:inline;">
                             <?= $user->user_detail->grade_sp_info ?> /
@@ -26,7 +31,7 @@
                         </h5>
                     </div>
                     <div class="mb-2">
-                        <h5 class="card-title" style="display:inline;">アリーナ : </h5>
+                        <h5 class="card-title" style="display:inline;">アリーナ</h5>
                         <!-- <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6> -->
                         <h5 class="card-text" style="display:inline;">
                             <?= $user->user_detail->arena_sp_info ?> /
