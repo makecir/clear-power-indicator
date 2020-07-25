@@ -21,16 +21,16 @@
         <div class="card-body text-dark">
             
             <div class="userDetails form content">
-                <?= $this->Form->create($user->user_detail) ?>
+                <?= $this->Form->create($user) ?>
                 <fieldset>
                     <?php
-                        echo $this->Form->control('iidx_id');
-                        echo $this->Form->control('dj_name');
-                        echo $this->Form->control('grade_sp');
-                        echo $this->Form->control('grade_dp');
-                        echo $this->Form->control('arena_sp');
-                        echo $this->Form->control('arena_dp');
-                        echo $this->Form->control('twitter_id');
+                        echo $this->Form->control('user_detail.iidx_id');
+                        echo $this->Form->control('user_detail.dj_name');
+                        echo $this->Form->control('user_detail.grade_sp');
+                        echo $this->Form->control('user_detail.grade_dp');
+                        echo $this->Form->control('user_detail.arena_sp');
+                        echo $this->Form->control('user_detail.arena_dp');
+                        echo $this->Form->control('user_detail.twitter_id');
                     ?>
                 </fieldset>
                 <?= $this->Form->button(__('更新'),['class' => 'btn btn-primary my-auto']) ?>

@@ -135,7 +135,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Scores', 'UserDetails'],
+            'contain' => ['UserDetails'],
         ]);
         $identity = $this->request->getAttribute('identity');
         $result = $identity->canResult('edit', $user);
@@ -144,7 +144,7 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'view', $user->id]);
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
@@ -153,7 +153,7 @@ class UsersController extends AppController
         }
         else{
             $this->Flash->error($result->getReason());
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'view', $user->id]);
         }
     }
 
