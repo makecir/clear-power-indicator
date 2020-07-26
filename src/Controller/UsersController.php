@@ -149,13 +149,18 @@ class UsersController extends AppController
                 if(isset($text_data)||isset($csv_data)){
                     $this->loadComponent('Indicator');
                     if(isset($csv_data)){
-                        $text_data = func($csv_data);
+                        $this->loadComponent('CSV');
+                        $input_lines = $this->CSV->getLinesFromCsv($csv_data);
                     }
-                    //$user->rating = $this->Indicator->getRating($text_data);
+                    else{
+                        $input_lines = explode(PHP_EOL, $text_data);
+                    }
+                    //$user->rating = $this->Indicator->getRating($input_lines);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        return $this->redirect(['action' => 'view', $user->id]);
+                        //return $this->redirect(['action' => 'view', $user->id]);
                     }
+                    $this->set(compact('input_lines'));
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
                 else{
@@ -168,8 +173,6 @@ class UsersController extends AppController
                 }
             }
             $this->set(compact('user', 'csvform'));
-            $data=$this->request->getData();
-            $this->set(compact('data'));
         }
         else{
             $this->Flash->error($result->getReason());
