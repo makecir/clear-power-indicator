@@ -88,4 +88,23 @@ class IndicatorComponent extends Component
     public function predict(&$rating, &$intercept, &$coefficient){
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }
+
+    public function saveLamps($user, &$input_lines){
+        // 1, array -> dict['title']['diff']=lamp;
+        // 2, dict['title']['diff']=lamp -> save(u_id,s_is,lamp);
+        // 
+    }
+
+    public function allClearLamps($user){
+        // 間違えて登録した時用に全てのランプを削除
+        $my_lamps = $user->user_detail->my_lamps->toArray();
+    }
+
+    public function getRating($user, &$input_lines){
+        // 1, 自身のランプをすべて持ってくる
+        $my_lamps = $user->user_detail->my_lamps->toArray();
+        // 2, たたかう
+        
+        return 1750.20;
+    }
 }

@@ -155,10 +155,12 @@ class UsersController extends AppController
                     else{
                         $input_lines = explode(PHP_EOL, $text_data);
                     }
-                    //$user->rating = $this->Indicator->getRating($input_lines);
+                    $this->Indicator->saveLamps($user, $input_lines);
+                    $rating = $this->Indicator->getRating($user, $input_lines);
+                    $user = $this->Users->patchEntity($user, ['user_detail'=>['rating'=>$rating]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        //return $this->redirect(['action' => 'view', $user->id]);
+                        return $this->redirect(['action' => 'view', $user->id]);
                     }
                     $this->set(compact('input_lines'));
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
