@@ -12,14 +12,17 @@
         </div>
         <div class="card-body text-dark">
             <h5 class="card-title" style="display:inline;">以下の2つのどちらかの方法でプレイデータを登録可能です</h5>
-            <p class="card-text text-danger">公式のプレミアムコース登録が必要です</p>
+            <p class="card-text">
+                ※ スコアを登録すると自動的にCPが更新されます</br>
+                ※ 公式のプレミアムコース登録が必要です
+            </p>
             <div class="row">
                 <div class="card col-md-5 m-3">
-                    <p>①</p>
+                    <p>①テキスト（スマホ向け）</p>
 
                 </div>
                 <div class="card col-md-5 m-3">
-                    <p>②</p>
+                    <p>②CSVアップロード</p>
                     <?php echo $this->Form->create($csvform, ['type' => 'file', 'style' => "display:inline-block"]); ?>
                     <label class="btn btn-secondary my-auto" style="display:inline-block">
                     <span id="imported-filename">CSV選択</span>
