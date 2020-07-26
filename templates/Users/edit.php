@@ -18,22 +18,33 @@
             </p>
             <div class="row">
                 <div class="card col-md-5 m-3">
-                    <p>①テキスト（スマホ向け）</p>
-
+                    <div class="mb-1 mt-1">
+                        <p>①テキスト（スマホ向け）</p>
+                        <?= $this->Form->create(null, ['style' => "display:inline-block"]); ?>
+                        <div style='float:left;' class="mr-1">
+                        <?= $this->Form->control('upload-text', ['type' => 'textarea','class'=>"textlines",'placeholder'=>'プレイデータ貼り付け','label' => '','style' => "float:left;"]); ?>
+                        </div>
+                        <div style='float:left;' class="mr-1">
+                        <span class="submit"><input type="submit" id="upload-playtext" class="btn btn-primary my-auto my-auto" value="テキスト読み込み"></span>
+                        </div>
+                        <?= $this->Form->end(); ?>
+                    </div>
                 </div>
                 <div class="card col-md-5 m-3">
-                    <p>②CSVアップロード</p>
-                    <?php echo $this->Form->create($csvform, ['type' => 'file', 'style' => "display:inline-block"]); ?>
-                    <label class="btn btn-secondary my-auto" style="display:inline-block">
-                    <span id="imported-filename">CSV選択</span>
-                    <span style="display:none;">
-                        <?php echo $this->Form->control('upload-csv', ['type' => 'file', 'accept' => '.csv', 'label' => '', 'style'=>"display:none;"]); ?>
-                    </span>
-                    </label>
-                    <span class="submit"><input type="submit" id="submit-csv" class="btn btn-primary my-auto" value="アップロード" style="display:none;"></span>
-                    <?php
-                        echo $this->Form->end();
-                    ?>
+                    <div class="mb-1 mt-1">
+                        <p>②CSVアップロード</p>
+                        <?php echo $this->Form->create($csvform, ['type' => 'file', 'style' => "display:inline-block"]); ?>
+                        <label class="btn btn-secondary my-auto" style="display:inline-block">
+                        <span id="imported-filename">CSV選択</span>
+                        <span style="display:none;">
+                            <?php echo $this->Form->control('upload-csv', ['type' => 'file', 'accept' => '.csv', 'label' => '', 'style'=>"display:none;"]); ?>
+                        </span>
+                        </label>
+                        <span class="submit"><input type="submit" id="submit-csv" class="btn btn-primary my-auto" value="アップロード" style="display:none;"></span>
+                        <?php
+                            echo $this->Form->end();
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

@@ -144,14 +144,32 @@ class UsersController extends AppController
         if ($result->getStatus()) {
             $csvform = new CSVForm();
             if ($this->request->is(['patch', 'post', 'put'])) {
-                $user = $this->Users->patchEntity($user, $this->request->getData());
-                if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(['action' => 'view', $user->id]);
+                $csv_data = $this->request->getData('upload-csv');
+                $text_data = $this->request->getData('upload-text');
+                if(isset($text_data)||isset($csv_data)){
+                    $this->loadComponent('Indicator');
+                    if(isset($csv_data)){
+                        $text_data = func($csv_data);
+                    }
+                    //$user->rating = $this->Indicator->getRating($text_data);
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The rating has been saved.'));
+                        return $this->redirect(['action' => 'view', $user->id]);
+                    }
+                    $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                else{
+                    $user = $this->Users->patchEntity($user, $this->request->getData());
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        return $this->redirect(['action' => 'view', $user->id]);
+                    }
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                }
             }
             $this->set(compact('user', 'csvform'));
+            $data=$this->request->getData();
+            $this->set(compact('data'));
         }
         else{
             $this->Flash->error($result->getReason());
