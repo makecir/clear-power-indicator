@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Form\CSVForm;
+
 /**
  * Users Controller
  *
@@ -140,6 +142,7 @@ class UsersController extends AppController
         $identity = $this->request->getAttribute('identity');
         $result = $identity->canResult('edit', $user);
         if ($result->getStatus()) {
+            $csvform = new CSVForm();
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
@@ -148,7 +151,7 @@ class UsersController extends AppController
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            $this->set(compact('user'));
+            $this->set(compact('user', 'csvform'));
         }
         else{
             $this->Flash->error($result->getReason());
