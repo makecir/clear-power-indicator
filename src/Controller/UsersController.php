@@ -100,7 +100,7 @@ class UsersController extends AppController
         $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
         // $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$rating);
         
-        $this->set(compact('user', 'lamp_counts', 'rec_table','my_lamps'));
+        $this->set(compact('user', 'lamp_counts', 'rec_table'));
 
     }
 
@@ -148,6 +148,7 @@ class UsersController extends AppController
                 $text_data = $this->request->getData('upload-text');
                 if(isset($text_data)||isset($csv_data)){
                     $this->loadComponent('Indicator');
+                    $this->loadComponent('Lamp');
                     if(isset($csv_data)){
                         $this->loadComponent('CSV');
                         $input_lines = $this->CSV->getLinesFromCsv($csv_data);
@@ -155,14 +156,15 @@ class UsersController extends AppController
                     else{
                         $input_lines = explode(PHP_EOL, $text_data);
                     }
-                    $this->Indicator->saveLamps($user, $input_lines);
-                    $rating = $this->Indicator->getRating($user, $input_lines);
+                    $new_lamps = $this->Lamp->getNewLampDict($user, $input_lines);
+                    $test = $this->Lamp->saveLamps($user, $new_lamps);
+                    $this->set(compact('new_lamps'));
+                    $rating = $this->Indicator->getRating($user);
                     $user = $this->Users->patchEntity($user, ['user_detail'=>['rating'=>$rating]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        return $this->redirect(['action' => 'view', $user->id]);
+                        //return $this->redirect(['action' => 'view', $user->id]);
                     }
-                    $this->set(compact('input_lines'));
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
                 else{

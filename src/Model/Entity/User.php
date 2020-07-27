@@ -36,6 +36,7 @@ class User extends Entity
         'created_at' => true,
         'modified_at' => true,
         'user_details' => true,
+        'scores' => true,
     ];
 
     /**
