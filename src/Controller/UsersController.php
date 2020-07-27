@@ -94,7 +94,7 @@ class UsersController extends AppController
         
         $this->loadModel('Scores');
         $this->loadComponent('Indicator');
-        $my_lamps = $user->user_detail->my_lamps->toArray();
+        $my_lamps = $user->user_detail->my_lamps_array->toArray();
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         // $detail_table = $this->Indicator->getLampList($my_lamps,$user->rating);
         $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
@@ -162,6 +162,7 @@ class UsersController extends AppController
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
                     $test = $this->Lamp->saveLamps($user, $new_lamps);
+                    $this->set(compact('test'));
                     $this->set(compact('new_lamps'));
                     $rating = $this->Indicator->getRating($user);
                     $user = $this->Users->patchEntity($user, ['user_detail'=>['rating'=>$rating]]);
@@ -198,6 +199,7 @@ class UsersController extends AppController
     public function delete($id = null)
     {
         // *TODO* 要本人確認
+        $this->Authorization->skipAuthorization();
 
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);

@@ -184,5 +184,14 @@ class UserDetail extends Entity
         return $query = $UserLamps->find('ownedBy', ['user_id' => $this->user_id]);
     }
 
+    public function _getMyLampsArray()
+    {
+        $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
+        return $query = $this->my_lamps->find('list', [
+            'keyField' => 'score_id',
+            'valueField' => 'lamp'
+        ]);
+    }
+
 
 }

@@ -48,12 +48,20 @@ class LampComponent extends Component
     
     public function saveLamps($user, &$new_lamps){
         // 2, dict['title']['diff']=lamp -> save(u_id,s_is,lamp);
-        $my_lamps = $user->user_detail->my_lamps->toArray();
+        //$my_lamps = $user->user_detail->my_lamps->toArray();
+
+        return $this->allClearLamps($user);
     }
 
     public function allClearLamps($user){
-        // 間違えて登録した時用に全てのランプを削除
-        $my_lamps = $user->user_detail->my_lamps->toArray();
+        // 全てのランプを削除
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $my_lamps = $Scores->find()->matching(
+            'Users' , function ($q) use ($user) {
+            return $q->where(['Users.id' => $user->id]);
+         })->toList();
+        $Users->Scores->unlink($user, $my_lamps);
+        return $my_lamps;
     }
 }
 

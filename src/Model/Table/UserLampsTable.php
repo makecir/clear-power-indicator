@@ -95,10 +95,7 @@ class UserLampsTable extends Table
 
     public function findOwnedBy(Query $query, array $options = [])
     {
-        return $query->find('list', [
-            'keyField' => 'score_id',
-            'valueField' => 'lamp'
-        ])->where(['user_id' => $options['user_id']]);
+        return $query->where(['user_id' => $options['user_id']]);
     }
 
 }
