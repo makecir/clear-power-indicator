@@ -157,6 +157,10 @@ class UsersController extends AppController
                         $input_lines = explode(PHP_EOL, $text_data);
                     }
                     $new_lamps = $this->Lamp->getNewLampDict($user, $input_lines);
+                    if(is_null($new_lamps)){
+                        $this->Flash->error(__('Fial to read data. Please, try again.'));
+                        return $this->redirect(['action' => 'edit', $user->id]);
+                    }
                     $test = $this->Lamp->saveLamps($user, $new_lamps);
                     $this->set(compact('new_lamps'));
                     $rating = $this->Indicator->getRating($user);

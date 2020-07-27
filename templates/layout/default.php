@@ -78,14 +78,19 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                 <?php if($isLoggedIn): ?>
                     <!-- ログイン中 -->
                     <li class="nav-item dropdown">
-                        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-cur-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?= $identity->username ?>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-cur-user">
                             <?= $this->Html->link(
-                                    __('Logout'),
-                                    ['controller' => 'Users', 'action' => 'logout'],
-                                    ['class' => 'dropdown-item'])
+                                __('My page'),
+                                ['controller' => 'Users', 'action' => 'view', $identity->id],
+                                ['class' => 'dropdown-item'])
+                            ?>
+                            <?= $this->Html->link(
+                                __('Logout'),
+                                ['controller' => 'Users', 'action' => 'logout'],
+                                ['class' => 'dropdown-item'])
                             ?>
                         </div>
                     </li>
