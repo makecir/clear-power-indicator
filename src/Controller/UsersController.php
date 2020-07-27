@@ -137,7 +137,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['UserDetails'],
+            'contain' => ['UserDetails','Scores'],
         ]);
         $identity = $this->request->getAttribute('identity');
         $result = $identity->canResult('edit', $user);
@@ -161,11 +161,10 @@ class UsersController extends AppController
                         $this->Flash->error(__('Fial to read data. Please, try again.'));
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
-                    $test = $this->Lamp->saveLamps($user, $new_lamps);
-                    $this->set(compact('test'));
+                    $this->Lamp->saveLamps($user, $new_lamps);
                     $this->set(compact('new_lamps'));
                     $rating = $this->Indicator->getRating($user);
-                    $user = $this->Users->patchEntity($user, ['user_detail'=>['rating'=>$rating]]);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
                         //return $this->redirect(['action' => 'view', $user->id]);
