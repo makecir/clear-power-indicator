@@ -85,6 +85,29 @@ class IndicatorComponent extends Component
         return $preds;
     }
 
+    
+    public function getBetterThamExpectedResults(&$my_lamps, $rating){
+        if(is_null($rating))return null;
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $scores = $Scores->find('rated')->toArray();
+        $lamp_num = sizeof($this->lamp_info);
+        $preds=array();
+        foreach($scores as $score){
+            for( $tar = 3 ; $tar <= min($my_lamps[$score['id']]??0, 7) ; $tar++ ){
+                //predict
+                $pred['version'] = $this->version_info[$score['version_num']??0];
+                $pred['name'] = $score['title'];
+                $pred['lamp'] = $this->lamp_info[$tar];
+                $intercept = $score[$this->pred_target[$tar]."_intercept"];
+                $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
+                $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
+                if($pred['probability']>50.0)continue;
+                $preds[] = $pred;
+            }
+        }
+        return $preds;
+    }
+
     public function predict(&$rating, &$intercept, &$coefficient){
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }

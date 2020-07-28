@@ -98,9 +98,9 @@ class UsersController extends AppController
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         // $detail_table = $this->Indicator->getLampList($my_lamps,$user->rating);
         $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
-        // $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$rating);
+        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating);
         
-        $this->set(compact('user', 'lamp_counts', 'rec_table','my_lamps'));
+        $this->set(compact('user', 'lamp_counts', 'rec_table','bte_table'));
 
     }
 
