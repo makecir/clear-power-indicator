@@ -44,6 +44,17 @@ class IndicatorComponent extends Component
         27 => "HEROIC VERSE",
     ];
 
+    public $color_info=[
+        0 => "#FFFFFF",
+        1 => "#CCCCCC",
+        2 => "#FF66CC",
+        3 => "#99FF99",
+        4 => "#99CCFF",
+        5 => "#FF6666",
+        6 => "#FFFF99",
+        7 => "#FF9966",
+    ];
+
     public $pred_target=[
         3 => "easy",
         4 => "clear",
@@ -63,6 +74,31 @@ class IndicatorComponent extends Component
         return $ret;
     }
 
+    public function getLampList(&$my_lamps){
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $scores = $Scores->find('available')->toArray();
+        $lamp_num = sizeof($this->lamp_info);
+        $results = array();
+        foreach($scores as $score){
+            $lamp = $my_lamps[$score['id']]??0;
+            $result['version'] = $this->version_info[$score['version_num']??0];
+            $result['title'] = $score['title'];
+            $result['lamp'] = $this->lamp_info[$lamp];
+            $result['lamp_color'] = $this->color_info[$lamp];
+            if($lamp >= 3 && $score->is_rated == 1){
+                $intercept = $score[$this->pred_target[$lamp]."_intercept"];
+                $coefficient = $score[$this->pred_target[$lamp]."_coefficient"];
+                $fifty = $this->fifty($intercept,$coefficient);
+            }
+            else $fifty = -1;
+            $result['fifty_rating'] = $fifty;
+            $results[] = $result;
+        }
+        return $results;
+    }
+
+    
+
     public function getRecommendResults(&$my_lamps, $rating){
         if(is_null($rating))return null;
         $Scores = TableRegistry::getTableLocator()->get('Scores');
@@ -73,9 +109,11 @@ class IndicatorComponent extends Component
             for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??0];
-                $pred['name'] = $score['title'];
-                $pred['cur_lamp'] = $this->lamp_info[$my_lamps[$score['id']]??0];
-                $pred['tar_lamp'] = $this->lamp_info[$tar];
+                $pred['title'] = $score['title'];
+                $pred['lamp_cur'] = $this->lamp_info[$my_lamps[$score['id']]??0];
+                $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
+                $pred['lamp_tar'] = $this->lamp_info[$tar];
+                $pred['lamp_tar_color'] = $this->color_info[$tar];
                 $intercept = $score[$this->pred_target[$tar]."_intercept"];
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
@@ -96,8 +134,9 @@ class IndicatorComponent extends Component
             for( $tar = 3 ; $tar <= min($my_lamps[$score['id']]??0, 7) ; $tar++ ){
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??0];
-                $pred['name'] = $score['title'];
+                $pred['title'] = $score['title'];
                 $pred['lamp'] = $this->lamp_info[$tar];
+                $pred['lamp_color'] = $this->color_info[$tar];
                 $intercept = $score[$this->pred_target[$tar]."_intercept"];
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
@@ -106,6 +145,11 @@ class IndicatorComponent extends Component
             }
         }
         return $preds;
+    }
+
+    public function fifty(&$intercept, &$coefficient){
+        if($coefficient === 0) return -1;
+        return - ($intercept / $coefficient);
     }
 
     public function predict(&$rating, &$intercept, &$coefficient){

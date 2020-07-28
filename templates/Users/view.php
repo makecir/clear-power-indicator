@@ -75,19 +75,78 @@
         </div>
         <div class="card-body tab-content">
             <div id="lamps" class="tab-pane fade show active">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="table-responsive">
+                    <table id="users-index" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><?= __('version') ?></th>
+                                <th><?= __('title') ?></th>
+                                <th><?= __('lamp') ?></th>
+                                <th><?= __('fifty_rating') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($detail_table as $row): ?>
+                            <tr>
+                                <td><?= h($row['version']) ?></td>
+                                <td><?= h($row['title']) ?></td>
+                                <td bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="recommended" class="tab-pane fade">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-info">Go somewhere</a>
+                <div class="table-responsive">
+                    <table id="users-index" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><?= __('version') ?></th>
+                                <th><?= __('title') ?></th>
+                                <th><?= __('lamp_cur') ?></th>
+                                <th><?= __('lamp_tar') ?></th>
+                                <th><?= __('probability') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($rec_table as $row): ?>
+                            <tr>
+                                <td><?= h($row['version']) ?></td>
+                                <td><?= h($row['title']) ?></td>
+                                <td bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
+                                <td bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
+                                <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="better-than-expected" class="tab-pane fade">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-success">Go somewhere</a>
+                <div class="table-responsive">
+                    <table id="users-index" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><?= __('version') ?></th>
+                                <th><?= __('title') ?></th>
+                                <th><?= __('lamp') ?></th>
+                                <th><?= __('probability') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($bte_table as $row): ?>
+                            <tr>
+                                <td><?= h($row['version']) ?></td>
+                                <td><?= h($row['title']) ?></td>
+                                <td bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
