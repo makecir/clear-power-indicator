@@ -190,7 +190,7 @@ class UserDetail extends Entity
         return $query = $this->my_lamps->find('list', [
             'keyField' => 'score_id',
             'valueField' => 'lamp'
-        ]);
+        ])->toArray();
     }
 
 

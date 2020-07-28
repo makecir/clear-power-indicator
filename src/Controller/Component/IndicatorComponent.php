@@ -90,10 +90,28 @@ class IndicatorComponent extends Component
     }
 
     public function getRating($user){
-        // 1, 自身のランプをすべて持ってくる
-        $my_lamps = $user->user_detail->my_lamps->toArray();
-        // 2, たたかう
-        
-        return 1750.20;
+        $ghost_num = 34204;
+
+        // ここから
+        $my_lamps = $user->user_detail->my_lamps_array;
+        foreach($my_lamps as $my_lamp){
+            if($my_lamp==2)$my_lamp=1;
+        }
+        $GhostLamps = TableRegistry::getTableLocator()->get('GhostLamps');
+        $ghost_lamps = $GhostLamps->find();
+        $battle_counts = array_fill(0, $ghost_num, 0);
+        foreach($ghost_lamps as $i => $ghost_lamp){
+            if(!array_key_exists($ghost_lamp->score_id, $my_lamps))continue;
+            if($my_lamps[$ghost_lamp->score_id] > $ghost_lamp->lamp) $battle_counts[$ghost_lamp->ghost_id - 1]++;
+            else if($my_lamps[$ghost_lamp->score_id] < $ghost_lamp->lamp) $battle_counts[$ghost_lamp->ghost_id - 1]--;
+            unset($ghost_lamp);
+        }
+        $win = 0;
+        foreach($battle_counts as $battle_count){
+            if($battle_count > 0) $win++;
+            if($battle_count < 0) $win--;
+        }
+        $reswin = ($win + $ghost_num + 1)/2.0;
+        return 400.00*log10( $reswin / ($ghost_num + 1 - $reswin) )+1500.0000;
     }
 }

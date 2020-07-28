@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Form\CSVForm;
-
+use Cake\ORM\TableRegistry;
 /**
  * Users Controller
  *
@@ -94,13 +94,13 @@ class UsersController extends AppController
         
         $this->loadModel('Scores');
         $this->loadComponent('Indicator');
-        $my_lamps = $user->user_detail->my_lamps_array->toArray();
+        $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         // $detail_table = $this->Indicator->getLampList($my_lamps,$user->rating);
         $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
         // $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$rating);
         
-        $this->set(compact('user', 'lamp_counts', 'rec_table'));
+        $this->set(compact('user', 'lamp_counts', 'rec_table','my_lamps'));
 
     }
 
@@ -163,11 +163,13 @@ class UsersController extends AppController
                     }
                     $this->Lamp->saveLamps($user, $new_lamps);
                     $this->set(compact('new_lamps'));
+                    //$ghost = $this->Indicator->test($user);
+                    //$this->set(compact('ghost'));
                     $rating = $this->Indicator->getRating($user);
                     $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        //return $this->redirect(['action' => 'view', $user->id]);
+                        return $this->redirect(['action' => 'view', $user->id]);
                     }
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
