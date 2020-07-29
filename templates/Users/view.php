@@ -24,7 +24,7 @@
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">段位</h5>
-                        <!-- <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6> -->
+                        <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6>
                         <h5 class="card-text" style="display:inline;">
                             <?= $user->user_detail->grade_sp_info ?> /
                             <?= $user->user_detail->grade_dp_info ?>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">アリーナ</h5>
-                        <!-- <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6> -->
+                        <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6>
                         <h5 class="card-text" style="display:inline;">
                             <?= $user->user_detail->arena_sp_info ?> /
                             <?= $user->user_detail->arena_dp_info ?>
@@ -63,7 +63,7 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#lamps" data-toggle="tab"> <?= __('Lamps Detail') ?></a>
+                    <a class="nav-link active" href="#lamps" data-toggle="tab">SP☆12<?= __('Lamps Detail') ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#recommended" data-toggle="tab"><?= __('Recommended') ?></a>
@@ -76,7 +76,7 @@
         <div class="card-body tab-content">
             <div id="lamps" class="tab-pane fade show active">
                 <div class="table-responsive">
-                    <table id="users-index" class="table table-bordered">
+                    <table id="lamp-detail" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th><?= __('version') ?></th>
@@ -100,7 +100,7 @@
             </div>
             <div id="recommended" class="tab-pane fade">
                 <div class="table-responsive">
-                    <table id="users-index" class="table table-bordered">
+                    <table id="rec-table" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th><?= __('version') ?></th>
@@ -126,7 +126,7 @@
             </div>
             <div id="better-than-expected" class="tab-pane fade">
                 <div class="table-responsive">
-                    <table id="users-index" class="table table-bordered">
+                    <table id="bte-table" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th><?= __('version') ?></th>
