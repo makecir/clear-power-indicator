@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="card  border-secondary mb-3 text-center">
+    <div class="card border-secondary mb-3">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -75,22 +75,106 @@
         </div>
         <div class="card-body tab-content">
             <div id="lamps" class="tab-pane fade show active">
+
+                <div class="card mb-3">
+                    <h5 class="card-header bg-info filter-header">
+                        <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                            <i class="fas fa-filter mr-2"></i>
+                            <i class="fa fa-chevron-down float-right"></i>
+                                絞り込み
+                        </a>
+                    </h5>
+                    <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
+                        <div class="card-body">
+                            <form action="#" data-persist=”garlic” >
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            バージョン
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="checkTrue(0,21)">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="checkFalse(0,21)">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                        <label class=mr-3><input type="checkbox" name="5th style" checked="checked"/>5th style</label>
+                                        <label class=mr-3><input type="checkbox" name="6th style" checked="checked"/>6th style</label>
+                                        <label class=mr-3><input type="checkbox" name="7th style" checked="checked"/>7th style</label>
+                                        <label class=mr-3><input type="checkbox" name="8th style" checked="checked"/>8th style</label>
+                                        <label class=mr-3><input type="checkbox" name="9th style" checked="checked"/>9th style</label>
+                                        <label class=mr-3><input type="checkbox" name="10th style" checked="checked"/>10th style</label>
+                                        <label class=mr-3><input type="checkbox" name="IIDX RED" checked="checked"/>IIDX RED</label>
+                                        <label class=mr-3><input type="checkbox" name="HAPPY SKY" checked="checked"/>HAPPY SKY</label>
+                                        <label class=mr-3><input type="checkbox" name="DistorteD" checked="checked"/>DistorteD</label>
+                                        <label class=mr-3><input type="checkbox" name="GOLD" checked="checked"/>GOLD</label>
+                                        <label class=mr-3><input type="checkbox" name="DJ TROOPERS" checked="checked"/>DJ TROOPERS</label>
+                                        <label class=mr-3><input type="checkbox" name="EMPRESS" checked="checked"/>EMPRESS</label>
+                                        <label class=mr-3><input type="checkbox" name="SIRIUS" checked="checked"/>SIRIUS</label>
+                                        <label class=mr-3><input type="checkbox" name="Resort Anthem" checked="checked"/>Resort Anthem</label>
+                                        <label class=mr-3><input type="checkbox" name="Lincle" checked="checked"/>Lincle</label>
+                                        <label class=mr-3><input type="checkbox" name="tricoro" checked="checked"/>tricoro</label>
+                                        <label class=mr-3><input type="checkbox" name="SPADA" checked="checked"/>SPADA</label>
+                                        <label class=mr-3><input type="checkbox" name="PENDUAL" checked="checked"/>PENDUAL</label>
+                                        <label class=mr-3><input type="checkbox" name="copula" checked="checked"/>copula</label>
+                                        <label class=mr-3><input type="checkbox" name="SINOBUZ" checked="checked"/>SINOBUZ</label>
+                                        <label class=mr-3><input type="checkbox" name="CANNON BALLERS" checked="checked"/>CANNON BALLERS</label>
+                                        <label class=mr-3><input type="checkbox" name="Rootage" checked="checked"/>Rootage</label>
+                                        </ul>
+                                    </li>
+                                    <hr>
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            現ランプ
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="checkTrue(22,29)">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="checkFalse(22,29)">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                        <label class=mr-3><input type="checkbox" name="mynp" checked="checked"/>NOPLAY</label>
+                                        <label class=mr-3><input type="checkbox" name="myfa" checked="checked"/>FAILED</label>
+                                        <label class=mr-3><input type="checkbox" name="myae" checked="checked"/>ASSITED</label>
+                                        <label class=mr-3><input type="checkbox" name="myes" checked="checked"/>EASY</label>
+                                        <label class=mr-3><input type="checkbox" name="mycl" checked="checked"/>CLEAR</label>
+                                        <label class=mr-3><input type="checkbox" name="myhd" checked="checked"/>HARD</label>
+                                        <label class=mr-3><input type="checkbox" name="myex" checked="checked"/>EXHARD</label>
+                                        <label class=mr-3><input type="checkbox" name="myfc" checked="checked"/>FC</label>
+                                        </ul>
+                                    </li>
+                                    <hr>
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            目標ランプ
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="checkTrue(30,34)">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="checkFalse(30,34)">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                        <label class=mr-3><input type="checkbox" name="tares" checked="checked"/>EASY</label>
+                                        <label class=mr-3><input type="checkbox" name="tarcl" checked="checked"/>CLEAR</label>
+                                        <label class=mr-3><input type="checkbox" name="tarhd" checked="checked"/>HARD</label>
+                                        <label class=mr-3><input type="checkbox" name="tarex" checked="checked"/>EXHARD</label>
+                                        <label class=mr-3><input type="checkbox" name="tarfc" checked="checked"/>FC</label>
+                                        <ul>
+                                    </li>
+                                </ul>
+                                <input type="checkbox" id="dummycheck" checked="checked" style="display:none;" disabled="disabled" >
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table id="lamp-detail" class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th><?= __('version') ?></th>
-                                <th><?= __('title') ?></th>
-                                <th><?= __('lamp') ?></th>
+                            <tr class="text-center">
+                                <th align="center"><?= __('version') ?></th>
+                                <th align="center"><?= __('title') ?></th>
+                                <th align="center"><?= __('lamp') ?></th>
                                 <th><?= __('fifty_rating') ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($detail_table as $row): ?>
                             <tr>
-                                <td><?= h($row['version']) ?></td>
-                                <td><?= h($row['title']) ?></td>
-                                <td bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                <td align="center"><?= h($row['version']) ?></td>
+                                <td align="center"><?= h($row['title']) ?></td>
+                                <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
                                 <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
                             </tr>
                             <?php endforeach; ?>
@@ -102,21 +186,21 @@
                 <div class="table-responsive">
                     <table id="rec-table" class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th><?= __('version') ?></th>
-                                <th><?= __('title') ?></th>
-                                <th><?= __('lamp_cur') ?></th>
-                                <th><?= __('lamp_tar') ?></th>
+                            <tr class="text-center">
+                                <th align="center" ><?= __('version') ?></th>
+                                <th align="center" ><?= __('title') ?></th>
+                                <th align="center" ><?= __('lamp_cur') ?></th>
+                                <th align="center" ><?= __('lamp_tar') ?></th>
                                 <th><?= __('probability') ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($rec_table as $row): ?>
                             <tr>
-                                <td><?= h($row['version']) ?></td>
-                                <td><?= h($row['title']) ?></td>
-                                <td bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
-                                <td bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
+                                <td align="center"><?= h($row['version']) ?></td>
+                                <td align="center"><?= h($row['title']) ?></td>
+                                <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
+                                <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
                                 <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                             </tr>
                             <?php endforeach; ?>
@@ -128,19 +212,19 @@
                 <div class="table-responsive">
                     <table id="bte-table" class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th><?= __('version') ?></th>
-                                <th><?= __('title') ?></th>
-                                <th><?= __('lamp') ?></th>
+                            <tr class="text-center">
+                                <th align="center"><?= __('version') ?></th>
+                                <th align="center"><?= __('title') ?></th>
+                                <th align="center"><?= __('lamp') ?></th>
                                 <th><?= __('probability') ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($bte_table as $row): ?>
                             <tr>
-                                <td><?= h($row['version']) ?></td>
-                                <td><?= h($row['title']) ?></td>
-                                <td bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                <td align="center"><?= h($row['version']) ?></td>
+                                <td align="center"><?= h($row['title']) ?></td>
+                                <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
                                 <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                             </tr>
                             <?php endforeach; ?>

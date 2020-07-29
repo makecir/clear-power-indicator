@@ -1,0 +1,10 @@
+.card-header .fa {
+    transition: .3s transform ease-in-out;
+  }
+.card-header .collapsed .fa {
+  transform: rotate(90deg);
+}
+.filter-header a:link, a:visited, a:hover, a:active {
+    color: white;
+    text-decoration: none;
+}
