@@ -147,6 +147,6 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
 
     <!-- using basic js -->
     <?= $this->Html->script('basic.js') ?>
-
+    <?= $this->Html->script('garlic.js') ?>
 </body>
 </html>

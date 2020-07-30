@@ -237,3 +237,7 @@ function allCheck(form,target_op,value){
     }
     $(boxes[target[0]]).change();
 }
+
+$(function(){
+    $("form").garlic();
+});
