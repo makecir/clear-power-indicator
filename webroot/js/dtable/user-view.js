@@ -204,14 +204,19 @@ $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
 
         //return true;
-
+        var detail_form = document.forms['detail-form'];
         var rec_form = document.forms['rec-form'];
+        var bte_form = document.forms['bte-form'];
 
         for(let ver of versions) {
+            if (settings.nTable.id == 'lamp-detail' && !detail_form.elements[ver].checked && data[0] == ver) return false;
             if (settings.nTable.id == 'rec-table' && !rec_form.elements[ver].checked && data[0] == ver) return false;
+            if (settings.nTable.id == 'bte-table' && !bte_form.elements[ver].checked && data[0] == ver) return false;
         }
         for(let lamp of cur_lamps) {
+            if (settings.nTable.id == 'lamp-detail' && !detail_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
             if (settings.nTable.id == 'rec-table' && !rec_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            if (settings.nTable.id == 'bte-table' && !bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
         }
         for(let lamp of tar_lamps) {
             if (settings.nTable.id == 'rec-table' && !rec_form.elements['tar_'+lamp].checked && data[3] == lamp) return false;

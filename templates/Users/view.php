@@ -75,7 +75,48 @@
         </div>
         <div class="card-body tab-content">
             <div id="lamps" class="tab-pane fade show active">
-
+                <div class="card mb-3">
+                    <h5 class="card-header bg-info filter-header">
+                        <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                            <i class="fas fa-filter mr-2"></i>
+                            <i class="fa fa-chevron-down float-right"></i>
+                                絞り込み
+                        </a>
+                    </h5>
+                    <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
+                        <div class="card-body">
+                            <form action="#" name="detail-form" data-persist=”garlic” >
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            バージョン
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('detail-form','versions',true);">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('detail-form','versions',false);">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                            <?php foreach ($checkbox['version'] as $_ver): ?>
+                                                <label class=mr-3><input type="checkbox" name="<?= $_ver ?>" checked="checked"/><?= $_ver ?></label>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                    <hr>
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            現ランプ
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('detail-form','cur_lamps',true);">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('detail-form','cur_lamps',false);">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                            <?php foreach ($checkbox['cur_lamp'] as $_lamp): ?>
+                                                <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="lamp-detail" class="table table-bordered">
                         <thead>
@@ -102,13 +143,13 @@
             <div id="recommended" class="tab-pane fade">
                 <div class="card mb-3">
                     <h5 class="card-header bg-info filter-header">
-                        <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                        <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
                             <i class="fas fa-filter mr-2"></i>
                             <i class="fa fa-chevron-down float-right"></i>
                                 絞り込み
                         </a>
                     </h5>
-                    <div id="collapse-f-lamp-detail" class="collapse" aria-labelledby="filter-lamp-detail">
+                    <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
                         <div class="card-body">
                             <form action="#" name="rec-form" data-persist=”garlic” >
                                 <ul class="nav flex-column">
@@ -131,11 +172,11 @@
                                             <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','cur_lamps',true);">全てチェック</a></div>
                                             <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','cur_lamps',false);">全て非チェック</a></div>
                                         </h5>
-                                            <ul>
-                                                <?php foreach ($checkbox['cur_lamp'] as $_lamp): ?>
-                                                    <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                        <ul>
+                                            <?php foreach ($checkbox['cur_lamp'] as $_lamp): ?>
+                                                <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
+                                            <?php endforeach; ?>
+                                        </ul>
                                     </li>
                                     <hr>
                                     <li class="nav-item">
@@ -144,14 +185,13 @@
                                             <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','tar_lamps',true);">全てチェック</a></div>
                                             <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','tar_lamps',false);">全て非チェック</a></div>
                                         </h5>
-                                            <ul>
-                                                <?php foreach ($checkbox['tar_lamp'] as $_lamp): ?>
-                                                    <label class=mr-3><input type="checkbox" name="<?= 'tar_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                        <ul>
+                                            <?php foreach ($checkbox['tar_lamp'] as $_lamp): ?>
+                                                <label class=mr-3><input type="checkbox" name="<?= 'tar_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
+                                            <?php endforeach; ?>
+                                        </ul>
                                     </li>
                                 </ul>
-                                <input type="checkbox" id="dummycheck" checked="checked" style="display:none;" disabled="disabled" >
                             </form>
                         </div>
                     </div>
@@ -182,7 +222,48 @@
                 </div>
             </div>
             <div id="better-than-expected" class="tab-pane fade">
-                
+            <div class="card mb-3">
+                    <h5 class="card-header bg-info filter-header">
+                        <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                            <i class="fas fa-filter mr-2"></i>
+                            <i class="fa fa-chevron-down float-right"></i>
+                                絞り込み
+                        </a>
+                    </h5>
+                    <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
+                        <div class="card-body">
+                            <form action="#" name="bte-form" data-persist=”garlic” >
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            バージョン
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','versions',true);">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','versions',false);">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                            <?php foreach ($checkbox['version'] as $_ver): ?>
+                                                <label class=mr-3><input type="checkbox" name="<?= $_ver ?>" checked="checked"/><?= $_ver ?></label>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                    <hr>
+                                    <li class="nav-item">
+                                        <h5 class="card-title">
+                                            現ランプ
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','cur_lamps',true);">全てチェック</a></div>
+                                            <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','cur_lamps',false);">全て非チェック</a></div>
+                                        </h5>
+                                        <ul>
+                                            <?php foreach ($checkbox['cur_lamp'] as $_lamp): ?>
+                                                <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="bte-table" class="table table-bordered">
                         <thead>
