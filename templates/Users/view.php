@@ -18,7 +18,7 @@
         </div>
         <div class="card-body text-dark">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="mb-4">
                         <h3 class="card-text" style="display:inline;"><?= __('CP')." : ".$user->user_detail->rating ?></h3>
                     </div>
@@ -50,7 +50,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7 p-3">
+                    
+                    <canvas id="myChart" width="400" height="400"></canvas>
+
                 </div>
             </div>
         </div>
@@ -289,5 +292,50 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.onload = function() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['FULLCOMBO', 'EXHARD', 'HARD', 'CLEAR', 'EASY', 'ASSISTED', 'FAILED', 'NO PLAY'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [
+                        <?php foreach(array_reverse($lamp_counts) as $count):?>
+                            <?= $count.',' ?>
+                        <?php endforeach; ?>
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 153, 102, 0.8)',
+                        'rgba(255, 255, 153, 0.8)',
+                        'rgba(255, 102, 102, 0.8)',
+                        'rgba(135, 204, 255, 0.8)',
+                        'rgba(153, 255, 153, 0.8)',
+                        'rgba(255, 102, 204, 0.8)',
+                        'rgba(204, 204, 204, 0.8)',
+                        'rgba(255, 255, 255, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 153, 102, 1)',
+                        'rgba(255, 255, 153, 1)',
+                        'rgba(255, 102, 102, 1)',
+                        'rgba(135, 204, 255, 1)',
+                        'rgba(153, 255, 153, 1)',
+                        'rgba(255, 102, 204, 1)',
+                        'rgba(204, 204, 204, 1)',
+                        'rgba(204, 204, 204, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+        }
+    </script>
+
 
 </div>
