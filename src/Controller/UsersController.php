@@ -99,9 +99,12 @@ class UsersController extends AppController
         $detail_table = $this->Indicator->getLampList($my_lamps);
         $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
         $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating);
-        $dtables = ['lamp-detail','rec-table','bte-table'];
+        $dtables = ['user-view'];
+        $checkbox['version'] = $this->Indicator->version_info;
+        $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
+        $checkbox['tar_lamp'] = $this->Indicator->tar_lamp_info;
 
-        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables'));
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox'));
 
     }
 

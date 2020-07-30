@@ -17,8 +17,15 @@ class IndicatorComponent extends Component
         7 => "FULLCOMBO",
     ];
 
+    public $tar_lamp_info=[
+        3 => "EASY",
+        4 => "CLEAR",
+        5 => "HARD",
+        6 => "EXHARD",
+        7 => "FULLCOMBO",
+    ];
+
     public $version_info=[
-         0 => "UNKNOWN",
          5 => "5th style",
          6 => "6th style",
          7 => "7th style",
@@ -81,7 +88,7 @@ class IndicatorComponent extends Component
         $results = array();
         foreach($scores as $score){
             $lamp = $my_lamps[$score['id']]??0;
-            $result['version'] = $this->version_info[$score['version_num']??0];
+            $result['version'] = $this->version_info[$score['version_num']??5];
             $result['title'] = $score['title'];
             $result['lamp'] = $this->lamp_info[$lamp];
             $result['lamp_color'] = $this->color_info[$lamp];
@@ -108,7 +115,7 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
-                $pred['version'] = $this->version_info[$score['version_num']??0];
+                $pred['version'] = $this->version_info[$score['version_num']??5];
                 $pred['title'] = $score['title'];
                 $pred['lamp_cur'] = $this->lamp_info[$my_lamps[$score['id']]??0];
                 $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
@@ -133,7 +140,7 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             for( $tar = 3 ; $tar <= min($my_lamps[$score['id']]??0, 7) ; $tar++ ){
                 //predict
-                $pred['version'] = $this->version_info[$score['version_num']??0];
+                $pred['version'] = $this->version_info[$score['version_num']??5];
                 $pred['title'] = $score['title'];
                 $pred['lamp'] = $this->lamp_info[$tar];
                 $pred['lamp_color'] = $this->color_info[$tar];
