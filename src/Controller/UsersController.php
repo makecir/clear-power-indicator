@@ -121,6 +121,14 @@ class UsersController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
+        $result = $this->Authentication->getResult();
+        // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            $redirect = $this->request->getQuery('redirect');
+            $this->Flash->error(__('新規登録を行う前にログアウトしてください'));
+            return $this->redirect(['action' => 'index']);
+        }
+
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
