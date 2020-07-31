@@ -198,6 +198,31 @@ class UsersController extends AppController
         }
     }
 
+    public function setting($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails'],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('setting', $user);
+        if ($result->getStatus()) {
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'view', $user->id]);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+            $this->set(compact('user'));
+        }
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+    }
+
+
     /**
      * Delete method
      *
@@ -207,20 +232,30 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        // *TODO* 要本人確認
-        $this->Authorization->skipAuthorization();
 
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails'],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('delete', $user);
+        if ($result->getStatus()) {
+            $this->Authorization->skipAuthorization();
 
-        // user削除時にdetail,follow,lampを消去
-
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->request->allowMethod(['post', 'delete']);
+            $user = $this->Users->get($id);
+    
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('The user has been deleted.'));
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
+    
+            return $this->redirect(['action' => 'view', $user->id]);
         }
-
-        return $this->redirect(['action' => 'index']);
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
     }
 }

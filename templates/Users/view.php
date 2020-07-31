@@ -11,7 +11,7 @@
             <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
             <h4 class="card-title" style="display:inline;">　</h4>
             <?= $this->Html->link(
-                __('更新'),
+                __('編集/更新'),
                 ['action' => 'edit', $user->id],
                 ['class' => 'btn btn-outline-primary my-auto', 'style' => "float:right;display:inline;"])
             ?>

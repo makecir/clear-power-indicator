@@ -124,6 +124,21 @@ class UsersTable extends Table
             ->allowEmptyString('email');
 
         $validator
+            ->scalar('is_admin')
+            ->maxLength('is_admin', 16)
+            ->notEmptyString('is_admin');
+
+        $validator
+            ->scalar('private_level')
+            ->maxLength('private_level', 16)
+            ->notEmptyString('private_level');
+
+        $validator
+            ->scalar('follow_pass')
+            ->maxLength('follow_pass', 60)
+            ->allowEmptyString('follow_pass');
+
+        $validator
             ->dateTime('created_at')
             ->notEmptyDateTime('created_at');
 

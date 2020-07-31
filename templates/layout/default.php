@@ -95,6 +95,11 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                                 ['class' => 'dropdown-item'])
                             ?>
                             <?= $this->Html->link(
+                                __('Setting'),
+                                ['controller' => 'Users', 'action' => 'setting', $identity->id],
+                                ['class' => 'dropdown-item'])
+                            ?>
+                            <?= $this->Html->link(
                                 __('Logout'),
                                 ['controller' => 'Users', 'action' => 'logout'],
                                 ['class' => 'dropdown-item'])
