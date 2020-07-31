@@ -129,8 +129,12 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
         </div>
     </main>
     <footer>
-        <div class="container mb-2" style="text-align:center">
-            ここにフッター
+        <div class="container mb-10 mt-10" style="text-align:center">
+            <div class="text-muted" style="font-size: 12px;">
+
+                beatmaniaⅡDXは、株式会社コナミデジタルエンタテインメントの商標または登録商標です。</br>
+                本サービスは、株式会社コナミデジタルエンタテインメントとは一切関係の無い個人が製作した非公式ファンサイトです。
+            </div>
         </div>
     </footer>
 
