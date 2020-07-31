@@ -41,7 +41,7 @@ class UserLampsTable extends Table
         parent::initialize($config);
 
         $this->setTable('user_lamps');
-        $this->setDisplayField('user_id');
+        $this->setDisplayField('lamp');
         $this->setPrimaryKey(['user_id', 'score_id']);
 
         $this->belongsTo('Users', [
@@ -92,4 +92,10 @@ class UserLampsTable extends Table
 
         return $rules;
     }
+
+    public function findOwnedBy(Query $query, array $options = [])
+    {
+        return $query->where(['user_id' => $options['user_id']]);
+    }
+
 }

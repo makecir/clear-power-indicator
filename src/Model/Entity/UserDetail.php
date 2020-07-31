@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Model\Entity;
-
+use Cake\ORM\TableRegistry;
 use Cake\ORM\Entity;
 
 /**
@@ -54,8 +54,8 @@ class UserDetail extends Entity
     public function getTable(){
         return TableRegistry::getTableLocator()->get('UserDetails');
     }
-
-    function _getGradeSpInfo(){
+    
+    protected function _getGradeSpDict(){
         $sp_grade_dict = [
             0 => "-",
             //11 => "七級",
@@ -78,10 +78,10 @@ class UserDetail extends Entity
             31 => "中伝", 
             33 => "皆伝"
         ];
-        return $sp_grade_dict[$this->grade_sp ?? 0];
+        return $sp_grade_dict;
     }
 
-    function _getGradeDpInfo(){
+    protected function _getGradeDpDict(){
         $dp_grade_dict = [
             0 => "-",
             //11 => "七級",
@@ -104,10 +104,10 @@ class UserDetail extends Entity
             31 => "中伝", 
             33 => "皆伝"
         ];
-        return $dp_grade_dict[$this->grade_dp ?? 0];
+        return $dp_grade_dict;
     }
 
-    function _getArenaSpInfo(){
+    protected function _getArenaSpDict(){
         $sp_Arena_dict = [
             0 => "-",
             //11 => "D5",
@@ -129,12 +129,12 @@ class UserDetail extends Entity
             27 => "A4", 
             28 => "A3", 
             29 => "A2",
-            29 => "A1",
+            30 => "A1",
         ];
-        return $sp_Arena_dict[$this->arena_sp ?? 0];
+        return $sp_Arena_dict;
     }
 
-    function _getArenaDpInfo(){
+    protected function _getArenaDpDict(){
         $dp_Arena_dict = [
             0 => "-",
             //11 => "D5",
@@ -156,9 +156,42 @@ class UserDetail extends Entity
             27 => "A4", 
             28 => "A3", 
             29 => "A2",
-            29 => "A1",
+            30 => "A1",
         ];
-        return $dp_Arena_dict[$this->arena_dp ?? 0];
+        return $dp_Arena_dict;
     }
+
+    protected function _getGradeSpInfo(){
+        return $this->grade_sp_dict[$this->grade_sp ?? 0];
+    }
+
+    protected function _getGradeDpInfo(){
+        return $this->grade_dp_dict[$this->grade_dp ?? 0];
+    }
+
+    protected function _getArenaSpInfo(){
+        return $this->arena_sp_dict[$this->arena_sp ?? 0];
+    }
+
+    protected function _getArenaDpInfo(){
+        return $this->arena_dp_dict[$this->arena_dp ?? 0];
+    }
+
+    // result['s_id']="(int)lamp"
+    public function _getMyLamps()
+    {
+        $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
+        return $query = $UserLamps->find('ownedBy', ['user_id' => $this->user_id]);
+    }
+
+    public function _getMyLampsArray()
+    {
+        $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
+        return $query = $this->my_lamps->find('list', [
+            'keyField' => 'score_id',
+            'valueField' => 'lamp'
+        ])->toArray();
+    }
+
 
 }

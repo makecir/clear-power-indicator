@@ -71,7 +71,7 @@ class UserDetailsTable extends Table
         $validator
             ->scalar('dj_name')
             ->maxLength('dj_name', 8)
-            ->allowEmptyString('dj_name');
+            ->notEmptyString('dj_name');
 
         $validator
             ->notEmptyString('grade_sp');

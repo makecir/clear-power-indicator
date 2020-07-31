@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Form\CSVForm;
 use Cake\ORM\TableRegistry;
-
 /**
  * Users Controller
  *
@@ -74,7 +74,6 @@ class UsersController extends AppController
         ]);
         $dtables=['user-index'];
 
-
         $this->set(compact('users','dtables'));
     }
 
@@ -92,7 +91,25 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails','Scores'],
         ]);
-        $this->set(compact('user'));
+        
+        $this->loadModel('Scores');
+        $this->loadComponent('Indicator');
+        $this->loadComponent('Lamp');
+        $my_lamps = $user->user_detail->my_lamps_array;
+        $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
+        $detail_table = $this->Indicator->getLampList($my_lamps);
+        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
+        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating);
+        $dtables = ['user-view'];
+        $checkbox['version'] = $this->Indicator->version_info;
+        $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
+        $checkbox['tar_lamp'] = $this->Indicator->tar_lamp_info;
+        $checkbox['color'] = $this->Indicator->color_info;
+        $checkbox['lamp_class'] = $this->Lamp->lamp_class_info;
+        $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
+
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox'));
+
     }
 
     /**
@@ -108,16 +125,8 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-
-                //user追加時に自動的にuser_detailを生成
-                $userDetailsTable = TableRegistry::getTableLocator()->get('UserDetails');
-                $user_detail = $userDetailsTable->newEmptyEntity();
-                $user_detail->user_id = $user->id;
-                if($userDetailsTable->save($user_detail)){
-                    $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(['action' => 'index']);
-                }
-                $this->Users->delete($user);
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -136,27 +145,56 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['Scores', 'UserDetails'],
+            'contain' => ['UserDetails','Scores'],
         ]);
         $identity = $this->request->getAttribute('identity');
         $result = $identity->canResult('edit', $user);
         if ($result->getStatus()) {
+            $csvform = new CSVForm();
             if ($this->request->is(['patch', 'post', 'put'])) {
-                $user = $this->Users->patchEntity($user, $this->request->getData());
-                if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
-    
-                    return $this->redirect(['action' => 'index']);
+                $csv_data = $this->request->getData('upload-csv');
+                $text_data = $this->request->getData('upload-text');
+                if(isset($text_data)||isset($csv_data)){
+                    $this->loadComponent('Indicator');
+                    $this->loadComponent('Lamp');
+                    if(isset($csv_data)){
+                        $this->loadComponent('CSV');
+                        $input_lines = $this->CSV->getLinesFromCsv($csv_data);
+                    }
+                    else{
+                        $input_lines = explode(PHP_EOL, $text_data);
+                    }
+                    $new_lamps = $this->Lamp->getNewLampDict($user, $input_lines);
+                    if(is_null($new_lamps)){
+                        $this->Flash->error(__('Fial to read data. Please, try again.'));
+                        return $this->redirect(['action' => 'edit', $user->id]);
+                    }
+                    $this->Lamp->saveLamps($user, $new_lamps);
+                    $this->set(compact('new_lamps'));
+                    //$ghost = $this->Indicator->test($user);
+                    //$this->set(compact('ghost'));
+                    $rating = $this->Indicator->getRating($user);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The rating has been saved.'));
+                        return $this->redirect(['action' => 'view', $user->id]);
+                    }
+                    $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                else{
+                    $user = $this->Users->patchEntity($user, $this->request->getData());
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        return $this->redirect(['action' => 'view', $user->id]);
+                    }
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                }
             }
-            $this->set(compact('user'));
-            $scores = $this->Users->Scores->find('list', ['limit' => 200]);
-            $this->set(compact('user', 'scores'));
+            $this->set(compact('user', 'csvform'));
         }
         else{
             $this->Flash->error($result->getReason());
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'view', $user->id]);
         }
     }
 
@@ -170,6 +208,7 @@ class UsersController extends AppController
     public function delete($id = null)
     {
         // *TODO* 要本人確認
+        $this->Authorization->skipAuthorization();
 
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);

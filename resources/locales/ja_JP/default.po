@@ -617,7 +617,7 @@ msgstr "ユーザー一覧"
 
 #: Users/login.php:7
 msgid "Please enter your username and password"
-msgstr ""
+msgstr "ユーザーIDとパスワードを入力して下さい"
 
 #: Users/login.php:11
 msgid "Login"
@@ -637,6 +637,9 @@ msgstr "このサイトについて"
 #:
 msgid "Register"
 msgstr "新規登録"
+
+msgid "My page"
+msgstr "マイページ"
 
 
 #: Users/view.php:12
@@ -671,4 +674,13 @@ msgstr "リコメンド"
 
 msgid "Better than expected"
 msgstr "逆リコメンド"
+
+msgid "CP update"
+msgstr "CP更新"
+
+msgid "Record Playdaya"
+msgstr "プレイデータ登録"
+
+msgid "Player edit"
+msgstr "プレイヤー情報更新"
 

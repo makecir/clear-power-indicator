@@ -84,4 +84,15 @@ class GhostLampsTable extends Table
 
         return $rules;
     }
+    
+    public function findScoredBy(Query $query, array $options = [])
+    {
+        return $query->find('list',[
+            'keyField' => 'score_id',
+            'valueField' => function ($entity) {
+                //return ['user_id'=>$entity['user_id'],'lamp'=>$entity['lamp']];
+                return $entity['ghost_id'];
+            }
+        ]);
+    }
 }

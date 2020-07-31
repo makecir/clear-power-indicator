@@ -29,12 +29,19 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+    
+    <?= $this->Html->css('style.css') ?>
 
     <!-- using bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- using datatable css -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css"/>
+
+    <!-- using icon css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" />
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -78,14 +85,19 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                 <?php if($isLoggedIn): ?>
                     <!-- ログイン中 -->
                     <li class="nav-item dropdown">
-                        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-cur-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?= $identity->username ?>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-cur-user">
                             <?= $this->Html->link(
-                                    __('Logout'),
-                                    ['controller' => 'Users', 'action' => 'logout'],
-                                    ['class' => 'dropdown-item'])
+                                __('My page'),
+                                ['controller' => 'Users', 'action' => 'view', $identity->id],
+                                ['class' => 'dropdown-item'])
+                            ?>
+                            <?= $this->Html->link(
+                                __('Logout'),
+                                ['controller' => 'Users', 'action' => 'logout'],
+                                ['class' => 'dropdown-item'])
                             ?>
                         </div>
                     </li>
@@ -135,8 +147,10 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
         <?php endforeach; ?>
     <?php endif; ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+
     <!-- using basic js -->
     <?= $this->Html->script('basic.js') ?>
-
+    <?= $this->Html->script('garlic.js') ?>
 </body>
 </html>

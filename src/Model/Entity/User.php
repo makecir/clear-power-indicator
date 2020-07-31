@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 
 use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Cake\ORM\Entity;
+use Cake\ORM\TableRegistry;
 
 /**
  * User Entity
@@ -35,6 +36,7 @@ class User extends Entity
         'created_at' => true,
         'modified_at' => true,
         'user_details' => true,
+        'scores' => true,
     ];
 
     /**
