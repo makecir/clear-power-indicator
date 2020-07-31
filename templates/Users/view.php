@@ -40,7 +40,7 @@
                     </div>
                     <div class="mb-0">
                         <p class="card-text">Twitter : 
-                            <?php if(isset($user->user_detail->twitter_id)): ?>
+                            <?php if(isset($user->user_detail->twitter_id) && ($user->user_detail->twitter_id !== "")): ?>
                                 <a href="https://twitter.com/<?= $user->user_detail->twitter_id ?>" class="card-link" style="display:inline;" target="_blank">
                                     <?= "@".$user->user_detail->twitter_id ?>
                                 </a>

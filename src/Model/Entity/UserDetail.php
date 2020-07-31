@@ -129,7 +129,7 @@ class UserDetail extends Entity
             27 => "A4", 
             28 => "A3", 
             29 => "A2",
-            29 => "A1",
+            30 => "A1",
         ];
         return $sp_Arena_dict;
     }
@@ -156,7 +156,7 @@ class UserDetail extends Entity
             27 => "A4", 
             28 => "A3", 
             29 => "A2",
-            29 => "A1",
+            30 => "A1",
         ];
         return $dp_Arena_dict;
     }
