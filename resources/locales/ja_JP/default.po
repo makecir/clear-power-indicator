@@ -641,6 +641,9 @@ msgstr "新規登録"
 msgid "My page"
 msgstr "マイページ"
 
+msgid "Setting"
+msgstr "設定"
+
 
 #: Users/view.php:12
 msgid "Delete User"

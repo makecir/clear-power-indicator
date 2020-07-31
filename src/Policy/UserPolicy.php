@@ -20,7 +20,7 @@ class userPolicy{
         }
         return new Result(false, __('Permission denied'));
     }
-    public function canDeleteg(IdentityInterface $cur_user, User $user){
+    public function canDelete(IdentityInterface $cur_user, User $user){
         if ($cur_user->id == $user->id) {
             return new Result(true);
         }

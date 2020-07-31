@@ -232,29 +232,28 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-
+        $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails'],
         ]);
         $identity = $this->request->getAttribute('identity');
         $result = $identity->canResult('delete', $user);
-        if ($result->getStatus()) {
-            $this->Authorization->skipAuthorization();
-
-            $this->request->allowMethod(['post', 'delete']);
-            $user = $this->Users->get($id);
-    
+        if (!$result->getStatus()){
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+        else if (! $user->check($this->request->getdata('password'))){
+            $this->Flash->error('パスワードが正しくありません');
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+        else {
             if ($this->Users->delete($user)) {
+                $this->Authentication->logout();
                 $this->Flash->success(__('The user has been deleted.'));
                 return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
             } else {
                 $this->Flash->error(__('The user could not be deleted. Please, try again.'));
             }
-    
-            return $this->redirect(['action' => 'view', $user->id]);
-        }
-        else{
-            $this->Flash->error($result->getReason());
             return $this->redirect(['action' => 'view', $user->id]);
         }
     }

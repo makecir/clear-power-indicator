@@ -58,4 +58,13 @@ class User extends Entity
         }
     }
 
+    public function check(string $password) : ?bool
+    {
+        return (new DefaultPasswordHasher())->check($password, $this->password);
+    }
+    public function aaa(string $password) : ?string
+    {
+        return (new DefaultPasswordHasher())->hash($password);
+    }
+
 }
