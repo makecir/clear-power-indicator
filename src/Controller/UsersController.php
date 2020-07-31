@@ -94,6 +94,7 @@ class UsersController extends AppController
         
         $this->loadModel('Scores');
         $this->loadComponent('Indicator');
+        $this->loadComponent('Lamp');
         $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         $detail_table = $this->Indicator->getLampList($my_lamps);
@@ -103,6 +104,9 @@ class UsersController extends AppController
         $checkbox['version'] = $this->Indicator->version_info;
         $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
         $checkbox['tar_lamp'] = $this->Indicator->tar_lamp_info;
+        $checkbox['color'] = $this->Indicator->color_info;
+        $checkbox['lamp_class'] = $this->Lamp->lamp_class_info;
+        $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
 
         $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox'));
 

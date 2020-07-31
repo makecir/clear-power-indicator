@@ -13,7 +13,7 @@
         </div>
         <div class="card-body text-dark">
             <div class="table-responsive">
-                <table id="users-index" class="table table-bordered">
+                <table id="users-index" class="table table-hover">
                     <thead>
                         <tr>
                             <th><?= __('id') ?></th>

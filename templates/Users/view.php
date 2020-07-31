@@ -16,9 +16,9 @@
                 ['class' => 'btn btn-outline-primary my-auto', 'style' => "float:right;display:inline;"])
             ?>
         </div>
-        <div class="card-body text-dark">
+        <div class="card-body text-dark pr-4 pl-4">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="mb-4">
                         <h3 class="card-text" style="display:inline;"><?= __('CP')." : ".$user->user_detail->rating ?></h3>
                     </div>
@@ -50,10 +50,30 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-7 p-3">
-                    
-                    <canvas id="myChart" width="400" height="400"></canvas>
-
+                <div class="col-md-8 p-3">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                                        <th scope="col"  bgcolor=<?= $checkbox['color'][$i] ?>><?= $checkbox['lamp_short'][$i] ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                                        <td scope="col"><?= $lamp_counts[$i] ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="progress mb-3">
+                        <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                            <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i] ?>" role="progressbar" style="width: <?= $lamp_counts[$i] ?>%" aria-valuenow="<?= $lamp_counts[$i] ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -292,50 +312,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        window.onload = function() {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['FULLCOMBO', 'EXHARD', 'HARD', 'CLEAR', 'EASY', 'ASSISTED', 'FAILED', 'NO PLAY'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [
-                        <?php foreach(array_reverse($lamp_counts) as $count):?>
-                            <?= $count.',' ?>
-                        <?php endforeach; ?>
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 153, 102, 0.8)',
-                        'rgba(255, 255, 153, 0.8)',
-                        'rgba(255, 102, 102, 0.8)',
-                        'rgba(135, 204, 255, 0.8)',
-                        'rgba(153, 255, 153, 0.8)',
-                        'rgba(255, 102, 204, 0.8)',
-                        'rgba(204, 204, 204, 0.8)',
-                        'rgba(255, 255, 255, 0.8)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 153, 102, 1)',
-                        'rgba(255, 255, 153, 1)',
-                        'rgba(255, 102, 102, 1)',
-                        'rgba(135, 204, 255, 1)',
-                        'rgba(153, 255, 153, 1)',
-                        'rgba(255, 102, 204, 1)',
-                        'rgba(204, 204, 204, 1)',
-                        'rgba(204, 204, 204, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-        }
-    </script>
-
 
 </div>

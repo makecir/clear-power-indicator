@@ -1,10 +1,34 @@
 .card-header .fa {
-    transition: .3s transform ease-in-out;
-  }
+  transition: .3s transform ease-in-out;
+}
 .card-header .collapsed .fa {
   transform: rotate(90deg);
 }
 .filter-header a:link, a:visited, a:hover, a:active {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
+}
+.progress-bar-NOPLAY {
+  background-color: #EEEEEE !important;
+}
+.progress-bar-FAILED {
+  background-color: #CCCCCC !important;
+}
+.progress-bar-ASSISTED {
+  background-color: #FF66CC !important;
+}
+.progress-bar-EASY {
+  background-color: #99FF99 !important;
+}
+.progress-bar-CLEAR {
+  background-color: #99CCFF !important;
+}
+.progress-bar-HARD {
+  background-color: #FF6666 !important;
+}
+.progress-bar-EXHARD {
+  background-color: #FFFF99 !important;
+}
+.progress-bar-FULLCOMBO {
+  background-color: #FF9966 !important;
 }

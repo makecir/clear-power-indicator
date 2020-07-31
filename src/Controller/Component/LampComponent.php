@@ -7,9 +7,31 @@ use Cake\ORM\TableRegistry;
 class LampComponent extends Component
 {
 
+    public $lamp_class_info=[
+        0 => "NOPLAY",
+        1 => "FAILED",
+        2 => "ASSISTED",
+        3 => "EASY",
+        4 => "CLEAR",
+        5 => "HARD",
+        6 => "EXHARD",
+        7 => "FULLCOMBO",
+    ];
+    public $lamp_short_info=[
+        0 => "NP",
+        1 => "FA",
+        2 => "AC",
+        3 => "EC",
+        4 => "CL",
+        5 => "HC",
+        6 => "EX",
+        7 => "FC",
+    ];
+
     public function getNewLampDict($user, &$lines){
         // 1, array -> dict['title']['diff']=lamp;
         
+
         $clear_str2num=[
             "NO PLAY"=>0,
             "FAILED"=>1,
