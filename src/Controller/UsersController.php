@@ -75,8 +75,6 @@ class UsersController extends AppController
         $dtables=['user-index'];
 
         $this->set(compact('users','dtables'));
-        $tmp=$this->Authentication;
-        $this->set(compact('tmp'));
     }
 
     /**
@@ -91,7 +89,7 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         $user = $this->Users->get($id, [
-            'contain' => ['UserDetails','Scores'],
+            'contain' => ['UserDetails','Scores','FollowUsers' => ['UserDetails'],],
         ]);
         
         $this->loadModel('Scores');
@@ -111,7 +109,10 @@ class UsersController extends AppController
         $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
 
         $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox'));
-
+        
+        $Followings = TableRegistry::getTableLocator()->get('Followings');
+        $tmp = $Followings->exists(['follow_user_id'=>2, 'followed_user_id'=>2]);
+        $this->set(compact('tmp'));
     }
 
     /**
@@ -279,4 +280,47 @@ class UsersController extends AppController
             return $this->redirect(['action' => 'view', $user->id]);
         }
     }
+
+
+    public function following($from = null, $to = null)
+    {
+        $user = $this->Users->get($from, [
+            'contain' => [
+                'UserDetails',
+                'FollowUsers' => ['UserDetails'],
+            ],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('setting', $user);
+        if ($result->getStatus() && $from !== $to) {
+            $this->loadComponent('Follow');
+            $target = $this->Users->get($to);
+            if($this->Follow->isFollow($from, $to)){
+                $this->Follow->unFollow($from, $to);
+                $this->Flash->success(__('Unfollowing.'));
+                return $this->redirect(['action' => 'view', $to]);
+            }
+            else{
+                if($target->private_level == 0){
+                    $this->Follow->Follow($from, $to);
+                    $this->Flash->success(__('Following.'));
+                    return $this->redirect(['action' => 'view', $to]);
+                }
+                if ($this->request->is(['patch', 'post', 'put'])) {
+                    $post_data = $this->request->getData();
+                    if(isset($post_data['phrase']) && $this->Follow->canFollow($target, $post_data['phrase'])){
+                        $this->Follow->Follow($from, $to);
+                        $this->Flash->success(__('Following.'));
+                        return $this->redirect(['action' => 'view', $to]);
+                    }
+                    $this->Flash->error(__('Invalid phrase'));
+                }
+            }
+        }
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $to]);
+        }
+    }
+
 }

@@ -17,7 +17,7 @@
                 echo $this->Form->control('password',['class' => 'form-control mb-3', 'placeholder'=>'Password']);
             ?>
         </fieldset>
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary my-auto']) ?>
+        <?= $this->Form->button(__('登録'), ['class' => 'btn btn-primary my-auto']) ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

@@ -7,19 +7,18 @@
             <div class="password change form content">
                 <?= $this->Form->create($user) ?>
                 <fieldset>
-                    <div class="mb-3">
+                    <div class="mb-5">
                         <h4 class="card-title"><?= __('公開設定') ?></h4>
                         <p>
                             パブリック：情報の公開と被フォローを特に制限しない</br>
                             プライベート：一部の情報はフォローワーのみ閲覧可能・被フォロー時にフォローフレーズを要求する</br>
                             (鍵アカウントをフォローするには、本人から合言葉を聞く必要があるというイメージ)</br>
                         </p>
-                        <?php
-                            echo $this->Form->select('private_level',$user->private_dict,['class' => 'form-control mb-3']);
-                            echo $this->Form->control('follow_pass',['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'follow', 'required' => true]);
-                        ?>
+                            <?= $this->Form->select('private_level',$user->private_dict,['class' => 'form-control mb-3']); ?>
+                            <?= $this->Form->control('follow_pass',['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'follow', 'required' => true]); ?>
+                        <small class="form-text text-muted">denied と設定すると、全てのフォローを拒否します。</small>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-5">
                         <h4 class="card-title"><?= __('連絡先を設定') ?></h4>
                         <p>
                             ユーザーIDまたはパスワードを忘れ、ログインが不可能になった場合、下記の情報を登録しておくことで、当サイトの運営と連絡を取ることが可能です。</br>

@@ -20,7 +20,6 @@
                             <th><?= __('IIDX ID') ?></th>
                             <th><?= __('CP') ?></th>
                             <th><?= __('Grade Sp') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,9 +29,6 @@
                             <td><?= h($user->user_detail->iidx_id) ?></td>
                             <td><?= h($user->user_detail->rating) ?></td>
                             <td><?= h($user->user_detail->grade_sp_info) ?></td>
-                            <td class="actions">
-                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
