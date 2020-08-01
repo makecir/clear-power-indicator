@@ -191,6 +191,7 @@ class UsersController extends AppController
                 }
                 else{
                     $user = $this->Users->patchEntity($user, $this->request->getData());
+                    $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
