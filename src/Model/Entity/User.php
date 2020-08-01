@@ -62,9 +62,13 @@ class User extends Entity
     {
         return (new DefaultPasswordHasher())->check($password, $this->password);
     }
-    public function aaa(string $password) : ?string
-    {
-        return (new DefaultPasswordHasher())->hash($password);
+
+    protected function _getPrivateDict(){
+        $dp_Arena_dict = [
+             0 => "パブリック",
+            10 => "プライベート",
+        ];
+        return $dp_Arena_dict;
     }
 
 }

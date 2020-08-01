@@ -4,10 +4,46 @@
             <h4 class="card-title mb-0"><?= __('アカウント設定') ?></h4>
         </div>
         <div class="card-body text-dark pr-4 pl-4">
-            
+            <div class="password change form content">
+                <?= $this->Form->create($user) ?>
+                <fieldset>
+                    <h4 class="card-title"><?= __('公開設定') ?></h4>
+                    <p>
+                        パブリック：情報の公開と被フォローを特に制限しない</br>
+                        プライベート：一部の情報はフォローワーのみ閲覧可能・被フォロー時にフォローフレーズを要求する</br>
+                        (鍵アカウントをフォローするには、本人から合言葉を聞く必要があるというイメージ)</br>
+                    </p>
+                    <?php
+                        echo $this->Form->select('private_level',$user->private_dict);
+                        echo $this->Form->control('follow_pass',['type' => 'text']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('変更'),['class' => 'btn btn-primary my-auto','id'=>'change-setting']) ?>
+                <?= $this->Form->end() ?>
+            </div>
         </div>
     </div>
-
+    <div class="card border-secondary mb-3">
+        <div class="card-header">
+            <h4 class="card-title mb-0"><?= __('パスワード変更') ?></h4>
+        </div>
+        <div class="card-body text-dark pr-4 pl-4">
+            <div class="password change form content">
+                <p>
+                    未実装
+                </p>
+                <?= $this->Form->create($user) ?>
+                <fieldset>
+                    <?php
+                        echo $this->Form->control('old_password',['type' => 'text', 'value'=>'']);
+                        echo $this->Form->control('new_password',['type' => 'text']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('変更'),['class' => 'btn btn-primary my-auto','id'=>'change-pass']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
     <div class="card border-secondary mb-3">
         <div class="card-header">
             <h4 class="card-title text-danger mb-0"><?= __('アカウント削除') ?></h4>

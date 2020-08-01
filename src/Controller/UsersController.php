@@ -216,12 +216,25 @@ class UsersController extends AppController
         $result = $identity->canResult('setting', $user);
         if ($result->getStatus()) {
             if ($this->request->is(['patch', 'post', 'put'])) {
-                $user = $this->Users->patchEntity($user, $this->request->getData());
-                if ($this->Users->save($user)) {
-                    $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(['action' => 'view', $user->id]);
+                $post_data = $this->request->getData();
+                if(isset($post_data['private_level'])){
+                    $user = $this->Users->patchEntity($user, $this->request->getData());
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        return $this->redirect(['action' => 'view', $user->id]);
+                    }
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                if(isset($post_data['old_password'])){
+                    if($user->check($post_data['old_password'])){
+                        if($this->Users->patchEntity($user, ['password' => $post_data['new_password']]) && $this->Users->save($user)){
+                            $this->Flash->success(__('New password has been saved.'));
+                            return $this->redirect(['action' => 'view', $user->id]);
+                        }
+                        else $this->Flash->error(__('Invalid new password'));
+                    }
+                    else $this->Flash->error(__('Wrong password'));
+                }
             }
             $this->set(compact('user'));
         }
