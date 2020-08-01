@@ -4,27 +4,20 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Add User') ?></legend>
-                <?php
-                    echo $this->Form->control('username');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('created_at');
-                    echo $this->Form->control('modified_at');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+<div class="card border-secondary mb-3">
+    <div class="card-header mb-0">
+        <h4 class="card-title" style="display:inline;"><?= __('Register') ?></h4>
+    </div>
+    <div class="card-body text-dark">
+        <?= $this->Form->create($user) ?>
+        <fieldset>
+            <legend><?= __('Register') ?></legend>
+            <?php
+                echo $this->Form->control('username',['class' => 'form-control mb-3', 'placeholder'=>'User ID']);
+                echo $this->Form->control('password',['class' => 'form-control mb-3', 'placeholder'=>'Password']);
+            ?>
+        </fieldset>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary my-auto']) ?>
+        <?= $this->Form->end() ?>
     </div>
 </div>

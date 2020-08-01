@@ -15,8 +15,8 @@
                             (鍵アカウントをフォローするには、本人から合言葉を聞く必要があるというイメージ)</br>
                         </p>
                         <?php
-                            echo $this->Form->select('private_level',$user->private_dict);
-                            echo $this->Form->control('follow_pass',['type' => 'text']);
+                            echo $this->Form->select('private_level',$user->private_dict,['class' => 'form-control mb-3']);
+                            echo $this->Form->control('follow_pass',['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'follow', 'required' => true]);
                         ?>
                     </div>
                     <div class="mb-3">
@@ -26,8 +26,8 @@
                             メールアドレス情報は第三者に公開されず、上記の連絡においての本人確認以外に用いられることはありません。</br>
                         </p>
                         <?php
-                            echo $this->Form->control('user_detail.twitter_id',['type' => 'text']);
-                            echo $this->Form->control('email',['type' => 'text']);
+                            echo $this->Form->control('user_detail.twitter_id',['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'IIDX_CPI']);
+                            echo $this->Form->control('email',['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'beatmaniaiidx.cpi@gmail.com']);
                         ?>
                     </div>
                 </fieldset>
@@ -48,8 +48,8 @@
                 <?= $this->Form->create($user) ?>
                 <fieldset>
                     <?php
-                        echo $this->Form->control('old_password',['type' => 'text', 'value'=>'']);
-                        echo $this->Form->control('new_password',['type' => 'text']);
+                        echo $this->Form->control('old_password',['class' => 'form-control mb-3', 'type' => 'password', 'value'=>'', 'placeholder'=>'Current password', 'required' => true]);
+                        echo $this->Form->control('new_password',['class' => 'form-control mb-3', 'type' => 'password', 'value'=>'', 'placeholder'=>'New password', 'required' => true]);
                     ?>
                 </fieldset>
                 <?= $this->Form->button(__('変更'),['class' => 'btn btn-primary my-auto','id'=>'change-pass']) ?>
@@ -70,7 +70,7 @@
 
             <?= $this->Form->create(null, ['url' => ['action' => 'delete', $user->id]]) ?>
             <fieldset>
-                <?= $this->Form->control('password', ['required' => true]) ?>
+                <?= $this->Form->control('password', ['class' => 'form-control mb-3', 'placeholder'=>'Password', 'required' => true]) ?>
             </fieldset>
             <?= $this->Form->button(__('Delete'),['class' => 'btn btn-danger my-auto'], ['confirm' => __('Are you sure you want to delete {0}?', $user->username)]) ?>
             <?= $this->Form->end() ?>

@@ -22,7 +22,7 @@
                         <p>①テキスト（スマホ向け）</p>
                         <?= $this->Form->create(null, ['style' => "display:inline-block"]); ?>
                         <div style='float:left;' class="mr-1">
-                        <?= $this->Form->control('upload-text', ['type' => 'textarea','class'=>"textlines",'placeholder'=>'プレイデータ貼り付け','label' => '','style' => "float:left;"]); ?>
+                        <?= $this->Form->control('upload-text', ['type' => 'textarea','class'=>"textlines form-control mb-3",'placeholder'=>'プレイデータ貼り付け','label' => '','style' => "float:left;"]); ?>
                         </div>
                         <div style='float:left;' class="mr-1">
                         <span class="submit"><input type="submit" id="upload-playtext" class="btn btn-primary my-auto my-auto" value="テキスト読み込み"></span>
@@ -60,15 +60,15 @@
                 <fieldset>
                     <?php
                         echo $this->Form->control('user_detail.iidx_id',
-                            ['type' => 'text']
+                            ['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'XXXX-XXXX']
                         );
-                        echo $this->Form->control('user_detail.dj_name');
-                        echo $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict);
-                        echo $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict);
-                        echo $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict);
-                        echo $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict);
+                        echo $this->Form->control('user_detail.dj_name',['class' => 'form-control mb-3', 'placeholder'=>'DJNAME']);
+                        echo $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict,['class' => 'form-control mb-3']);
+                        echo $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict,['class' => 'form-control mb-3']);
+                        echo $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict,['class' => 'form-control mb-3']);
+                        echo $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict,['class' => 'form-control mb-3']);
                         echo $this->Form->control('user_detail.twitter_id',
-                            ['type' => 'text']
+                            ['class' => 'form-control mb-3', 'type' => 'text','placeholder'=>'IIDX_CPI']
                         );
                     ?>
                 </fieldset>

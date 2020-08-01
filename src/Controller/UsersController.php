@@ -71,7 +71,7 @@ class UsersController extends AppController
                 'FollowUsers' => ['UserDetails'],
                 'FollowedUsers' => ['UserDetails'],
             ],
-        ]);
+        ]) ?? [];
         $dtables=['user-index'];
 
         $this->set(compact('users','dtables'));
@@ -99,9 +99,9 @@ class UsersController extends AppController
         $this->loadComponent('Lamp');
         $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
-        $detail_table = $this->Indicator->getLampList($my_lamps);
-        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
-        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating);
+        $detail_table = $this->Indicator->getLampList($my_lamps) ?? [];
+        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating) ?? [];
+        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating) ?? [];
         $dtables = ['user-view'];
         $checkbox['version'] = $this->Indicator->version_info;
         $checkbox['cur_lamp'] = $this->Indicator->lamp_info;

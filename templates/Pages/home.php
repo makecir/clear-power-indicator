@@ -25,12 +25,12 @@
                 <div class="card-body text-dark">
                     <p>
                         ユーザ登録をすることで、推定結果を保存可能です。</br>
-                        新規登録またはログインしてCPIをご利用ください。</br>
+                        新規登録またはログインし、CPIをご利用ください。</br>
                     </p>
                     <?= $this->Html->link(
                         __('Register'),
                         ['controller' => 'Users', 'action' => 'add'],
-                        ['class' => 'btn btn-primary'])
+                        ['class' => 'btn btn-info'])
                     ?>
                     <?= $this->Html->link(
                         __('Login'),
@@ -55,7 +55,7 @@
                     <?= $this->Html->link(
                         __('beta-version'),
                         "https://cpi-beta.makecir.com/",
-                        ['class' => 'btn btn-primary'])
+                        ['class' => 'btn btn-info'])
                     ?>
                 </div>
             </div>
