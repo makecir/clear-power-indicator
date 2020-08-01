@@ -4,7 +4,7 @@
             <h4 class="card-title mb-0"><?= __('アカウント設定') ?></h4>
         </div>
         <div class="card-body text-dark pr-4 pl-4">
-
+            
         </div>
     </div>
 
@@ -23,7 +23,7 @@
             <fieldset>
                 <?= $this->Form->control('password', ['required' => true]) ?>
             </fieldset>
-            <?= $this->Form->button(__('Delete'),['class' => 'btn btn-primary my-auto'], ['confirm' => __('Are you sure you want to delete {0}?', $user->username)]) ?>
+            <?= $this->Form->button(__('Delete'),['class' => 'btn btn-danger my-auto'], ['confirm' => __('Are you sure you want to delete {0}?', $user->username)]) ?>
             <?= $this->Form->end() ?>
 
         </div>

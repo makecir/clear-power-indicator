@@ -181,9 +181,6 @@ class UsersController extends AppController
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
                     $this->Lamp->saveLamps($user, $new_lamps);
-                    $this->set(compact('new_lamps'));
-                    //$ghost = $this->Indicator->test($user);
-                    //$this->set(compact('ghost'));
                     $rating = $this->Indicator->getRating($user);
                     $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
                     if ($this->Users->save($user)) {
