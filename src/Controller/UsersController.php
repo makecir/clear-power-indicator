@@ -95,6 +95,7 @@ class UsersController extends AppController
         $this->loadModel('Scores');
         $this->loadComponent('Indicator');
         $this->loadComponent('Lamp');
+        $this->loadComponent('Follow');
         $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         $detail_table = $this->Indicator->getLampList($my_lamps) ?? [];
@@ -108,11 +109,12 @@ class UsersController extends AppController
         $checkbox['lamp_class'] = $this->Lamp->lamp_class_info;
         $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
 
-        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox'));
-        
-        $Followings = TableRegistry::getTableLocator()->get('Followings');
-        $tmp = $Followings->exists(['follow_user_id'=>2, 'followed_user_id'=>2]);
-        $this->set(compact('tmp'));
+        $identity = $this->request->getAttribute('identity');
+        $mypage = isset($identity) && ($identity->id === $user->id);
+        $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $user->id);
+        $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
+
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
     }
 
     /**

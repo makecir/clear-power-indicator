@@ -25,7 +25,10 @@
                     <tbody>
                         <?php foreach ($users as $user): ?>
                         <tr>
-                            <td><?= $this->Html->link($user->user_detail->dj_name, ['action' => 'view', $user->id]) ?></td>
+                            <td>
+                                <?= $this->Html->link($user->user_detail->dj_name, ['action' => 'view', $user->id]) ?>
+                                <?= ($user->private_level!==0?' <i class="fas fa-lock"></i>':'') ?>
+                            </td>
                             <td><?= h($user->user_detail->iidx_id) ?></td>
                             <td><?= h($user->user_detail->rating) ?></td>
                             <td><?= h($user->user_detail->grade_sp_info) ?></td>
