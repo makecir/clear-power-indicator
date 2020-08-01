@@ -66,12 +66,24 @@ class UserDetailsTable extends Table
         $validator
             ->scalar('iidx_id')
             ->maxLength('iidx_id', 9)
-            ->allowEmptyString('iidx_id');
+            ->allowEmptyString('iidx_id')
+            ->add('iidx_id', 'iidxIdFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A([0-9]{4}-?[0-9]{4})|(XXXX-XXXX)\z/", $value)===1;
+                },
+                'message' => 'IIDXidとして認識できません',
+            ]);
 
         $validator
             ->scalar('dj_name')
             ->maxLength('dj_name', 8)
-            ->notEmptyString('dj_name');
+            ->notEmptyString('dj_name')
+            ->add('dj_name', 'djNameFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A[a-zA-Z0-9\$\.\*\-$!?]{1,6}\z/", $value)===1;
+                },
+                'message' => 'DJネームとして認識できません',
+            ]);
 
         $validator
             ->notEmptyString('grade_sp');
@@ -92,8 +104,14 @@ class UserDetailsTable extends Table
 
         $validator
             ->scalar('twitter_id')
-            ->maxLength('twitter_id', 32)
-            ->allowEmptyString('twitter_id');
+            ->maxLength('twitter_id', 16)
+            ->allowEmptyString('twitter_id')
+            ->add('twitter_id', 'twitterIdFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A\w*\z/", $value)===1;
+                },
+                'message' => '使用できない文字が含まれています',
+            ]);
 
         $validator
             ->numeric('rating')
