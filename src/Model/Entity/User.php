@@ -33,6 +33,9 @@ class User extends Entity
         'username' => true,
         'password' => true,
         'email' => true,
+        'is_admin' => true,
+        'private_level' => true,
+        'follow_pass' => true,
         'created_at' => true,
         'modified_at' => true,
         'user_details' => true,
@@ -53,6 +56,19 @@ class User extends Entity
         if (strlen($password) > 0) {
             return (new DefaultPasswordHasher())->hash($password);
         }
+    }
+
+    public function check(string $password) : ?bool
+    {
+        return (new DefaultPasswordHasher())->check($password, $this->password);
+    }
+
+    protected function _getPrivateDict(){
+        $dp_Arena_dict = [
+             0 => "パブリック",
+            10 => "プライベート",
+        ];
+        return $dp_Arena_dict;
     }
 
 }

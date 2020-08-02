@@ -16,31 +16,22 @@
                 <table id="users-index" class="table table-hover">
                     <thead>
                         <tr>
-                            <th><?= __('id') ?></th>
-                            <th><?= __('username') ?></th>
-                            <th><?= __('IIDX ID') ?></th>
                             <th><?= __('DJ NAME') ?></th>
+                            <th><?= __('IIDX ID') ?></th>
+                            <th><?= __('CP') ?></th>
                             <th><?= __('Grade Sp') ?></th>
-                            <th><?= __('created_at') ?></th>
-                            <th><?= __('modified_at') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($users as $user): ?>
                         <tr>
-                            <td><?= $this->Number->format($user->id) ?></td>
-                            <td><?= h($user->username) ?></td>
-                            <td><?= h($user->user_detail->iidx_id) ?></td>
-                            <td><?= h($user->user_detail->dj_name) ?></td>
-                            <td><?= h($user->user_detail->grade_sp_info) ?></td>
-                            <td><?= h($user->created_at) ?></td>
-                            <td><?= h($user->modified_at) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                            <td>
+                                <?= $this->Html->link($user->user_detail->dj_name, ['action' => 'view', $user->id]) ?>
+                                <?= ($user->private_level!==0?' <i class="fas fa-lock"></i>':'') ?>
                             </td>
+                            <td><?= h($user->user_detail->iidx_id) ?></td>
+                            <td><?= h($user->user_detail->rating) ?></td>
+                            <td><?= h($user->user_detail->grade_sp_info) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -14,4 +14,22 @@ class userPolicy{
         }
         return new Result(false, __('Permission denied'));
     }
+    public function canSetting(IdentityInterface $cur_user, User $user){
+        if ($cur_user->id == $user->id) {
+            return new Result(true);
+        }
+        return new Result(false, __('Permission denied'));
+    }
+    public function canDelete(IdentityInterface $cur_user, User $user){
+        if ($cur_user->id == $user->id) {
+            return new Result(true);
+        }
+        return new Result(false, __('Permission denied'));
+    }
+    public function canFollowing(IdentityInterface $cur_user, User $user){
+        if ($cur_user->id == $user->id) {
+            return new Result(true);
+        }
+        return new Result(false, __('Permission denied'));
+    }
 }

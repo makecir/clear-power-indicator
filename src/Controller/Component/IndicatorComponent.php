@@ -154,6 +154,26 @@ class IndicatorComponent extends Component
         return $preds;
     }
 
+    public function getFollowingLampCounts(&$user){
+        //$Followings = TableRegistry::getTableLocator()->get('Followings');
+        $results = [[
+            'id' => $user->id,
+            'dj_name' => $user->user_detail->dj_name,
+            'rating' => $user->user_detail->rating,
+            'lamp_counts' => $this->getLampCounts($user->user_detail->my_lamps_array),
+            'update' => $user->user_detail->modified_at,
+        ]];
+        foreach((array)$user->following_users as $rival){
+            $ret['id'] = $rival->id;
+            $ret['dj_name'] = $rival->user_detail->dj_name;
+            $ret['rating'] = $rival->user_detail->rating;
+            $ret['lamp_counts'] = $this->getLampCounts($rival->user_detail->my_lamps_array);
+            $ret['update'] = $rival->user_detail->modified_at;
+            $results[]= $ret;
+        }
+        return $results;
+    }
+
     public function fifty(&$intercept, &$coefficient){
         if($coefficient === 0) return -1;
         return - ($intercept / $coefficient);

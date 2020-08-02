@@ -88,6 +88,7 @@ class UsersTable extends Table
         $this->belongsToMany('FollowedUsers', [
             'className' => 'Users',
             'foreignKey' => 'followed_user_id',
+            'targetForeignKey'=>'follow_user_id',
             'propertyName' => 'followed_users',
             'joinTable' => 'followings',
         ]);
@@ -107,21 +108,63 @@ class UsersTable extends Table
 
         $validator
             ->scalar('username')
-            ->maxLength('username', 16)
+            ->lengthBetween('username', [4, 16], '4字以上16字以下の制限があります')
+            //->maxLength('username', 16)
             ->requirePresence('username', 'create')
             ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
+            ->add('username', 'usernameFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A\w*\z/", $value)===1;
+                },
+                'message' => '使用できない文字が含まれています',
+            ]);
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 256)
+            //->maxLength('password', 256)
+            ->lengthBetween('password', [6, 32], '6字以上32字以下の制限があります')
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password')
+            ->add('password', 'passwordFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A\w*\z/", $value)===1;
+                },
+                'message' => '使用できない文字が含まれています',
+            ]);
 
         $validator
             ->scalar('email')
             ->maxLength('email', 128)
-            ->allowEmptyString('email');
+            ->allowEmptyString('email')
+            ->add('email', 'emailFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+z/", $value)===1;
+                },
+                'message' => 'emailアドレスとして認識できません',
+            ]);;
+
+        $validator
+            ->scalar('is_admin')
+            ->maxLength('is_admin', 16)
+            ->notEmptyString('is_admin');
+
+        $validator
+            ->scalar('private_level')
+            ->maxLength('private_level', 16)
+            ->notEmptyString('private_level');
+
+        $validator
+            ->scalar('follow_pass')
+            //->maxLength('follow_pass', 60)
+            ->lengthBetween('follow_pass', [4, 32], '4字以上32字以下の制限があります')
+            ->notEmptyString('follow_pass')
+            ->add('follow_pass', 'followPassFormat', [
+                'rule' => function ($value) {
+                    return preg_match("/\A\w*\z/", $value)===1;
+                },
+                'message' => '使用できない文字が含まれています',
+            ]);
 
         $validator
             ->dateTime('created_at')

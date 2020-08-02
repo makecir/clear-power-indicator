@@ -35,7 +35,7 @@ class UsersController extends AppController
     
             //return $this->redirect($redirect);
             $this->Flash->success(__('successfully signed in.'));
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'view', $this->request->getAttribute('identity')->id]);
         }
         // ユーザーが submit 後、認証失敗した場合は、エラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
@@ -71,7 +71,7 @@ class UsersController extends AppController
                 'FollowUsers' => ['UserDetails'],
                 'FollowedUsers' => ['UserDetails'],
             ],
-        ]);
+        ]) ?? [];
         $dtables=['user-index'];
 
         $this->set(compact('users','dtables'));
@@ -89,17 +89,18 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         $user = $this->Users->get($id, [
-            'contain' => ['UserDetails','Scores'],
+            'contain' => ['UserDetails','Scores','FollowUsers' => ['UserDetails'], 'FollowedUsers' => ['UserDetails']],
         ]);
         
         $this->loadModel('Scores');
         $this->loadComponent('Indicator');
         $this->loadComponent('Lamp');
+        $this->loadComponent('Follow');
         $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
-        $detail_table = $this->Indicator->getLampList($my_lamps);
-        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating);
-        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating);
+        $detail_table = $this->Indicator->getLampList($my_lamps) ?? [];
+        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating) ?? [];
+        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating) ?? [];
         $dtables = ['user-view'];
         $checkbox['version'] = $this->Indicator->version_info;
         $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
@@ -108,8 +109,14 @@ class UsersController extends AppController
         $checkbox['lamp_class'] = $this->Lamp->lamp_class_info;
         $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
 
-        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox'));
+        $identity = $this->request->getAttribute('identity');
+        $mypage = isset($identity) && ($identity->id === $user->id);
+        $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $user->id);
+        $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
 
+        $follow_compare_table = $this->Indicator->getFollowingLampCounts($user);
+
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'follow_compare_table', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
     }
 
     /**
@@ -121,11 +128,20 @@ class UsersController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
+        $result = $this->Authentication->getResult();
+        // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            $redirect = $this->request->getQuery('redirect');
+            $this->Flash->error(__('新規登録を行う前にログアウトしてください'));
+            return $this->redirect(['action' => 'index']);
+        }
+
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
+                $this->Authentication->setIdentity($user);
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -170,9 +186,6 @@ class UsersController extends AppController
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
                     $this->Lamp->saveLamps($user, $new_lamps);
-                    $this->set(compact('new_lamps'));
-                    //$ghost = $this->Indicator->test($user);
-                    //$this->set(compact('ghost'));
                     $rating = $this->Indicator->getRating($user);
                     $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
                     if ($this->Users->save($user)) {
@@ -183,6 +196,7 @@ class UsersController extends AppController
                 }
                 else{
                     $user = $this->Users->patchEntity($user, $this->request->getData());
+                    $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
@@ -198,6 +212,44 @@ class UsersController extends AppController
         }
     }
 
+    public function setting($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails'],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('setting', $user);
+        if ($result->getStatus()) {
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $post_data = $this->request->getData();
+                if(isset($post_data['private_level'])){
+                    $user = $this->Users->patchEntity($user, $this->request->getData());
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        return $this->redirect(['action' => 'view', $user->id]);
+                    }
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                }
+                if(isset($post_data['old_password'])){
+                    if($user->check($post_data['old_password'])){
+                        if($this->Users->patchEntity($user, ['password' => $post_data['new_password']]) && $this->Users->save($user)){
+                            $this->Flash->success(__('New password has been saved.'));
+                            return $this->redirect(['action' => 'view', $user->id]);
+                        }
+                        else $this->Flash->error(__('Invalid new password'));
+                    }
+                    else $this->Flash->error(__('Wrong password'));
+                }
+            }
+            $this->set(compact('user'));
+        }
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+    }
+
+
     /**
      * Delete method
      *
@@ -207,20 +259,72 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        // *TODO* 要本人確認
-        $this->Authorization->skipAuthorization();
-
         $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-
-        // user削除時にdetail,follow,lampを消去
-
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails'],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('delete', $user);
+        if (!$result->getStatus()){
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
         }
-
-        return $this->redirect(['action' => 'index']);
+        else if (! $user->check($this->request->getdata('password'))){
+            $this->Flash->error('パスワードが正しくありません');
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+        else {
+            if ($this->Users->delete($user)) {
+                $this->Authentication->logout();
+                $this->Flash->success(__('The user has been deleted.'));
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
     }
+
+
+    public function following($from = null, $to = null)
+    {
+        $user = $this->Users->get($from, [
+            'contain' => [
+                'UserDetails',
+                'FollowUsers' => ['UserDetails'],
+            ],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('setting', $user);
+        if ($result->getStatus() && $from !== $to) {
+            $this->loadComponent('Follow');
+            $target = $this->Users->get($to);
+            if($this->Follow->isFollow($from, $to)){
+                $this->Follow->unFollow($from, $to);
+                $this->Flash->success(__('Unfollowing.'));
+                return $this->redirect(['action' => 'view', $to]);
+            }
+            else{
+                if($target->private_level == 0){
+                    $this->Follow->Follow($from, $to);
+                    $this->Flash->success(__('Following.'));
+                    return $this->redirect(['action' => 'view', $to]);
+                }
+                if ($this->request->is(['patch', 'post', 'put'])) {
+                    $post_data = $this->request->getData();
+                    if(isset($post_data['phrase']) && $this->Follow->canFollow($target, $post_data['phrase'])){
+                        $this->Follow->Follow($from, $to);
+                        $this->Flash->success(__('Following.'));
+                        return $this->redirect(['action' => 'view', $to]);
+                    }
+                    $this->Flash->error(__('Invalid phrase'));
+                }
+            }
+        }
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $to]);
+        }
+    }
+
 }

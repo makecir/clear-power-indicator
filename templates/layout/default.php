@@ -95,6 +95,11 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
                                 ['class' => 'dropdown-item'])
                             ?>
                             <?= $this->Html->link(
+                                __('Setting'),
+                                ['controller' => 'Users', 'action' => 'setting', $identity->id],
+                                ['class' => 'dropdown-item'])
+                            ?>
+                            <?= $this->Html->link(
                                 __('Logout'),
                                 ['controller' => 'Users', 'action' => 'logout'],
                                 ['class' => 'dropdown-item'])
@@ -129,8 +134,15 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
         </div>
     </main>
     <footer>
-        <div class="container mb-2" style="text-align:center">
-            ここにフッター
+        <div class="container" style="text-align:center">
+            <div class="text-muted mb-10 mt-10 pb-10 pt-10" style="font-size: 12px;">
+                </br>
+                <p>
+                beatmaniaⅡDXは、株式会社コナミデジタルエンタテインメントの商標または登録商標です。</br>
+                本サービスは、株式会社コナミデジタルエンタテインメントとは一切関係の無い個人が製作した非公式ファンサイトです。
+                </p>
+                </br>
+            </div>
         </div>
     </footer>
 

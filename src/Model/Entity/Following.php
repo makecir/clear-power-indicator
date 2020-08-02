@@ -28,7 +28,7 @@ class Following extends Entity
      */
     protected $_accessible = [
         'created_at' => true,
-        'follow_user' => true,
-        'followed_user' => true,
+        'follow_user_id' => true,
+        'followed_user_id' => true,
     ];
 }
