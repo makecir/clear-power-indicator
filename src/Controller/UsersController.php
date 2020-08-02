@@ -89,7 +89,11 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         $user = $this->Users->get($id, [
-            'contain' => ['UserDetails','Scores','FollowUsers' => ['UserDetails'], 'FollowedUsers' => ['UserDetails']],
+            'contain' => ['UserDetails',
+                'Scores',
+                'FollowUsers' => ['UserDetails'], 
+                'FollowedUsers' => ['UserDetails'],
+            ],
         ]);
         
         $this->loadModel('Scores');

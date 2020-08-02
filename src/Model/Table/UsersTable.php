@@ -61,34 +61,22 @@ class UsersTable extends Table
             'dependent' => true,
             'cascadeCallbacks' => true,
         ]);
-
-        //関連削除用
-        $this->hasMany('Followings', [
-            'className' => 'Followings',
-            'foreignKey' => 'follow_user_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
-        ]);
-
-        //関連削除用
-        $this->hasMany('Followings', [
-            'className' => 'Followings',
-            'foreignKey' => 'followed_user_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
-        ]);
         
         $this->belongsToMany('FollowUsers', [
+            'through' => 'Followings',
+            'conditions' => [''],
             'className' => 'Users',
             'foreignKey' => 'follow_user_id',
+            'targetForeignKey' => 'followed_user_id',
             'propertyName' => 'following_users',
             'joinTable' => 'followings',
         ]);
 
         $this->belongsToMany('FollowedUsers', [
+            'through' => 'Followings',
             'className' => 'Users',
             'foreignKey' => 'followed_user_id',
-            'targetForeignKey'=>'follow_user_id',
+            'targetForeignKey' => 'follow_user_id',
             'propertyName' => 'followed_users',
             'joinTable' => 'followings',
         ]);
