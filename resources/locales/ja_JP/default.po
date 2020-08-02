@@ -231,10 +231,6 @@ msgstr ""
 msgid "New Following"
 msgstr ""
 
-#: Followings/index.php:9
-msgid "Followings"
-msgstr ""
-
 #: Followings/index.php:27
 #: Scores/index.php:73
 #: Scores/view.php:149
@@ -680,6 +676,9 @@ msgstr "リコメンド"
 
 msgid "Better than expected"
 msgstr "逆リコメンド"
+
+msgid "Followings"
+msgstr "フォロー比較"
 
 msgid "CP update"
 msgstr "CP更新"

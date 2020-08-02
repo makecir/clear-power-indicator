@@ -105,6 +105,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#better-than-expected" data-toggle="tab"><?= __('Better than expected') ?></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#followings" data-toggle="tab"><?= __('Followings') ?></a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body tab-content">
@@ -320,6 +323,41 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div id="followings" class="tab-pane fade">
+                    <?php if(!$mypage):?>
+                        <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人のみ閲覧可能です</i></div></div>
+                    <?php else:?>
+                        <div class="table-responsive">
+                            <table id="following-table" class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th align="center"><?= __('DJname') ?></th>
+                                        <th align="center"><?= __('CP') ?></th>
+                                        <th align="center"><?= __('Lamp') ?></th>
+                                        <th align="center"><?= __('Updated at') ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($follow_compare_table as $row): ?>
+                                        <tr>
+                                            <td align="center"><?= $this->Html->link($row['dj_name'], ['action' => 'view', $row['id']]) ?></td>
+                                            <td align="center"><?= h($row['rating']) ?></td>
+                                            <td align="center">
+                                                <div class="progress mb-3">
+                                                    <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                                                        <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i] ?>" role="progressbar" style="width: <?= $row['lamp_counts'][$i] ?>%" aria-valuenow="<?= $row['lamp_counts'][$i] ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </td>
+                                            <td align="center"><?= h($row['update']->format('Y/m/d')) ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

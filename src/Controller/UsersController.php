@@ -35,7 +35,7 @@ class UsersController extends AppController
     
             //return $this->redirect($redirect);
             $this->Flash->success(__('successfully signed in.'));
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'view', $this->request->getAttribute('identity')->id]);
         }
         // ユーザーが submit 後、認証失敗した場合は、エラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
@@ -114,7 +114,9 @@ class UsersController extends AppController
         $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $user->id);
         $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
 
-        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
+        $follow_compare_table = $this->Indicator->getFollowingLampCounts($user);
+
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'follow_compare_table', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
     }
 
     /**
