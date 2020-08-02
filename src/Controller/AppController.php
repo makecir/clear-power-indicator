@@ -44,10 +44,27 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
+        // 認証結果を確認し、サイトのロックを行うために次の行を追加します
+        $this->loadComponent('Authentication.Authentication');
+        $this->loadComponent('Authorization.Authorization',[
+            'skipAuthorization' => ['index','view'],
+            //'authorizeModel' => ['edit'],
+        ]);
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
     }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'display']);
+        //$identity = $this->request->getAttribute('authentication')->getIdentity();
+        $isLoggedIn = $this->Authentication->getResult()->isValid();
+        $identity = $this->request->getAttribute('identity');
+        $this->set(compact('isLoggedIn','identity'));
+    }
+
 }
