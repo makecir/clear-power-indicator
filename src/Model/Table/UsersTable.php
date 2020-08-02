@@ -88,6 +88,7 @@ class UsersTable extends Table
         $this->belongsToMany('FollowedUsers', [
             'className' => 'Users',
             'foreignKey' => 'followed_user_id',
+            'targetForeignKey'=>'follow_user_id',
             'propertyName' => 'followed_users',
             'joinTable' => 'followings',
         ]);

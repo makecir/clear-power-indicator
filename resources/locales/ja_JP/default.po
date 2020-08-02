@@ -680,6 +680,9 @@ msgstr "逆リコメンド"
 msgid "Followings"
 msgstr "フォロー比較"
 
+msgid "Followers"
+msgstr "フォローワー"
+
 msgid "CP update"
 msgstr "CP更新"
 

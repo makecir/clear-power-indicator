@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="mb-4">
-                        <h3 class="card-text" style="display:inline;"><?= __('CP')." : ".$user->user_detail->rating ?></h3>
+                        <h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3>
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">段位</h5>
@@ -108,6 +108,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#followings" data-toggle="tab"><?= __('Followings') ?></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#followers" data-toggle="tab"><?= __('Followers') ?></a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body tab-content">
@@ -161,7 +164,7 @@
                                     <th align="center"><?= __('version') ?></th>
                                     <th align="center"><?= __('title') ?></th>
                                     <th align="center"><?= __('lamp') ?></th>
-                                    <th><?= __('fifty_rating') ?></th>
+                                    <th><?= __('fifty_CPI') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -334,7 +337,7 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th align="center"><?= __('DJname') ?></th>
-                                        <th align="center"><?= __('CP') ?></th>
+                                        <th align="center"><?= __('CPI') ?></th>
                                         <th align="center"><?= __('Lamp') ?></th>
                                         <th align="center"><?= __('Updated at') ?></th>
                                     </tr>
@@ -352,6 +355,35 @@
                                                 </div>
                                             </td>
                                             <td align="center"><?= h($row['update']->format('Y/m/d')) ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif;?>
+                </div>
+                
+                <div id="followers" class="tab-pane fade">
+                    <?php if(!$mypage):?>
+                        <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人のみ閲覧可能です</i></div></div>
+                    <?php else:?>
+                        <div class="table-responsive">
+                            <table id="follower-table" class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th align="center"><?= __('DJname') ?></th>
+                                        <th align="center"><?= __('IIDX ID') ?></th>
+                                        <th align="center"><?= __('CPI') ?></th>
+                                        <th align="center"><?= __('class') ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($user->followed_users as $row): ?>
+                                        <tr>
+                                            <td align="center"><?= $this->Html->link($row->user_detail->dj_name, ['action' => 'view', $row->id]) ?></td>
+                                            <td align="center"><?= h($row->user_detail->dj_name) ?></td>
+                                            <td align="center"><?= h($row->user_detail->rating) ?></td>
+                                            <td align="center"><?= h($row->user_detail->grade_sp_info) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
