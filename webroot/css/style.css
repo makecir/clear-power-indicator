@@ -4,7 +4,7 @@
 .card-header .collapsed .fa {
   transform: rotate(90deg);
 }
-.filter-header a:link, a:visited, a:hover, a:active {
+.filter-header a:link,.filter-header a:visited,.filter-header a:hover,.filter-header a:active {
   color: white;
   text-decoration: none;
 }
