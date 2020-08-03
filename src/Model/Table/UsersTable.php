@@ -127,7 +127,7 @@ class UsersTable extends Table
             ->allowEmptyString('email')
             ->add('email', 'emailFormat', [
                 'rule' => function ($value) {
-                    return preg_match("/\A([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+z/", $value)===1;
+                    return preg_match("/\A(([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+|)\z/", $value)===1;
                 },
                 'message' => 'emailアドレスとして認識できません',
             ]);;

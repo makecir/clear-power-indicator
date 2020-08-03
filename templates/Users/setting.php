@@ -11,8 +11,7 @@
                         <h4 class="card-title"><?= __('公開設定') ?></h4>
                         <p>
                             パブリック：情報の公開と被フォローを特に制限しない</br>
-                            プライベート：一部の情報はフォローワーのみ閲覧可能・被フォロー時にフォローフレーズを要求する</br>
-                            (鍵アカウントをフォローするには、本人から合言葉を聞く必要があるというイメージ)</br>
+                            プライベート：プレイヤーの基本情報以外はフォロワーのみ閲覧可能（プライベートアカウントをフォローするには、そのユーザーが設定した合言葉が必要です）
                         </p>
                             <?= $this->Form->select('private_level',$user->private_dict,['class' => 'form-control mb-3']); ?>
                             <?= $this->Form->control('follow_pass',['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'follow', 'required' => true]); ?>
