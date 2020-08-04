@@ -13,7 +13,7 @@
             <?php if(!$isLoggedIn):?>
             <?php elseif($mypage):?>
                 <?= $this->Html->link(
-                    __('編集/更新'),
+                    __('更新'),
                     ['action' => 'edit', $user->id],
                     ['class' => 'btn btn-primary my-auto', 'style' => "float:right;display:inline;"])
                 ?>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-8 p-3">
-                    <div class="table-responsive">
+                    <div class="table-responsive table-smart-phone-xx">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -155,8 +155,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table id="lamp-detail" class="table table-bordered">
+                    <div class="table-responsive  table-smart-phone-x">
+                        <table  id="lamp-detail" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
                                     <th align="center"><?= __('Version') ?></th>
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive table-smart-phone-xx">
                         <table id="rec-table" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
@@ -242,7 +242,7 @@
                                     <th align="center" ><?= __('Title') ?></th>
                                     <th align="center" ><?= __('Lamp cur') ?></th>
                                     <th align="center" ><?= __('Lamp tar') ?></th>
-                                    <th><?= __('probability') ?></th>
+                                    <th><?= __('Clear Prob') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,7 +260,7 @@
                     </div>
                 </div>
                 <div id="better-than-expected" class="tab-pane fade">
-                <div class="card mb-3">
+                    <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
                                 <i class="fas fa-filter mr-2"></i>
@@ -302,7 +302,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive table-smart-phone-xx">
                         <table id="bte-table" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
@@ -330,7 +330,7 @@
                     <?php if(!$mypage):?>
                         <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人のみ閲覧可能です</i></div></div>
                     <?php else:?>
-                        <div class="table-responsive">
+                        <div class="table-responsive table-smart-phone-x">
                             <table id="following-table" class="table table-bordered">
                                 <thead>
                                     <tr class="text-center">
@@ -365,7 +365,7 @@
                     <?php if(!$mypage):?>
                         <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人のみ閲覧可能です</i></div></div>
                     <?php else:?>
-                        <div class="table-responsive">
+                        <div class="table-responsive table-smart-phone-x">
                             <table id="follower-table" class="table table-bordered">
                                 <thead>
                                     <tr class="text-center">

@@ -26,7 +26,13 @@ $(document).ready(function() {
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'dom-jp',
+            },
+            {
+                'targets' :  3,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp',
+                "visible": ($(window).width() >= 768),
             }
         ]
     });
@@ -57,7 +63,8 @@ $(document).ready(function() {
             {
                 'targets' :  0,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'dom-jp',
+                "visible": ($(window).width() >= 768),
             },
             {},
             {
@@ -99,7 +106,8 @@ $(document).ready(function() {
             { 
                 'targets' :  0,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'dom-jp',
+                "visible": ($(window).width() >= 768),
             },
             {},
             {
@@ -238,8 +246,7 @@ var tar_lamps = new Array(
 );
 
 $.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-
+    function( settings, data, dataIndex, rowData ) {
         //return true;
         var detail_form = document.forms['detail-form'];
         var rec_form = document.forms['rec-form'];
