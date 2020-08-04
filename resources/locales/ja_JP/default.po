@@ -111,32 +111,38 @@ msgid "Sign Up"
 msgstr "新規登録"
 
 msgid "successfully signed in."
-msgstr "ログインに成功しました"
+msgstr "ログインに成功しました。"
 
 msgid "Signed out."
-msgstr "ログアウトしました"
+msgstr "ログアウトしました。"
 
 #: Controller/UsersController.php:39
 msgid "Invalid username or password"
-msgstr "ユーザーIDかパスワードが不正です"
+msgstr "ユーザーIDかパスワードが不正です。"
+
+msgid "Invalid new password"
+msgstr "新しいパスワードが不正です。"
+
+msgid "Wrong password"
+msgstr "パスワードが誤っています。"
 
 #: Controller/UsersController.php:107
 #: Controller/UsersController.php:134
 msgid "The user has been saved."
-msgstr ""
+msgstr "ユーザー情報を保存しました。"
 
 #: Controller/UsersController.php:112
 #: Controller/UsersController.php:138
 msgid "The user could not be saved. Please, try again."
-msgstr ""
+msgstr "ユーザーを情報を更新できませんでした。もう一度お試しください。"
 
 #: Controller/UsersController.php:162
 msgid "The user has been deleted."
-msgstr ""
+msgstr "ユーザーは削除されました。"
 
 #: Controller/UsersController.php:164
 msgid "The user could not be deleted. Please, try again."
-msgstr ""
+msgstr "ユーザーを削除できませんでした。もう一度お試しください。"
 
 #: Followings/add.php:10
 #: Followings/edit.php:10
@@ -692,3 +698,49 @@ msgstr "プレイデータ登録"
 msgid "Player edit"
 msgstr "プレイヤー情報更新"
 
+
+msgid "Version"
+msgstr "バージョン"
+
+msgid "Title"
+msgstr "タイトル"
+
+msgid "Lamp"
+msgstr "ランプ"
+
+msgid "Fifty CPI"
+msgstr "50％CPI"
+
+msgid "Lamp cur"
+msgstr "現ランプ"
+
+msgid "Lamp tar"
+msgstr "目標ランプ"
+
+msgid "Clear Prob"
+msgstr "クリア確率"
+
+msgid "DJ Name"
+msgstr "DJ NAME"
+
+msgid "SP Grade"
+msgstr "SP段位"
+
+msgid "Unfollowing."
+msgstr "フォローを解除しました。"
+
+msgid "Following."
+msgstr "フォローしました。"
+
+msgid "Invalid phrase"
+msgstr "合言葉が正しくありません。"
+
+
+msgid "Fial to read data. Please, try again."
+msgstr "ファイルの読み込みに失敗しました。もう一度お試しください。"
+
+msgid "Fial to calclate rating. Please, try again."
+msgstr "レーティングの推定に失敗しました。もう一度お試しください。"
+
+msgid "The rating has been saved."
+msgstr "レーティングを推定し、保存しました。"

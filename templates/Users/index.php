@@ -19,7 +19,7 @@
                             <th><?= __('DJ NAME') ?></th>
                             <th><?= __('IIDX ID') ?></th>
                             <th><?= __('CPI') ?></th>
-                            <th><?= __('Grade Sp') ?></th>
+                            <th><?= __('SP Grade') ?></th>
                         </tr>
                     </thead>
                     <tbody>

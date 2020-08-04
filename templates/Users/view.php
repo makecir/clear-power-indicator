@@ -27,24 +27,22 @@
         </div>
         <div class="card-body text-dark pr-3 pl-3">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5 col-lg-4">
                     <div class="mb-4">
                         <h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3>
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">段位</h5>
-                        <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6>
                         <h5 class="card-text" style="display:inline;">
-                            <?= $user->user_detail->grade_sp_info ?> /
-                            <?= $user->user_detail->grade_dp_info ?>
+                            <?= $user->user_detail->grade_sp!=0?"SP":"" ?><?= $user->user_detail->grade_sp_info ?> /
+                            <?= $user->user_detail->grade_dp!=0?"DP":"" ?><?= $user->user_detail->grade_dp_info ?>
                         </h5>
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">アリーナ</h5>
-                        <h6 class="card-subtitle mb-2 text-muted" style="display:inline;">SP/DP</h6>
                         <h5 class="card-text" style="display:inline;">
-                            <?= $user->user_detail->arena_sp_info ?> /
-                            <?= $user->user_detail->arena_dp_info ?>
+                            <?= $user->user_detail->arena_sp!=0?"SP ":"" ?><?= $user->user_detail->arena_sp_info ?> /
+                            <?= $user->user_detail->arena_dp!=0?"DP ":"" ?><?= $user->user_detail->arena_dp_info ?>
                         </h5>
                     </div>
                     <div class="mb-0">
@@ -59,7 +57,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-8 p-3">
+                <div class="col-md-7 col-lg-8 p-3">
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -161,10 +159,10 @@
                         <table id="lamp-detail" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th align="center"><?= __('version') ?></th>
-                                    <th align="center"><?= __('title') ?></th>
-                                    <th align="center"><?= __('lamp') ?></th>
-                                    <th><?= __('fifty_CPI') ?></th>
+                                    <th align="center"><?= __('Version') ?></th>
+                                    <th align="center"><?= __('Title') ?></th>
+                                    <th align="center"><?= __('Lamp') ?></th>
+                                    <th><?= __('Fifty CPI') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -240,10 +238,10 @@
                         <table id="rec-table" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th align="center" ><?= __('version') ?></th>
-                                    <th align="center" ><?= __('title') ?></th>
-                                    <th align="center" ><?= __('lamp_cur') ?></th>
-                                    <th align="center" ><?= __('lamp_tar') ?></th>
+                                    <th align="center" ><?= __('Version') ?></th>
+                                    <th align="center" ><?= __('Title') ?></th>
+                                    <th align="center" ><?= __('Lamp cur') ?></th>
+                                    <th align="center" ><?= __('Lamp tar') ?></th>
                                     <th><?= __('probability') ?></th>
                                 </tr>
                             </thead>
@@ -308,10 +306,10 @@
                         <table id="bte-table" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
-                                    <th align="center"><?= __('version') ?></th>
-                                    <th align="center"><?= __('title') ?></th>
-                                    <th align="center"><?= __('lamp') ?></th>
-                                    <th><?= __('probability') ?></th>
+                                    <th align="center"><?= __('Version') ?></th>
+                                    <th align="center"><?= __('Title') ?></th>
+                                    <th align="center"><?= __('Lamp') ?></th>
+                                    <th><?= __('Clear Prob') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -371,17 +369,17 @@
                             <table id="follower-table" class="table table-bordered">
                                 <thead>
                                     <tr class="text-center">
-                                        <th align="center"><?= __('DJname') ?></th>
+                                        <th align="center"><?= __('DJ NAME') ?></th>
                                         <th align="center"><?= __('IIDX ID') ?></th>
                                         <th align="center"><?= __('CPI') ?></th>
-                                        <th align="center"><?= __('class') ?></th>
+                                        <th align="center"><?= __('SP Grade') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($user->followed_users as $row): ?>
                                         <tr>
                                             <td align="center"><?= $this->Html->link($row->user_detail->dj_name, ['action' => 'view', $row->id]) ?></td>
-                                            <td align="center"><?= h($row->user_detail->dj_name) ?></td>
+                                            <td align="center"><?= h($row->user_detail->iidx_id) ?></td>
                                             <td align="center"><?= h($row->user_detail->rating) ?></td>
                                             <td align="center"><?= h($row->user_detail->grade_sp_info) ?></td>
                                         </tr>
