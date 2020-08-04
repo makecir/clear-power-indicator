@@ -9,7 +9,6 @@
         <div class="card-header">
             <h3 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h3>
             <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
-            <h4 class="card-title" style="display:inline;">　</h4>
             <?php if(!$isLoggedIn):?>
             <?php elseif($mypage):?>
                 <?= $this->Html->link(
@@ -29,7 +28,11 @@
             <div class="row">
                 <div class="col-md-5 col-lg-4">
                     <div class="mb-4">
-                        <h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3>
+                        <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3></div>
+                        <h6 class="card-text" style="display:inline;"><?= __('(推定 : ')?></h6>
+                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->pred_standing ?></h5>
+                        <h6 class="card-text" style="display:inline;"><?= __('位程度') ?></h6>
+                        <h6 class="card-text" style="display:inline;"><?= __(')') ?></h6>
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">段位</h5>
@@ -58,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-8 p-3">
-                    <div class="table-responsive table-smart-phone-xx">
+                    <div class="table-responsive table-smart-phone-sm">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

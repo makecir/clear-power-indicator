@@ -12,7 +12,7 @@
                 <legend><?= __('Please enter your username and password') ?></legend>
                 <?= $this->Form->control('username', ['class' => 'form-control mb-3', 'required' => true, 'placeholder'=>'User ID']) ?>
                 <?= $this->Form->control('password', ['class' => 'form-control mb-3', 'required' => true, 'placeholder'=>'Password']) ?>
-                <?= $this->Form->hidden('remember_me', ['type' => 'checkbox', 'checked' => 'checked']) ?>
+                <?= $this->Form->control('remember_me', ['type' => 'checkbox', 'checked' => 'checked']) ?>
             </fieldset>
             <?= $this->Form->button(__('Login'),['class' => 'btn btn-primary my-auto']) ?>
             <?= $this->Form->end() ?>
