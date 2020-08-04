@@ -31,8 +31,16 @@
                         <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3></div>
                         <h6 class="card-text" style="display:inline;"><?= __('(推定 : ')?></h6>
                         <h5 class="card-text" style="display:inline;"><?= $user->user_detail->pred_standing ?></h5>
-                        <h6 class="card-text" style="display:inline;"><?= __('位程度') ?></h6>
-                        <h6 class="card-text" style="display:inline;"><?= __(')') ?></h6>
+                        <h6 class="card-text" style="display:inline;"><?= __('位程度)') ?></h6>
+                        <span data-toggle="tooltip" data-html="true" title=
+                            <?= "'大まかな目安です</br>詳しくは".
+                                $this->Html->link(
+                                    __("こちら"),
+                                    ['controller' => 'Pages', 'action' => 'about'],).
+                                "をご覧下さい'" 
+                            ?> class="text-nowrap" data-trigger="click">
+                            <i class="fas fa-question-circle"></i>
+                        </span>
                     </div>
                     <div class="mb-2">
                         <h5 class="card-title" style="display:inline;">段位</h5>
@@ -118,13 +126,13 @@
                 <div id="lamps" class="tab-pane fade show active">
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
-                            <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                            <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
                                 <i class="fas fa-filter mr-2"></i>
                                 <i class="fa fa-chevron-down float-right"></i>
                                     絞り込み
                             </a>
                         </h5>
-                        <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
+                        <div id="collapse-f-lamp-detail" class="collapse" aria-labelledby="filter-lamp-detail">
                             <div class="card-body">
                                 <form action="#" name="detail-form" data-persist=”garlic” >
                                     <ul class="nav flex-column">
@@ -184,13 +192,13 @@
                 <div id="recommended" class="tab-pane fade">
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
-                            <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                            <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
                                 <i class="fas fa-filter mr-2"></i>
                                 <i class="fa fa-chevron-down float-right"></i>
                                     絞り込み
                             </a>
                         </h5>
-                        <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
+                        <div id="collapse-f-lamp-detail" class="collapse" aria-labelledby="filter-lamp-detail">
                             <div class="card-body">
                                 <form action="#" name="rec-form" data-persist=”garlic” >
                                     <ul class="nav flex-column">
@@ -265,13 +273,13 @@
                 <div id="better-than-expected" class="tab-pane fade">
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
-                            <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="true" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
+                            <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
                                 <i class="fas fa-filter mr-2"></i>
                                 <i class="fa fa-chevron-down float-right"></i>
                                     絞り込み
                             </a>
                         </h5>
-                        <div id="collapse-f-lamp-detail" class="collapse show" aria-labelledby="filter-lamp-detail">
+                        <div id="collapse-f-lamp-detail" class="collapse" aria-labelledby="filter-lamp-detail">
                             <div class="card-body">
                                 <form action="#" name="bte-form" data-persist=”garlic” >
                                     <ul class="nav flex-column">

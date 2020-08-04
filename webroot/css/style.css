@@ -33,6 +33,11 @@
   background-color: #FF9966 !important;
 }
 
+.tooltip-inner {
+  min-width: 100px;
+  max-width: 100%; 
+}
+
 @media (max-width:769px) { 
 .table-smart-phone-xx th { font-size:xx-small;}
 .table-smart-phone-xx td { font-size:xx-small;}
