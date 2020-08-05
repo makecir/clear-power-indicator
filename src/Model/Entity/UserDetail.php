@@ -45,6 +45,7 @@ class UserDetail extends Entity
         'arena_dp' => true,
         'bio' => true,
         'twitter_id' => true,
+        'standing' => true,
         'rating' => true,
         'update_at' => true,
         'created_at' => true,
@@ -380,9 +381,9 @@ class UserDetail extends Entity
         return $rate!=100?intval($rate*$player/100):"-";
     }
 
-    // protected function _getPredStandingInfo(){
-    //     return  $this->pred_standing.($this->pred_standing!="-"?'位程度':'');
-    // }
+    protected function _getStandingInfo(){
+        return  (isset($this->standing)?$this->standing:"-");
+    }
 
     // result['s_id']="(int)lamp"
     public function _getMyLamps()

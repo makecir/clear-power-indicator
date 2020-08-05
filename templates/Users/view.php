@@ -30,7 +30,7 @@
                     <div class="mb-4">
                         <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3></div>
                         <h6 class="card-text" style="display:inline;"><?= __('(推定 : ')?></h6>
-                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->pred_standing ?></h5>
+                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->standing ?></h5>
                         <h6 class="card-text" style="display:inline;"><?= __('位程度)') ?></h6>
                         <span data-toggle="tooltip" data-html="true" title=
                             <?= "'大まかな目安です</br>詳しくは".

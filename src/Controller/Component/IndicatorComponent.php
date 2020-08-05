@@ -6,6 +6,7 @@ use Cake\ORM\TableRegistry;
 
 class IndicatorComponent extends Component
 {
+
     public $lamp_info=[
         0 => "NO PLAY",
         1 => "FAILED",
@@ -183,9 +184,8 @@ class IndicatorComponent extends Component
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }
 
-    public function getRating($user){
+    public function getRating(&$user){
         $ghost_num = 34204;
-
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         foreach($my_lamps as $my_lamp){
@@ -205,6 +205,7 @@ class IndicatorComponent extends Component
             if($battle_count > 0) $win++;
             if($battle_count < 0) $win--;
         }
+        $user->user_detail->standing = $ghost_num - ($win + $ghost_num)/2.0 + 1;
         $reswin = ($win + $ghost_num + 1)/2.0;
         return 400.00*log10( $reswin / ($ghost_num + 1 - $reswin) )+1500.0000;
     }
