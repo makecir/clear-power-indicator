@@ -10,11 +10,11 @@
                 <fieldset>
                     <p>
                         プライベートなアカウントです。</br>
-                        フォローに必要なフレーズを本人に確認し、入力してください。
+                        フォローに必要な合言葉を本人に確認し、入力してください。
                     </p>
                     <?php
                         echo $this->Form->control('phrase',
-                            ['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'Follow phrase']
+                            ['label' => '合言葉', 'class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'Follow phrase']
                         );
                     ?>
                 </fieldset>

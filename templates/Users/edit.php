@@ -59,16 +59,22 @@
                 <?= $this->Form->create($user) ?>
                 <fieldset>
                     <?php
+                        echo $this->Form->control('user_detail.dj_name',['label' => 'DJ NAME', 'class' => 'form-control mb-3', 'placeholder'=>'DJNAME']);
                         echo $this->Form->control('user_detail.iidx_id',
-                            ['class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'XXXX-XXXX']
+                            ['label' => 'IIDX ID', 'class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'XXXX-XXXX']
                         );
-                        echo $this->Form->control('user_detail.dj_name',['class' => 'form-control mb-3', 'placeholder'=>'DJNAME']);
-                        echo $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict,['class' => 'form-control mb-3']);
-                        echo $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict,['class' => 'form-control mb-3']);
-                        echo $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict,['class' => 'form-control mb-3']);
-                        echo $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict,['class' => 'form-control mb-3']);
+                    ?>
+                    <label for="private-level">SP段位</label>
+                    <?= $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict,['class' => 'form-control mb-3']); ?>
+                    <label for="private-level">DP段位</label>
+                    <?= $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict,['class' => 'form-control mb-3']); ?>
+                    <label for="private-level">SPアリーナ</label>
+                    <?= $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict,['class' => 'form-control mb-3']); ?>
+                    <label for="private-level">DPアリーナ</label>
+                    <?= $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict,['class' => 'form-control mb-3']); ?>
+                    <?php
                         echo $this->Form->control('user_detail.twitter_id',
-                            ['class' => 'form-control mb-3', 'type' => 'text','placeholder'=>'IIDX_CPI']
+                            ['label' => 'Twitter ID', 'class' => 'form-control mb-3', 'type' => 'text','placeholder'=>'IIDX_CPI']
                         );
                     ?>
                 </fieldset>
