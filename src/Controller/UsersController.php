@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Form\CSVForm;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 /**
  * Users Controller
  *
@@ -191,7 +192,7 @@ class UsersController extends AppController
                     }
                     $this->Lamp->saveLamps($user, $new_lamps);
                     $rating = $this->Indicator->getRating($user);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);

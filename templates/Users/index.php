@@ -20,6 +20,7 @@
                             <th><?= __('IIDX ID') ?></th>
                             <th><?= __('CPI') ?></th>
                             <th><?= __('SP Grade') ?></th>
+                            <th align="center"><?= __('Updated at') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,7 @@
                             <td><?= h($user->user_detail->iidx_id) ?></td>
                             <td><?= h($user->user_detail->rating) ?></td>
                             <td><?= h($user->user_detail->grade_sp_info) ?></td>
+                            <td align="center"><?= $user->private_level!==0?"---":$user->user_detail->modified_at->format('Y/m/d') ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

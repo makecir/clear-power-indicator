@@ -2,7 +2,7 @@ $(document).ready(function() {
     var table = $('#users-index').DataTable({
         lengthMenu: [ 20, 50, 100, 1000],
         displayLength: 20,
-        order:  [ [0, "asc"] ],
+        order:  [ [4, "desc"] ],
         oLanguage: {
             /* 日本語化設定 */
             sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)

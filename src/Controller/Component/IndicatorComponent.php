@@ -169,7 +169,7 @@ class IndicatorComponent extends Component
             $ret['dj_name'] = $rival->user_detail->dj_name;
             $ret['rating'] = $rival->user_detail->rating;
             $ret['lamp_counts'] = $this->getLampCounts($rival->user_detail->my_lamps_array);
-            $ret['update'] = $rival->user_detail->modified_at;
+            $ret['update'] = $rival->user_detail->update_at;
             $results[]= $ret;
         }
         return $results;
