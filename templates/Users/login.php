@@ -10,7 +10,7 @@
             <?= $this->Form->create() ?>
             <fieldset>
                 <legend><?= __('Please enter your username and password') ?></legend>
-                <?= $this->Form->control('username', ['label' => 'User ID', 'class' => 'form-control mb-3', 'required' => true, 'placeholder'=>'User ID']) ?>
+                <?= $this->Form->control('username', ['label' => 'User ID', 'class' => 'form-control mb-3', 'required' => true, 'placeholder'=>'user_id']) ?>
                 <?= $this->Form->control('password', ['label' => 'Password', 'class' => 'form-control mb-3', 'required' => true, 'placeholder'=>'Password']) ?>
                 <?= $this->Form->control('remember_me', ['label' => 'ログイン状態を維持する', 'type' => 'checkbox', 'checked' => 'checked']) ?>
             </fieldset>
