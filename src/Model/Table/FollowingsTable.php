@@ -80,8 +80,8 @@ class FollowingsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['follow_user_id'], 'Following'));
-        $rules->add($rules->existsIn(['followed_user_id'], 'Following'));
+        $rules->add($rules->existsIn(['follow_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['followed_user_id'], 'Users'));
 
         return $rules;
     }
