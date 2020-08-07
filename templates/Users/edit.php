@@ -64,14 +64,26 @@
                             ['label' => 'IIDX ID', 'class' => 'form-control mb-3', 'type' => 'text', 'placeholder'=>'XXXX-XXXX']
                         );
                     ?>
-                    <label for="private-level">SP段位</label>
-                    <?= $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict,['class' => 'form-control mb-3']); ?>
-                    <label for="private-level">DP段位</label>
-                    <?= $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict,['class' => 'form-control mb-3']); ?>
-                    <label for="private-level">SPアリーナ</label>
-                    <?= $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict,['class' => 'form-control mb-3']); ?>
-                    <label for="private-level">DPアリーナ</label>
-                    <?= $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict,['class' => 'form-control mb-3']); ?>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="private-level">SP段位</label>
+                            <?= $this->Form->select('user_detail.grade_sp',$user->user_detail->grade_sp_dict,['class' => 'form-control mb-3']); ?>
+                        </div>
+                        <div class="col">
+                            <label for="private-level">DP段位</label>
+                            <?= $this->Form->select('user_detail.grade_dp',$user->user_detail->grade_dp_dict,['class' => 'form-control mb-3']); ?>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="private-level">SPアリーナ</label>
+                            <?= $this->Form->select('user_detail.arena_sp',$user->user_detail->arena_sp_dict,['class' => 'form-control mb-3']); ?>
+                        </div>
+                        <div class="col">
+                            <label for="private-level">DPアリーナ</label>
+                            <?= $this->Form->select('user_detail.arena_dp',$user->user_detail->arena_dp_dict,['class' => 'form-control mb-3']); ?>
+                        </div>
+                    </div>
                     <?php
                         echo $this->Form->control('user_detail.twitter_id',
                             ['label' => 'Twitter ID', 'class' => 'form-control mb-3', 'type' => 'text','placeholder'=>'IIDX_CPI']
