@@ -13,7 +13,7 @@
         </div>
         <div class="card-body text-dark">
             <div class="table-responsive">
-                <table id="users-index" class="table table-hover">
+                <table id="users-index" class="table table-hover table-smart-phone-xx">
                     <thead>
                         <tr>
                             <th><?= __('DJ NAME') ?></th>
