@@ -69,8 +69,6 @@ class UsersController extends AppController
                 'Scores', 
                 'UserDetails',
                 'UserLamps',
-                'FollowUsers' => ['UserDetails'],
-                'FollowedUsers' => ['UserDetails'],
             ],
         ]) ?? [];
         $dtables=['user-index'];
@@ -173,6 +171,7 @@ class UsersController extends AppController
         if ($result->getStatus()) {
             $csvform = new CSVForm();
             if ($this->request->is(['patch', 'post', 'put'])) {
+                //$this->loadComponent('OGP');
                 $csv_data = $this->request->getData('upload-csv');
                 $text_data = $this->request->getData('upload-text');
                 if(isset($text_data)||isset($csv_data)){
@@ -203,6 +202,7 @@ class UsersController extends AppController
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
                     if ($this->Users->save($user)) {
+                        //$this->OGP->saveScreenShot($user->id);
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
                     }

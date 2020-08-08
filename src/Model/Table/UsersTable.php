@@ -63,8 +63,7 @@ class UsersTable extends Table
         ]);
         
         $this->belongsToMany('FollowUsers', [
-            'through' => 'Followings',
-            'conditions' => [''],
+            //'through' => 'Followings',
             'className' => 'Users',
             'foreignKey' => 'follow_user_id',
             'targetForeignKey' => 'followed_user_id',
@@ -73,7 +72,7 @@ class UsersTable extends Table
         ]);
 
         $this->belongsToMany('FollowedUsers', [
-            'through' => 'Followings',
+            //'through' => 'Followings',
             'className' => 'Users',
             'foreignKey' => 'followed_user_id',
             'targetForeignKey' => 'follow_user_id',

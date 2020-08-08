@@ -51,7 +51,7 @@ class FollowingsTable extends Table
         ]);
         $this->belongsTo('FollowedUsers', [
             'className' => 'Users',
-            'foreignKey' => 'followed_user_id',
+            'foreignKey' => 'follow_user_id',
             'joinType' => 'INNER',
         ]);
     }
