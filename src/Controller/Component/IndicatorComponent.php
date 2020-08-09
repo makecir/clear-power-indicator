@@ -100,6 +100,7 @@ class IndicatorComponent extends Component
             }
             else $fifty = -1;
             $result['fifty_rating'] = $fifty;
+            $result['diff'] = $score['difficulty'];
             $results[] = $result;
         }
         return $results;
@@ -125,6 +126,7 @@ class IndicatorComponent extends Component
                 $intercept = $score[$this->pred_target[$tar]."_intercept"];
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
+                $pred['diff'] = $score['difficulty'];
                 $preds[] = $pred;
             }
         }
@@ -149,6 +151,7 @@ class IndicatorComponent extends Component
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
                 if($pred['probability']>50.0)continue;
+                $pred['diff'] = $score['difficulty'];
                 $preds[] = $pred;
             }
         }

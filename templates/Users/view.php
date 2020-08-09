@@ -161,6 +161,16 @@
                                                 <?php endforeach; ?>
                                             </ul>
                                         </li>
+                                        <hr>
+                                        <li class="nav-item">
+                                            <h5 class="card-title">
+                                                その他
+                                            </h5>
+                                            <ul style="list-style: none;">
+                                                <li><label class=mr-3><input type="checkbox" name="detail_leg_only"/> LEGGENDARIAのみ表示</label></li>
+                                                <li><label class=mr-3><input type="checkbox" name="detail_leg_except"/> LEGGENDARIAを非表示</label></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </form>
                             </div>
@@ -180,7 +190,7 @@
                                 <?php foreach ($detail_table as $row): ?>
                                 <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
                                     <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
                                 </tr>
@@ -287,7 +297,7 @@
                                 <?php foreach ($rec_table as $row): ?>
                                     <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
@@ -370,7 +380,7 @@
                                 <?php foreach ($bte_table as $row): ?>
                                 <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                                 </tr>
