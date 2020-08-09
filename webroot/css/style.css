@@ -55,6 +55,14 @@
 .table-smart-phone-sm td { padding: .5rem!important; }
 }
 
+.table-hid{
+  display:none !important;
+  width:0 !important;
+  height:0 !important;
+  opacity:0 !important;
+  visibility: collapse !important;
+}
+
 ul.list{list-style-type:none;margin:0;padding:0;}/*リセット*/
 ul.list li{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
 ul.list li i{line-height:1.6;position:absolute;top:0;left:0;}

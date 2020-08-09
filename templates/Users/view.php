@@ -240,31 +240,58 @@
                                                 <?php endforeach; ?>
                                             </ul>
                                         </li>
+                                        <hr>
+                                        <li class="nav-item">
+                                            <h5 class="card-title">
+                                                クリア確率
+                                            </h5>
+                                            <ul>
+                                                <div class="form-row">
+                                                    <div class="col-3">
+                                                        <?= $this->Form->control('rec_min',['label' => 'min', 'name'=>'rec_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.00', 'placeholder'=>'0.00', 'required' => true]); ?>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <?= $this->Form->control('rec_max',['label' => 'max', 'name'=>'rec_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'100.00', 'placeholder'=>'100.00', 'required' => true]); ?>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </li>
+                                        <hr>
+                                        <li class="nav-item">
+                                            <h5 class="card-title">
+                                                その他
+                                            </h5>
+                                            <ul style="list-style: none;">
+                                                <li><label class=mr-3><input type="checkbox" name="rec_one_step"/> 現ランプの次のランプのみ表示</label></li>
+                                                <li><label class=mr-3><input type="checkbox" name="rec_leg_only"/> LEGGENDARIAのみ表示</label></li>
+                                                <li><label class=mr-3><input type="checkbox" name="rec_leg_except"/> LEGGENDARIAを非表示</label></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive table-smart-phone-xx">
-                        <table id="rec-table" class="table table-bordered">
+                        <table id="rec-table" class="table table-bordered" >
                             <thead>
                                 <tr class="text-center">
-                                    <th align="center" ><?= __('Version') ?></th>
-                                    <th align="center" ><?= __('Title') ?></th>
-                                    <th align="center" ><?= __('Lamp cur') ?></th>
-                                    <th align="center" ><?= __('Lamp tar') ?></th>
+                                    <th align="center"><?= __('Version') ?></th>
+                                    <th align="center"><?= __('Title') ?></th>
+                                    <th align="center"><?= __('Lamp cur') ?></th>
+                                    <th align="center"><?= __('Lamp tar') ?></th>
                                     <th><?= __('Clear Prob') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($rec_table as $row): ?>
-                                <tr>
+                                    <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"><?= h($row['title']) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
-                                </tr>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -306,6 +333,22 @@
                                                 <?php foreach ($checkbox['cur_lamp'] as $_lamp): ?>
                                                     <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
                                                 <?php endforeach; ?>
+                                            </ul>
+                                        </li>
+                                        <hr>
+                                        <li class="nav-item">
+                                            <h5 class="card-title">
+                                                クリア確率
+                                            </h5>
+                                            <ul>
+                                                <div class="form-row">
+                                                    <div class="col-3">
+                                                        <?= $this->Form->control('bte_min',['label' => 'min', 'name'=>'bte_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.00', 'placeholder'=>'0.00', 'required' => true]); ?>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <?= $this->Form->control('bte_max',['label' => 'max', 'name'=>'bte_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'100.00', 'placeholder'=>'100.00', 'required' => true]); ?>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </li>
                                     </ul>
