@@ -356,7 +356,7 @@
                                                         <?= $this->Form->control('bte_min',['label' => 'min', 'name'=>'bte_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.00', 'placeholder'=>'0.00', 'required' => true]); ?>
                                                     </div>
                                                     <div class="col-3">
-                                                        <?= $this->Form->control('bte_max',['label' => 'max', 'name'=>'bte_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'100.00', 'placeholder'=>'100.00', 'required' => true]); ?>
+                                                        <?= $this->Form->control('bte_max',['label' => 'max', 'name'=>'bte_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'50.00', 'placeholder'=>'50.00', 'required' => true]); ?>
                                                     </div>
                                                 </div>
                                             </ul>

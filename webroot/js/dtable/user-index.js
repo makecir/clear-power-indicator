@@ -19,5 +19,15 @@ $(document).ready(function() {
     });
     $('form').on('change', function(event) {
         table.draw();
-	});
+    });
 } );
+
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex, rowData ) {
+        var users_form = document.forms['users-form'];
+        if(users_form.elements['cpi_is_valid'].checked && data[2]=="" )return false;
+        if(parseFloat(data[2]) < parseFloat(users_form.elements['cpi_min'].value) || parseFloat(users_form.elements['cpi_max'].value) < parseFloat(data[2]))return false;
+        return true;
+    }
+);
+
