@@ -283,7 +283,7 @@ $.fn.dataTable.ext.search.push(
         }
         if(settings.nTable.id == 'bte-table'){
             for(let ver of versions) if (!bte_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of cur_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
             if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[4]))return false;
         }
 

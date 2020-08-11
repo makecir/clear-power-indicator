@@ -104,8 +104,8 @@
         <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock fa-3x"></i></div></div>
     <?php else:?>
         <div class="card border-secondary mb-3">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs padding-sm">
+            <div class="card-header padding-sm">
+                <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="#lamps" data-toggle="tab">SP☆12<?= __('Lamps Detail') ?></a>
                     </li>
@@ -341,7 +341,7 @@
                                                 <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','cur_lamps',false);">全て非チェック</a></div>
                                             </h5>
                                             <ul>
-                                                <?php foreach ($checkbox['cur_lamp'] as $_lamp): ?>
+                                                <?php foreach ($checkbox['tar_lamp'] as $_lamp): ?>
                                                     <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
                                                 <?php endforeach; ?>
                                             </ul>
