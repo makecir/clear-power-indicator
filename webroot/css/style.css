@@ -53,6 +53,8 @@
 .table-smart-phone-sm td { font-size:small;}
 .table-smart-phone-sm th { padding: .5rem!important; }
 .table-smart-phone-sm td { padding: .5rem!important; }
+
+.padding-sm{ padding: .75rem !important;}
 }
 
 .table-hid{
@@ -66,3 +68,39 @@
 ul.list{list-style-type:none;margin:0;padding:0;}/*リセット*/
 ul.list li{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
 ul.list li i{line-height:1.6;position:absolute;top:0;left:0;}
+
+dl.list dt{list-style-type:none;margin:0;padding:0;}/*リセット*/
+dl.list dt{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
+dl.list dt i{line-height:1.6;position:absolute;top:0;left:0;}
+
+ol.list {
+  counter-reset: my-counter;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ol.list > li {
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: 30px;
+  position: relative;
+}
+ol.list > li:before {
+  content: counter(my-counter);
+  counter-increment: my-counter;
+  background-color: #333;
+  border: 1px solid;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 22px;
+  width: 22px;
+  color: #ffffff;
+  font-size: 85%;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

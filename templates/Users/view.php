@@ -6,7 +6,7 @@
 ?>
 <div class="users view content">
     <div class="card border-secondary mb-3">
-        <div class="card-header">
+        <div class="card-header padding-sm">
             <h3 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h3>
             <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
             <?php if(!$isLoggedIn):?>
@@ -104,7 +104,7 @@
     <?php else:?>
         <div class="card border-secondary mb-3">
             <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
+                <ul class="nav nav-tabs card-header-tabs padding-sm">
                     <li class="nav-item">
                         <a class="nav-link active" href="#lamps" data-toggle="tab">SP☆12<?= __('Lamps Detail') ?></a>
                     </li>
@@ -122,7 +122,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="card-body tab-content">
+            <div class="card-body tab-content padding-sm">
                 <div id="lamps" class="tab-pane fade show active">
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
@@ -257,10 +257,10 @@
                                             </h5>
                                             <ul>
                                                 <div class="form-row">
-                                                    <div class="col-3">
+                                                    <div class="col-6">
                                                         <?= $this->Form->control('rec_min',['label' => 'min', 'name'=>'rec_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.00', 'placeholder'=>'0.00', 'required' => true]); ?>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-6">
                                                         <?= $this->Form->control('rec_max',['label' => 'max', 'name'=>'rec_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'100.00', 'placeholder'=>'100.00', 'required' => true]); ?>
                                                     </div>
                                                 </div>

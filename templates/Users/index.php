@@ -32,10 +32,10 @@
                                         <ul　style="list-style: none;">
                                             <li><label class=mr-3><input type="checkbox" name="cpi_is_valid"/> レーティングの無いユーザーを非表示</label></li>
                                             <div class="form-row">
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     <?= $this->Form->control('cpi_min',['label' => 'min', 'name'=>'cpi_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'-1000.00', 'placeholder'=>'0.00', 'required' => true]); ?>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     <?= $this->Form->control('cpi_max',['label' => 'max', 'name'=>'cpi_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'4000.00', 'placeholder'=>'4000.00', 'required' => true]); ?>
                                                 </div>
                                             </div>
