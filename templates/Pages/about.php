@@ -1,6 +1,6 @@
 <div class="display about content">
     <div class="card border-secondary mb-3" id="about">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 このサイトについて
             </h5>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="card border-secondary mb-3" id="caution">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 利用に際しての注意・警告
             </h5>
@@ -51,7 +51,7 @@
                             サービスに意図的に負荷をかける行為はご遠慮ください。
                         </li>
                         <li>
-                            その他、悪意を持ってサイト運営・他利用者・サービス外の第三者に攻撃を行っていると運営が判断した場合、上記の措置を行う可能性があります。
+                            その他、悪意を持ってサイト運営・他利用者・サービス外の第三者に不利益を及ぼす行為をしていると運営が判断した場合、アカウントの停止を含むその他の措置を行う可能性があります。
                         </li>
                     </ul>
                 </li>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="card border-secondary mb-3" id="numerical-value">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 表示される数値について
             </h5>
@@ -99,13 +99,13 @@
                             </table>
                         </div>
                     </div>
-                    具体的には、データベース上の約30,000名のプレイヤーとクリアランプ勝敗を比較し、イロレーティング方式（係数400・平均1500）に変換して表示します。</br>
+                    具体的には、データベース上の約30,000名のプレイヤーとクリアランプ勝敗を比較し、イロレーティング方式（係数400・平均1500）に変換して表示しています。</br>
                     （例：データベースのプレイヤーに19500勝9500敗1000分の場合、引き分けを0.5勝換算として勝率は約2/3なので、CPIは1620程度となります）
                 </dd>
                 <dt>推定順位</dt>
                 <dd>
                     CPIを求める際に利用した、データベースのプレイヤーに対する勝敗数から計算します。</br>
-                    よって「段位未取得、七段以下、および非公開でないプレイヤー」の「データベース作成時のプレイデータ」との比較で求めているため、CSV登録時点における“真の順位”とは異なります。
+                    よって「八段以上の段位を取得済みかつ非公開設定でないプレイヤー」の「データベース作成時のプレイデータ」との比較で求めているため、プレイデータ登録時点における“真の順位”とは異なります。
                 </dd>
                 <dt>クリア確率</dt>
                 <dd>
@@ -122,24 +122,32 @@
     </div>
 
     <div class="card border-secondary mb-3" id="how-to-update">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 スコア登録方法
             </h5>
         </div>
         <div class="card-body text-dark">
+            <div class="text-danger"><p>推定には、IIDX公式のプレミアムコース登録が必要になります。</p></div> 
             <ol class="list">
-                <li><p class="card-text"> <a href="https://p.eagate.573.jp/game/2dx/27/djdata/score_download.html" target="_blank">公式サイト</a>の「SP」->「ダウンロード」からプレーデータCSVをダウンロードします。
-                </br>※スマホの場合でも、ブラウザの「デスクトップ用のサイトで閲覧」等の機能を使用することで、CSVをダウンロード可能な場合があります。</p></li>
-                <li><p class="card-text"> <a href="/" target="_blank">推定ページ</a>の「レート推定」の「CSV選択」で、ダウンロードしたCSVを選択し、「アップロード」ボタンを押します。 </p></li>
-                <li><p class="card-text"> 算出に20秒程度掛かります。お待ちください。</p></li>
-                <li><p class="card-text"> レート等が更新されれば、推定完了です。</br>
+                <li><a href="https://p.eagate.573.jp/game/2dx/27/djdata/score_download.html" target="_blank">公式サイト</a>にアクセスします。</br>
+                「SP」->「ダウンロード」からプレーデータのテキスト全てをコピー、または、CSVをダウンロードします。
+                <li>
+                    <?= $this->Html->link(
+                        'CP更新/プレイデータ登録',
+                        ['controller' => 'Users', 'action' => 'edit', $identity->id],
+                    )?>
+                    (要ログイン)の「①テキスト」にコピーしたプレイデータをペーストし「テキスト読み込み」をクリック。</br>
+                    または、「②CSVアップロード」の「CSV選択」で、ダウンロードしたCSVを選択し、「アップロード」ボタンを押します。 
+                </li>
+                <li>算出に20秒程度掛かります。お待ちください。</li>
+                <li>ページが更新され、ダイアログが出たら推定および更新完了です。</li>
             </ol>
         </div>
     </div>
 
     <div class="card border-secondary mb-3" id="contact">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 連絡先
             </h5>
@@ -159,22 +167,23 @@
     </div>
 
     <div class="card border-secondary mb-3" id="donation">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header padding-sm">
             <h5 class="mb-0">
                 広告表示・開発者支援について
             </h5>
         </div>
         <div class="card-body text-dark">
             <p>
-                当サイトの運営にあたり、実力の推定・コンテンツの表示・データの保管を担うサーバの契約費を自腹で補っています。</br>
+                当サイトの運営にあたり、実力の推定・コンテンツの表示・データの保管を担うサーバの契約費を自費で補っています。</br>
                 可能な限り長期の運営を行うため、広告表示によってコストの補填を行うことを考えています。</br>
-                開発の進行・運営の維持にご協力いただける場合、
+            </p>
+            <p>
+                ご寄付等の形で開発の進行・運営の維持にご協力いただける場合、
                 <?= $this->Html->link(
                     '開発者支援について',
                     ['action' => 'donate'],)
                 ?>をご覧ください。
-           </p>
-
+            </p>
         </div>
     </div>
 

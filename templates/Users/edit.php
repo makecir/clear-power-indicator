@@ -7,8 +7,8 @@
 
 <div class="users view content">
     <div class="card border-secondary mb-3">
-        <div class="card-header">
-            <h4 class="card-title" style="display:inline;"><?= __('CP update') ?> / <?= __('Record Playdaya') ?></h4>
+        <div class="card-header padding-sm">
+            <h4 class="card-title" style="display:inline;"><?= __('CP update') ?>/<?= __('Record Playdaya') ?></h4>
         </div>
         <div class="card-body text-dark">
             <div class="pb-3">
@@ -16,7 +16,12 @@
                 <p class="card-text">
                     <ul class="list">
                         <li>プレイデータのテキストまたはCSVのダウンロードは<a href="https://p.eagate.573.jp/game/2dx/27/djdata/score_download.html" target="_blank">こちら</a>から</li>
-                        <li>方法の詳しい説明は<a href="https://p.eagate.573.jp/game/2dx/27/djdata/score_download.html" target="_blank">スコア登録方法</a>をご覧ください</li>
+                        <li>方法の詳しい説明は
+                            <?= $this->Html->link(
+                                'スコア登録方法',
+                                ['controller' => 'Pages', 'action' => 'about', '#'=>'how-to-update'],
+                            )?>
+                            をご覧ください</li>
                         <li><font color="#d9534f">算出に20秒程度要します</font> ゆっくりお待ちください</li>
                     </ul>
                 </p>

@@ -66,12 +66,12 @@
 }
 
 ul.list{list-style-type:none;margin:0;padding:0;}/*リセット*/
-ul.list li{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
-ul.list li i{line-height:1.6;position:absolute;top:0;left:0;}
+ul.list > li{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
+ul.list > li i{line-height:1.6;position:absolute;top:0;left:0;}
 
-dl.list dt{list-style-type:none;margin:0;padding:0;}/*リセット*/
-dl.list dt{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
-dl.list dt i{line-height:1.6;position:absolute;top:0;left:0;}
+dl.list > dt{list-style-type:none;margin:0;padding:0;}/*リセット*/
+dl.list > dt{margin-bottom:0.5em;line-height:1.6;padding-left:1.5em;position:relative;}
+dl.list > dt i{line-height:1.6;position:absolute;top:0;left:0;}
 
 ol.list {
   counter-reset: my-counter;

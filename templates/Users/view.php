@@ -35,8 +35,9 @@
                         <span data-toggle="tooltip" data-html="true" title=
                             <?= "'大まかな目安です</br>詳しくは".
                                 $this->Html->link(
-                                    __("こちら"),
-                                    ['controller' => 'Pages', 'action' => 'about'],).
+                                    'こちら',
+                                    ['controller' => 'Pages', 'action' => 'about', '#'=>'numerical-value'],
+                                ).
                                 "をご覧下さい'" 
                             ?> class="text-nowrap" data-trigger="click">
                             <i class="fas fa-question-circle"></i>
