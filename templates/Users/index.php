@@ -23,7 +23,7 @@
                     </h5>
                     <div id="collapse-f-users-index" class="collapse" aria-labelledby="filter-users-index">
                         <div class="card-body">
-                            <form action="#" name="users-form" data-persist=”garlic” >
+                            <form action="#" name="users-form">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <h5 class="card-title">
