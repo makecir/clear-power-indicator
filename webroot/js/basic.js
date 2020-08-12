@@ -16,3 +16,19 @@ $('#upload-csv').change(function (e) {
     if (val) $('#submit-csv').show();
     $('#imported-filename').text('CSV選択：' + val.substr(val.lastIndexOf("\\") + 1));
 });
+
+$('#upload-playtext').on('click', function(){
+    $('#text-sub-icon').addClass('fa-spin');
+});
+
+$('#submit-csv').on('click', function(){
+    $('#csv-sub-icon').addClass('fa-spin');
+});
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(function(){
+    $('ul.list > li').prepend('<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>');
+    $('dl.list dt').prepend('<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>');
+  });
+  

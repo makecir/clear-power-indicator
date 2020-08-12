@@ -61,34 +61,21 @@ class UsersTable extends Table
             'dependent' => true,
             'cascadeCallbacks' => true,
         ]);
-
-        //関連削除用
-        $this->hasMany('Followings', [
-            'className' => 'Followings',
-            'foreignKey' => 'follow_user_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
-        ]);
-
-        //関連削除用
-        $this->hasMany('Followings', [
-            'className' => 'Followings',
-            'foreignKey' => 'followed_user_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
-        ]);
         
         $this->belongsToMany('FollowUsers', [
+            //'through' => 'Followings',
             'className' => 'Users',
             'foreignKey' => 'follow_user_id',
+            'targetForeignKey' => 'followed_user_id',
             'propertyName' => 'following_users',
             'joinTable' => 'followings',
         ]);
 
         $this->belongsToMany('FollowedUsers', [
+            //'through' => 'Followings',
             'className' => 'Users',
             'foreignKey' => 'followed_user_id',
-            'targetForeignKey'=>'follow_user_id',
+            'targetForeignKey' => 'follow_user_id',
             'propertyName' => 'followed_users',
             'joinTable' => 'followings',
         ]);
@@ -139,7 +126,7 @@ class UsersTable extends Table
             ->allowEmptyString('email')
             ->add('email', 'emailFormat', [
                 'rule' => function ($value) {
-                    return preg_match("/\A([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+z/", $value)===1;
+                    return preg_match("/\A(([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+|)\z/", $value)===1;
                 },
                 'message' => 'emailアドレスとして認識できません',
             ]);;

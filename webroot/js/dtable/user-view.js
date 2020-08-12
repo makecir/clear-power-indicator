@@ -26,7 +26,13 @@ $(document).ready(function() {
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'dom-jp',
+            },
+            {
+                'targets' :  3,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp',
+                "visible": ($(window).width() >= 768),
             }
         ]
     });
@@ -57,7 +63,8 @@ $(document).ready(function() {
             {
                 'targets' :  0,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'dom-jp',
+                "visible": ($(window).width() >= 768),
             },
             {},
             {
@@ -69,7 +76,9 @@ $(document).ready(function() {
                 'targets' :  3,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp'
-            }
+            },
+            {},
+
         ]
     });
     $('form').on('change', function(event) {
@@ -99,14 +108,16 @@ $(document).ready(function() {
             { 
                 'targets' :  0,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'dom-jp',
+                "visible": ($(window).width() >= 768),
             },
             {},
             {
                 'targets' :  2,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp'
-            }
+            },
+            {},
         ]
     });
     $('form').on('change', function(event) {
@@ -236,27 +247,44 @@ var tar_lamps = new Array(
     'EXHARD',
     'FULLCOMBO'
 );
+var lamp2num = {
+    'NO PLAY':2,
+    'FAILED':2,
+    'ASSISTED':2,
+    'EASY':3,
+    'CLEAR':4,
+    'HARD':5,
+    'EXHARD':6,
+    'FULLCOMBO':7,
+}
 
 $.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-
+    function( settings, data, dataIndex, rowData ) {
         //return true;
         var detail_form = document.forms['detail-form'];
         var rec_form = document.forms['rec-form'];
         var bte_form = document.forms['bte-form'];
 
-        for(let ver of versions) {
-            if (settings.nTable.id == 'lamp-detail' && !detail_form.elements[ver].checked && data[0] == ver) return false;
-            if (settings.nTable.id == 'rec-table' && !rec_form.elements[ver].checked && data[0] == ver) return false;
-            if (settings.nTable.id == 'bte-table' && !bte_form.elements[ver].checked && data[0] == ver) return false;
+        if(settings.nTable.id == 'lamp-detail'){
+            for(let ver of versions) if  (!detail_form.elements[ver].checked && data[0] == ver) return false;
+            for(let lamp of cur_lamps) if (!detail_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            if(detail_form.elements['detail_leg_only'].checked && (!data[1].includes("†") || data[1].includes("ZIGOQ") || data[1].includes("paradisus") || data[1].includes("ラヴリィ～レイディオ"))) return false;
+            if(detail_form.elements['detail_leg_except'].checked && data[1].includes("†") && !data[1].includes("ZIGOQ") && !data[1].includes("paradisus") && !data[1].includes("ラヴリィ～レイディオ")) return false;
         }
-        for(let lamp of cur_lamps) {
-            if (settings.nTable.id == 'lamp-detail' && !detail_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
-            if (settings.nTable.id == 'rec-table' && !rec_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
-            if (settings.nTable.id == 'bte-table' && !bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+        if(settings.nTable.id == 'rec-table'){
+            for(let ver of versions) if (!rec_form.elements[ver].checked && data[0] == ver) return false;
+            for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && data[3] == lamp) return false;
+            if(parseFloat(data[4]) < parseFloat(rec_form.elements['rec_min'].value) || parseFloat(rec_form.elements['rec_max'].value) < parseFloat(data[4]))return false;
+            if(rec_form.elements['rec_one_step'].checked && lamp2num[data[2]]+1 < lamp2num[data[3]])return false;
+            if(rec_form.elements['rec_leg_only'].checked && (!data[1].includes("†") || data[1].includes("ZIGOQ") || data[1].includes("paradisus") || data[1].includes("ラヴリィ～レイディオ"))) return false;
+            if(rec_form.elements['rec_leg_except'].checked && data[1].includes("†") && !data[1].includes("ZIGOQ") && !data[1].includes("paradisus") && !data[1].includes("ラヴリィ～レイディオ")) return false;
+
         }
-        for(let lamp of tar_lamps) {
-            if (settings.nTable.id == 'rec-table' && !rec_form.elements['tar_'+lamp].checked && data[3] == lamp) return false;
+        if(settings.nTable.id == 'bte-table'){
+            for(let ver of versions) if (!bte_form.elements[ver].checked && data[0] == ver) return false;
+            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[4]))return false;
         }
 
         return true;
@@ -277,4 +305,8 @@ function allCheck(form,target_op,value){
 
 $(function(){
     $("form").garlic();
+});
+
+$(function () {
+    $(document.forms[0][0]).change();
 });

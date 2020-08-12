@@ -114,6 +114,10 @@ class UserDetailsTable extends Table
             ]);
 
         $validator
+            ->scalar('standing')
+            ->allowEmptyString('standing');
+
+        $validator
             ->numeric('rating')
             ->allowEmptyString('rating');
 

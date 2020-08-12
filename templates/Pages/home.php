@@ -1,6 +1,6 @@
 <div class="display home content">
     <div class="card border-secondary mb-3">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header  padding-sm" >
             <h3 class="mb-0">
                 <?= __('Clear Power Indicator') ?>
             </h3>
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card border-secondary mb-3">
-                <div class="card-header" role="tab" id="headingOne">
+                <div class="card-header">
                     <h4 class="mb-0">
                         <?= __('利用する') ?>
                     </h4>
@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-6">
             <div class="card border-secondary mb-3">
-                <div class="card-header" role="tab" id="headingOne">
+                <div class="card-header">
                     <h4 class="mb-0">
                         <?= __('試してみる') ?>
                     </h4>

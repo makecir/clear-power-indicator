@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Form\CSVForm;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 /**
  * Users Controller
  *
@@ -68,8 +69,6 @@ class UsersController extends AppController
                 'Scores', 
                 'UserDetails',
                 'UserLamps',
-                'FollowUsers' => ['UserDetails'],
-                'FollowedUsers' => ['UserDetails'],
             ],
         ]) ?? [];
         $dtables=['user-index'];
@@ -89,7 +88,11 @@ class UsersController extends AppController
         $this->Authorization->skipAuthorization();
 
         $user = $this->Users->get($id, [
-            'contain' => ['UserDetails','Scores','FollowUsers' => ['UserDetails'], 'FollowedUsers' => ['UserDetails']],
+            'contain' => ['UserDetails',
+                'Scores',
+                'FollowUsers' => ['UserDetails'], 
+                'FollowedUsers' => ['UserDetails'],
+            ],
         ]);
         
         $this->loadModel('Scores');
@@ -168,6 +171,7 @@ class UsersController extends AppController
         if ($result->getStatus()) {
             $csvform = new CSVForm();
             if ($this->request->is(['patch', 'post', 'put'])) {
+                //$this->loadComponent('OGP');
                 $csv_data = $this->request->getData('upload-csv');
                 $text_data = $this->request->getData('upload-text');
                 if(isset($text_data)||isset($csv_data)){
@@ -187,7 +191,7 @@ class UsersController extends AppController
                     }
                     $this->Lamp->saveLamps($user, $new_lamps);
                     $rating = $this->Indicator->getRating($user);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating]]);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
@@ -198,6 +202,7 @@ class UsersController extends AppController
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
                     if ($this->Users->save($user)) {
+                        //$this->OGP->saveScreenShot($user->id);
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
                     }
