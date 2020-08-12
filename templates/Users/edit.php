@@ -8,11 +8,11 @@
 <div class="users view content">
     <div class="card border-secondary mb-3">
         <div class="card-header padding-sm">
-            <h4 class="card-title" style="display:inline;"><?= __('CP update') ?>/<?= __('Record Playdaya') ?></h4>
+            <h4 class="card-title" style="display:inline;"><?= __('CPI update') ?>/<?= __('Record Playdaya') ?></h4>
         </div>
         <div class="card-body text-dark">
             <div class="pb-3">
-                <h5 class="card-title" style="display:inline;">スコアを登録すると自動的にCPが更新されます</h5>
+                <h5 class="card-title" style="display:inline;">スコアを登録すると自動的にCPIが更新されます</h5>
                 <p class="card-text">
                     <ul class="list">
                         <li>プレイデータのテキストまたはCSVのダウンロードは<a href="https://p.eagate.573.jp/game/2dx/27/djdata/score_download.html" target="_blank">こちら</a>から</li>

@@ -689,8 +689,8 @@ msgstr "フォロー比較"
 msgid "Followers"
 msgstr "フォロワー"
 
-msgid "CP update"
-msgstr "CP更新"
+msgid "CPI update"
+msgstr "CPI更新"
 
 msgid "Record Playdaya"
 msgstr "プレイデータ登録"
