@@ -79,6 +79,10 @@ class UsersTable extends Table
             'propertyName' => 'followed_users',
             'joinTable' => 'followings',
         ]);
+
+        $this->hasMany('UserHistories', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**
