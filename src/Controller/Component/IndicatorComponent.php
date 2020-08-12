@@ -106,8 +106,6 @@ class IndicatorComponent extends Component
         return $results;
     }
 
-    
-
     public function getRecommendResults(&$my_lamps, $rating){
         if(is_null($rating))return null;
         $Scores = TableRegistry::getTableLocator()->get('Scores');

@@ -34,5 +34,6 @@ class UserHistory extends Entity
         'rating_diff' => true,
         'created_at' => true,
         'user' => true,
+        'lamp_changes' => true,
     ];
 }

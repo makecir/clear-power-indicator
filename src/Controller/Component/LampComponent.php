@@ -71,31 +71,66 @@ class LampComponent extends Component
     public function saveLamps($user, &$new_lamps){
         // 2, dict['title']['diff']=lamp -> save(u_id,s_is,lamp);
         $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
-        $new_scores = array();
-        $bank = array();
-        $this->allClearLamps($user);
+        $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
+        $LampChanges = TableRegistry::getTableLocator()->get('LampChanges');
+
+        $my_lamps_dict = $UserLamps->find('list',['keyField'=>'score_id','valueField'=>'lamp','conditions'=>['user_id'=>$user->id]])->toArray();
+        
         $dict = $this->getFetchTitleDict();
+        //check
+        $invalid = false;
+        $new_scores = array();
+        $lamp_changes = array();
+        $no_match_scores  = array();
         foreach($new_lamps as $title => $lamps){
             if(!array_key_exists($title, $dict)){
-                $bank[] = $title;
+                $no_match_scores[] = $title;
                 continue;
             }
             foreach($lamps as $diff => $lamp){
                 if(!array_key_exists($diff, $dict[$title])){
-                    $bank[] = $title.":diff=".$diff;
+                    $no_match_scores[] = $title.":diff=".$diff;
                     continue;
                 }
                 $s_id = $dict[$title][$diff];
-                $lamp = $lamp;
-                $new_scores[] = ['user_id'=>$user->id,'score_id'=>$s_id, 'lamp'=>$lamp];
+                if($lamp == 0)continue;
+                if(array_key_exists($s_id, $my_lamps_dict))$before_lamp = $my_lamps_dict[$s_id];
+                else $before_lamp = 0;
+                if($before_lamp > $lamp) $invalid = true;
+                if($before_lamp < $lamp) {
+                    $lamp_changes[] = ['score_id'=>$s_id, 'before_lamp'=>$before_lamp, 'after_lamp'=>$lamp];
+                }
+                $new_scores[] = ['user_id'=>$user->id, 'score_id'=>$s_id, 'lamp'=>$lamp];
             }
         }
-        $query = $UserLamps->query();
-        $query->insert(['user_id', 'score_id', 'lamp']);
-        foreach ($new_scores as $new_score) {
-            $query->values($new_score);
+        if($invalid || count($lamp_changes) === 0)return null;
+
+        $this->allClearLamps($user);
+
+        $user_history = $UserHistories->newEmptyEntity();
+        $user_history->user_id = $user->id;
+        $UserHistories->save($user_history);
+
+        if(count($new_scores) !== 0){
+            $query = $UserLamps->query();
+            $query->insert(['user_id', 'score_id', 'lamp']);
+            foreach ($new_scores as $new_score) {
+                $query->values($new_score);
+            }
+            $query->execute();
         }
-        $query->execute();
+
+        if(count($lamp_changes) !== 0){
+            $query = $LampChanges->query();
+            $query->insert(['score_id', 'before_lamp', 'after_lamp', 'user_history_id']);
+            foreach ($lamp_changes as $lamp_change) {
+                $lamp_change['user_history_id'] = $user_history->id;
+                $query->values($lamp_change);
+            }
+            $query->execute();
+        }
+
+        return $user_history;
     }
 
     public function allClearLamps($user){

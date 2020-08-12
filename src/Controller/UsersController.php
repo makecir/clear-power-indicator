@@ -189,12 +189,20 @@ class UsersController extends AppController
                         $this->Flash->error(__('Fial to read data. Please, try again.'));
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
-                    $this->Lamp->saveLamps($user, $new_lamps);
-                    $rating = $this->Indicator->getRating($user);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
+                    $user_history = $this->Lamp->saveLamps($user, $new_lamps);
+                    // if(is_null($user_history)){
+                    //     $this->Flash->error(__('Fial to save data. Please, check your play data.'));
+                    //     return $this->redirect(['action' => 'edit', $user->id]);
+                    // }
+                    //$tes = $user_history[1];
+                    //$tes = $user_history[';1'];
+                    $this->set(compact('user_history'));
+                    //$rating = 1500;
+                    //$rating = $this->Indicator->getRating($user, $user_history);
+                    //$user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        return $this->redirect(['action' => 'view', $user->id]);
+                        //return $this->redirect(['action' => 'view', $user->id]);
                     }
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
@@ -202,7 +210,6 @@ class UsersController extends AppController
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
                     if ($this->Users->save($user)) {
-                        //$this->OGP->saveScreenShot($user->id);
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
                     }
