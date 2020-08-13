@@ -90,6 +90,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails',
                 'Scores',
+                'UserHistories',
                 'FollowUsers' => ['UserDetails'], 
                 'FollowedUsers' => ['UserDetails'],
             ],

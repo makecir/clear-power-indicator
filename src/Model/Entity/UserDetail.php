@@ -55,6 +55,10 @@ class UserDetail extends Entity
     public function getTable(){
         return TableRegistry::getTableLocator()->get('UserDetails');
     }
+
+    protected function _getRatingInfo(){
+        return $this->rating?sprintf('%.2f',$this->rating):'';
+    }
     
     protected function _getGradeSpDict(){
         $sp_grade_dict = [

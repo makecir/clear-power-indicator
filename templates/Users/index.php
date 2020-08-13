@@ -64,7 +64,7 @@
                                 <?= ($user->private_level!==0?' <i class="fas fa-lock"></i>':'') ?>
                             </td>
                             <td><?= h($user->user_detail->iidx_id) ?></td>
-                            <td><?= h($user->user_detail->rating) ?></td>
+                            <td><?= h($user->user_detail->rating_info) ?></td>
                             <td><?= h($user->user_detail->grade_sp_info) ?></td>
                             <td align="center"><?= $user->private_level!==0?"---":$user->user_detail->modified_at->format('Y/m/d') ?></td>
                         </tr>

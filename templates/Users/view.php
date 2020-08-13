@@ -28,9 +28,9 @@
             <div class="row">
                 <div class="col-md-5 col-lg-4">
                     <div class="mb-4">
-                        <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3></div>
+                        <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'') ?></h3></div>
                         <h6 class="card-text" style="display:inline;"><?= __('(推定 : ')?></h6>
-                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->standing ?></h5>
+                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->rating_info ?></h5>
                         <h6 class="card-text" style="display:inline;"><?= __('位程度)') ?></h6>
                         <span data-toggle="tooltip" data-html="true" title=
                             <?= "'大まかな目安です</br>詳しくは".
@@ -114,6 +114,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#better-than-expected" data-toggle="tab"><?= __('Better than expected') ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#histories" data-toggle="tab"><?= __('Histories') ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#followings" data-toggle="tab"><?= __('Followings') ?></a>
@@ -391,6 +394,41 @@
                     </div>
                 </div>
 
+                <div id="histories" class="tab-pane fade">
+                    <?php if(!($mypage || $follow_flag)):?>
+                        <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人かフォロワーのみ閲覧可能です</i></div></div>
+                    <?php else:?>
+                        <div class="table-responsive table-smart-phone-sm">
+                            <table id="histories-table" class="table table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th align="center"><?= __('Date') ?></th>
+                                        <th align="center"><?= __('CPI') ?></th>
+                                        <th align="center"><?= __('Diff') ?></th>
+                                        <th align="center"><?= __('#') ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($user->user_histories as $row): ?>
+                                        <tr>
+                                            <td align="center"><?= h($row->created_at->format('Y/m/d')) ?></td>
+                                            <td align="center"><?= h($row->rating_cur_info) ?></td>
+                                            <td align="center"><?= h($row->rating_diff_info) ?></td>
+                                            <td align="center">
+                                                <?= $this->Html->link(
+                                                    __('Detail'),
+                                                    ['action' => 'following', $identity->id, $user->id],
+                                                    ['class' => 'btn btn-sm btn-info my-auto'])
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif;?>
+                </div>
+
                 <div id="followings" class="tab-pane fade">
                     <?php if(!$mypage):?>
                         <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人のみ閲覧可能です</i></div></div>
@@ -409,7 +447,7 @@
                                     <?php foreach ($follow_compare_table as $row): ?>
                                         <tr>
                                             <td align="center"><?= $this->Html->link($row['dj_name'], ['action' => 'view', $row['id']]) ?></td>
-                                            <td align="center"><?= h($row['rating']) ?></td>
+                                            <td align="center"><?= h(($row['rating']?sprintf('%.2f',$row['rating']):'')) ?></td>
                                             <td align="center">
                                                 <div class="progress mb-3">
                                                     <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
@@ -445,7 +483,7 @@
                                         <tr>
                                             <td align="center"><?= $this->Html->link($row->user_detail->dj_name, ['action' => 'view', $row->id]) ?></td>
                                             <td align="center"><?= h($row->user_detail->iidx_id) ?></td>
-                                            <td align="center"><?= h($row->user_detail->rating) ?></td>
+                                            <td align="center"><?= h(($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'')) ?></td>
                                             <td align="center"><?= h($row->user_detail->grade_sp_info) ?></td>
                                         </tr>
                                     <?php endforeach; ?>

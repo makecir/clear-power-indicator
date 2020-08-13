@@ -5,6 +5,7 @@ use App\Model\Entity\User;
 use App\Model\Table\UsersTable;
 use Authorization\IdentityInterface;
 use Authorization\Policy\Result;
+use Cake\ORM\TableRegistry;
 
 
 class userPolicy{

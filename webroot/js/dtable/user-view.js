@@ -126,6 +126,44 @@ $(document).ready(function() {
 } );
 
 $(document).ready(function() {
+    var table = $('#histories-table').DataTable({
+        lengthMenu: [ 20, 50, 100, 1000],
+        displayLength: 20,
+        //order:  [ [1, "desc"] ],
+        ordering: false,
+        oLanguage: {
+            /* 日本語化設定 */
+            sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+            oPaginate : { // ページネーション欄
+                sNext : "次へ",
+                sPrevious : "前へ"
+            },
+            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sSearch : "検索 ", // 検索欄(例 = 検索 --)
+            sZeroRecords : "表示するデータがありません", // 表示する行がない場合
+            sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
+            sInfoFiltered : "全 _MAX_ 件から絞り込み" 
+        },
+        columnDefs : [
+            {
+                'targets' :  0,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp'
+            },
+            {},
+            {
+                'targets' :  2,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp'
+            }
+        ]
+    });
+    $('form').on('change', function(event) {
+        table.draw();
+    });
+} );
+
+$(document).ready(function() {
     var table = $('#following-table').DataTable({
         lengthMenu: [ 20, 50, 100, 1000],
         displayLength: 20,
@@ -152,6 +190,52 @@ $(document).ready(function() {
             {},
             {
                 'targets' :  2,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp'
+            }
+        ]
+    });
+    $('form').on('change', function(event) {
+        table.draw();
+    });
+} );
+
+$(document).ready(function() {
+    var table = $('#follower-table').DataTable({
+        lengthMenu: [ 20, 50, 100, 1000],
+        displayLength: 20,
+        order:  [ [1, "desc"] ],
+        oLanguage: {
+            /* 日本語化設定 */
+            sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+            oPaginate : { // ページネーション欄
+                sNext : "次へ",
+                sPrevious : "前へ"
+            },
+            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sSearch : "検索 ", // 検索欄(例 = 検索 --)
+            sZeroRecords : "表示するデータがありません", // 表示する行がない場合
+            sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
+            sInfoFiltered : "全 _MAX_ 件から絞り込み" 
+        },
+        columnDefs : [
+            {
+                'targets' :  0,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp'
+            },
+            {
+                'targets' :  1,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp'
+            },
+            {
+                'targets' :  2,
+                'orderable' : true,
+                'orderDataType' : 'dom-jp'
+            },
+            {
+                'targets' :  3,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp'
             }
@@ -198,6 +282,15 @@ $(function($){
           case 'HARD':return '95';
           case 'EXHARD':return '96';
           case 'FULLCOMBO':return '97';
+
+          case '六段':return '150';
+          case '七段':return '151';
+          case '八段':return '152';
+          case '九段':return '153';
+          case '十段':return '154';
+          case '中伝':return '155';
+          case '皆伝':return '156';
+          
 
           default:
             return '00';

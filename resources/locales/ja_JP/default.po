@@ -683,6 +683,9 @@ msgstr "リコメンド"
 msgid "Better than expected"
 msgstr "逆リコメンド"
 
+msgid "Histories"
+msgstr "更新履歴"
+
 msgid "Followings"
 msgstr "フォロー比較"
 
@@ -698,6 +701,8 @@ msgstr "プレイデータ登録"
 msgid "Player edit"
 msgstr "プレイヤー情報更新"
 
+msgid "Detail"
+msgstr "詳細"
 
 msgid "Version"
 msgstr "バージョン"

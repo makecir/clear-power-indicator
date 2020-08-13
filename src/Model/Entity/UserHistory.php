@@ -32,8 +32,27 @@ class UserHistory extends Entity
         'user_id' => true,
         'rating_cur' => true,
         'rating_diff' => true,
+        'standing_cur' => true,
+        'standing_diff' => true,
         'created_at' => true,
         'user' => true,
         'lamp_changes' => true,
     ];
+
+    protected function _getRatingCurInfo(){
+        return $this->rating_cur?sprintf('%.2f',$this->rating_cur):'';
+    }
+
+    protected function _getRatingDiffInfo(){
+        return $this->rating_cur?sprintf(($this->rating_diff>0.00?'+':'-').'%.2f',$this->rating_diff):'';
+    }
+
+    protected function _getStandingCurInfo(){
+        return $this->standing_cur?sprintf('%.2f',$this->standing_cur):'';
+    }
+
+    protected function _getStandingDiffInfo(){
+        return $this->standing_cur?sprintf(($this->standing_diff>0.00?'↑':'↓').'%.2f',$this->standing_diff):'';
+    }
+
 }
