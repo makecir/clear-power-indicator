@@ -409,7 +409,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($user->user_histories as $row): ?>
+                                    <?php foreach (array_reverse($user->user_histories) as $row): ?>
                                         <tr>
                                             <td align="center"><?= h($row->created_at->format('Y/m/d')) ?></td>
                                             <td align="center"><?= h($row->rating_cur_info) ?></td>
@@ -417,7 +417,7 @@
                                             <td align="center">
                                                 <?= $this->Html->link(
                                                     __('Detail'),
-                                                    ['action' => 'following', $identity->id, $user->id],
+                                                    ['controller' => 'UserHistories','action' => 'view', $row->id],
                                                     ['class' => 'btn btn-sm btn-info my-auto'])
                                                 ?>
                                             </td>

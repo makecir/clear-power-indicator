@@ -82,6 +82,8 @@ class UsersTable extends Table
 
         $this->hasMany('UserHistories', [
             'foreignKey' => 'user_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
     }
 

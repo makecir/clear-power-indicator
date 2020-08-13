@@ -169,5 +169,13 @@ class LampComponent extends Component
         return $ret;
     }
 
+    public function getLampChangeCounts(&$user_history){
+        $lamp_num = sizeof($this->lamp_class_info);
+        $ret = array_fill(0, $lamp_num, 0);
+        foreach($user_history->lamp_changes as $change){
+            $ret[$change->after_lamp ?? 0]+=1;
+        }
+        return $ret;
+    }
 }
 

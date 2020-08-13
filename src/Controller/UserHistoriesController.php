@@ -12,21 +12,6 @@ namespace App\Controller;
 class UserHistoriesController extends AppController
 {
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users'],
-        ];
-        $userHistories = $this->paginate($this->UserHistories);
-
-        $this->set(compact('userHistories'));
-    }
-
-    /**
      * View method
      *
      * @param string|null $id User History id.
@@ -36,56 +21,27 @@ class UserHistoriesController extends AppController
     public function view($id = null)
     {
         $userHistory = $this->UserHistories->get($id, [
-            'contain' => ['Users'],
+            'contain' => [
+                'LampChanges',
+                'Users'=>['UserDetails']
+            ],
         ]);
+        $this->loadComponent('Indicator');
+        $this->loadComponent('Follow');
+        $this->loadComponent('Lamp');
 
-        $this->set(compact('userHistory'));
-    }
+        $identity = $this->request->getAttribute('identity');
+        $this->loadModel('Users');
+        $user = $this->Users->get($userHistory->user_id);
+        $mypage = isset($identity) && ($identity->id === $user->id);
+        $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $user->id);
+        $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $userHistory = $this->UserHistories->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $userHistory = $this->UserHistories->patchEntity($userHistory, $this->request->getData());
-            if ($this->UserHistories->save($userHistory)) {
-                $this->Flash->success(__('The user history has been saved.'));
+        $change_counts = $this->Lamp->getLampChangeCounts($userHistory);
+        $change_counts_label = $this->Lamp->lamp_short_info;
+        $change_counts_color = $this->Indicator->color_info;
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user history could not be saved. Please, try again.'));
-        }
-        $users = $this->UserHistories->Users->find('list', ['limit' => 200]);
-        $this->set(compact('userHistory', 'users'));
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id User History id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $userHistory = $this->UserHistories->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $userHistory = $this->UserHistories->patchEntity($userHistory, $this->request->getData());
-            if ($this->UserHistories->save($userHistory)) {
-                $this->Flash->success(__('The user history has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user history could not be saved. Please, try again.'));
-        }
-        $users = $this->UserHistories->Users->find('list', ['limit' => 200]);
-        $this->set(compact('userHistory', 'users'));
+        $this->set(compact('userHistory','is_permitted','change_counts','change_counts_label','change_counts_color'));
     }
 
     /**
@@ -99,6 +55,13 @@ class UserHistoriesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $userHistory = $this->UserHistories->get($id);
+        $this->loadModel('Users');
+        $user = $this->Users->get($userHistory->user_id);
+        $result = $identity->canResult('delete', $user);
+        if (!$result->getStatus()){
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
         if ($this->UserHistories->delete($userHistory)) {
             $this->Flash->success(__('The user history has been deleted.'));
         } else {

@@ -48,11 +48,11 @@ class UserHistory extends Entity
     }
 
     protected function _getStandingCurInfo(){
-        return $this->standing_cur?sprintf('%.2f',$this->standing_cur):'';
+        return $this->standing_cur?sprintf('%.0f',$this->standing_cur):'';
     }
 
     protected function _getStandingDiffInfo(){
-        return $this->standing_cur?sprintf(($this->standing_diff>0.00?'↑':'↓').'%.2f',$this->standing_diff):'';
+        return $this->standing_cur?($this->standing_diff<=0?'↑ ':'↓ ').abs($this->standing_diff):'';
     }
 
 }

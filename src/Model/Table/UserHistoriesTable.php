@@ -50,6 +50,8 @@ class UserHistoriesTable extends Table
 
         $this->hasMany('LampChanges', [
             'foreignKey' => 'user_history_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
 
     }

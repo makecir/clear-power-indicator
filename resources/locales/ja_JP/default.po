@@ -753,3 +753,9 @@ msgstr "前回のプレイデータと比較して、☆12のランプに変更�
 
 msgid "The rating has been saved."
 msgstr "レーティングを推定し、保存しました。"
+
+msgid "Update detail"
+msgstr "更新詳細"
+
+msgid "Lamp changes"
+msgstr "ランプ更新"
