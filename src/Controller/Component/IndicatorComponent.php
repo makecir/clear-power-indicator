@@ -185,7 +185,7 @@ class IndicatorComponent extends Component
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }
 
-    public function getRating(&$user){
+    public function getRating(&$user, $user_history){
         $ghost_num = 34204;
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
@@ -208,6 +208,13 @@ class IndicatorComponent extends Component
         }
         $user->user_detail->standing = $ghost_num - ($win + $ghost_num)/2.0 + 1;
         $reswin = ($win + $ghost_num + 1)/2.0;
-        return 400.00*log10( $reswin / ($ghost_num + 1 - $reswin) )+1500.0000;
+        $new_rating = 400.00*log10( $reswin / ($ghost_num + 1 - $reswin) ) + 1500.0000;
+
+        $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
+        $rating_diff = (isset($user->user_detail->rating)?($new_rating - $user->user_detail->rating):0.00);
+        $user_history = $UserHistories->patchEntity($user_history, ['rating_cur' => $new_rating, 'rating_diff' =>  $rating_diff]);
+        $UserHistories->save($user_history);
+
+        return $new_rating;
     }
 }

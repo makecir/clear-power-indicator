@@ -742,5 +742,9 @@ msgstr "ファイルの読み込みに失敗しました。もう一度お試し
 msgid "Fial to calclate rating. Please, try again."
 msgstr "レーティングの推定に失敗しました。もう一度お試しください。"
 
+msgid "No changing or invalid playdata. Please, check your play data."
+msgstr "前回のプレイデータと比較して、☆12のランプに変更の無いか不整合のあるデータである可能性があります。
+もう一度ご確認ください。"
+
 msgid "The rating has been saved."
 msgstr "レーティングを推定し、保存しました。"

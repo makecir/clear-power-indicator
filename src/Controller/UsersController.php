@@ -190,19 +190,15 @@ class UsersController extends AppController
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
                     $user_history = $this->Lamp->saveLamps($user, $new_lamps);
-                    // if(is_null($user_history)){
-                    //     $this->Flash->error(__('Fial to save data. Please, check your play data.'));
-                    //     return $this->redirect(['action' => 'edit', $user->id]);
-                    // }
-                    //$tes = $user_history[1];
-                    //$tes = $user_history[';1'];
-                    $this->set(compact('user_history'));
-                    //$rating = 1500;
-                    //$rating = $this->Indicator->getRating($user, $user_history);
-                    //$user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
+                    if(is_null($user_history)){
+                        $this->Flash->error(__('No changing or invalid playdata. Please, check your play data.'));
+                        return $this->redirect(['action' => 'edit', $user->id]);
+                    }
+                    $rating = $this->Indicator->getRating($user, $user_history);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        //return $this->redirect(['action' => 'view', $user->id]);
+                        return $this->redirect(['action' => 'view', $user->id]);
                     }
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
