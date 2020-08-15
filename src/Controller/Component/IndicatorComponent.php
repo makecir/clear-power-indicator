@@ -91,7 +91,7 @@ class IndicatorComponent extends Component
             $lamp = $my_lamps[$score['id']]??0;
             $result['version'] = $this->version_info[$score['version_num']??5];
             $result['title'] = $score['title'];
-            $result['lamp'] = $this->lamp_info[$lamp];
+            $result['lamp'] = $lamp;
             $result['lamp_color'] = $this->color_info[$lamp];
             if($lamp >= 3 && $score->is_rated == 1){
                 $intercept = $score[$this->pred_target[$lamp]."_intercept"];
@@ -117,9 +117,9 @@ class IndicatorComponent extends Component
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??5];
                 $pred['title'] = $score['title'];
-                $pred['lamp_cur'] = $this->lamp_info[$my_lamps[$score['id']]??0];
+                $pred['lamp_cur'] = $my_lamps[$score['id']]??0;
                 $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
-                $pred['lamp_tar'] = $this->lamp_info[$tar];
+                $pred['lamp_tar'] = $tar;
                 $pred['lamp_tar_color'] = $this->color_info[$tar];
                 $intercept = $score[$this->pred_target[$tar]."_intercept"];
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
@@ -143,7 +143,7 @@ class IndicatorComponent extends Component
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??5];
                 $pred['title'] = $score['title'];
-                $pred['lamp'] = $this->lamp_info[$tar];
+                $pred['lamp'] = $tar;
                 $pred['lamp_color'] = $this->color_info[$tar];
                 $intercept = $score[$this->pred_target[$tar]."_intercept"];
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];

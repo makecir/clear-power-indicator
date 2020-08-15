@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive  table-smart-phone-x">
+                    <div class="table-responsive table-smart-phone-xx">
                         <table  id="lamp-detail" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
@@ -195,7 +195,10 @@
                                 <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
+                                    </td>
                                     <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -302,8 +305,14 @@
                                     <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp_cur']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp_cur']] ?></div>
+                                    </td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['tar_lamp'][$row['lamp_tar']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp_tar']] ?></div>
+                                    </td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -385,7 +394,10 @@
                                 <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
+                                    </td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                                 </tr>
                                 <?php endforeach; ?>

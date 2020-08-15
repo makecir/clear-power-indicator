@@ -7,10 +7,12 @@ $(document).ready(function() {
             /* 日本語化設定 */
             sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
             oPaginate : { // ページネーション欄
-                sNext : "次へ",
-                sPrevious : "前へ"
+                sFirst : "最初",
+                sLast : "最後",
+                sNext : "次",
+                sPrevious : "前"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -32,7 +34,7 @@ $(document).ready(function() {
                 'targets' :  3,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp',
-                "visible": ($(window).width() >= 768),
+                //"visible": ($(window).width() >= 768),
             }
         ]
     });
@@ -53,7 +55,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -64,7 +66,7 @@ $(document).ready(function() {
                 'targets' :  0,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp',
-                "visible": ($(window).width() >= 768),
+                //"visible": ($(window).width() >= 768),
             },
             {},
             {
@@ -98,7 +100,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -109,7 +111,7 @@ $(document).ready(function() {
                 'targets' :  0,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp',
-                "visible": ($(window).width() >= 768),
+                //"visible": ($(window).width() >= 768),
             },
             {},
             {
@@ -138,7 +140,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -175,7 +177,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "(_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -212,7 +214,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "(_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -357,17 +359,16 @@ $.fn.dataTable.ext.search.push(
         var detail_form = document.forms['detail-form'];
         var rec_form = document.forms['rec-form'];
         var bte_form = document.forms['bte-form'];
-
         if(settings.nTable.id == 'lamp-detail'){
             for(let ver of versions) if  (!detail_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of cur_lamps) if (!detail_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            for(let lamp of cur_lamps) if (!detail_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
             if(detail_form.elements['detail_leg_only'].checked && (!data[1].includes("†") || data[1].includes("ZIGOQ") || data[1].includes("paradisus") || data[1].includes("ラヴリィ～レイディオ"))) return false;
             if(detail_form.elements['detail_leg_except'].checked && data[1].includes("†") && !data[1].includes("ZIGOQ") && !data[1].includes("paradisus") && !data[1].includes("ラヴリィ～レイディオ")) return false;
         }
         if(settings.nTable.id == 'rec-table'){
             for(let ver of versions) if (!rec_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
-            for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && data[3] == lamp) return false;
+            for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
+            for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && data[3].includes(lamp)) return false;
             if(parseFloat(data[4]) < parseFloat(rec_form.elements['rec_min'].value) || parseFloat(rec_form.elements['rec_max'].value) < parseFloat(data[4]))return false;
             if(rec_form.elements['rec_one_step'].checked && lamp2num[data[2]]+1 < lamp2num[data[3]])return false;
             if(rec_form.elements['rec_leg_only'].checked && (!data[1].includes("†") || data[1].includes("ZIGOQ") || data[1].includes("paradisus") || data[1].includes("ラヴリィ～レイディオ"))) return false;
@@ -376,7 +377,7 @@ $.fn.dataTable.ext.search.push(
         }
         if(settings.nTable.id == 'bte-table'){
             for(let ver of versions) if (!bte_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
             if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[4]))return false;
         }
 

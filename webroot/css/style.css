@@ -38,6 +38,10 @@
   max-width: 100%; 
 }
 
+.pc-dsp { display:block; }
+.sp-dsp { display:none; }
+
+
 @media (max-width:769px) { 
 .table-smart-phone-xx th { font-size:xx-small;}
 .table-smart-phone-xx td { font-size:xx-small;}
@@ -55,6 +59,12 @@
 .table-smart-phone-sm td { padding: .5rem!important; }
 
 .padding-sm{ padding: .75rem !important;}
+
+.page-link{padding: 0.25rem .35rem !important;}
+
+.pc-dsp { display:none; }
+.sp-dsp { display:block; }
+
 }
 
 .table-hid{
