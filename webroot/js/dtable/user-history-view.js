@@ -54,23 +54,3 @@ $(function($){
         });
     };
 });
-
-function allCheck(form,target_op,value){
-    const boxes = document.forms[form];
-
-    if(target_op=='versions'){prefix=''; target = versions;}
-    if(target_op=='cur_lamps'){prefix='cur_'; target = cur_lamps;}
-    if(target_op=='tar_lamps'){prefix='tar_'; target = tar_lamps;}
-    for(let tar of target) {
-        boxes[prefix + tar].checked = value;
-    }
-    $(boxes[target[0]]).change();
-}
-
-$(function(){
-    $("form").garlic();
-});
-
-$(function () {
-    $(document.forms[0][0]).change();
-});

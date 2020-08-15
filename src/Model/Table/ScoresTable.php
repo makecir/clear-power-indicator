@@ -51,9 +51,13 @@ class ScoresTable extends Table
 
         $this->hasMany('UserLamps', [
             'foreignKey' => 'score_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
         $this->hasMany('GhostLamps', [
             'foreignKey' => 'score_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
 
     }

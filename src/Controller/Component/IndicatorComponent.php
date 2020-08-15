@@ -176,18 +176,25 @@ class IndicatorComponent extends Component
         return $results;
     }
 
-    public function getLampChangeResults(&$user_history){
+    public function getLampChangeResults(&$user_history, &$top_change){
         $results = array();
+        $top_change['cpi'] = 0;
+        $top_change['title'] = '';
+        $top_change['lamp'] = 0;
         foreach($user_history->lamp_changes as $change){
             $result['title'] = $change->score->title;
             $result['diff'] = $change->score->difficulty;
             $result['before_lamp'] = $change->before_lamp;
             $result['after_lamp'] = $change->after_lamp;
-            
             if($change->after_lamp >= 3 && $change->score->is_rated == 1){
                 $intercept = $change->score[$this->pred_target[$change->after_lamp]."_intercept"];
                 $coefficient = $change->score[$this->pred_target[$change->after_lamp]."_coefficient"];
                 $fifty = $this->fifty($intercept,$coefficient);
+                if($fifty > $top_change['cpi']){
+                    $top_change['cpi'] = $fifty;
+                    $top_change['title'] = $change->score->title;
+                    $top_change['lamp'] = $change->after_lamp;
+                }
             }
             $result['fifty_rating'] = $fifty ?? '-';
             $results[] = $result;

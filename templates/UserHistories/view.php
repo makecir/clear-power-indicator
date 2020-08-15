@@ -3,52 +3,70 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\UserHistory $userHistory
  */
+
+$tweet_text = $userHistory->user->user_detail->dj_name.'さんのCPI：'.$userHistory->rating_cur_info.' ('.$userHistory->rating_diff_info.")\n";
+if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' '.($lamp_info[$top_change['lamp']]).' 適正CPI'.(sprintf('%.2f',$top_change['cpi']))."\n";
+
 ?>
 <div class="users view content">
     <div class="card border-secondary mb-3">
         <div class="card-header padding-sm">
             <h4 class="mb-0">
                 <?= __('Update detail') ?>
+                <div style="float:right;display:inline;">
+                    <?= $this->Html->link(
+                            __('User page'),
+                            ['controller'=>'Users', 'action'=>'view',$userHistory->user_id],
+                            ['class' => 'btn btn-info'])
+                        ?>
+                </div>
             </h4>
         </div>
         <div class="card-body pr-3 pl-3">
             <?php if(!$is_permitted):?>
                 <div class="text-center pt-5 pb-5"><i class="fas fa-lock fa-3x"></i></div>
             <?php else:?>
-                <div class="row text-dark">
-                    <div class="col-md-5 col-lg-4">
-                        <div class="mb-2">
-                            <h4 class="card-text" style="display:inline;"><?= $userHistory->user->user_detail->dj_name ?></h4>
-                            <h5 class="card-subtitle mb-2 text-muted" style="display:inline;">(<?= $userHistory->user->user_detail->iidx_id ?>)</h5>
+                <div class="text-dark">
+                    <div class="row">
+                        <div class="col-md-5 col-lg-4">
+                            <div class="mb-2">
+                                <h4 class="card-text" style="display:inline;"><?= $userHistory->user->user_detail->dj_name ?></h4>
+                                <h5 class="card-subtitle mb-2 text-muted" style="display:inline;">(<?= $userHistory->user->user_detail->iidx_id ?>)</h5>
+                            </div>
+                            <div class="mb-2">
+                                <h4 class="card-text" style="display:inline;"><?= __('CPI')." : ".$userHistory->rating_cur_info ?></h4>
+                                <h5 class="card-subtitle mb-2" style="display:inline;">(<?= $userHistory->rating_diff_info ?>)</h5>
+                            </div>
+                            <div class="mb-2">
+                                <h4 class="card-text" style="display:inline;"><?= __('推定順位')." : ".$userHistory->standing_cur_info ?></h4>
+                                <h5 class="card-subtitle mb-2" style="display:inline;">(<?= $userHistory->standing_diff_info ?>)</h5>
+                            </div>
                         </div>
-                        <div class="mb-2">
-                            <h4 class="card-text" style="display:inline;"><?= __('CPI')." : ".$userHistory->rating_cur_info ?></h4>
-                            <h5 class="card-subtitle mb-2" style="display:inline;">(<?= $userHistory->rating_diff_info ?>)</h5>
-                        </div>
-                        <div class="mb-2">
-                            <h4 class="card-text" style="display:inline;"><?= __('推定順位')." : ".$userHistory->standing_cur_info ?></h4>
-                            <h5 class="card-subtitle mb-2" style="display:inline;">(<?= $userHistory->standing_diff_info ?>)</h5>
+                        <div class="col-md-7 col-lg-8 p-3">
+                            <div class="table-responsive table-smart-phone-sm">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <?php foreach(array_reverse([1,2,3,4,5,6,7]) as $i): ?>
+                                                <th scope="col" bgcolor=<?= $change_counts_color[$i] ?>><?= $change_counts_label[$i] ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <?php foreach(array_reverse([1,2,3,4,5,6,7]) as $i): ?>
+                                                <td scope="col">+<?= $change_counts[$i] ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-lg-8 p-3">
-                        <div class="table-responsive table-smart-phone-sm">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <?php foreach(array_reverse([1,2,3,4,5,6,7]) as $i): ?>
-                                            <th scope="col" bgcolor=<?= $change_counts_color[$i] ?>><?= $change_counts_label[$i] ?></th>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <?php foreach(array_reverse([1,2,3,4,5,6,7]) as $i): ?>
-                                            <td scope="col">+<?= $change_counts[$i] ?></th>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class='text-center'>
+                        <?php if($mypage):?>
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="ClearPowerIndicator" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <?php endif;?>
                     </div>
                 </div>
             <?php endif;?>

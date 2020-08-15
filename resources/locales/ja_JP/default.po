@@ -762,3 +762,6 @@ msgstr "ランプ更新"
 
 msgid "Lamp before"
 msgstr "元ランプ"
+
+msgid "User page"
+msgstr "ユーザーページ"
