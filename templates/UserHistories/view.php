@@ -65,7 +65,7 @@
             </div>
             <div class="card-body tab-content padding-sm">
                 <div class="table-responsive table-smart-phone-xx">
-                    <table id="change-table" class="table table-bordered" >
+                    <table id="lamp-changes" class="table table-bordered" >
                         <thead>
                             <tr class="text-center">
                                 <th align="center"><?= __('Title') ?></th>
