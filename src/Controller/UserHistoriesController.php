@@ -22,7 +22,7 @@ class UserHistoriesController extends AppController
     {
         $userHistory = $this->UserHistories->get($id, [
             'contain' => [
-                'LampChanges',
+                'LampChanges'=>['Scores'],
                 'Users'=>['UserDetails']
             ],
         ]);
@@ -38,10 +38,12 @@ class UserHistoriesController extends AppController
         $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
 
         $change_counts = $this->Lamp->getLampChangeCounts($userHistory);
+        $changes_table = $this->Indicator->getLampChangeResults($userHistory);
         $change_counts_label = $this->Lamp->lamp_short_info;
         $change_counts_color = $this->Indicator->color_info;
+        $lamp_info = $this->Indicator->lamp_info;
 
-        $this->set(compact('userHistory','is_permitted','change_counts','change_counts_label','change_counts_color'));
+        $this->set(compact('userHistory','is_permitted','change_counts','changes_table','change_counts_label','change_counts_color','lamp_info'));
     }
 
     /**

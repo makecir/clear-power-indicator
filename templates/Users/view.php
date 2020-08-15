@@ -39,7 +39,7 @@
                                     ['controller' => 'Pages', 'action' => 'about', '#'=>'numerical-value'],
                                 ).
                                 "をご覧下さい'" 
-                            ?> class="text-nowrap" data-trigger="click">
+                            ?> class="text-nowrap" data-trigger="click hover focus">
                             <i class="fas fa-question-circle"></i>
                         </span>
                     </div>

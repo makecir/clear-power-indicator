@@ -177,5 +177,6 @@ class LampComponent extends Component
         }
         return $ret;
     }
+
 }
 

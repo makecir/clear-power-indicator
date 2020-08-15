@@ -28,14 +28,9 @@ $(document).ready(function() {
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp',
+                'orderDataType' : 'lamp',
             },
-            {
-                'targets' :  3,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp',
-                //"visible": ($(window).width() >= 768),
-            }
+            {}
         ]
     });
     $('form').on('change', function(event) {
@@ -72,12 +67,12 @@ $(document).ready(function() {
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'lamp'
             },
             {
                 'targets' :  3,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'lamp'
             },
             {},
 
@@ -117,7 +112,7 @@ $(document).ready(function() {
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'lamp'
             },
             {},
         ]
@@ -147,17 +142,9 @@ $(document).ready(function() {
             sInfoFiltered : "全 _MAX_ 件から絞り込み" 
         },
         columnDefs : [
-            {
-                'targets' :  0,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            },
             {},
-            {
-                'targets' :  2,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            }
+            {},
+            {}
         ]
     });
     $('form').on('change', function(event) {
@@ -184,17 +171,10 @@ $(document).ready(function() {
             sInfoFiltered : "全 _MAX_ 件から絞り込み" 
         },
         columnDefs : [
-            {
-                'targets' :  0,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            },
             {},
-            {
-                'targets' :  2,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            }
+            {},
+            {},
+            {}
         ]
     });
     $('form').on('change', function(event) {
@@ -221,25 +201,13 @@ $(document).ready(function() {
             sInfoFiltered : "全 _MAX_ 件から絞り込み" 
         },
         columnDefs : [
-            {
-                'targets' :  0,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            },
-            {
-                'targets' :  1,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            },
-            {
-                'targets' :  2,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
-            },
+            {},
+            {},
+            {},
             {
                 'targets' :  3,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'grade-jp'
             }
         ]
     });
@@ -285,20 +253,41 @@ $(function($){
           case 'EXHARD':return '96';
           case 'FULLCOMBO':return '97';
 
-          case '六段':return '150';
-          case '七段':return '151';
-          case '八段':return '152';
-          case '九段':return '153';
-          case '十段':return '154';
-          case '中伝':return '155';
-          case '皆伝':return '156';
-          
-
           default:
             return '00';
         }
       });
     };  
+    $.fn.dataTable.ext.order['lamp'] = function (settings, col){
+        return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+          if($(td).html().includes('NO PLAY'))return 10;
+          if($(td).html().includes('FAILED'))return 11;
+          if($(td).html().includes('ASSITED'))return 12;
+          if($(td).html().includes('EASY'))return 13;
+          if($(td).html().includes('CLEAR'))return 14;
+          if($(td).html().includes('HARD'))return 15;
+          if($(td).html().includes('EXHARD'))return 16;
+          if($(td).html().includes('FULLCOMBO'))return 17;
+          else return 0;
+        });
+      };  
+    $.fn.dataTable.ext.order['grade-jp'] = function (settings, col){
+        return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+          switch ($(td).html()){
+  
+            case '六段':return '150';
+            case '七段':return '151';
+            case '八段':return '152';
+            case '九段':return '153';
+            case '十段':return '154';
+            case '中伝':return '155';
+            case '皆伝':return '156';
+            
+            default:
+              return '00';
+          }
+        });
+      };  
   
 }); 
 

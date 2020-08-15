@@ -16,6 +16,16 @@ $(document).ready(function() {
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
             sInfoFiltered : "全 _MAX_ 件から絞り込み" 
         },
+        columnDefs : [
+            {},
+            {},
+            {},
+            {
+                'targets' :  3,
+                'orderable' : true,
+                'orderDataType' : 'grade-jp'
+            }
+        ]
     });
     $('form').on('change', function(event) {
         table.draw();
@@ -30,4 +40,25 @@ $.fn.dataTable.ext.search.push(
         return true;
     }
 );
+
+$(function($){ 
+    $.fn.dataTable.ext.order['grade-jp'] = function (settings, col){
+      return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+        switch ($(td).html()){
+
+          case '六段':return '150';
+          case '七段':return '151';
+          case '八段':return '152';
+          case '九段':return '153';
+          case '十段':return '154';
+          case '中伝':return '155';
+          case '皆伝':return '156';
+          
+          default:
+            return '00';
+        }
+      });
+    };  
+  
+}); 
 

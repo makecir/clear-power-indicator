@@ -176,6 +176,25 @@ class IndicatorComponent extends Component
         return $results;
     }
 
+    public function getLampChangeResults(&$user_history){
+        $results = array();
+        foreach($user_history->lamp_changes as $change){
+            $result['title'] = $change->score->title;
+            $result['diff'] = $change->score->difficulty;
+            $result['before_lamp'] = $change->before_lamp;
+            $result['after_lamp'] = $change->after_lamp;
+            
+            if($change->after_lamp >= 3 && $change->score->is_rated == 1){
+                $intercept = $change->score[$this->pred_target[$change->after_lamp]."_intercept"];
+                $coefficient = $change->score[$this->pred_target[$change->after_lamp]."_coefficient"];
+                $fifty = $this->fifty($intercept,$coefficient);
+            }
+            $result['fifty_rating'] = $fifty ?? '-';
+            $results[] = $result;
+        }
+        return $results;
+    }
+
     public function fifty(&$intercept, &$coefficient){
         if($coefficient === 0) return -1;
         return - ($intercept / $coefficient);

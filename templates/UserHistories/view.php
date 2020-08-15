@@ -64,7 +64,34 @@
                 </h4>
             </div>
             <div class="card-body tab-content padding-sm">
-                
+                <div class="table-responsive table-smart-phone-xx">
+                    <table id="change-table" class="table table-bordered" >
+                        <thead>
+                            <tr class="text-center">
+                                <th align="center"><?= __('Title') ?></th>
+                                <th align="center"><?= __('Lamp before') ?></th>
+                                <th align="center"><?= __('Lamp cur') ?></th>
+                                <th align="center"><?= __('Fifty CPI') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($changes_table as $row): ?>
+                                <tr>
+                                <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                <td align="center" bgcolor=<?= $change_counts_color[$row['before_lamp']] ?>>
+                                    <div class="pc-dsp"><?= $lamp_info[$row['before_lamp']] ?></div>
+                                    <div class="sp-dsp"><?= $change_counts_label[$row['before_lamp']] ?></div>
+                                </td>
+                                <td align="center" bgcolor=<?= $change_counts_color[$row['after_lamp']] ?>>
+                                    <div class="pc-dsp"><?= $lamp_info[$row['after_lamp']] ?></div>
+                                    <div class="sp-dsp"><?= $change_counts_label[$row['after_lamp']] ?></div>
+                                </td>
+                                <td align="right"><?php echo sprintf('%.2f',$row['fifty_rating']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     <?php endif;?>

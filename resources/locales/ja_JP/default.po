@@ -714,7 +714,7 @@ msgid "Lamp"
 msgstr "ランプ"
 
 msgid "Fifty CPI"
-msgstr "50％CPI"
+msgstr "適正CPI"
 
 msgid "Lamp cur"
 msgstr "現ランプ"
@@ -759,3 +759,6 @@ msgstr "更新詳細"
 
 msgid "Lamp changes"
 msgstr "ランプ更新"
+
+msgid "Lamp before"
+msgstr "元ランプ"
