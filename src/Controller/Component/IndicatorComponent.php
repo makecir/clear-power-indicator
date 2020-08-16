@@ -139,19 +139,18 @@ class IndicatorComponent extends Component
         $lamp_num = sizeof($this->lamp_info);
         $preds=array();
         foreach($scores as $score){
-            for( $tar = 3 ; $tar <= min($my_lamps[$score['id']]??0, 7) ; $tar++ ){
-                //predict
-                $pred['version'] = $this->version_info[$score['version_num']??5];
-                $pred['title'] = $score['title'];
-                $pred['lamp'] = $tar;
-                $pred['lamp_color'] = $this->color_info[$tar];
-                $intercept = $score[$this->pred_target[$tar]."_intercept"];
-                $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
-                $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
-                if($pred['probability']>50.0)continue;
-                $pred['diff'] = $score['difficulty'];
-                $preds[] = $pred;
-            }
+            $tar = $my_lamps[$score['id']]??0;
+            if($tar < 3) continue;
+            $pred['version'] = $this->version_info[$score['version_num']??5];
+            $pred['title'] = $score['title'];
+            $pred['lamp'] = $tar;
+            $pred['lamp_color'] = $this->color_info[$tar];
+            $intercept = $score[$this->pred_target[$tar]."_intercept"];
+            $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
+            $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
+            if($pred['probability']>50.0)continue;
+            $pred['diff'] = $score['difficulty'];
+            $preds[] = $pred;
         }
         return $preds;
     }
