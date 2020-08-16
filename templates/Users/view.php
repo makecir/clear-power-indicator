@@ -30,7 +30,7 @@
                     <div class="mb-4">
                         <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'') ?></h3></div>
                         <h6 class="card-text" style="display:inline;"><?= __('(推定 : ')?></h6>
-                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->rating_info ?></h5>
+                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->standing_info ?></h5>
                         <h6 class="card-text" style="display:inline;"><?= __('位程度)') ?></h6>
                         <span data-toggle="tooltip" data-html="true" title=
                             <?= "'大まかな目安です</br>詳しくは".
@@ -407,7 +407,7 @@
                 </div>
 
                 <div id="histories" class="tab-pane fade">
-                    <?php if(!($mypage || $follow_flag)):?>
+                    <?php if($user->private_level > 0 && !($mypage || $follow_flag)):?>
                         <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人かフォロワーのみ閲覧可能です</i></div></div>
                     <?php else:?>
                         <div class="table-responsive table-smart-phone-sm">
