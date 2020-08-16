@@ -136,7 +136,7 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                     更新の削除を行うと、更新履歴からこの更新が削除され、全ての曲のランプがNO PLAYに戻り、CPIはデフォルト値にリセットされます。</br>
                 </p>
                 <div class="text-center">
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $userHistory->id], ['class'=>'btn btn-danger', 'confirm' => __('Are you sure you want to delete', $userHistory->id)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $userHistory->id], ['class'=>'btn btn-danger', 'confirm' => __('Are you sure you want to delete?', $userHistory->id)]) ?>
                 </div>
             </div>
         </div>
