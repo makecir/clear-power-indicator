@@ -16,6 +16,7 @@
 use Cake\Routing\Router;
 
 $cakeDescription = 'CPI : Clear Power Indicator ';
+$source_version = "?ver=1.000";
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,7 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
     
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('style.css'.$source_version) ?>
 
     <!-- using bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -164,14 +165,14 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
     <?php if(isset($dtables)): ?>
         <?php foreach ($dtables as $dtable): ?>
-            <?= $this->Html->script('dtable/'.$dtable.'.js') ?>
+            <?= $this->Html->script('dtable/'.$dtable.'.js'.$source_version) ?>
         <?php endforeach; ?>
     <?php endif; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 
     <!-- using basic js -->
-    <?= $this->Html->script('basic.js') ?>
+    <?= $this->Html->script('basic.js'.$source_version) ?>
     <?= $this->Html->script('garlic.js') ?>
 </body>
 </html>

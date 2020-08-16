@@ -5,7 +5,7 @@
  */
 
 $tweet_text = $userHistory->user->user_detail->dj_name.'さんがCPIを更新しました：'.$userHistory->rating_cur_info.' ('.$userHistory->rating_diff_info.")\n";
-if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' '.($lamp_info[$top_change['lamp']]).' 適正CPI'.(sprintf('%.2f',$top_change['cpi']))."\n";
+if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' 【'.($lamp_info[$top_change['lamp']]).'】 (適正CPI'.(sprintf('%.0f',$top_change['cpi'])).")\n";
 
 ?>
 <div class="users view content">
@@ -40,6 +40,16 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                             <div class="mb-2">
                                 <h4 class="card-text" style="display:inline;"><?= __('推定順位')." : ".$userHistory->standing_cur_info ?></h4>
                                 <h5 class="card-subtitle mb-2" style="display:inline;">(<?= $userHistory->standing_diff_info ?>)</h5>
+                                <span data-toggle="tooltip" data-html="true" title=
+                                    <?= "'大まかな目安です</br>詳しくは".
+                                        $this->Html->link(
+                                            'こちら',
+                                            ['controller' => 'Pages', 'action' => 'about', '#'=>'numerical-value'],
+                                        ).
+                                        "をご覧下さい'" 
+                                    ?> class="text-nowrap" data-trigger="click hover focus">
+                                    <i class="fas fa-question-circle"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-7 col-lg-8 p-3">
@@ -65,7 +75,7 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                     </div>
                     <div class='text-center'>
                         <?php if($mypage):?>
-                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="ClearPowerIndicator" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         <?php endif;?>
                     </div>
                 </div>
@@ -109,6 +119,24 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    <?php endif;?>
+    <?php if($mypage):?>
+        <div class="card border-secondary mb-3">
+            <div class="card-header padding-sm">
+                <h4 class="mb-0">
+                    <div class="text-danger">更新の削除</div>
+                </h4>
+            </div>
+            <div class="card-body tab-content padding-sm">
+                <p>
+                    ※誤ったプレイデータを登録した場合を想定した機能です</br>
+                    更新の削除を行うと、更新履歴からこの更新が削除され、全ての曲のランプがNO PLAYに戻り、CPIはデフォルト値にリセットされます。</br>
+                </p>
+                <div class="text-center">
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $userHistory->id], ['class'=>'btn btn-danger', 'confirm' => __('Are you sure you want to delete', $userHistory->id)]) ?>
                 </div>
             </div>
         </div>

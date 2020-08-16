@@ -765,3 +765,13 @@ msgstr "元ランプ"
 
 msgid "User page"
 msgstr "ユーザーページ"
+
+
+msgid "The user history has been deleted."
+msgstr "更新を削除しました。"
+
+msgid "The user history could not be deleted. Please, try again."
+msgstr "更新の削除に失敗しました。もう一度お試しください。"
+
+msgid "Are you sure you want to delete?"
+msgstr "本当に削除しますか？"
