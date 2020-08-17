@@ -134,7 +134,7 @@ msgstr "ユーザー情報を保存しました。"
 #: Controller/UsersController.php:112
 #: Controller/UsersController.php:138
 msgid "The user could not be saved. Please, try again."
-msgstr "ユーザーを情報を更新できませんでした。もう一度お試しください。"
+msgstr "ユーザーを情報を更新できませんでした。使用済みのユーザーIDである可能性があります。"
 
 #: Controller/UsersController.php:162
 msgid "The user has been deleted."
@@ -466,6 +466,12 @@ msgstr "ユーザーID"
 #: Users/view.php:26
 msgid "Password"
 msgstr "パスワード"
+
+msgid "Retype Password"
+msgstr "パスワード(再入力)"
+
+msgid "Re-entered password does not match."
+msgstr "パスワードが再入力と一致しません。"
 
 #: Scores/view.php:135
 msgid "Email"

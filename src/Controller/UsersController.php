@@ -142,7 +142,12 @@ class UsersController extends AppController
 
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $request = $this->request->getData();
+            if($request['password'] !== $request['retype_password']){
+                $this->Flash->error(__('Re-entered password does not match.'));
+                return $this->redirect(['action' => 'add']);
+            }
+            $user = $this->Users->patchEntity($user, $request);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
                 $this->Authentication->setIdentity($user);
@@ -151,8 +156,6 @@ class UsersController extends AppController
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
-        $scores = $this->Users->Scores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'scores'));
     }
 
     /**
