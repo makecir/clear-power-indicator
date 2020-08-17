@@ -117,14 +117,18 @@ msgid "Signed out."
 msgstr "ログアウトしました。"
 
 #: Controller/UsersController.php:39
-msgid "Invalid username or password"
+msgid "Invalid username or password."
 msgstr "ユーザーIDかパスワードが不正です。"
 
-msgid "Invalid new password"
+msgid "Invalid new password."
 msgstr "新しいパスワードが不正です。"
 
-msgid "Wrong password"
+msgid "Wrong password."
 msgstr "パスワードが誤っています。"
+
+msgid "The usrename should be unique."
+msgstr "ユーザーIDが使用済みです。"
+
 
 #: Controller/UsersController.php:107
 #: Controller/UsersController.php:134
@@ -134,7 +138,7 @@ msgstr "ユーザー情報を保存しました。"
 #: Controller/UsersController.php:112
 #: Controller/UsersController.php:138
 msgid "The user could not be saved. Please, try again."
-msgstr "ユーザーを情報を更新できませんでした。使用済みのユーザーIDである可能性があります。"
+msgstr "ユーザーを情報を更新できませんでした。エラーの内容をご確認ください。"
 
 #: Controller/UsersController.php:162
 msgid "The user has been deleted."

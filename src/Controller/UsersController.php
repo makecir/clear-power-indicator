@@ -40,7 +40,7 @@ class UsersController extends AppController
         }
         // ユーザーが submit 後、認証失敗した場合は、エラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error(__('Invalid username or password'));
+            $this->Flash->error(__('Invalid username or password.'));
         }
     }
 
@@ -248,9 +248,9 @@ class UsersController extends AppController
                             $this->Flash->success(__('New password has been saved.'));
                             return $this->redirect(['action' => 'view', $user->id]);
                         }
-                        else $this->Flash->error(__('Invalid new password'));
+                        else $this->Flash->error(__('Invalid new password.'));
                     }
-                    else $this->Flash->error(__('Wrong password'));
+                    else $this->Flash->error(__('Wrong password.'));
                 }
             }
             $this->set(compact('user'));
