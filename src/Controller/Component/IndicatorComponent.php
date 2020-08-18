@@ -90,7 +90,7 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             $lamp = $my_lamps[$score['id']]??0;
             $result['version'] = $this->version_info[$score['version_num']??5];
-            $result['title'] = $score['title'];
+            $result['title'] = $score['title_info'];
             $result['lamp'] = $lamp;
             $result['lamp_color'] = $this->color_info[$lamp];
             if($lamp >= 3 && $score->is_rated == 1){
@@ -116,7 +116,7 @@ class IndicatorComponent extends Component
             for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
                 $pred['version'] = $this->version_info[$score['version_num']??5];
-                $pred['title'] = $score['title'];
+                $pred['title'] = $score['title_info'];
                 $pred['lamp_cur'] = $my_lamps[$score['id']]??0;
                 $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
                 $pred['lamp_tar'] = $tar;
@@ -142,7 +142,7 @@ class IndicatorComponent extends Component
             $tar = $my_lamps[$score['id']]??0;
             if($tar < 3) continue;
             $pred['version'] = $this->version_info[$score['version_num']??5];
-            $pred['title'] = $score['title'];
+            $pred['title'] = $score['title_info'];
             $pred['lamp'] = $tar;
             $pred['lamp_color'] = $this->color_info[$tar];
             $intercept = $score[$this->pred_target[$tar]."_intercept"];
