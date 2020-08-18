@@ -27,7 +27,7 @@
                 </p>
             </div>
             <h5 class="card-title">以下の2つのどちらかの方法でプレイデータを登録可能です</h5>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="card col-md-5 m-3">
                     <p>①テキスト（スマホ向け）</p>
                     <div class="mb-1 mt-1 text-center">
@@ -60,6 +60,15 @@
                     </div>
                 </div>
             </div>
+            <?php if(isset($user->user_detail->rating)): ?>
+                <div class="mb-3">
+                    <h5 class="card-title">プレイデータに変更が無い場合、再計算ボタンからCPIを再算出することが可能です</h5>
+                    <div class="text-center">
+                    <a href="<?= $this->Url->build(['action'=>'recalclate',$user->id]) ?>" class="btn btn-info" id="jump-reculc">再計算 <i id="reculc-icon" class="fas fa-sync"></i></a>
+                    </div>
+                </div>
+            <?php endif; ?>
+
         </div>
     </div>
     <div class="card border-secondary mb-3">

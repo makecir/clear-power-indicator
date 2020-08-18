@@ -752,7 +752,7 @@ msgstr "合言葉が正しくありません。"
 
 
 msgid "Fial to read data. Please, try again."
-msgstr "ファイルの読み込みに失敗しました。もう一度お試しください。"
+msgstr "データの読み込みに失敗しました。☆12のランプが存在しない可能性があります。もう一度お試しください。"
 
 msgid "Fial to calclate rating. Please, try again."
 msgstr "レーティングの推定に失敗しました。もう一度お試しください。"
@@ -765,6 +765,10 @@ msgstr "前回のプレイデータと比較して、☆12のランプに変更�
 
 msgid "The rating has been saved."
 msgstr "レーティングを推定し、保存しました。"
+
+msgid "Unable to detect a 12 level lamp."
+msgstr "☆12のランプを検出できませんでした。プレイデータを登録してください。"
+
 
 msgid "Update detail"
 msgstr "更新詳細"

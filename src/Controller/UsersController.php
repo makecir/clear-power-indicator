@@ -200,7 +200,7 @@ class UsersController extends AppController
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
                     $this->Indicator->setRating($user, $user_history);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
                     if($invalid)$this->Flash->warning(__('Contains inconsistent data.'));
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
@@ -341,4 +341,33 @@ class UsersController extends AppController
         }
     }
 
+    public function recalclate($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails'],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('recalclate', $user);
+        if (!$result->getStatus()){
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+        else {
+            $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
+            $user_history = $UserHistories->newEmptyEntity();
+            $user_history->user_id = $user->id;
+            $this->loadComponent('Indicator');
+            if($this->Indicator->setRating($user, $user_history)){
+                $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The rating has been saved.'));
+                    return $this->redirect(['controller'=>'UserHistories', 'action' => 'view', $user_history->id]);
+                }
+                $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            }
+            $this->Flash->error(__('Unable to detect a 12 level lamp.'));
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+    }
 }

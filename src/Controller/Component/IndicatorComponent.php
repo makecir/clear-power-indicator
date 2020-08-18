@@ -215,6 +215,7 @@ class IndicatorComponent extends Component
         $SEASON = 1;
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
+        if(count($my_lamps)==0)return false;
         foreach($my_lamps as $my_lamp){
             if($my_lamp==2)$my_lamp=1;
         }
@@ -252,5 +253,6 @@ class IndicatorComponent extends Component
         $user->user_detail->standing = $new_standing;
         $user->user_detail->season = $SEASON;
 
+        return true;
     }
 }

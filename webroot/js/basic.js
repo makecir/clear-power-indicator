@@ -25,6 +25,10 @@ $('#submit-csv').on('click', function(){
     $('#csv-sub-icon').addClass('fa-spin');
 });
 
+$('#jump-reculc').on('click', function(){
+    $('#reculc-icon').addClass('fa-spin');
+});
+
 $('[data-toggle="tooltip"]').tooltip();
 
 $(function(){
