@@ -59,7 +59,7 @@ class UserHistoriesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $userHistory = $this->UserHistories->get($id);
         $this->loadModel('Users');
-        $user = $this->Users->get($userHistory->user_id);
+        $user = $this->Users->get($userHistory->user_id, ['contain' => ['UserDetails'],]);
         $identity = $this->request->getAttribute('identity');
         $result = $identity->canResult('delete', $user);
         if (!$result->getStatus()){
@@ -68,7 +68,7 @@ class UserHistoriesController extends AppController
         }
         $this->loadComponent('Lamp');
         $this->Lamp->allClearLamps($user);
-        $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => null, 'stnding' => null]]);
+        $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => NULL, 'standing' => NULL]]);
         $this->Users->save($user);
         if ($this->UserHistories->delete($userHistory)) {
             $this->Flash->success(__('The user history has been deleted.'));
