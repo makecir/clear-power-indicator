@@ -151,7 +151,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
                 $this->Authentication->setIdentity($user);
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $user->id]);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -202,7 +202,7 @@ class UsersController extends AppController
                     $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        return $this->redirect(['action' => 'view', $user->id]);
+                        return $this->redirect(['controller'=>'UserHistories', 'action' => 'view', $user_history->id]);
                     }
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
