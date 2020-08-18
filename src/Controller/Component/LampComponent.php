@@ -68,7 +68,7 @@ class LampComponent extends Component
 
     }
     
-    public function saveLamps($user, &$new_lamps){
+    public function saveLamps($user, &$new_lamps, &$invalid){
         // 2, dict['title']['diff']=lamp -> save(u_id,s_is,lamp);
         $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
         $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
@@ -97,19 +97,27 @@ class LampComponent extends Component
                 if(array_key_exists($s_id, $my_lamps_dict))$before_lamp = $my_lamps_dict[$s_id];
                 else $before_lamp = 0;
                 if($before_lamp > $lamp) $invalid = true;
-                if($before_lamp < $lamp) {
+                if($before_lamp != $lamp) {
                     $lamp_changes[] = ['score_id'=>$s_id, 'before_lamp'=>$before_lamp, 'after_lamp'=>$lamp];
                 }
                 $new_scores[] = ['user_id'=>$user->id, 'score_id'=>$s_id, 'lamp'=>$lamp];
             }
         }
-        if($invalid || count($lamp_changes) === 0)return null;
+        if(count($lamp_changes) === 0)return null;
 
         $this->allClearLamps($user);
 
         $user_history = $UserHistories->newEmptyEntity();
         $user_history->user_id = $user->id;
         $UserHistories->save($user_history);
+
+        if($invalid){
+            $ConciseLogs = TableRegistry::getTableLocator()->get('ConciseLogs');
+            $concise_log = $ConciseLogs->newEmptyEntity();
+            $concise_log->type_id = 2;
+            $concise_log->user_id = $user->id;
+            $ConciseLogs->save($concise_log);
+        }
 
         if(count($new_scores) !== 0){
             $query = $UserLamps->query();

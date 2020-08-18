@@ -29,7 +29,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\ConciseLog[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\ConciseLog[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class ConciseLogTable extends Table
+class ConciseLogsTable extends Table
 {
     /**
      * Initialize method
@@ -41,7 +41,7 @@ class ConciseLogTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('concise_log');
+        $this->setTable('concise_logs');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
