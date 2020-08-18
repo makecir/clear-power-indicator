@@ -210,8 +210,9 @@ class IndicatorComponent extends Component
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }
 
-    public function getRating(&$user, $user_history){
-        $ghost_num = 30210;
+    public function setRating(&$user, $user_history){
+        $GHOST_NUM = 30210;
+        $SEASON = 1;
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         foreach($my_lamps as $my_lamp){
@@ -219,7 +220,7 @@ class IndicatorComponent extends Component
         }
         $GhostLamps = TableRegistry::getTableLocator()->get('GhostLamps');
         $ghost_lamps = $GhostLamps->find();
-        $battle_counts = array_fill(0, $ghost_num, 0);
+        $battle_counts = array_fill(0, $GHOST_NUM, 0);
         foreach($ghost_lamps as $i => $ghost_lamp){
             if(!array_key_exists($ghost_lamp->score_id, $my_lamps))continue;
             if($my_lamps[$ghost_lamp->score_id] > $ghost_lamp->lamp) $battle_counts[$ghost_lamp->ghost_id - 1]++;
@@ -231,13 +232,14 @@ class IndicatorComponent extends Component
             if($battle_count > 0) $win++;
             if($battle_count < 0) $win--;
         }
-        $new_standing = $ghost_num - ($win + $ghost_num)/2.0 + 1;
-        $reswin = ($win + $ghost_num + 1)/2.0;
-        $new_rating = 400.00*log10( $reswin / ($ghost_num + 1 - $reswin) ) + 1500.0000;
+        $new_standing = $GHOST_NUM - ($win + $GHOST_NUM)/2.0 + 1;
+        $reswin = ($win + $GHOST_NUM + 1)/2.0;
+        $new_rating = 400.00*log10( $reswin / ($GHOST_NUM + 1 - $reswin) ) + 1500.0000;
 
         $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
         $rating_diff = (isset($user->user_detail->rating)?($new_rating - $user->user_detail->rating):0.00);
-        $standing_diff = (isset($user->user_detail->standing)?($new_standing - $user->user_detail->standing):0);
+        $rating_diff = (($user->user_detail->season??0 == $SEASON)?($new_rating - $user->user_detail->rating):0.00);
+        $standing_diff = (($user->user_detail->season??0 == $SEASON)?($new_standing - $user->user_detail->standing):0);
         $user_history = $UserHistories->patchEntity($user_history, [
             'rating_cur' => $new_rating,
             'rating_diff' => $rating_diff,
@@ -246,8 +248,9 @@ class IndicatorComponent extends Component
         ]);
         $UserHistories->save($user_history);
 
+        $user->user_detail->rating = $new_rating;
         $user->user_detail->standing = $new_standing;
+        $user->user_detail->season = $SEASON;
 
-        return $new_rating;
     }
 }

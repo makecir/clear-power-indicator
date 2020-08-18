@@ -199,7 +199,7 @@ class UsersController extends AppController
                         $this->Flash->error(__('No changing. Please, check your play data.'));
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
-                    $rating = $this->Indicator->getRating($user, $user_history);
+                    $this->Indicator->setRating($user, $user_history);
                     $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
                     if($invalid)$this->Flash->warning(__('Contains inconsistent data.'));
                     if ($this->Users->save($user)) {

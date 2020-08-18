@@ -53,7 +53,7 @@
                                 </span>
                             </label>
                             <div class="mb-3 mt-3">
-                                <button class="btn btn-primary my-auto" type="submit" id="submit-csv" style="display:none;">アップロード <i id="csv-sub-icon" class="fas fa-sync"></i></button>
+                                <button class="btn btn-primary my-auto" type="submit" id="submit-csv" style="display:none;">CSV読み込み <i id="csv-sub-icon" class="fas fa-sync"></i></button>
                             </div>
                             <?= $this->Form->end(); ?>
                         </div>

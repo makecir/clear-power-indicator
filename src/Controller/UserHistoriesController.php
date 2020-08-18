@@ -68,7 +68,7 @@ class UserHistoriesController extends AppController
         }
         $this->loadComponent('Lamp');
         $this->Lamp->allClearLamps($user);
-        $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => NULL, 'standing' => NULL]]);
+        $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => NULL, 'standing' => NULL, 'season' => NULL]]);
         $this->Users->save($user);
         if ($this->UserHistories->delete($userHistory)) {
             $this->Flash->success(__('The user history has been deleted.'));
