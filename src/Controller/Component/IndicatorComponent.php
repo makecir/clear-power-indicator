@@ -211,7 +211,7 @@ class IndicatorComponent extends Component
     }
 
     public function getRating(&$user, $user_history){
-        $ghost_num = 34204;
+        $ghost_num = 30210;
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         foreach($my_lamps as $my_lamp){

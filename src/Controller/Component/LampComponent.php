@@ -150,21 +150,7 @@ class LampComponent extends Component
         $scores = $Scores->find('available');
         $ret = array();
         foreach($scores as $score){
-            if($score->title==="Innocent Walls[H]" 
-            || $score->title==="Innocent Walls[A]"
-            || $score->title==="gigadelic[H]"
-            || $score->title==="gigadelic[A]"){
-                $ret[substr($score->title, 0, strlen($score->title)-3)][$score->difficulty] = $score->id;
-            }
-            else if($score->difficulty == 4){
-                $ret[substr($score->title, 0, strlen($score->title)-3)][$score->difficulty] = $score->id;
-            }
-            else if($score->difficulty == 5){
-                $ret[substr($score->title, 0, strlen($score->title)-14)][$score->difficulty-1] = $score->id;
-            }
-            else{
-                $ret[$score->title][$score->difficulty]=$score->id;
-            }
+            $ret[$score->title][$score->difficulty]=$score->id;
         }
         return $ret;
     }

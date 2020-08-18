@@ -65,11 +65,11 @@ class User extends Entity
     }
 
     protected function _getPrivateDict(){
-        $dp_Arena_dict = [
+        $private_dict = [
              0 => "パブリック",
             10 => "プライベート",
         ];
-        return $dp_Arena_dict;
+        return $private_dict;
     }
 
 }
