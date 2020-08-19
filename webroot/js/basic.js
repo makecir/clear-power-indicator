@@ -35,4 +35,3 @@ $(function(){
     $('ul.list > li').prepend('<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>');
     $('dl.list dt').prepend('<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>');
   });
-  

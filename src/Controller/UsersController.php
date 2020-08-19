@@ -103,8 +103,8 @@ class UsersController extends AppController
         $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         $detail_table = $this->Indicator->getLampList($my_lamps) ?? [];
-        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating) ?? [];
-        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating) ?? [];
+        $rec_table = $this->Indicator->getRecommendResults($my_lamps, $user->user_detail->rating, $tweet_top_info) ?? [];
+        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps, $user->user_detail->rating, $tweet_top_info) ?? [];
         $dtables = ['user-view'];
         $checkbox['version'] = $this->Indicator->version_info;
         $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
@@ -120,7 +120,7 @@ class UsersController extends AppController
 
         $follow_compare_table = $this->Indicator->getFollowingLampCounts($user);
 
-        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'follow_compare_table', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'follow_compare_table', 'tweet_top_info', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
     }
 
     /**

@@ -3,6 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+
+$tweet_text_lamp = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating.' (推定順位：'.$user->user_detail->standing."位程度)\n".
+"SP☆12ランプ詳細はこちら";
+$tweet_text_rec = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
+"リコメンドTOP：".$tweet_top_info['rec']['title']." 【".$tweet_top_info['rec']['lamp']."】 ".sprintf("%.2f",$tweet_top_info['rec']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['rec']['cpi']).")\n";
+$tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
+"逆リコメンドTOP：".$tweet_top_info['bte']['title']." 【".$tweet_top_info['bte']['lamp']."】 ".sprintf("%.2f",$tweet_top_info['bte']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['bte']['cpi']).")\n";
 ?>
 <div class="users view content">
     <div class="card border-secondary mb-3">
@@ -128,6 +135,11 @@
             </div>
             <div class="card-body tab-content padding-sm">
                 <div id="lamps" class="tab-pane fade show active">
+                <?php if($mypage):?>
+                    <div class='text-right mb-1' id="lamp-tweet">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_lamp ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                <?php endif;?>
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
@@ -207,6 +219,11 @@
                     </div>
                 </div>
                 <div id="recommended" class="tab-pane fade">
+                    <?php if($mypage):?>
+                        <div class='text-right mb-1' id="rec-tweet">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_rec ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#recommended"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    <?php endif;?>
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
@@ -321,6 +338,11 @@
                     </div>
                 </div>
                 <div id="better-than-expected" class="tab-pane fade">
+                    <?php if($mypage):?>
+                        <div class='text-right mb-1' id="bte-tweet">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_bte ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    <?php endif;?>
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
@@ -507,4 +529,28 @@
             </div>
         </div>
     <?php endif;?>
+
+    <?php if($mypage):?>
+        <div class="card border-secondary mb-3">
+            <div class="card-header padding-sm">
+                <h4 class="card-title" style="display:inline;">特殊な共有</h4>
+            </div>
+            <div class="card-body text-dark pr-3 pl-3">
+                <ul class="list">
+                    <li>リコメンドTOPを含める
+                    <div class='text-right mb-1' id="rec-tweet">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_rec ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#recommended"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                    </li>
+                    <li>逆リコメンドTOPを含める
+                    <div class='text-right mb-1' id="bte-tweet">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_bte ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#better-than-expected"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    <?php endif;?>
+
 </div>

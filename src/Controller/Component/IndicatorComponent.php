@@ -106,12 +106,17 @@ class IndicatorComponent extends Component
         return $results;
     }
 
-    public function getRecommendResults(&$my_lamps, $rating){
+    public function getRecommendResults(&$my_lamps, $rating, &$top_tweet_info){
         if(is_null($rating))return null;
         $Scores = TableRegistry::getTableLocator()->get('Scores');
         $scores = $Scores->find('rated')->toArray();
         $lamp_num = sizeof($this->lamp_info);
         $preds=array();
+        $top_tweet_info['rec'] = array();
+        $top_tweet_info['rec']['cpi'] = 0;
+        $top_tweet_info['rec']['title'] = '';
+        $top_tweet_info['rec']['lamp'] = 0;
+        $top_tweet_info['rec']['prob'] = -1;
         foreach($scores as $score){
             for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
@@ -125,6 +130,12 @@ class IndicatorComponent extends Component
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
                 $pred['diff'] = $score['difficulty'];
+                if($pred['probability'] > $top_tweet_info['rec']['prob']){
+                    $top_tweet_info['rec']['cpi'] = $this->fifty($intercept,$coefficient);
+                    $top_tweet_info['rec']['title'] = $score['title_info'];
+                    $top_tweet_info['rec']['lamp'] = $tar;
+                    $top_tweet_info['rec']['pred'] = $pred['probability'];
+                }
                 $preds[] = $pred;
             }
         }
@@ -132,12 +143,17 @@ class IndicatorComponent extends Component
     }
 
     
-    public function getBetterThamExpectedResults(&$my_lamps, $rating){
+    public function getBetterThamExpectedResults(&$my_lamps, $rating, &$top_tweet_info){
         if(is_null($rating))return null;
         $Scores = TableRegistry::getTableLocator()->get('Scores');
         $scores = $Scores->find('rated')->toArray();
         $lamp_num = sizeof($this->lamp_info);
         $preds=array();
+        $top_tweet_info['bte'] = array();
+        $top_tweet_info['bte']['cpi'] = 0;
+        $top_tweet_info['bte']['title'] = '';
+        $top_tweet_info['bte']['lamp'] = 0;
+        $top_tweet_info['bte']['prob'] = 101.00;
         foreach($scores as $score){
             $tar = $my_lamps[$score['id']]??0;
             if($tar < 3) continue;
@@ -150,6 +166,12 @@ class IndicatorComponent extends Component
             $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
             if($pred['probability']>50.0)continue;
             $pred['diff'] = $score['difficulty'];
+            if($pred['probability'] < $top_tweet_info['bte']['prob']){
+                $top_tweet_info['bte']['cpi'] = $this->fifty($intercept,$coefficient);
+                $top_tweet_info['bte']['title'] = $score['title_info'];
+                $top_tweet_info['bte']['lamp'] = $tar;
+                $top_tweet_info['bte']['pred'] = $pred['probability'];
+            }
             $preds[] = $pred;
         }
         return $preds;
