@@ -22,7 +22,7 @@
     </div>
 
     <div class="card border-secondary mb-3">
-        <div class="card-header" role="tab" id="headingOne">
+        <div class="card-header">
             <h5 class="mb-0">
                 ご支援いただいた皆様
             </h5>
@@ -33,10 +33,8 @@
                 掲載順は最初にご支援戴いた日時に基づいています。</br>
                 また、反映には一定のお時間を戴いています。ご了承ください。</br>
             </p>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+            <ul class="list">
+                <li>のりみそ 様</li>
             </dl>
         </div>
     </div>

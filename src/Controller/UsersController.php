@@ -218,7 +218,9 @@ class UsersController extends AppController
                     $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
             }
-            $this->set(compact('user', 'csvform'));
+            $this->loadComponent('Indicator');
+            $season = $this->Indicator->getSeason();
+            $this->set(compact('user', 'csvform', 'season'));
         }
         else{
             $this->Flash->error($result->getReason());
@@ -353,10 +355,15 @@ class UsersController extends AppController
             return $this->redirect(['action' => 'view', $user->id]);
         }
         else {
+            $this->loadComponent('Indicator');
+            if($user->user_detail->season??0 == $this->indicator->getSeason()){
+
+                $this->Flash->success(__('No need to recalculate.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            }
             $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
             $user_history = $UserHistories->newEmptyEntity();
             $user_history->user_id = $user->id;
-            $this->loadComponent('Indicator');
             if($this->Indicator->setRating($user, $user_history)){
                 $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
                 if ($this->Users->save($user)) {

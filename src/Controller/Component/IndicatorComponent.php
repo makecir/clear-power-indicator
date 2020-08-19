@@ -210,9 +210,17 @@ class IndicatorComponent extends Component
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }
 
+    public function getGhostNum() {
+        return 30210;
+    }
+
+    public function getSeason() {
+        return 1;
+    }
+
     public function setRating(&$user, $user_history){
-        $GHOST_NUM = 30210;
-        $SEASON = 1;
+        $GHOST_NUM = $this->getGhostNum();
+        $SEASON = $this->getSeason();
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         if(count($my_lamps)==0)return false;

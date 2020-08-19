@@ -769,6 +769,8 @@ msgstr "レーティングを推定し、保存しました。"
 msgid "Unable to detect a 12 level lamp."
 msgstr "☆12のランプを検出できませんでした。プレイデータを登録してください。"
 
+msgid "No need to recalculate."
+msgstr "更新の必要はありません。"
 
 msgid "Update detail"
 msgstr "更新詳細"

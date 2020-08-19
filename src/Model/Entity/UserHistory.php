@@ -44,7 +44,7 @@ class UserHistory extends Entity
     }
 
     protected function _getRatingDiffInfo(){
-        return $this->rating_cur?sprintf(($this->rating_diff>0.00?'+':'-').'%.2f',$this->rating_diff):'';
+        return $this->rating_cur?sprintf(($this->rating_diff >= 0.00 ? '+' : '' ).'%.2f',$this->rating_diff):'';
     }
 
     protected function _getStandingCurInfo(){

@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <?php if(isset($user->user_detail->rating)): ?>
+            <?php if(isset($user->user_detail->rating) && $season != $user->user_detail->season): ?>
                 <div class="mb-3">
                     <h5 class="card-title">プレイデータに変更が無い場合、再計算ボタンからCPIを再算出することが可能です</h5>
                     <div class="text-center">
