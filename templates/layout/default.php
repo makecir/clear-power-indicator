@@ -40,7 +40,6 @@ $source_version = "?ver=1.000";
     
     <title>
         <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
