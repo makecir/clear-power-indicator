@@ -537,16 +537,20 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
             </div>
             <div class="card-body text-dark pr-3 pl-3">
                 <ul class="list">
-                    <li>リコメンドTOPを含める
-                    <div class='text-right mb-1' id="rec-tweet">
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_rec ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#recommended"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
-                    </li>
-                    <li>逆リコメンドTOPを含める
-                    <div class='text-right mb-1' id="bte-tweet">
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_bte ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#better-than-expected"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
-                    </li>
+                    <?php if($tweet_top_info['rec']['prob'] != -1):?>
+                        <li>リコメンドTOPを含める
+                        <div class='text-right mb-1' id="rec-tweet">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_rec ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#recommended"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                        </li>
+                        <?php endif;?>
+                    <?php if($tweet_top_info['bte']['prob'] != 101.00):?>
+                        <li>逆リコメンドTOPを含める
+                        <div class='text-right mb-1' id="bte-tweet">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_bte ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#better-than-expected"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                        </li>
+                    <?php endif;?>
                 </ul>
             </div>
         </div>
