@@ -135,7 +135,7 @@
                 <li>
                     <?= $this->Html->link(
                         'CP更新/プレイデータ登録',
-                        ['controller' => 'Users', 'action' => 'edit', $identity->id],
+                        ['controller' => 'Users', 'action' => 'edit', $identity->id??null],
                     )?>
                     (要ログイン)の「①テキスト」にコピーしたプレイデータをペーストし「テキスト読み込み」をクリック。</br>
                     または、「②CSVアップロード」の「CSV選択」で、ダウンロードしたCSVを選択し、「アップロード」ボタンを押します。 
