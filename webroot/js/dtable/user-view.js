@@ -391,5 +391,7 @@ $(function(){
 });
 
 $(function () {
-    $(document.forms[0][0]).change();
+    if(document.forms[0]!==undefined){
+        $(document.forms[0][0]).change();
+    }
 });
