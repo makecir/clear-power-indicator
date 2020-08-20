@@ -7,10 +7,12 @@ $(document).ready(function() {
             /* 日本語化設定 */
             sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
             oPaginate : { // ページネーション欄
-                sNext : "次へ",
-                sPrevious : "前へ"
+                sFirst : "最初",
+                sLast : "最後",
+                sNext : "次",
+                sPrevious : "前"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -26,14 +28,9 @@ $(document).ready(function() {
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp',
+                'orderDataType' : 'lamp',
             },
-            {
-                'targets' :  3,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp',
-                "visible": ($(window).width() >= 768),
-            }
+            {}
         ]
     });
     $('form').on('change', function(event) {
@@ -53,7 +50,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -64,18 +61,18 @@ $(document).ready(function() {
                 'targets' :  0,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp',
-                "visible": ($(window).width() >= 768),
+                //"visible": ($(window).width() >= 768),
             },
             {},
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'lamp'
             },
             {
                 'targets' :  3,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'lamp'
             },
             {},
 
@@ -98,7 +95,7 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
@@ -109,15 +106,45 @@ $(document).ready(function() {
                 'targets' :  0,
                 'orderable' : true,
                 'orderDataType' : 'dom-jp',
-                "visible": ($(window).width() >= 768),
+                //"visible": ($(window).width() >= 768),
             },
             {},
             {
                 'targets' :  2,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'lamp'
             },
             {},
+        ]
+    });
+    $('form').on('change', function(event) {
+        table.draw();
+    });
+} );
+
+$(document).ready(function() {
+    var table = $('#histories-table').DataTable({
+        lengthMenu: [ 20, 50, 100, 1000],
+        displayLength: 20,
+        //order:  [ [1, "desc"] ],
+        ordering: false,
+        oLanguage: {
+            /* 日本語化設定 */
+            sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+            oPaginate : { // ページネーション欄
+                sNext : "次へ",
+                sPrevious : "前へ"
+            },
+            sInfo : "表示中 : (_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sSearch : "検索 ", // 検索欄(例 = 検索 --)
+            sZeroRecords : "表示するデータがありません", // 表示する行がない場合
+            sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
+            sInfoFiltered : "全 _MAX_ 件から絞り込み" 
+        },
+        columnDefs : [
+            {},
+            {},
+            {}
         ]
     });
     $('form').on('change', function(event) {
@@ -137,23 +164,50 @@ $(document).ready(function() {
                 sNext : "次へ",
                 sPrevious : "前へ"
             },
-            sInfo : "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sInfo : "(_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
             sSearch : "検索 ", // 検索欄(例 = 検索 --)
             sZeroRecords : "表示するデータがありません", // 表示する行がない場合
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
             sInfoFiltered : "全 _MAX_ 件から絞り込み" 
         },
         columnDefs : [
-            {
-                'targets' :  0,
-                'orderable' : true,
-                'orderDataType' : 'dom-jp'
+            {},
+            {},
+            {},
+            {}
+        ]
+    });
+    $('form').on('change', function(event) {
+        table.draw();
+    });
+} );
+
+$(document).ready(function() {
+    var table = $('#follower-table').DataTable({
+        lengthMenu: [ 20, 50, 100, 1000],
+        displayLength: 20,
+        order:  [ [1, "desc"] ],
+        oLanguage: {
+            /* 日本語化設定 */
+            sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+            oPaginate : { // ページネーション欄
+                sNext : "次へ",
+                sPrevious : "前へ"
             },
+            sInfo : "(_START_ ~ _END_) / _TOTAL_", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+            sSearch : "検索 ", // 検索欄(例 = 検索 --)
+            sZeroRecords : "表示するデータがありません", // 表示する行がない場合
+            sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
+            sInfoFiltered : "全 _MAX_ 件から絞り込み" 
+        },
+        columnDefs : [
+            {},
+            {},
             {},
             {
-                'targets' :  2,
+                'targets' :  3,
                 'orderable' : true,
-                'orderDataType' : 'dom-jp'
+                'orderDataType' : 'grade-jp'
             }
         ]
     });
@@ -204,6 +258,36 @@ $(function($){
         }
       });
     };  
+    $.fn.dataTable.ext.order['lamp'] = function (settings, col){
+        return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+          if($(td).html().includes('NO PLAY'))return 10;
+          if($(td).html().includes('FAILED'))return 11;
+          if($(td).html().includes('ASSITED'))return 12;
+          if($(td).html().includes('EASY'))return 13;
+          if($(td).html().includes('CLEAR'))return 14;
+          if($(td).html().includes('HARD'))return 15;
+          if($(td).html().includes('EXHARD'))return 16;
+          if($(td).html().includes('FULLCOMBO'))return 17;
+          else return 0;
+        });
+      };  
+    $.fn.dataTable.ext.order['grade-jp'] = function (settings, col){
+        return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+          switch ($(td).html()){
+  
+            case '六段':return '150';
+            case '七段':return '151';
+            case '八段':return '152';
+            case '九段':return '153';
+            case '十段':return '154';
+            case '中伝':return '155';
+            case '皆伝':return '156';
+            
+            default:
+              return '00';
+          }
+        });
+      };  
   
 }); 
 
@@ -264,26 +348,25 @@ $.fn.dataTable.ext.search.push(
         var detail_form = document.forms['detail-form'];
         var rec_form = document.forms['rec-form'];
         var bte_form = document.forms['bte-form'];
-
         if(settings.nTable.id == 'lamp-detail'){
             for(let ver of versions) if  (!detail_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of cur_lamps) if (!detail_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
-            if(detail_form.elements['detail_leg_only'].checked && (!data[1].includes("†") || data[1].includes("ZIGOQ") || data[1].includes("paradisus") || data[1].includes("ラヴリィ～レイディオ"))) return false;
-            if(detail_form.elements['detail_leg_except'].checked && data[1].includes("†") && !data[1].includes("ZIGOQ") && !data[1].includes("paradisus") && !data[1].includes("ラヴリィ～レイディオ")) return false;
+            for(let lamp of cur_lamps) if (!detail_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
+            if(detail_form.elements['detail_leg_only'].checked && (!data[1].includes("[L]"))) return false;
+            if(detail_form.elements['detail_leg_except'].checked && data[1].includes("[L]")) return false;
         }
         if(settings.nTable.id == 'rec-table'){
             for(let ver of versions) if (!rec_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
-            for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && data[3] == lamp) return false;
+            for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
+            for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && data[3].includes(lamp)) return false;
             if(parseFloat(data[4]) < parseFloat(rec_form.elements['rec_min'].value) || parseFloat(rec_form.elements['rec_max'].value) < parseFloat(data[4]))return false;
             if(rec_form.elements['rec_one_step'].checked && lamp2num[data[2]]+1 < lamp2num[data[3]])return false;
-            if(rec_form.elements['rec_leg_only'].checked && (!data[1].includes("†") || data[1].includes("ZIGOQ") || data[1].includes("paradisus") || data[1].includes("ラヴリィ～レイディオ"))) return false;
-            if(rec_form.elements['rec_leg_except'].checked && data[1].includes("†") && !data[1].includes("ZIGOQ") && !data[1].includes("paradisus") && !data[1].includes("ラヴリィ～レイディオ")) return false;
+            if(rec_form.elements['rec_leg_only'].checked && (!data[1].includes("[L]"))) return false;
+            if(rec_form.elements['rec_leg_except'].checked && data[1].includes("[L]")) return false;
 
         }
         if(settings.nTable.id == 'bte-table'){
             for(let ver of versions) if (!bte_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2] == lamp) return false;
+            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
             if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[4]))return false;
         }
 
@@ -308,5 +391,7 @@ $(function(){
 });
 
 $(function () {
-    $(document.forms[0][0]).change();
+    if(document.forms[0]!==undefined){
+        $(document.forms[0][0]).change();
+    }
 });

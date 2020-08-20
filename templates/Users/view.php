@@ -3,6 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+
+$tweet_text_lamp = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating.' (推定順位：'.$user->user_detail->standing."位程度)\n".
+"SP☆12ランプ詳細はこちら";
+$tweet_text_rec = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
+"リコメンドTOP：".$tweet_top_info['rec']['title']." 【".$tweet_top_info['rec']['lamp']."】 ".sprintf("%.2f",$tweet_top_info['rec']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['rec']['cpi']).")\n";
+$tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
+"逆リコメンドTOP：".$tweet_top_info['bte']['title']." 【".$tweet_top_info['bte']['lamp']."】 ".sprintf("%.2f",$tweet_top_info['bte']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['bte']['cpi']).")\n";
 ?>
 <div class="users view content">
     <div class="card border-secondary mb-3">
@@ -28,9 +35,9 @@
             <div class="row">
                 <div class="col-md-5 col-lg-4">
                     <div class="mb-4">
-                        <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".$user->user_detail->rating ?></h3></div>
+                        <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'') ?></h3></div>
                         <h6 class="card-text" style="display:inline;"><?= __('(推定 : ')?></h6>
-                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->standing ?></h5>
+                        <h5 class="card-text" style="display:inline;"><?= $user->user_detail->standing_info ?></h5>
                         <h6 class="card-text" style="display:inline;"><?= __('位程度)') ?></h6>
                         <span data-toggle="tooltip" data-html="true" title=
                             <?= "'大まかな目安です</br>詳しくは".
@@ -39,7 +46,7 @@
                                     ['controller' => 'Pages', 'action' => 'about', '#'=>'numerical-value'],
                                 ).
                                 "をご覧下さい'" 
-                            ?> class="text-nowrap" data-trigger="click">
+                            ?> class="text-nowrap" data-trigger="click hover focus">
                             <i class="fas fa-question-circle"></i>
                         </span>
                     </div>
@@ -116,6 +123,9 @@
                         <a class="nav-link" href="#better-than-expected" data-toggle="tab"><?= __('Better than expected') ?></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#histories" data-toggle="tab"><?= __('Histories') ?></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#followings" data-toggle="tab"><?= __('Followings') ?></a>
                     </li>
                     <li class="nav-item">
@@ -125,6 +135,11 @@
             </div>
             <div class="card-body tab-content padding-sm">
                 <div id="lamps" class="tab-pane fade show active">
+                <?php if($mypage):?>
+                    <div class='text-right mb-1' id="lamp-tweet">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_lamp ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                <?php endif;?>
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
@@ -177,7 +192,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive  table-smart-phone-x">
+                    <div class="table-responsive table-smart-phone-xx">
                         <table  id="lamp-detail" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
@@ -192,7 +207,10 @@
                                 <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
+                                    </td>
                                     <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -201,6 +219,11 @@
                     </div>
                 </div>
                 <div id="recommended" class="tab-pane fade">
+                    <?php if($mypage):?>
+                        <div class='text-right mb-1' id="rec-tweet">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_rec ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#recommended"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    <?php endif;?>
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
@@ -299,8 +322,14 @@
                                     <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>><?= h($row['lamp_cur']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>><?= h($row['lamp_tar']) ?></td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp_cur']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp_cur']] ?></div>
+                                    </td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_tar_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['tar_lamp'][$row['lamp_tar']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp_tar']] ?></div>
+                                    </td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -309,6 +338,11 @@
                     </div>
                 </div>
                 <div id="better-than-expected" class="tab-pane fade">
+                    <?php if($mypage):?>
+                        <div class='text-right mb-1' id="bte-tweet">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_bte ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    <?php endif;?>
                     <div class="card mb-3">
                         <h5 class="card-header bg-info filter-header">
                             <a data-toggle="collapse" href="#collapse-f-lamp-detail" aria-expanded="false" aria-controls="collapse-f-lamp-detail" id="filter-lamp-detail" class="d-block">
@@ -382,13 +416,51 @@
                                 <tr>
                                     <td align="center"><?= h($row['version']) ?></td>
                                     <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
-                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>><?= h($row['lamp']) ?></td>
+                                    <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
+                                        <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
+                                        <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
+                                    </td>
                                     <td align="right"><?php echo sprintf('%.2f %%',$row['probability']); ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div id="histories" class="tab-pane fade">
+                    <?php if($user->private_level > 0 && !($mypage || $follow_flag)):?>
+                        <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock"> 本人かフォロワーのみ閲覧可能です</i></div></div>
+                    <?php else:?>
+                        <div class="table-responsive table-smart-phone-sm">
+                            <table id="histories-table" class="table table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th align="center"><?= __('Date') ?></th>
+                                        <th align="center"><?= __('CPI') ?></th>
+                                        <th align="center"><?= __('Diff') ?></th>
+                                        <th align="center"><?= __('#') ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach (array_reverse($user->user_histories) as $row): ?>
+                                        <tr>
+                                            <td align="center"><?= h($row->created_at->format('Y/m/d')) ?></td>
+                                            <td align="center"><?= h($row->rating_cur_info) ?></td>
+                                            <td align="center"><?= h($row->rating_diff_info) ?></td>
+                                            <td align="center">
+                                                <?= $this->Html->link(
+                                                    __('Detail'),
+                                                    ['controller' => 'UserHistories','action' => 'view', $row->id],
+                                                    ['class' => 'btn btn-sm btn-info my-auto'])
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif;?>
                 </div>
 
                 <div id="followings" class="tab-pane fade">
@@ -409,7 +481,7 @@
                                     <?php foreach ($follow_compare_table as $row): ?>
                                         <tr>
                                             <td align="center"><?= $this->Html->link($row['dj_name'], ['action' => 'view', $row['id']]) ?></td>
-                                            <td align="center"><?= h($row['rating']) ?></td>
+                                            <td align="center"><?= h(($row['rating']?sprintf('%.2f',$row['rating']):'')) ?></td>
                                             <td align="center">
                                                 <div class="progress mb-3">
                                                     <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
@@ -445,7 +517,7 @@
                                         <tr>
                                             <td align="center"><?= $this->Html->link($row->user_detail->dj_name, ['action' => 'view', $row->id]) ?></td>
                                             <td align="center"><?= h($row->user_detail->iidx_id) ?></td>
-                                            <td align="center"><?= h($row->user_detail->rating) ?></td>
+                                            <td align="center"><?= h(($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'')) ?></td>
                                             <td align="center"><?= h($row->user_detail->grade_sp_info) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -457,4 +529,28 @@
             </div>
         </div>
     <?php endif;?>
+
+    <?php if($mypage):?>
+        <div class="card border-secondary mb-3">
+            <div class="card-header padding-sm">
+                <h4 class="card-title" style="display:inline;">特殊な共有</h4>
+            </div>
+            <div class="card-body text-dark pr-3 pl-3">
+                <ul class="list">
+                    <li>リコメンドTOPを含める
+                    <div class='text-right mb-1' id="rec-tweet">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_rec ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#recommended"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                    </li>
+                    <li>逆リコメンドTOPを含める
+                    <div class='text-right mb-1' id="bte-tweet">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_bte ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])."#better-than-expected"?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    <?php endif;?>
+
 </div>

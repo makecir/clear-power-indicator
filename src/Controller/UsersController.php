@@ -40,7 +40,7 @@ class UsersController extends AppController
         }
         // ユーザーが submit 後、認証失敗した場合は、エラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error(__('Invalid username or password'));
+            $this->Flash->error(__('Invalid username or password.'));
         }
     }
 
@@ -90,6 +90,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['UserDetails',
                 'Scores',
+                'UserHistories',
                 'FollowUsers' => ['UserDetails'], 
                 'FollowedUsers' => ['UserDetails'],
             ],
@@ -102,8 +103,8 @@ class UsersController extends AppController
         $my_lamps = $user->user_detail->my_lamps_array;
         $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
         $detail_table = $this->Indicator->getLampList($my_lamps) ?? [];
-        $rec_table = $this->Indicator->getRecommendResults($my_lamps,$user->user_detail->rating) ?? [];
-        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps,$user->user_detail->rating) ?? [];
+        $rec_table = $this->Indicator->getRecommendResults($my_lamps, $user->user_detail->rating, $tweet_top_info) ?? [];
+        $bte_table = $this->Indicator->getBetterThamExpectedResults($my_lamps, $user->user_detail->rating, $tweet_top_info) ?? [];
         $dtables = ['user-view'];
         $checkbox['version'] = $this->Indicator->version_info;
         $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
@@ -119,7 +120,7 @@ class UsersController extends AppController
 
         $follow_compare_table = $this->Indicator->getFollowingLampCounts($user);
 
-        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'follow_compare_table', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
+        $this->set(compact('user', 'lamp_counts', 'detail_table', 'rec_table', 'bte_table', 'follow_compare_table', 'tweet_top_info', 'dtables', 'checkbox', 'mypage', 'follow_flag', 'is_permitted'));
     }
 
     /**
@@ -141,17 +142,20 @@ class UsersController extends AppController
 
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $request = $this->request->getData();
+            if($request['password'] !== $request['retype_password']){
+                $this->Flash->error(__('Re-entered password does not match.'));
+                return $this->redirect(['action' => 'add']);
+            }
+            $user = $this->Users->patchEntity($user, $request);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
                 $this->Authentication->setIdentity($user);
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $user->id]);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
-        $scores = $this->Users->Scores->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'scores'));
     }
 
     /**
@@ -189,12 +193,18 @@ class UsersController extends AppController
                         $this->Flash->error(__('Fial to read data. Please, try again.'));
                         return $this->redirect(['action' => 'edit', $user->id]);
                     }
-                    $this->Lamp->saveLamps($user, $new_lamps);
-                    $rating = $this->Indicator->getRating($user);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['rating' => $rating, 'update_at' =>  Time::now()]]);
+                    $invalid = false;
+                    $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
+                    if(is_null($user_history)){
+                        $this->Flash->error(__('No changing. Please, check your play data.'));
+                        return $this->redirect(['action' => 'edit', $user->id]);
+                    }
+                    $this->Indicator->setRating($user, $user_history);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                    if($invalid)$this->Flash->warning(__('Contains inconsistent data.'));
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
-                        return $this->redirect(['action' => 'view', $user->id]);
+                        return $this->redirect(['controller'=>'UserHistories', 'action' => 'view', $user_history->id]);
                     }
                     $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
                 }
@@ -202,14 +212,15 @@ class UsersController extends AppController
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
                     if ($this->Users->save($user)) {
-                        //$this->OGP->saveScreenShot($user->id);
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
                     }
                     $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
             }
-            $this->set(compact('user', 'csvform'));
+            $this->loadComponent('Indicator');
+            $season = $this->Indicator->getSeason();
+            $this->set(compact('user', 'csvform', 'season'));
         }
         else{
             $this->Flash->error($result->getReason());
@@ -241,9 +252,9 @@ class UsersController extends AppController
                             $this->Flash->success(__('New password has been saved.'));
                             return $this->redirect(['action' => 'view', $user->id]);
                         }
-                        else $this->Flash->error(__('Invalid new password'));
+                        else $this->Flash->error(__('Invalid new password.'));
                     }
-                    else $this->Flash->error(__('Wrong password'));
+                    else $this->Flash->error(__('Wrong password.'));
                 }
             }
             $this->set(compact('user'));
@@ -332,4 +343,38 @@ class UsersController extends AppController
         }
     }
 
+    public function recalclate($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails'],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('recalclate', $user);
+        if (!$result->getStatus()){
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+        else {
+            $this->loadComponent('Indicator');
+            if($user->user_detail->season??0 == $this->indicator->getSeason()){
+
+                $this->Flash->success(__('No need to recalculate.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            }
+            $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
+            $user_history = $UserHistories->newEmptyEntity();
+            $user_history->user_id = $user->id;
+            if($this->Indicator->setRating($user, $user_history)){
+                $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The rating has been saved.'));
+                    return $this->redirect(['controller'=>'UserHistories', 'action' => 'view', $user_history->id]);
+                }
+                $this->Flash->error(__('Fial to calclate rating. Please, try again.'));
+                return $this->redirect(['action' => 'view', $user->id]);
+            }
+            $this->Flash->error(__('Unable to detect a 12 level lamp.'));
+            return $this->redirect(['action' => 'view', $user->id]);
+        }
+    }
 }

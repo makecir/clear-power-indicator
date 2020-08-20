@@ -79,6 +79,12 @@ class UsersTable extends Table
             'propertyName' => 'followed_users',
             'joinTable' => 'followings',
         ]);
+
+        $this->hasMany('UserHistories', [
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
     }
 
     /**
@@ -98,8 +104,8 @@ class UsersTable extends Table
             ->lengthBetween('username', [4, 16], '4字以上16字以下の制限があります')
             //->maxLength('username', 16)
             ->requirePresence('username', 'create')
-            ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
+            ->notEmptyString('username', 'このフィールドを入力してください。')
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table','message' => __('The usrename should be unique.')])
             ->add('username', 'usernameFormat', [
                 'rule' => function ($value) {
                     return preg_match("/\A\w*\z/", $value)===1;
@@ -112,7 +118,7 @@ class UsersTable extends Table
             //->maxLength('password', 256)
             ->lengthBetween('password', [6, 32], '6字以上32字以下の制限があります')
             ->requirePresence('password', 'create')
-            ->notEmptyString('password')
+            ->notEmptyString('password', 'このフィールドを入力してください。')
             ->add('password', 'passwordFormat', [
                 'rule' => function ($value) {
                     return preg_match("/\A\w*\z/", $value)===1;

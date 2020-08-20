@@ -159,7 +159,8 @@
                 その他のお問合せは、下記のTwitterのDMまたはEメールからご連絡ください。
             </p>
             <dl class="list">
-                <dt>Google Form : <a href="https://forms.gle/dmtBFkpF7FMtKBw77">アンケート</a></dt>
+                <dt>Google Form : <a href="https://forms.gle/1zgkyzQq99DAHsVx7">要望・感想</a></dt>
+                <dt>Google Form : <a href="https://forms.gle/jc96F6ry5cP4VGfz7">不具合報告</a></dt>
                 <dt>Twitter : <a href="https://twitter.com/IIDX_CPI" target="_blank">@IIDX_CPI</a></dt>
                 <dt>Email : <a href="mailto:beatmaniaiidx.cpi@gmail.com">beatmaniaiidx.cpi@gmail.com</a></dt>
             </dl>

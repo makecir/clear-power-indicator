@@ -47,6 +47,7 @@ class UserDetail extends Entity
         'twitter_id' => true,
         'standing' => true,
         'rating' => true,
+        'season' => true,
         'update_at' => true,
         'created_at' => true,
         'modified_at' => true,
@@ -54,6 +55,10 @@ class UserDetail extends Entity
 
     public function getTable(){
         return TableRegistry::getTableLocator()->get('UserDetails');
+    }
+
+    protected function _getRatingInfo(){
+        return $this->rating?sprintf('%.2f',$this->rating):'';
     }
     
     protected function _getGradeSpDict(){

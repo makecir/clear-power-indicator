@@ -75,5 +75,18 @@ class Score extends Entity
         'created_at' => true,
         'modified_at' => true,
         'users' => true,
+        'title_info' => true,
     ];
+
+    protected function _getTitleInfo(){
+        $suffix = "";
+        if($this->difficulty >= 4) $suffix = "[L]";
+        elseif($this->title == "gigadelic" || $this->title == "Innocent Walls"){
+            if($this->difficulty == 2) $suffix = "[H]";
+            if($this->difficulty >= 3) $suffix = "[A]";
+        }
+        return $this->title.$suffix;
+    }
+
+
 }
