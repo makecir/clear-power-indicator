@@ -46,13 +46,13 @@ class FollowingsTable extends Table
 
         $this->belongsTo('FollowUsers', [
             'className' => 'Users',
-            'foreignKey' => 'follow_user_id',
-            //'joinType' => 'INNER',
+            'foreignKey' => 'followed_user_id',
+            'joinType' => 'INNER',
         ]);
         $this->belongsTo('FollowedUsers', [
             'className' => 'Users',
-            'foreignKey' => 'followed_user_id',
-            //'joinType' => 'INNER',
+            'foreignKey' => 'follow_user_id',
+            'joinType' => 'INNER',
         ]);
     }
 
@@ -80,8 +80,8 @@ class FollowingsTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['follow_user_id'], 'FollowUsers'));
-        $rules->add($rules->existsIn(['followed_user_id'], 'FollowedUsers'));
+        $rules->add($rules->existsIn(['follow_user_id'], 'Users'));
+        $rules->add($rules->existsIn(['followed_user_id'], 'Users'));
 
         return $rules;
     }

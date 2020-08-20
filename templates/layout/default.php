@@ -13,14 +13,31 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
+use Cake\Routing\Router;
 
 $cakeDescription = 'CPI : Clear Power Indicator ';
+$source_version = "?ver=1.000";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175924766-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-175924766-1');
+    </script>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@IIDX_CPI">
+    <meta property="og:title" content="Clear Power Indicator">
+    <meta property="og:description" content="CPIは、BeatmaniaIIDXのSP☆12のクリア力や、曲やクリアオプションごとの達成確率を推定する非公式ファンサイトです">
+    <meta property="og:image" content="<?= Router::url('/img/cpi_144_144.png',true)?>">
+    
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
@@ -30,7 +47,7 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
     
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('style.css'.$source_version) ?>
 
     <!-- using bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -133,9 +150,10 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
             <?= $this->fetch('content') ?>
         </div>
     </main>
-    <footer>
+
+    <footer class="mt-5 mb-3">
         <div class="container" style="text-align:center">
-            <div class="text-muted mb-10 mt-10 pb-10 pt-10" style="font-size: 12px;">
+            <div class="text-muted" style="font-size: 12px;">
                 </br>
                 <p>
                 beatmaniaⅡDXは、株式会社コナミデジタルエンタテインメントの商標または登録商標です。</br>
@@ -155,14 +173,14 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
     <?php if(isset($dtables)): ?>
         <?php foreach ($dtables as $dtable): ?>
-            <?= $this->Html->script('dtable/'.$dtable.'.js') ?>
+            <?= $this->Html->script('dtable/'.$dtable.'.js'.$source_version) ?>
         <?php endforeach; ?>
     <?php endif; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 
     <!-- using basic js -->
-    <?= $this->Html->script('basic.js') ?>
+    <?= $this->Html->script('basic.js'.$source_version) ?>
     <?= $this->Html->script('garlic.js') ?>
 </body>
 </html>
