@@ -136,8 +136,8 @@ class IndicatorComponent extends Component
                 if($pred['probability'] > $top_tweet_info['rec']['prob']){
                     $top_tweet_info['rec']['cpi'] = $this->fifty($intercept,$coefficient);
                     $top_tweet_info['rec']['title'] = $score['title_info'];
-                    $top_tweet_info['rec']['lamp'] = $tar;
-                    $top_tweet_info['rec']['pred'] = $pred['probability'];
+                    $top_tweet_info['rec']['lamp'] = $this->tar_lamp_info[$tar];
+                    $top_tweet_info['rec']['prob'] = $pred['probability'];
                 }
                 $preds[] = $pred;
             }
@@ -173,7 +173,7 @@ class IndicatorComponent extends Component
                 $top_tweet_info['bte']['cpi'] = $this->fifty($intercept,$coefficient);
                 $top_tweet_info['bte']['title'] = $score['title_info'];
                 $top_tweet_info['bte']['lamp'] = $tar;
-                $top_tweet_info['bte']['pred'] = $pred['probability'];
+                $top_tweet_info['bte']['prob'] = $pred['probability'];
             }
             $preds[] = $pred;
         }
