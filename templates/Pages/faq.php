@@ -1,7 +1,7 @@
-<div class="display home content">
+<div class="display faq content">
 
 
-	<div class="card border-secondary mb-3" id="caution">
+    <div class="card border-secondary mb-3" id="caution">
         <div class="card-header">
             <h5 class="mb-0">
                 ご要望・ご質問に対する回答
