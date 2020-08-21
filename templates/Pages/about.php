@@ -117,9 +117,51 @@
                             対象譜面のランプを旧曲と比較し、その差が小さいプレイヤーを半分程度抽出し、クリア確率を計算する
                     </div>
                 </dd>
+                <dt>適正CPI</dt>
+                <dd>
+                    対象のランプでクリアを達成しているプレイヤーの割合が50％になるCPIレーティングを表しています。</br>
+                    例えば、「DynamiteのEASYランプの適正CPIが1561.30である」というのは、「CPIが1561.30のユーザーのうち2人に1人がDynamiteをEASYでクリアしていると推定できる」と言い換えられます。
+                </dd>
             </dl>
         </div>
     </div>
+
+    <div class="card border-secondary mb-3" id="update">
+        <div class="card-header">
+            <h5 class="mb-0">
+                更新・対応譜面
+            </h5>
+        </div>
+        <div class="card-body text-dark">
+            <div class="mb-3">
+                <h4 class="card-title">CPIサービスの更新履歴</h4>
+                <p>
+                    <?= $this->Html->link(
+                        '更新履歴',
+                        ['action' => 'update'],)
+                    ?>をご覧ください。
+                </p>
+            </div>
+            <div class="mb-3">
+                <h4 class="card-title">対応譜面</h4>
+                <div class="text-dark"><p>更新日：2020/08/21</p></div> 
+                <dl class="list">
+                    <dt>適正CPIおよびクリア確率算出対応譜面</dt>
+                    <dd>
+                        2020/05/20頃までに追加された要解禁譜面 + 2020/06/20頃までに追加された解禁不要譜面</br>
+                        （IIDX26までの全譜面 + AKASHIC BREAK、Inferno of Fomalhaut、LASER CRUSTER (IGNITE REMIX)、LIGHTNING STRIKES、Lords Of The Roundtable、Matt Silver、Primitive Vibes、Rave Patroller、SCREW // owo // SCREW、T-REX vs Velociraptor (In the Far east euphoria)、TECHNO Style Essentials、THE BRAVE MUST DIE、THE F∀UST、TRIUMPH、Vinculum stellarum、がっつり陰キャ!? 怪盗いいんちょの億劫^^;、深淵に捧ぐレクイエム、華麗なる大犬円舞曲、千年ノ理[L]、TITANS RETURN[L]、snow storm[L])
+                        </dd>
+                    <dt>ランプ一覧で扱う対応譜面</dt>
+                    <dd>
+                    上記に加えて2020/07/20頃までに追加された譜面</br>
+                    （Artist、BEAT PRISONER、Double Dribble、Everlasting Message、Friction[!]Function、Level 2、Vinculum stellarum、ピアノ協奏曲第1番”蠍火” (BlackY Remix)、ZEPHYRANTHES[L]）</br>
+                    この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
 
     <div class="card border-secondary mb-3" id="how-to-update">
         <div class="card-header">

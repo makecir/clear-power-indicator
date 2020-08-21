@@ -1,4 +1,21 @@
 <div class="display home content">
+
+    <div class="card border-info mb-3" id="about">
+        <div class="card-header text-white bg-info">
+            <h5 class="mb-0">
+                アンケートのお願い
+            </h5>
+        </div>
+        <div class="card-body text-dark">
+            CPIは鋭意製作中のwebサイトです。</br>
+            <a href="https://forms.gle/1zgkyzQq99DAHsVx7">改善要望・感想</a>または<a href="https://forms.gle/jc96F6ry5cP4VGfz7">不具合報告</a>をご回答いただき、開発を支援していただけると嬉しいです。</br>
+            今までに頂いたご要望とご質問の一部に<?= $this->Html->link(
+                'こちら',
+                ['action' => 'faq'],)
+            ?>で回答しています。
+        </div>
+    </div>
+
     <div class="card border-secondary mb-3">
         <div class="card-header  padding-sm" >
             <h3 class="mb-0">

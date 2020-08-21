@@ -93,12 +93,15 @@ class IndicatorComponent extends Component
             $result['title'] = $score['title_info'];
             $result['lamp'] = $lamp;
             $result['lamp_color'] = $this->color_info[$lamp];
-            if($lamp >= 3 && $score->is_rated == 1){
-                $intercept = $score[$this->pred_target[$lamp]."_intercept"];
-                $coefficient = $score[$this->pred_target[$lamp]."_coefficient"];
-                $fifty = $this->fifty($intercept,$coefficient);
+            if($lamp >= 3){
+                if($score->is_rated == 1){
+                    $intercept = $score[$this->pred_target[$lamp]."_intercept"];
+                    $coefficient = $score[$this->pred_target[$lamp]."_coefficient"];
+                    $fifty = sprintf('%.2f',$this->fifty($intercept,$coefficient));
+                }
+                else $fifty = "未対応";
             }
-            else $fifty = -1;
+            else $fifty = "-";
             $result['fifty_rating'] = $fifty;
             $result['diff'] = $score['difficulty'];
             $results[] = $result;

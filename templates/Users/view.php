@@ -211,7 +211,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
                                     </td>
-                                    <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
+                                    <td align="right"><?php echo $row['fifty_rating']; ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -265,8 +265,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <li class="nav-item">
                                             <h5 class="card-title">
                                                 目標ランプ
-                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','tar_lamps',true);">全てチェック</a></div>
-                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','tar_lamps',false);">全て非チェック</a></div>
+                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','tar_lamps',true);">全てチェック</div>
+                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('rec-form','tar_lamps',false);">全て非チェック</div>
                                             </h5>
                                             <ul>
                                                 <?php foreach ($checkbox['tar_lamp'] as $_lamp): ?>
@@ -278,6 +278,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <li class="nav-item">
                                             <h5 class="card-title">
                                                 クリア確率
+                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('rec-form',{'rec_min':'0.00','rec_max':'100.00',});">リセット</div>
                                             </h5>
                                             <ul>
                                                 <div class="form-row">
@@ -371,12 +372,12 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <li class="nav-item">
                                             <h5 class="card-title">
                                                 現ランプ
-                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','cur_lamps',true);">全てチェック</a></div>
-                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','cur_lamps',false);">全て非チェック</a></div>
+                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','tar_lamps',true);">全てチェック</a></div>
+                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="allCheck('bte-form','tar_lamps',false);">全て非チェック</a></div>
                                             </h5>
                                             <ul>
                                                 <?php foreach ($checkbox['tar_lamp'] as $_lamp): ?>
-                                                    <label class=mr-3><input type="checkbox" name="<?= 'cur_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
+                                                    <label class=mr-3><input type="checkbox" name="<?= 'tar_'.$_lamp ?>" checked="checked"/><?= $_lamp ?></label>
                                                 <?php endforeach; ?>
                                             </ul>
                                         </li>
@@ -384,6 +385,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <li class="nav-item">
                                             <h5 class="card-title">
                                                 クリア確率
+                                                <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('bte-form',{'bte_min':'0.00','bte_max':'50.00',});">リセット</div>
                                             </h5>
                                             <ul>
                                                 <div class="form-row">

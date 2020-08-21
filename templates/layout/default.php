@@ -16,7 +16,7 @@
 use Cake\Routing\Router;
 
 $cakeDescription = 'CPI : Clear Power Indicator ';
-$source_version = "?ver=1.000";
+$source_version = "?ver=1.001";
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@ $source_version = "?ver=1.000";
     <meta property="og:image" content="<?= Router::url('/img/cpi_144_144.png',true)?>">
     
     <title>
-        <?= $cakeDescription ?>:
+        <?= $cakeDescription ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
@@ -77,14 +77,7 @@ $source_version = "?ver=1.000";
            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <?= $this->Html->link(
-                        __('Home'),
-                        ['controller' => 'Pages', 'action' => 'display'],
-                        ['class' => 'nav-link'])
-                    ?>
-                </li>
-                <li class="nav-item">
-                    <?= $this->Html->link(
-                        __('User'),
+                        __('Users'),
                         ['controller' => 'Users', 'action' => 'index'],
                         ['class' => 'nav-link'])
                     ?>
@@ -93,6 +86,13 @@ $source_version = "?ver=1.000";
                     <?= $this->Html->link(
                         __('About'),
                         ['controller' => 'Pages', 'action' => 'about'],
+                        ['class' => 'nav-link'])
+                    ?>
+                </li>
+                <li class="nav-item">
+                    <?= $this->Html->link(
+                        __('Donate'),
+                        ['controller' => 'Pages', 'action' => 'donate'],
                         ['class' => 'nav-link'])
                     ?>
                 </li>
