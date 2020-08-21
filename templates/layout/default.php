@@ -84,7 +84,7 @@ $source_version = "?ver=1.000";
                 </li>
                 <li class="nav-item">
                     <?= $this->Html->link(
-                        __('User'),
+                        __('Users'),
                         ['controller' => 'Users', 'action' => 'index'],
                         ['class' => 'nav-link'])
                     ?>
