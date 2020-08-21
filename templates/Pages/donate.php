@@ -34,7 +34,7 @@
                 また、反映には一定のお時間を戴いています。ご了承ください。</br>
             </p>
             <ul class="list">
-                <li>のりみそ 様</li>
+                <li>norimisoIIDX 様</li>
             </dl>
         </div>
     </div>
