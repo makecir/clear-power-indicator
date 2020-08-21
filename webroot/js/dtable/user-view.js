@@ -30,7 +30,11 @@ $(document).ready(function() {
                 'orderable' : true,
                 'orderDataType' : 'lamp',
             },
-            {}
+            {
+                'targets' :  3,
+                'orderable' : true,
+                'orderDataType' : 'fifty_cpi',
+            }
         ]
     });
     $('form').on('change', function(event) {
@@ -301,7 +305,14 @@ $(function($){
           }
         });
       };  
-  
+      $.fn.dataTable.ext.order['fifty_cpi'] = function (settings, col){
+        return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+          if($(td).html()=="-")return 0;
+          if($(td).html()=="未対応")return 1;
+          else return $(td).html();
+
+        });
+      };  
 }); 
 
 var versions = new Array('5th style',

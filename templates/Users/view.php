@@ -211,7 +211,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
                                     </td>
-                                    <td align="right"><?php echo $row['fifty_rating']!=-1?(sprintf('%.2f',$row['fifty_rating'])):("-"); ?></td>
+                                    <td align="right"><?php echo $row['fifty_rating']; ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
