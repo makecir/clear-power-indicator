@@ -74,3 +74,9 @@ $(function($){
   
 }); 
 
+function setValue(form,dict){
+    const forms = document.forms[form];
+    for(let key in dict){
+        forms[key].value=dict[key];
+    }
+}

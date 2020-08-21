@@ -39,7 +39,7 @@ $source_version = "?ver=1.001";
     <meta property="og:image" content="<?= Router::url('/img/cpi_144_144.png',true)?>">
     
     <title>
-        <?= $cakeDescription ?>:
+        <?= $cakeDescription ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
