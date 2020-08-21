@@ -30,7 +30,11 @@ $(document).ready(function() {
                 'orderable' : true,
                 'orderDataType' : 'lamp',
             },
-            {}
+            {
+                'targets' :  3,
+                'orderable' : true,
+                'orderDataType' : 'fifty_cpi',
+            }
         ]
     });
     $('form').on('change', function(event) {
@@ -275,6 +279,18 @@ $(function($){
         return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
           switch ($(td).html()){
   
+            case '七級':return '138';
+            case '六級':return '139';
+            case '五級':return '140';
+            case '四級':return '141';
+            case '三級':return '142';
+            case '二級':return '143';
+            case '一級':return '144';
+            case '初段':return '145';
+            case '二段':return '146';
+            case '三段':return '147';
+            case '四段':return '148';
+            case '五段':return '149';
             case '六段':return '150';
             case '七段':return '151';
             case '八段':return '152';
@@ -283,12 +299,20 @@ $(function($){
             case '中伝':return '155';
             case '皆伝':return '156';
             
+            
             default:
               return '00';
           }
         });
       };  
-  
+      $.fn.dataTable.ext.order['fifty_cpi'] = function (settings, col){
+        return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
+          if($(td).html()=="-")return 0;
+          if($(td).html()=="未対応")return 1;
+          else return $(td).html();
+
+        });
+      };  
 }); 
 
 var versions = new Array('5th style',
@@ -366,7 +390,7 @@ $.fn.dataTable.ext.search.push(
         }
         if(settings.nTable.id == 'bte-table'){
             for(let ver of versions) if (!bte_form.elements[ver].checked && data[0] == ver) return false;
-            for(let lamp of tar_lamps) if (!bte_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
+            for(let lamp of tar_lamps) if (!bte_form.elements[("tar_"+lamp)].checked && data[2].includes(lamp)) return false;
             if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[4]))return false;
         }
 
@@ -383,8 +407,16 @@ function allCheck(form,target_op,value){
     for(let tar of target) {
         boxes[prefix + tar].checked = value;
     }
-    $(boxes[target[0]]).change();
+    $(boxes[prefix + target[0]]).change();
 }
+
+function setValue(form,dict){
+    const forms = document.forms[form];
+    for(let key in dict){
+        forms[key].value=dict[key];
+    }
+}
+
 
 $(function(){
     $("form").garlic();

@@ -46,6 +46,18 @@ $(function($){
       return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
         switch ($(td).html()){
 
+          case '七級':return '138';
+          case '六級':return '139';
+          case '五級':return '140';
+          case '四級':return '141';
+          case '三級':return '142';
+          case '二級':return '143';
+          case '一級':return '144';
+          case '初段':return '145';
+          case '二段':return '146';
+          case '三段':return '147';
+          case '四段':return '148';
+          case '五段':return '149';
           case '六段':return '150';
           case '七段':return '151';
           case '八段':return '152';
@@ -62,3 +74,9 @@ $(function($){
   
 }); 
 
+function setValue(form,dict){
+    const forms = document.forms[form];
+    for(let key in dict){
+        forms[key].value=dict[key];
+    }
+}

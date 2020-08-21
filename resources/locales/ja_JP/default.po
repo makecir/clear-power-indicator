@@ -646,6 +646,9 @@ msgstr "ホーム"
 msgid "About"
 msgstr "このサイトについて"
 
+msgid "Donate"
+msgstr "開発者支援"
+
 #:
 msgid "Register"
 msgstr "新規登録"
