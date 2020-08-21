@@ -7,9 +7,9 @@
 $tweet_text_lamp = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating.' (推定順位：'.$user->user_detail->standing."位程度)\n".
 "SP☆12ランプ詳細はこちら";
 $tweet_text_rec = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
-"リコメンドTOP：".$tweet_top_info['rec']['title']." 【".$tweet_top_info['rec']['lamp']."】 ".sprintf("%.2f",$tweet_top_info['rec']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['rec']['cpi']).")\n";
+"リコメンドTOP：".$tweet_top_info['rec']['title']." 【".$tweet_top_info['rec']['lamp']."】 ".sprintf("%.2f%%",$tweet_top_info['rec']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['rec']['cpi']).")\n";
 $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
-"逆リコメンドTOP：".$tweet_top_info['bte']['title']." 【".$tweet_top_info['bte']['lamp']."】 ".sprintf("%.2f",$tweet_top_info['bte']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['bte']['cpi']).")\n";
+"逆リコメンドTOP：".$tweet_top_info['bte']['title']." 【".$tweet_top_info['bte']['lamp']."】 ".sprintf("%.2f%%",$tweet_top_info['bte']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['bte']['cpi']).")\n";
 ?>
 <div class="users view content">
     <div class="card border-secondary mb-3">
