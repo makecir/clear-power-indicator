@@ -66,9 +66,7 @@ class UsersController extends AppController
     {
         $users = $this->Users->find('all', [
             'contain' => [
-                'Scores', 
                 'UserDetails',
-                'UserLamps',
             ],
         ]) ?? [];
         $dtables=['user-index'];
