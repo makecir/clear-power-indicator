@@ -29,6 +29,7 @@ $source_version = "?ver=1.001";
         gtag('js', new Date());
         gtag('config', 'UA-175924766-1');
     </script>
+    <script data-ad-client="ca-pub-1818502111329198" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
