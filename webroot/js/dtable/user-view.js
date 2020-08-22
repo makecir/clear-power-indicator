@@ -391,7 +391,7 @@ $.fn.dataTable.ext.search.push(
         if(settings.nTable.id == 'bte-table'){
             for(let ver of versions) if (!bte_form.elements[ver].checked && data[0] == ver) return false;
             for(let lamp of tar_lamps) if (!bte_form.elements[("tar_"+lamp)].checked && data[2].includes(lamp)) return false;
-            if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[4]))return false;
+            if(parseFloat(data[3]) < parseFloat(bte_form.elements['bte_min'].value) || parseFloat(bte_form.elements['bte_max'].value) < parseFloat(data[3]))return false;
         }
 
         return true;
@@ -415,6 +415,7 @@ function setValue(form,dict){
     for(let key in dict){
         forms[key].value=dict[key];
     }
+    $(forms[0]).change();
 }
 
 
