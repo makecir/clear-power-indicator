@@ -269,8 +269,8 @@ $(function($){
           if($(td).html().includes('ASSITED'))return 12;
           if($(td).html().includes('EASY'))return 13;
           if($(td).html().includes('CLEAR'))return 14;
-          if($(td).html().includes('HARD'))return 15;
           if($(td).html().includes('EXHARD'))return 16;
+          if($(td).html().includes('HARD'))return 15;
           if($(td).html().includes('FULLCOMBO'))return 17;
           else return 0;
         });
