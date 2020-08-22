@@ -356,7 +356,7 @@ class UsersController extends AppController
         }
         else {
             $this->loadComponent('Indicator');
-            if($user->user_detail->season??0 == $this->indicator->getSeason()){
+            if(($user->user_detail->season??0) == $this->Indicator->getSeason()){
 
                 $this->Flash->success(__('No need to recalculate.'));
                 return $this->redirect(['action' => 'view', $user->id]);
