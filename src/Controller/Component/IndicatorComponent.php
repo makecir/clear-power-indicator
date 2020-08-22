@@ -206,7 +206,7 @@ class IndicatorComponent extends Component
         $top_change['title'] = '';
         $top_change['lamp'] = 0;
         foreach($user_history->lamp_changes as $change){
-            $result['title'] = $change->score->title;
+            $result['title'] = $change->score->title_info;
             $result['diff'] = $change->score->difficulty;
             $result['before_lamp'] = $change->before_lamp;
             $result['after_lamp'] = $change->after_lamp;
@@ -216,7 +216,7 @@ class IndicatorComponent extends Component
                 $fifty = $this->fifty($intercept,$coefficient);
                 if($fifty > $top_change['cpi']){
                     $top_change['cpi'] = $fifty;
-                    $top_change['title'] = $change->score->title;
+                    $top_change['title'] = $change->score->title_info;
                     $top_change['lamp'] = $change->after_lamp;
                 }
             }
