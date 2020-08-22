@@ -236,7 +236,7 @@ class IndicatorComponent extends Component
     }
 
     public function getGhostNum() {
-        return 30210;
+        return 30206;
     }
 
     public function getSeason() {
