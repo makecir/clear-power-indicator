@@ -366,6 +366,18 @@ var lamp2num = {
     'FULLCOMBO':7,
 }
 
+function lamp2numFunc(data){
+    if(data.includes('NO PLAY'))return 10;
+    if(data.includes('FAILED'))return 11;
+    if(data.includes('ASSITED'))return 12;
+    if(data.includes('EASY'))return 13;
+    if(data.includes('CLEAR'))return 14;
+    if(data.includes('EXHARD'))return 16;
+    if(data.includes('HARD'))return 15;
+    if(data.includes('FULLCOMBO'))return 17;
+    else return 0;
+}
+
 $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex, rowData ) {
         //return true;
@@ -383,7 +395,7 @@ $.fn.dataTable.ext.search.push(
             for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && data[2].includes(lamp)) return false;
             for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && data[3].includes(lamp)) return false;
             if(parseFloat(data[4]) < parseFloat(rec_form.elements['rec_min'].value) || parseFloat(rec_form.elements['rec_max'].value) < parseFloat(data[4]))return false;
-            if(rec_form.elements['rec_one_step'].checked && lamp2num[data[2]]+1 < lamp2num[data[3]])return false;
+            if(rec_form.elements['rec_one_step'].checked && lamp2numFunc(data[2])+1 < lamp2numFunc(data[3]))return false;
             if(rec_form.elements['rec_leg_only'].checked && (!data[1].includes("[L]"))) return false;
             if(rec_form.elements['rec_leg_except'].checked && data[1].includes("[L]")) return false;
 
