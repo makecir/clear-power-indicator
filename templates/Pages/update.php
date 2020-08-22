@@ -9,7 +9,7 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
-                <dt>2020/08/21</dt>
+                <dt>2020/08/22</dt>
                 <dd>正式サービス開始</dd>
                 <dt>2020/03/14</dt>
                 <dd>オープンβテストを開始</dd>
