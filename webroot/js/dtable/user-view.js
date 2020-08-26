@@ -250,7 +250,7 @@ $(function($){
 
           case 'NO PLAY':return '90';
           case 'FAILED':return '91';
-          case 'ASSITED':return '92';
+          case 'ASSISTED':return '92';
           case 'EASY':return '93';
           case 'CLEAR':return '94';
           case 'HARD':return '95';
@@ -266,13 +266,13 @@ $(function($){
         return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
           if($(td).html().includes('NO PLAY'))return 10;
           if($(td).html().includes('FAILED'))return 11;
-          if($(td).html().includes('ASSITED'))return 12;
+          if($(td).html().includes('ASSISTED'))return 12;
           if($(td).html().includes('EASY'))return 13;
           if($(td).html().includes('CLEAR'))return 14;
           if($(td).html().includes('EXHARD'))return 16;
           if($(td).html().includes('HARD'))return 15;
           if($(td).html().includes('FULLCOMBO'))return 17;
-          else return 0;
+          else return 100;
         });
       };  
     $.fn.dataTable.ext.order['grade-jp'] = function (settings, col){
@@ -380,16 +380,7 @@ function lamp2numFunc(data){
 
 function lampInclude(data,lamp){
     if(lamp == "HARD") return data.includes("HARD") && !(data.includes("EXHARD"));
-    return data.includes(lamp);
-    if(data.includes('NO PLAY'))return 10;
-    if(data.includes('FAILED'))return 11;
-    if(data.includes('ASSITED'))return 12;
-    if(data.includes('EASY'))return 13;
-    if(data.includes('CLEAR'))return 14;
-    if(data.includes('EXHARD'))return 16;
-    if(data.includes('HARD'))return 15;
-    if(data.includes('FULLCOMBO'))return 17;
-    else return 0;
+    else return data.includes(lamp);
 }
 
 $.fn.dataTable.ext.search.push(
@@ -409,7 +400,7 @@ $.fn.dataTable.ext.search.push(
             for(let lamp of cur_lamps) if (!rec_form.elements[("cur_"+lamp)].checked && lampInclude(data[2],lamp)) return false;
             for(let lamp of tar_lamps) if (!rec_form.elements['tar_'+lamp].checked && lampInclude(data[3],lamp)) return false;
             if(parseFloat(data[4]) < parseFloat(rec_form.elements['rec_min'].value) || parseFloat(rec_form.elements['rec_max'].value) < parseFloat(data[4]))return false;
-            if(rec_form.elements['rec_one_step'].checked && lamp2numFunc(data[2])+1 < lamp2numFunc(data[3]))return false;
+            if(rec_form.elements['rec_one_step'].checked && lamp2numFunc(data[2])+1.9 < lamp2numFunc(data[3]))return false;
             if(rec_form.elements['rec_leg_only'].checked && (!data[1].includes("[L]"))) return false;
             if(rec_form.elements['rec_leg_except'].checked && data[1].includes("[L]")) return false;
 

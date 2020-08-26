@@ -519,7 +519,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <tr>
                                             <td align="center"><?= $this->Html->link($row->user_detail->dj_name, ['action' => 'view', $row->id]) ?></td>
                                             <td align="center"><?= h($row->user_detail->iidx_id) ?></td>
-                                            <td align="center"><?= h(($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'')) ?></td>
+                                            <td align="center"><?= h(($row->user_detail->rating?sprintf('%.2f',$row->user_detail->rating):'')) ?></td>
                                             <td align="center"><?= h($row->user_detail->grade_sp_info) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
