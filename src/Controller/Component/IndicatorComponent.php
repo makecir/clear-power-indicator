@@ -220,6 +220,7 @@ class IndicatorComponent extends Component
                     $top_change['lamp'] = $change->after_lamp;
                 }
             }
+            else $fifty = NULL;
             $result['fifty_rating'] = $fifty ?? '-';
             $results[] = $result;
         }
