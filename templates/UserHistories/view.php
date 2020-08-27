@@ -114,7 +114,7 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                                     <div class="pc-dsp"><?= $lamp_info[$row['after_lamp']] ?></div>
                                     <div class="sp-dsp"><?= $change_counts_label[$row['after_lamp']] ?></div>
                                 </td>
-                                <td align="right"><?php echo sprintf('%.2f',$row['fifty_rating']); ?></td>
+                                <td align="right"><?= $row['fifty_rating'] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

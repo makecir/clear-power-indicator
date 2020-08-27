@@ -213,15 +213,15 @@ class IndicatorComponent extends Component
             if($change->after_lamp >= 3 && $change->score->is_rated == 1){
                 $intercept = $change->score[$this->pred_target[$change->after_lamp]."_intercept"];
                 $coefficient = $change->score[$this->pred_target[$change->after_lamp]."_coefficient"];
-                $fifty = $this->fifty($intercept,$coefficient);
+                $fifty = sprintf('%.2f',$this->fifty($intercept,$coefficient));
                 if($fifty > $top_change['cpi']){
                     $top_change['cpi'] = $fifty;
                     $top_change['title'] = $change->score->title_info;
                     $top_change['lamp'] = $change->after_lamp;
                 }
             }
-            else $fifty = NULL;
-            $result['fifty_rating'] = $fifty ?? '-';
+            else $fifty = '-';
+            $result['fifty_rating'] = $fifty;
             $results[] = $result;
         }
         return $results;
