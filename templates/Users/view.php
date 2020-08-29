@@ -193,7 +193,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                         </div>
                     </div>
                     <div class="table-responsive table-smart-phone-xx">
-                        <table  id="lamp-detail" class="table table-bordered">
+                        <table id="lamp-detail" class="table table-bordered">
                             <thead>
                                 <tr class="text-center">
                                     <th align="center"><?= __('Version') ?></th>
