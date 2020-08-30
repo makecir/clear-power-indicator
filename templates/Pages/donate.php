@@ -36,6 +36,7 @@
             </p>
             <ul class="list">
                 <li>norimisoIIDX 様</li>
+                <li>shuymn 様</li>
             </dl>
         </div>
     </div>
