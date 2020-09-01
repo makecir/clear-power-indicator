@@ -176,9 +176,9 @@ $.fn.dataTable.ext.search.push(
             for(let lamp of cur_lamps) if (!compare_form.elements[("rival_"+lamp)].checked && lampInclude(data[3],lamp)) return false;
             if(compare_form.elements['compare_leg_only'].checked && (!data[1].includes("[L]"))) return false;
             if(compare_form.elements['compare_leg_except'].checked && data[1].includes("[L]")) return false;
-            if(compare_form.elements['compare_except_win'].checked && (lamp2numFunc(data[2]) > lamp2numFunc(data[3]))) return false;
-            if(compare_form.elements['compare_except_draw'].checked && (lamp2numFunc(data[2]) == lamp2numFunc(data[3]))) return false;
-            if(compare_form.elements['compare_except_lose'].checked && (lamp2numFunc(data[2]) < lamp2numFunc(data[3]))) return false;
+            if(!compare_form.elements['compare_except_win'].checked && (lamp2numFunc(data[2]) > lamp2numFunc(data[3]))) return false;
+            if(!compare_form.elements['compare_except_draw'].checked && (lamp2numFunc(data[2]) == lamp2numFunc(data[3]))) return false;
+            if(!compare_form.elements['compare_except_lose'].checked && (lamp2numFunc(data[2]) < lamp2numFunc(data[3]))) return false;
         }
         return true;
     }
@@ -188,8 +188,8 @@ function allCheck(form,target_op,value){
     const boxes = document.forms[form];
 
     if(target_op=='versions'){prefix=''; target = versions;}
-    if(target_op=='cur_lamps'){prefix='cur_'; target = cur_lamps;}
-    if(target_op=='tar_lamps'){prefix='tar_'; target = tar_lamps;}
+    if(target_op=='my_lamps'){prefix='my_'; target = cur_lamps;}
+    if(target_op=='rival_lamps'){prefix='rival_'; target = cur_lamps;}
     for(let tar of target) {
         boxes[prefix + tar].checked = value;
     }
