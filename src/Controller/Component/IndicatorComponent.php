@@ -200,6 +200,54 @@ class IndicatorComponent extends Component
         return $results;
     }
 
+    public function getCompareInfo(&$me, &$rival){
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $scores = $Scores->find('available')->toArray();
+        $results = array();
+        $my_lamps = $me->user_detail->my_lamps_array;
+        $rival_lamps = $rival->user_detail->my_lamps_array;
+        $results['lamp_count']['me'] = $this->getLampCounts($my_lamps);
+        $results['lamp_count']['rival'] = $this->getLampCounts($rival_lamps);
+        $results['rating']['diff'] = ($rival->user_detail->rating - $me->user_detail->rating >= 0?"+":"").($rival->user_detail->rating - $me->user_detail->rating);
+        $results['standing']['diff'] = ($rival->user_detail->standing - $me->user_detail->standing >= 0?"↓":"↑").abs($rival->user_detail->standing - $me->user_detail->standing);
+        $results['win']['me'] = 0;
+        $results['win']['rival'] = 0;
+        foreach($scores as $score){
+            $my_lamp = $my_lamps[$score['id']]??0;
+            $rival_lamp = $rival_lamps[$score['id']]??0;
+            if($my_lamp!==0 && $rival_lamp!==0){
+                if($my_lamp > $rival_lamp)$results['win']['me']++;
+                if($my_lamp < $rival_lamp)$results['win']['rival']++;
+            }
+        }
+        if($results['win']['me'] > $results['win']['rival'])$results['win']['result'] = "勝利";
+        else if($results['win']['me'] < $results['win']['rival'])$results['win']['result'] = "敗北";
+        else $results['win']['result'] = "互角";
+        return $results;
+    }
+
+    public function getCompareResults(&$me, &$rival){
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $scores = $Scores->find('available')->toArray();
+        $lamp_num = sizeof($this->lamp_info);
+        $my_lamps = $me->user_detail->my_lamps_array;
+        $rival_lamps = $rival->user_detail->my_lamps_array;
+        $results = array();
+        foreach($scores as $score){
+            $my_lamp = $my_lamps[$score['id']]??0;
+            $rival_lamp = $rival_lamps[$score['id']]??0;
+            $result['version'] = $this->version_info[$score['version_num']??5];
+            $result['title'] = $score['title_info'];
+            $result['my_lamp'] = $my_lamp;
+            $result['my_lamp_color'] = $this->color_info[$my_lamp];
+            $result['rival_lamp'] = $rival_lamp;
+            $result['rival_lamp_color'] = $this->color_info[$rival_lamp];
+            $result['diff'] = $score['difficulty'];
+            $results[] = $result;
+        }
+        return $results;
+    }
+
     public function getLampChangeResults(&$user_history, &$top_change){
         $results = array();
         $top_change['cpi'] = 0;

@@ -796,3 +796,17 @@ msgstr "更新の削除に失敗しました。もう一度お試しください
 
 msgid "Are you sure you want to delete?"
 msgstr "本当に削除しますか？"
+
+
+
+msgid "Compare"
+msgstr "比較"
+
+msgid "Compare with me"
+msgstr "自分と比較"
+
+msgid "My Lamp"
+msgstr "自分"
+
+msgid "Rival Lamp"
+msgstr "相手"
