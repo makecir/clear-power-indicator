@@ -109,7 +109,7 @@
                 </h5>
                 <div id="collapse-f-lamp-compare" class="collapse" aria-labelledby="filter-lamp-compare">
                     <div class="card-body">
-                        <form action="#" name="compare-form" data-persist=”garlic” >
+                        <form action="#" name="compare-form">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <h5 class="card-title">
