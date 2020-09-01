@@ -152,7 +152,7 @@ var lamp2num = {
 function lamp2numFunc(data){
     if(data.includes('NO PLAY'))return 10;
     if(data.includes('FAILED'))return 11;
-    if(data.includes('ASSITED'))return 12;
+    if(data.includes('ASSISTED'))return 12;
     if(data.includes('EASY'))return 13;
     if(data.includes('CLEAR'))return 14;
     if(data.includes('EXHARD'))return 16;
@@ -176,9 +176,10 @@ $.fn.dataTable.ext.search.push(
             for(let lamp of cur_lamps) if (!compare_form.elements[("rival_"+lamp)].checked && lampInclude(data[3],lamp)) return false;
             if(compare_form.elements['compare_leg_only'].checked && (!data[1].includes("[L]"))) return false;
             if(compare_form.elements['compare_leg_except'].checked && data[1].includes("[L]")) return false;
-            if(!compare_form.elements['compare_except_win'].checked && (lamp2numFunc(data[2]) > lamp2numFunc(data[3]))) return false;
-            if(!compare_form.elements['compare_except_draw'].checked && (lamp2numFunc(data[2]) == lamp2numFunc(data[3]))) return false;
-            if(!compare_form.elements['compare_except_lose'].checked && (lamp2numFunc(data[2]) < lamp2numFunc(data[3]))) return false;
+            if(!compare_form.elements['compare_except_win'].checked && (lamp2numFunc(data[2]) > lamp2numFunc(data[3]) && lamp2numFunc(data[3]) != 10)) return false;
+            if(!compare_form.elements['compare_except_draw'].checked && (lamp2numFunc(data[2]) == lamp2numFunc(data[3]) && lamp2numFunc(data[3]) != 10)) return false;
+            if(!compare_form.elements['compare_except_lose'].checked && (lamp2numFunc(data[2]) < lamp2numFunc(data[3]) && lamp2numFunc(data[2]) != 10)) return false;
+            if(!compare_form.elements['compare_except_no_match'].checked && (lamp2numFunc(data[2]) == 10 || lamp2numFunc(data[3]) == 10)) return false;
         }
         return true;
     }

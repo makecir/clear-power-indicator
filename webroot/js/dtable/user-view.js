@@ -369,7 +369,7 @@ var lamp2num = {
 function lamp2numFunc(data){
     if(data.includes('NO PLAY'))return 10;
     if(data.includes('FAILED'))return 11;
-    if(data.includes('ASSITED'))return 12;
+    if(data.includes('ASSISTED'))return 12;
     if(data.includes('EASY'))return 13;
     if(data.includes('CLEAR'))return 14;
     if(data.includes('EXHARD'))return 16;
