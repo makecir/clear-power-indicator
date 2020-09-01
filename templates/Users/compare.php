@@ -7,50 +7,53 @@
 <div class="users compare content">
     <div class="card border-secondary mb-3">
         <div class="card-header padding-sm">
-            <h4 class="mb-0">
-                <?= __('Compare') ?>
+            <h3 class="mb-0">
+                <?= "vs ".$rival->user_detail->dj_name ?>
                 <div style="float:right;display:inline;">
-                    <?= $this->Html->link(
-                        __('User page'),
-                        ['controller'=>'Users', 'action'=>'view',$rival->id],
-                        ['class' => 'btn btn-info'])
-                    ?>
+                <?= $this->Html->link(
+                    __($follow_flag?'フォロー解除':'フォロー'),
+                    ['action' => 'following', $identity->id, $rival->id],
+                    ['class' => 'btn btn'.($follow_flag?'':'-outline').'-success my-auto', 'style' => "float:right;display:inline;"])
+                ?>
                 </div>
-            </h4>
+            </h3>
         </div>
         <div class="card-body pr-3 pl-3 text-dark">
             <div class="row">
-                <div class="col-md-5 col-lg-4">
+                <div class="col-lg-4">
+                    <div class="ml-2 mb-3">
+                        <h3 style="display:inline;">
+                            <?= $compare_info_table['win']['me'] ?>勝<?= $compare_info_table['win']['rival'] ?>敗
+                        </h3>
+                        <h4 style="display:inline;">
+                            (<?= $compare_info_table['win']['result'] ?>)
+                        </h4>
+                    </div>
                     <div class="table-responsive">
-                        <table id="compare-info" class="table table-bordered" >
+                        <table id="compare-info" class="table table-bordered table-smart-phone-sm">
                             <thead>
                                 <tr class="text-center">
                                     <th align="center"></th>
-                                    <th align="center"><?= $this->Html->link($me->user_detail->dj_name,['action'=>'view',$me->id],) ?></th>
-                                    <th align="center"><?= $this->Html->link($rival->user_detail->dj_name,['action'=>'view',$rival->id],) ?></th>
+                                    <th align="center">CPI</th>
+                                    <th align="center">推定順位</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th align="center">CPI</th>
+                                    <th align="center"><?= $this->Html->link($me->user_detail->dj_name,['action'=>'view',$me->id],) ?></th>
                                     <td align="center"><?= $me->user_detail->rating ?></td>
-                                    <td align="center"><?= $rival->user_detail->rating ?><?= " (".$compare_info_table['rating']['diff'].")" ?></td>
-                                </tr>
-                                <tr>
-                                    <th align="center">推定順位</th>
                                     <td align="center"><?= $me->user_detail->standing ?>位</td>
-                                    <td align="center"><?= $rival->user_detail->standing ?>位<?= " (".$compare_info_table['standing']['diff'].")" ?></td>
                                 </tr>
                                 <tr>
-                                    <th align="center">勝敗</th>
-                                    <td align="center"><?= $compare_info_table['wim']['me'] ?>勝</td>
-                                    <td align="center"><?= $compare_info_table['wim']['rival'] ?>勝</td>
+                                    <th align="center"><?= $this->Html->link($rival->user_detail->dj_name,['action'=>'view',$rival->id],) ?></th>
+                                    <td align="center"><?= $rival->user_detail->rating ?><?= " (".$compare_info_table['rating']['diff'].")" ?></td>
+                                    <td align="center"><?= $rival->user_detail->standing ?>位<?= " (".$compare_info_table['standing']['diff'].")" ?></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="col-md-7 col-lg-8 p-3">
+                <div class=" col-lg-8 p-3">
                     <div class="table-responsive table-smart-phone-sm">
                         <table class="table table-bordered">
                             <thead>
@@ -149,14 +152,22 @@
                                 <hr>
                                 <li class="nav-item">
                                     <h5 class="card-title">
+                                        勝敗
+                                    </h5>
+                                    <ul style="list-style: none;">
+                                        <label class=mr-3><input type="checkbox" name="compare_except_win"/> 勝ち</label>
+                                        <label class=mr-3><input type="checkbox" name="compare_except_draw"/> 互角</label>
+                                        <label class=mr-3><input type="checkbox" name="compare_except_lose"/>  負け</label>
+                                    </ul>
+                                </li>
+                                <hr>
+                                <li class="nav-item">
+                                    <h5 class="card-title">
                                         その他
                                     </h5>
                                     <ul style="list-style: none;">
                                         <li><label class=mr-3><input type="checkbox" name="compare_leg_only"/> LEGGENDARIAのみ表示</label></li>
                                         <li><label class=mr-3><input type="checkbox" name="compare_leg_except"/> LEGGENDARIAを非表示</label></li>
-                                        <li><label class=mr-3><input type="checkbox" name="compare_except_win"/> 勝っている曲を非表示</label></li>
-                                        <li><label class=mr-3><input type="checkbox" name="compare_except_draw"/> 互角の曲を非表示</label></li>
-                                        <li><label class=mr-3><input type="checkbox" name="compare_except_lose"/>  負けている曲を非表示</label></li>
                                     </ul>
                                 </li>
                             </ul>

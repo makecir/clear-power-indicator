@@ -32,7 +32,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
             <?php endif; ?>
         </div>
         <div class="card-body text-dark pr-3 pl-3">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-5 col-lg-4">
                     <div class="mb-4">
                         <div class="mb-1"><h3 class="card-text" style="display:inline;"><?= __('CPI')." : ".($user->user_detail->rating?sprintf('%.2f',$user->user_detail->rating):'') ?></h3></div>
@@ -82,7 +82,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <thead>
                                 <tr>
                                     <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
-                                        <th scope="col"  bgcolor=<?= $checkbox['color'][$i] ?>><?= $checkbox['lamp_short'][$i] ?></th>
+                                        <th scope="col" bgcolor=<?= $checkbox['color'][$i] ?>><?= $checkbox['lamp_short'][$i] ?></th>
                                     <?php endforeach; ?>
                                 </tr>
                             </thead>
@@ -101,6 +101,15 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                         <?php endforeach; ?>
                     </div>
                 </div>
+            </div>
+            <div class='text-center'>
+                <?php if($isLoggedIn && !$mypage):?>
+                    <?= $this->Html->link(
+                        __('Compare with me'),
+                        ['controller'=>'Users', 'action'=>'compare',$identity->id,$user->id],
+                        ['class' => 'btn btn-info'])
+                    ?>
+                <?php endif;?>
             </div>
         </div>
         <div class="card-footer text-muted text-center">
@@ -476,7 +485,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <th align="center"><?= __('DJname') ?></th>
                                         <th align="center"><?= __('CPI') ?></th>
                                         <th align="center"><?= __('Lamp') ?></th>
-                                        <th align="center"><?= __('Updated at') ?></th>
+                                        <th align="center"><?= __('Compare') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -491,7 +500,15 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                                     <?php endforeach; ?>
                                                 </div>
                                             </td>
-                                            <td align="center"><?= h($row['update']->format('Y/m/d')) ?></td>
+                                            <td align="center">
+                                                <?php if($row['id']!=$user->id):?>
+                                                <?= $this->Html->link(
+                                                    __('Compare'),
+                                                    ['controller'=>'Users', 'action'=>'compare',$user->id,$row['id']],
+                                                    ['class' => 'btn btn-sm btn-info my-auto'])
+                                                ?>
+                                                <?php endif;?>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
