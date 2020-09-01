@@ -155,9 +155,9 @@
                                         勝敗
                                     </h5>
                                     <ul style="list-style: none;">
-                                        <label class=mr-3><input type="checkbox" name="compare_except_win"/> 勝ち</label>
-                                        <label class=mr-3><input type="checkbox" name="compare_except_draw"/> 互角</label>
-                                        <label class=mr-3><input type="checkbox" name="compare_except_lose"/>  負け</label>
+                                        <label class=mr-3><input type="checkbox" name="compare_except_win" checked="checked"/> 勝ち</label>
+                                        <label class=mr-3><input type="checkbox" name="compare_except_draw" checked="checked"/> 互角</label>
+                                        <label class=mr-3><input type="checkbox" name="compare_except_lose" checked="checked"/> 負け</label>
                                     </ul>
                                 </li>
                                 <hr>
