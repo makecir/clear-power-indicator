@@ -361,12 +361,15 @@ class UsersController extends AppController
         if ($result->getStatus() && $my_id !== $rival_id && ($rival->private_level == 0 || $this->Follow->isFollow($my_id, $rival_id))) {
             $this->loadComponent('Indicator');
             $this->loadComponent('Lamp');
+            $compare_info_table = $this->Indicator->getCompareInfo($me, $rival);
             $compare_table = $this->Indicator->getCompareResults($me, $rival);
             $display_info['cur_lamp'] = $this->Indicator->lamp_info;
             $display_info['lamp_short'] = $this->Lamp->lamp_short_info;
             $display_info['version'] = $this->Indicator->version_info;
+            $display_info['color'] = $this->Indicator->color_info;
+            $display_info['lamp_class'] = $this->Lamp->lamp_class_info;
             $dtables = ['user-compare'];
-            $this->set(compact('me', 'rival', 'compare_table', 'display_info', 'dtables'));
+            $this->set(compact('me', 'rival', 'compare_table', 'display_info', 'dtables', 'compare_info_table'));
         }
         else{
             $this->Flash->error($result->getReason());

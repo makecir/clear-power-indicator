@@ -19,7 +19,73 @@
             </h4>
         </div>
         <div class="card-body pr-3 pl-3 text-dark">
-
+            <div class="row">
+                <div class="col-md-5 col-lg-4">
+                    <div class="table-responsive">
+                        <table id="compare-info" class="table table-bordered" >
+                            <thead>
+                                <tr class="text-center">
+                                    <th align="center"></th>
+                                    <th align="center"><?= $this->Html->link($me->user_detail->dj_name,['action'=>'view',$me->id],) ?></th>
+                                    <th align="center"><?= $this->Html->link($rival->user_detail->dj_name,['action'=>'view',$rival->id],) ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th align="center">CPI</th>
+                                    <td align="center"><?= $me->user_detail->rating ?></td>
+                                    <td align="center"><?= $rival->user_detail->rating ?><?= " (".$compare_info_table['rating']['diff'].")" ?></td>
+                                </tr>
+                                <tr>
+                                    <th align="center">推定順位</th>
+                                    <td align="center"><?= $me->user_detail->standing ?>位</td>
+                                    <td align="center"><?= $rival->user_detail->standing ?>位<?= " (".$compare_info_table['standing']['diff'].")" ?></td>
+                                </tr>
+                                <tr>
+                                    <th align="center">勝敗</th>
+                                    <td align="center"><?= $compare_info_table['wim']['me'] ?>勝</td>
+                                    <td align="center"><?= $compare_info_table['wim']['rival'] ?>勝</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-8 p-3">
+                    <div class="table-responsive table-smart-phone-sm">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                                        <th scope="col"  bgcolor=<?= $display_info['color'][$i] ?>><?= $display_info['lamp_short'][$i] ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                                        <td scope="col"><?= $compare_info_table['lamp_count']['me'][$i] ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <tr>
+                                    <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                                        <td scope="col"><?= $compare_info_table['lamp_count']['rival'][$i] ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="progress mb-3">
+                        <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                            <div class="progress-bar progress-bar-<?= $display_info['lamp_class'][$i] ?>" role="progressbar" style="width: <?= $compare_info_table['lamp_count']['me'][$i] ?>%" aria-valuenow="<?= $compare_info_table['lamp_count']['me'][$i] ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="progress mb-3">
+                        <?php foreach(array_reverse([0,1,2,3,4,5,6,7]) as $i): ?>
+                            <div class="progress-bar progress-bar-<?= $display_info['lamp_class'][$i] ?>" role="progressbar" style="width: <?= $compare_info_table['lamp_count']['rival'][$i] ?>%" aria-valuenow="<?= $compare_info_table['lamp_count']['rival'][$i] ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -200,6 +200,29 @@ class IndicatorComponent extends Component
         return $results;
     }
 
+    public function getCompareInfo(&$me, &$rival){
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $scores = $Scores->find('available')->toArray();
+        $results = array();
+        $my_lamps = $me->user_detail->my_lamps_array;
+        $rival_lamps = $rival->user_detail->my_lamps_array;
+        $results['lamp_count']['me'] = $this->getLampCounts($my_lamps);
+        $results['lamp_count']['rival'] = $this->getLampCounts($rival_lamps);
+        $results['rating']['diff'] = ($rival->user_detail->rating - $me->user_detail->rating >= 0?"+":"").($rival->user_detail->rating - $me->user_detail->rating);
+        $results['standing']['diff'] = ($rival->user_detail->standing - $me->user_detail->standing >= 0?"↓":"↑").abs($rival->user_detail->standing - $me->user_detail->standing);
+        $results['wim']['me'] = 0;
+        $results['wim']['rival'] = 0;
+        foreach($scores as $score){
+            $my_lamp = $my_lamps[$score['id']]??0;
+            $rival_lamp = $rival_lamps[$score['id']]??0;
+            if($my_lamp!==0 && $rival_lamp!==0){
+                if($my_lamp > $rival_lamp)$results['wim']['me']++;
+                if($my_lamp < $rival_lamp)$results['wim']['rival']++;
+            }
+        }
+        return $results;
+    }
+
     public function getCompareResults(&$me, &$rival){
         $Scores = TableRegistry::getTableLocator()->get('Scores');
         $scores = $Scores->find('available')->toArray();
