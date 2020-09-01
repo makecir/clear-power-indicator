@@ -373,7 +373,7 @@ class UsersController extends AppController
             $this->set(compact('me', 'rival', 'compare_table', 'display_info', 'dtables', 'compare_info_table', 'follow_flag'));
         }
         else{
-            $this->Flash->error($result->getReason());
+            $this->Flash->error(__('Permission denied'));
             return $this->redirect(['action' => 'view', $rival_id]);
         }
     }
