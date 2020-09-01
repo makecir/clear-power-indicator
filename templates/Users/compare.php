@@ -158,6 +158,7 @@
                                         <label class=mr-3><input type="checkbox" name="compare_except_win" checked="checked"/> 勝ち</label>
                                         <label class=mr-3><input type="checkbox" name="compare_except_draw" checked="checked"/> 互角</label>
                                         <label class=mr-3><input type="checkbox" name="compare_except_lose" checked="checked"/> 負け</label>
+                                        <label class=mr-3><input type="checkbox" name="compare_except_no_match" checked="checked"/> 無試合</label>
                                     </ul>
                                 </li>
                                 <hr>
