@@ -341,6 +341,43 @@ class UsersController extends AppController
         }
     }
 
+    
+    public function compare($my_id = null, $rival_id = null)
+    {
+        $me = $this->Users->get($my_id, [
+            'contain' => [
+                'UserDetails',
+                'FollowUsers' => ['UserDetails'],
+            ],
+        ]);
+        $rival = $this->Users->get($rival_id, [
+            'contain' => [
+                'UserDetails',
+            ],
+        ]);
+        $identity = $this->request->getAttribute('identity');
+        $result = $identity->canResult('compare', $me);
+        $this->loadComponent('Follow');
+        if ($result->getStatus() && $my_id !== $rival_id && ($rival->private_level == 0 || $this->Follow->isFollow($my_id, $rival_id))) {
+            $this->loadComponent('Indicator');
+            $this->loadComponent('Lamp');
+            $compare_info_table = $this->Indicator->getCompareInfo($me, $rival);
+            $compare_table = $this->Indicator->getCompareResults($me, $rival);
+            $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $rival->id);
+            $display_info['cur_lamp'] = $this->Indicator->lamp_info;
+            $display_info['lamp_short'] = $this->Lamp->lamp_short_info;
+            $display_info['version'] = $this->Indicator->version_info;
+            $display_info['color'] = $this->Indicator->color_info;
+            $display_info['lamp_class'] = $this->Lamp->lamp_class_info;
+            $dtables = ['user-compare'];
+            $this->set(compact('me', 'rival', 'compare_table', 'display_info', 'dtables', 'compare_info_table', 'follow_flag'));
+        }
+        else{
+            $this->Flash->error($result->getReason());
+            return $this->redirect(['action' => 'view', $rival_id]);
+        }
+    }
+
     public function recalclate($id = null)
     {
         $user = $this->Users->get($id, [
