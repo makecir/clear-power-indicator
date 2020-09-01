@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2020/09/02</dt>
+                <dd>プレイヤー比較機能を追加</dd>
                 <dt>2020/08/22</dt>
                 <dd>正式サービス開始</dd>
                 <dt>2020/03/14</dt>
