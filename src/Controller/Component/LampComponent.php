@@ -31,7 +31,6 @@ class LampComponent extends Component
     public function getNewLampDict($user, &$lines){
         // 1, array -> dict['title']['diff']=lamp;
         
-
         $clear_str2num=[
             "NO PLAY"=>0,
             "FAILED"=>1,
@@ -43,6 +42,18 @@ class LampComponent extends Component
             "FULLCOMBO CLEAR"=>7,
             "ASSIST EASY"=>2,
         ];
+        // $djlevel_str2num=[
+        //     "---"=>0,
+        //     "F"=>1,
+        //     "E"=>2,
+        //     "D"=>3,
+        //     "C"=>4,
+        //     "B"=>5,
+        //     "A"=>6,
+        //     "AA"=>7,
+        //     "AAA"=>8,
+        //     "MAX"=>9,
+        // ];
 
         $ret=array();
         foreach($lines as $i => $line){
@@ -58,7 +69,10 @@ class LampComponent extends Component
                     for($j=2 ; $j<5 ; $j++){
                         $tar = $j*7 + 5;
                         if($elements[$tar] == 12){
-                            $ret[$title][$j]=$clear_str2num[$elements[$tar+5]];
+                            $ret[$title][$j]['lamp'] = $clear_str2num[$elements[$tar+5]];
+                            $ret[$title][$j]['miss_count'] = ( $elements[$tar+4]!="---" ? $elements[$tar+4] : NULL);
+                            // $ret[$title][$j]['ex_score'] = $elements[$tar+1];
+                            // $ret[$title][$j]['dj_level'] = $djlevel_str2num[$elements[$tar+6]];
                         }
                     }
                 }
@@ -93,14 +107,14 @@ class LampComponent extends Component
                     continue;
                 }
                 $s_id = $dict[$title][$diff];
-                if($lamp == 0)continue;
+                if($lamp['lamp'] == 0)continue;
                 if(array_key_exists($s_id, $my_lamps_dict))$before_lamp = $my_lamps_dict[$s_id];
                 else $before_lamp = 0;
-                if($before_lamp > $lamp) $invalid = true;
-                if($before_lamp != $lamp) {
-                    $lamp_changes[] = ['score_id'=>$s_id, 'before_lamp'=>$before_lamp, 'after_lamp'=>$lamp];
+                if($before_lamp > $lamp['lamp']) $invalid = true;
+                if($before_lamp != $lamp['lamp']) {
+                    $lamp_changes[] = ['score_id'=>$s_id, 'before_lamp'=>$before_lamp, 'after_lamp'=>$lamp['lamp']];
                 }
-                $new_scores[] = ['user_id'=>$user->id, 'score_id'=>$s_id, 'lamp'=>$lamp];
+                $new_scores[] = ['user_id'=>$user->id, 'score_id'=>$s_id, 'lamp'=>$lamp['lamp'], 'miss_count'=>$lamp['miss_count']];
             }
         }
         if(count($lamp_changes) === 0)return null;
@@ -121,7 +135,7 @@ class LampComponent extends Component
 
         if(count($new_scores) !== 0){
             $query = $UserLamps->query();
-            $query->insert(['user_id', 'score_id', 'lamp']);
+            $query->insert(['user_id', 'score_id', 'lamp', 'miss_count']);
             foreach ($new_scores as $new_score) {
                 $query->values($new_score);
             }

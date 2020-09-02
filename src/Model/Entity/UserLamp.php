@@ -30,6 +30,9 @@ class UserLamp extends Entity
      */
     protected $_accessible = [
         'lamp' => true,
+        'miss_count' => true,
+        // 'ex_score' => true,
+        // 'dj_level' => true,
         'user' => true,
         'score' => true,
         'created_at' => true,
