@@ -89,7 +89,7 @@ class IndicatorComponent extends Component
         $results = array();
         foreach($scores as $score){
             $lamp = $my_lamps[$score['id']]??0;
-            $result['version'] = $this->version_info[$score['version_num']??5];
+            $result['version'] = $score['version_info'];
             $result['title'] = $score['title_info'];
             $result['lamp'] = $lamp;
             $result['lamp_color'] = $this->color_info[$lamp];
@@ -123,7 +123,7 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
-                $pred['version'] = $this->version_info[$score['version_num']??5];
+                $pred['version'] = $score['version_info'];
                 $pred['title'] = $score['title_info'];
                 $pred['lamp_cur'] = $my_lamps[$score['id']]??0;
                 $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
@@ -160,7 +160,7 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             $tar = $my_lamps[$score['id']]??0;
             if($tar < 3) continue;
-            $pred['version'] = $this->version_info[$score['version_num']??5];
+            $pred['version'] = $score['version_info'];
             $pred['title'] = $score['title_info'];
             $pred['lamp'] = $tar;
             $pred['lamp_color'] = $this->color_info[$tar];
@@ -236,7 +236,7 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             $my_lamp = $my_lamps[$score['id']]??0;
             $rival_lamp = $rival_lamps[$score['id']]??0;
-            $result['version'] = $this->version_info[$score['version_num']??5];
+            $result['version'] = $score['version_info'];
             $result['title'] = $score['title_info'];
             $result['my_lamp'] = $my_lamp;
             $result['my_lamp_color'] = $this->color_info[$my_lamp];
@@ -272,6 +272,12 @@ class IndicatorComponent extends Component
             $result['fifty_rating'] = $fifty;
             $results[] = $result;
         }
+        return $results;
+    }
+
+    public function getFiftyResults(&$score){
+        $results = array();
+        //$resylts[]= 
         return $results;
     }
 
