@@ -84,6 +84,7 @@ class Score extends Entity
         'fifty_rating_hard'=>true,
         'fifty_rating_exhard'=>true,
         'fifty_rating_fc'=>true,
+        'probability_easy'=>true,
     ];
 
     protected function _getTitleInfo(){
@@ -172,12 +173,33 @@ class Score extends Entity
     protected function _getFiftyRatingFc(){
         $ret = $this->getFiftyRating($this->fc_intercept, $this->fc_coefficient);
         if($ret == -1)return "-";
+        else if($ret > 5000 || $ret < -5000)return "Infinity";
         else return sprintf('%.2f',$ret);
     }
 
     protected function getFiftyRating(&$intercept, &$coefficient){
         if($this->is_rated == 0 || $coefficient === 0) return -1;
         return - ($intercept / $coefficient);
+    }
+
+    public function getProbabilityEasy(&$rating){
+        return 1/(1+M_E**(-($this->easy_intercept + $this->easy_coefficient*$rating)));
+    }
+
+    public function getProbabilityClear(&$rating){
+        return 1/(1+M_E**(-($this->clear_intercept + $this->clear_coefficient*$rating)));
+    }
+
+    public function getProbabilityHard(&$rating){
+        return 1/(1+M_E**(-($this->hard_intercept + $this->hard_coefficient*$rating)));
+    }
+
+    public function getProbabilityExhard(&$rating){
+        return 1/(1+M_E**(-($this->exhard_intercept + $this->exhard_coefficient*$rating)));
+    }
+
+    public function getProbabilityFc(&$rating){
+        return 1/(1+M_E**(-($this->fc_intercept + $this->fc_coefficient*$rating)));
     }
 
 }

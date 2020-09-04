@@ -5,7 +5,7 @@
  */
 
 $tweet_text = $userHistory->user->user_detail->dj_name.'さんがCPIを更新しました：'.$userHistory->rating_cur_info.' ('.$userHistory->rating_diff_info.")\n";
-if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' 【'.($lamp_info[$top_change['lamp']]).'】 (適正CPI'.(sprintf('%.0f',$top_change['cpi'])).")\n";
+if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' 【'.($lamp_info[$top_change['lamp']]).'】 (適正CPI'.$top_change['cpi'].")\n";
 
 ?>
 <div class="users view content">

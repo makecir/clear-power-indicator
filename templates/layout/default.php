@@ -177,6 +177,8 @@ $source_version = "?ver=1.008";
     <?php endif; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js'></script>
+    <script src='https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js'></script>
 
     <!-- using basic js -->
     <?= $this->Html->script('basic.js'.$source_version) ?>
