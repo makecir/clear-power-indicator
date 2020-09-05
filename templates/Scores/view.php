@@ -7,17 +7,22 @@
 <div class="scores view content">
     <div class="card border-secondary mb-3">
         <div class="card-header padding-sm">
-            <div class="pc-dsp"><h3 class="mb-0"><?= h($score->title)." ".$score->difficulty_info_with_color ?></h3></div>
-            <div class="sp-dsp"><h4 class="mb-0"><?= h($score->title)." ".$score->difficulty_info_with_color ?></h4></div>
+            <div class="pc-dsp"><h3 class="mb-0" style="display:inline;"><?= h($score->title) ?></h3><h4 class="mb-0" style="display:inline;"><?= " ".$score->difficulty_info_with_color ?></h4></div>
+            <div class="sp-dsp"><h4 class="mb-0" style="display:inline;"><?= h($score->title) ?></h4><h5 class="mb-0" style="display:inline;"><?= " ".$score->difficulty_info_with_color ?></h5></div>
         </div>
         <div class="card-body text-dark pr-3 pl-3">
             <div class="mb-3">
-                <div><h4><?= h($score->version_info) ?></div>
-                <div>
-                    <h4 style="display:inline;">TexTage</h4>
-                    <h6 style="display:inline;">(外部サイト) </h6>
+                <div class="pc-dsp"><h4><?= h($score->version_info) ?></h4></div>
+                <div class="sp-dsp"><h5><?= h($score->version_info) ?></h5></div>
+                <div class="pc-dsp">
+                    <h4 style="display:inline;">譜面</h4>
                     <h4 style="display:inline;"><?= $this->Html->link("1P",$score->textage_url_1p,['class'=>'btn btn-info', 'target'=>"_blank"]) ?> <?= $this->Html->link("2P",$score->textage_url_2p,['class'=>'btn btn-info', 'target'=>"_blank"]) ?></h4>
-
+                    <h6 style="display:inline;">(外部サイトTexTage) </h6>
+                </div>
+                <div class="sp-dsp">
+                    <h5 style="display:inline;">譜面</h5>
+                    <h4 style="display:inline;"><?= $this->Html->link("1P",$score->textage_url_1p,['class'=>'btn btn-info btn-sm', 'target'=>"_blank"]) ?> <?= $this->Html->link("2P",$score->textage_url_2p,['class'=>'btn btn-info btn-sm', 'target'=>"_blank"]) ?></h4>
+                    <h6 style="display:inline;">(外部サイトTexTage) </h6>
                 </div>
             </div>
             <?php if(isset($identity)):?>
@@ -42,9 +47,27 @@
             <?php endif;?>
             <?php if($score->is_rated==1):?>
                 <div class="mb-3">
-                    <div class="mb-1">
+                    <div class="mb-1 pc-dsp">
                         <h4 style="display:inline;">適正CPI</h4>
-                        <h5 style="display:inline;">(クリア確率50%)</h5>
+                        <?php if(isset($identity)):?>
+                            <h4 style="display:inline;">・クリア確率</h6>
+                        <?php endif;?>
+                    </div>
+                    <div class="mb-1 sp-dsp">
+                        <h5 style="display:inline;">適正CPI</h5>
+                        <?php if(isset($identity)):?>
+                            <h5 style="display:inline;">・クリア確率</h5>
+                        <?php endif;?>
+                        <span data-toggle="tooltip" data-html="true" title=
+                            <?= "'大まかな目安です</br>詳しくは".
+                                $this->Html->link(
+                                    'こちら',
+                                    ['controller' => 'Pages', 'action' => 'about', '#'=>'numerical-value'],
+                                ).
+                                "をご覧下さい'" 
+                            ?> class="text-nowrap" data-trigger="click hover focus">
+                            <i class="fas fa-question-circle"></i>
+                        </span>
                     </div>
                     <div class="table-responsive table-smart-phone-x">
                         <table class="table table-bordered padding-sm">
@@ -78,7 +101,164 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <canvas id="myChart" width="400" height="300"></canvas>
+                    <style id="compiled-css" type="text/css">
+                        .chartWrapper {
+                        position: relative;
+                        }
+                        .chartWrapper > canvas {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        pointer-events:none;
+                        }
+                        .chartAreaWrapper {
+                        overflow-x: scroll;
+                        }
+                        .chartAreaWrapper2 {
+                        width: 1076px;
+                        }
+                    </style> 
+                    <div class="chartWrapper"> 
+                        <div class="chartAreaWrapper" id="rew"> 
+                            <div class="chartAreaWrapper2"> 
+                            <canvas id="myChart" height="300" width="1076"></canvas> 
+                            </div> 
+                        </div> 
+                        <canvas id="myChartAxis" height="300" width="0"></canvas> 
+                    </div>
+                    <script>
+                        window.onload = function() {
+                            var rectangleSet = false;
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'scatter',
+                                data: {
+                                    labels: [<?php foreach($predict_line['x'] as $predict):?><?= $predict.',' ?><?php endforeach; ?>],
+                                    datasets: [
+                                        {
+                                            label: 'EASY',
+                                            data: [<?php foreach($predict_line['easy'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
+                                            borderColor: 'rgba(153, 255, 153, 1)',
+                                            pointRadius: 0,
+                                            showLine: true,
+                                            fill: false,
+                                        },
+                                        {
+                                            label: 'CLEAR',
+                                            data: [<?php foreach($predict_line['clear'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
+                                            borderColor: 'rgba(135, 204, 255, 1)',
+                                            pointRadius: 0,
+                                            showLine: true,
+                                            fill: false,
+                                        },
+                                        {
+                                            label: 'HARD',
+                                            data: [<?php foreach($predict_line['hard'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
+                                            borderColor: 'rgba(255, 102, 102, 1)',
+                                            pointRadius: 0,
+                                            showLine: true,
+                                            fill: false,
+                                        },
+                                        {
+                                            label: 'EXHARD',
+                                            data: [<?php foreach($predict_line['exhard'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
+                                            borderColor: 'rgba(255, 255, 153, 1)',
+                                            pointRadius: 0,
+                                            showLine: true,
+                                            fill: false,
+                                        },
+                                        {
+                                            label: 'FULLCOMBO',
+                                            data: [<?php foreach($predict_line['fc'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
+                                            borderColor: 'rgba(255, 153, 102, 1)',
+                                            pointRadius: 0,
+                                            showLine: true,
+                                            fill: false,
+                                        },
+                                    ]
+                                },
+                                options: {
+                                    legend: {display: false},
+                                    //responsive: true,
+                                    //maintainAspectRatio: false,
+                                    scales: {
+                                        xAxes: [{
+                                            ticks: {
+                                                stepSize: 50
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            ticks: {
+                                                callback: function(value, index, values) {
+                                                    return value + "%";
+                                                }
+                                            }
+                                        }]
+                                    },
+                                    <?php if(isset($identity)&&isset($me->user_detail->rating_info)&& $me->user_detail->rating >= reset($predict_line['x']) && $me->user_detail->rating <= end($predict_line['x'])):?>
+                                    annotation: {
+                                        annotations: [
+                                            {
+                                                type: "line",
+                                                mode: "vertical",
+                                                scaleID: "x-axis-1",
+                                                value: <?= $me->user_detail->rating_info ?>,
+                                                borderColor: "black",
+                                                label: {
+                                                    // content: "you",
+                                                    // enabled: true,
+                                                    // position: "top"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    <?php endif; ?>
+                                    animation: {
+                                        onComplete : function () {
+                                            if (!rectangleSet) {
+                                                var scale = window.devicePixelRatio; 
+                                                var sourceCanvas = this.chart.ctx.canvas;
+                                                var getParentIdName = this.chart.canvas.attributes.id.value,
+                                                    targetElement = document.getElementById("myChartAxis"),
+                                                    sourceElement = document.getElementById("myChart"),
+                                                    copyWidth = this.scales["y-axis-1"].width - 9, // we are copying the width of actual chart
+                                                    copyHeight = this.chart.height - 30 , // we are copying the width of actual chart
+                                                    targetElementWidth = sourceElement.getContext("2d").canvas.clientWidth,
+                                                    targetElementHeight = sourceElement.getContext("2d").canvas.clientHeight,
+                                                    targetCtx = targetElement.getContext("2d");
+                                                targetCtx.scale(scale, scale);
+                                                targetCtx.canvas.width = copyWidth * scale;
+                                                targetCtx.canvas.height = copyHeight * scale;
+                                                targetCtx.canvas.style.width = `${copyWidth}px`;
+                                                targetCtx.canvas.style.height = `${copyHeight}px`;
+                                                //targetCtx.drawImage(sourceCanvas, 0, 0, targetElementWidth, targetElementHeight);
+                                                targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth * scale, copyHeight * scale, 0, 0, copyWidth * scale, copyHeight * scale);
+
+                                                var sourceCtx = sourceCanvas.getContext('2d');
+                                                sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
+                                                rectangleSet = true;
+                                            }
+                                        },
+                                        onProgress: function () {
+                                            if (rectangleSet === true) {
+                                                var copyWidth = myChart.scales["y-axis-1"].width - 9;
+                                                var copyHeight = myChart.chart.height - 30;
+
+                                                var sourceCtx = myChart.chart.canvas.getContext('2d');
+                                                sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
+                                            }
+                                        }
+                                    }
+                                },
+                            });
+                            <?php if(isset($identity)&&isset($me->user_detail->rating_info)):?>
+                            var rating_min = <?= reset($predict_line['x']) ?>;
+                            var rating_max = <?= end($predict_line['x']) ?>;
+                            var scrollvalue = Math.max(0,(<?= $me->user_detail->rating_info?> - rating_min)*1024/(Math.max(1,rating_max-rating_min))-(($(window).width())/2-55));
+                            $('.chartAreaWrapper').scrollLeft(scrollvalue);
+                            <?php endif;?>
+                        }
+                    </script>
                 </div>
             <?php else:?>
                 <h4>CPI算出未対応曲です。</h4>
@@ -86,94 +266,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    window.onload = function() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            labels: [<?php foreach($predict_line['x'] as $predict):?><?= $predict.',' ?><?php endforeach; ?>],
-            datasets: [
-                {
-                    label: 'EASY',
-                    data: [<?php foreach($predict_line['easy'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
-                    borderColor: 'rgba(153, 255, 153, 1)',
-                    pointRadius: 0,
-                    showLine: true,
-                    fill: false,
-                },
-                {
-                    label: 'CLEAR',
-                    data: [<?php foreach($predict_line['clear'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
-                    borderColor: 'rgba(135, 204, 255, 1)',
-                    pointRadius: 0,
-                    showLine: true,
-                    fill: false,
-                },
-                {
-                    label: 'HARD',
-                    data: [<?php foreach($predict_line['hard'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
-                    borderColor: 'rgba(255, 102, 102, 1)',
-                    pointRadius: 0,
-                    showLine: true,
-                    fill: false,
-                },
-                {
-                    label: 'EXHARD',
-                    data: [<?php foreach($predict_line['exhard'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
-                    borderColor: 'rgba(255, 255, 153, 1)',
-                    pointRadius: 0,
-                    showLine: true,
-                    fill: false,
-                },
-                {
-                    label: 'FULLCOMBO',
-                    data: [<?php foreach($predict_line['fc'] as $i => $predict):?><?= '{x:'.$predict_line['x'][$i].',y:'.$predict.'},' ?><?php endforeach; ?>],
-                    borderColor: 'rgba(255, 153, 102, 1)',
-                    pointRadius: 0,
-                    showLine: true,
-                    fill: false,
-                },
-            ]
-        },
-        options: {
-            legend: {display: false},
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        stepSize: 50
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        callback: function(value, index, values) {
-                            return value + "%";
-                        }
-                    }
-            }]
-            },
-            <?php if(isset($identity)&&isset($me->user_detail->rating_info)&& $me->user_detail->rating >= $predict_line['x'][0] && $me->user_detail->rating <= end($predict_line['x'])):?>
-                annotation: {
-                    annotations: [
-                        {
-                            type: "line",
-                            mode: "vertical",
-                            scaleID: "x-axis-1",
-                            value: <?= $me->user_detail->rating_info ?>,
-                            borderColor: "black",
-                            label: {
-                                // content: "you",
-                                // enabled: true,
-                                // position: "top"
-                            }
-                        }
-                    ]
-                }
-            <?php endif; ?>
-        }
-    });
-    }
-</script>
