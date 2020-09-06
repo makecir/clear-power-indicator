@@ -89,10 +89,10 @@ class Score extends Entity
 
     protected function _getTitleInfo(){
         $suffix = "";
-        if($this->difficulty >= 4) $suffix = "[L]";
+        if($this->difficulty >= 4) $suffix = " [L]";
         elseif($this->title == "gigadelic" || $this->title == "Innocent Walls"){
-            if($this->difficulty == 2) $suffix = "[H]";
-            if($this->difficulty >= 3) $suffix = "[A]";
+            if($this->difficulty == 2) $suffix = " [H]";
+            if($this->difficulty >= 3) $suffix = " [A]";
         }
         return $this->title.$suffix;
     }

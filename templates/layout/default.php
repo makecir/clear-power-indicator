@@ -16,7 +16,7 @@
 use Cake\Routing\Router;
 
 $cakeDescription = 'CPI : Clear Power Indicator ';
-$source_version = "?ver=1.008";
+$source_version = "?ver=1.009";
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,6 +79,13 @@ $source_version = "?ver=1.008";
                     <?= $this->Html->link(
                         __('Users'),
                         ['controller' => 'Users', 'action' => 'index'],
+                        ['class' => 'nav-link'])
+                    ?>
+                </li>
+                <li class="nav-item">
+                    <?= $this->Html->link(
+                        __('Scores'),
+                        ['controller' => 'Scores', 'action' => 'index'],
                         ['class' => 'nav-link'])
                     ?>
                 </li>

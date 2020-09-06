@@ -214,8 +214,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <tbody>
                                 <?php foreach ($detail_table as $row): ?>
                                 <tr>
-                                    <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                    <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
@@ -330,8 +330,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <tbody>
                                 <?php foreach ($rec_table as $row): ?>
                                     <tr>
-                                    <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                    <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>>
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp_cur']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp_cur']] ?></div>
@@ -425,8 +425,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <tbody>
                                 <?php foreach ($bte_table as $row): ?>
                                 <tr>
-                                    <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                    <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>

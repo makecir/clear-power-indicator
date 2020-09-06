@@ -5,88 +5,75 @@
  */
 ?>
 <div class="scores index content">
-    <?= $this->Html->link(__('New Score'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Scores') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('title') ?></th>
-                    <th><?= $this->Paginator->sort('version_num') ?></th>
-                    <th><?= $this->Paginator->sort('level') ?></th>
-                    <th><?= $this->Paginator->sort('difficulty') ?></th>
-                    <th><?= $this->Paginator->sort('notes') ?></th>
-                    <th><?= $this->Paginator->sort('predicted_easy_rank') ?></th>
-                    <th><?= $this->Paginator->sort('predicted_clear_rank') ?></th>
-                    <th><?= $this->Paginator->sort('predicted_hard_rank') ?></th>
-                    <th><?= $this->Paginator->sort('predicted_exhard_rank') ?></th>
-                    <th><?= $this->Paginator->sort('predicted_fc_rank') ?></th>
-                    <th><?= $this->Paginator->sort('predicted_aaa_rank') ?></th>
-                    <th><?= $this->Paginator->sort('is_deleted') ?></th>
-                    <th><?= $this->Paginator->sort('is_rated') ?></th>
-                    <th><?= $this->Paginator->sort('easy_intercept') ?></th>
-                    <th><?= $this->Paginator->sort('easy_coefficient') ?></th>
-                    <th><?= $this->Paginator->sort('clear_intercept') ?></th>
-                    <th><?= $this->Paginator->sort('clear_coefficient') ?></th>
-                    <th><?= $this->Paginator->sort('hard_intercept') ?></th>
-                    <th><?= $this->Paginator->sort('hard_coefficient') ?></th>
-                    <th><?= $this->Paginator->sort('exhard_intercept') ?></th>
-                    <th><?= $this->Paginator->sort('exhard_coefficient') ?></th>
-                    <th><?= $this->Paginator->sort('fc_intercept') ?></th>
-                    <th><?= $this->Paginator->sort('fc_coefficient') ?></th>
-                    <th><?= $this->Paginator->sort('created_at') ?></th>
-                    <th><?= $this->Paginator->sort('modified_at') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($scores as $score): ?>
-                <tr>
-                    <td><?= $this->Number->format($score->id) ?></td>
-                    <td><?= h($score->title) ?></td>
-                    <td><?= $this->Number->format($score->version_num) ?></td>
-                    <td><?= $this->Number->format($score->level) ?></td>
-                    <td><?= $this->Number->format($score->difficulty) ?></td>
-                    <td><?= $this->Number->format($score->notes) ?></td>
-                    <td><?= $this->Number->format($score->predicted_easy_rank) ?></td>
-                    <td><?= $this->Number->format($score->predicted_clear_rank) ?></td>
-                    <td><?= $this->Number->format($score->predicted_hard_rank) ?></td>
-                    <td><?= $this->Number->format($score->predicted_exhard_rank) ?></td>
-                    <td><?= $this->Number->format($score->predicted_fc_rank) ?></td>
-                    <td><?= $this->Number->format($score->predicted_aaa_rank) ?></td>
-                    <td><?= $this->Number->format($score->is_deleted) ?></td>
-                    <td><?= $this->Number->format($score->is_rated) ?></td>
-                    <td><?= $this->Number->format($score->easy_intercept) ?></td>
-                    <td><?= $this->Number->format($score->easy_coefficient) ?></td>
-                    <td><?= $this->Number->format($score->clear_intercept) ?></td>
-                    <td><?= $this->Number->format($score->clear_coefficient) ?></td>
-                    <td><?= $this->Number->format($score->hard_intercept) ?></td>
-                    <td><?= $this->Number->format($score->hard_coefficient) ?></td>
-                    <td><?= $this->Number->format($score->exhard_intercept) ?></td>
-                    <td><?= $this->Number->format($score->exhard_coefficient) ?></td>
-                    <td><?= $this->Number->format($score->fc_intercept) ?></td>
-                    <td><?= $this->Number->format($score->fc_coefficient) ?></td>
-                    <td><?= h($score->created_at) ?></td>
-                    <td><?= h($score->modified_at) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $score->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $score->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $score->id], ['confirm' => __('Are you sure you want to delete # {0}?', $score->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+    <div class="card border-secondary mb-3">
+        <div class="card-header">
+            <h4 class="mb-0">
+                <?= "適正CPI一覧" ?>
+            </h4>
+        </div>
+        <div class="card-body text-dark padding-sm">
+            <div class="card mb-3">
+                <h5 class="card-header bg-info filter-header">
+                    <a data-toggle="collapse" href="#collapse-f-scores-index" aria-expanded="false" aria-controls="collapse-f-scores-index" id="filter-scores-index" class="d-block">
+                        <i class="fas fa-filter mr-2"></i>
+                        <i class="fa fa-chevron-down float-right"></i>
+                            絞り込み
+                    </a>
+                </h5>
+                <div id="collapse-f-scores-index" class="collapse" aria-labelledby="filter-scores-index">
+                    <div class="card-body">
+                        <form action="#" name="scores-form">
+                            <ul class="nav flex-column">
+                                <?php for($i=3;$i<=7;$i++):?>
+                                <li class="nav-item">
+                                    <h5 class="card-title">
+                                        <?= $display_info['cur_lamp'][$i] ?>
+                                        <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('scores-form',{'<?= $display_info['cur_lamp'][$i] ?>_min':'0.00','<?= $display_info['cur_lamp'][$i] ?>_max':'5000.00',});">リセット</div>
+                                    </h5>
+                                    <ul>
+                                        <div class="form-row">
+                                            <div class="col-6">
+                                                <?= $this->Form->control($display_info['cur_lamp'][$i].'_min',['label' => 'min', 'name'=>$display_info['cur_lamp'][$i].'_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.00', 'placeholder'=>'0.00', 'required' => true]); ?>
+                                            </div>
+                                            <div class="col-6">
+                                                <?= $this->Form->control($display_info['cur_lamp'][$i].'_max',['label' => 'max', 'name'=>$display_info['cur_lamp'][$i].'_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'5000.00', 'placeholder'=>'5000.00', 'required' => true]); ?>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </li>
+                                <hr>
+                                <?php endfor;?>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="scores-index" class="table table-hover table-smart-phone-xx">
+                    <thead>
+                        <tr>
+                            <th><?= __('TITLE') ?></th>
+                            <th bgcolor=<?= $display_info['color'][3] ?>>EASY</th>
+                            <th bgcolor=<?= $display_info['color'][4] ?>>CLEAR</th>
+                            <th bgcolor=<?= $display_info['color'][5] ?>>HARD</th>
+                            <th bgcolor=<?= $display_info['color'][6] ?>>EXHARD</th>
+                            <th bgcolor=<?= $display_info['color'][7] ?>>FC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($scores as $score): ?>
+                        <tr>
+                            <td><?= $this->Html->link($score->title_info, ['action' => 'view', $score->id]) ?></td>
+                            <td align="center" bgcolor=<?= $display_info['color_light'][3] ?>><?= $score->fifty_rating_easy ?></td>
+                            <td align="center" bgcolor=<?= $display_info['color_light'][4] ?>><?= $score->fifty_rating_clear ?></td>
+                            <td align="center" bgcolor=<?= $display_info['color_light'][5] ?>><?= $score->fifty_rating_hard ?></td>
+                            <td align="center" bgcolor=<?= $display_info['color_light'][6] ?>><?= $score->fifty_rating_exhard ?></td>
+                            <td align="center" bgcolor=<?= $display_info['color_light'][7] ?>><?= $score->fifty_rating_fc ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

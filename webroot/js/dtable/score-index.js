@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    var table = $('#users-index').DataTable({
+    var table = $('#scores-index').DataTable({
         lengthMenu: [ 20, 50, 100, 1000],
         displayLength: 20,
-        order:  [ [4, "desc"] ],
+        order:  [ [0, "asc"] ],
         oLanguage: {
             /* 日本語化設定 */
             sLengthMenu : "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
@@ -20,11 +20,9 @@ $(document).ready(function() {
             {},
             {},
             {},
-            {
-                'targets' :  3,
-                'orderable' : true,
-                'orderDataType' : 'grade-jp'
-            }
+            {},
+            {},
+            {}
         ]
     });
     $('form').on('change', function(event) {
@@ -34,9 +32,18 @@ $(document).ready(function() {
 
 $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex, rowData ) {
-        var users_form = document.forms['users-form'];
-        if(users_form.elements['cpi_is_valid'].checked && data[2]=="" )return false;
-        if(parseFloat(data[2]) < parseFloat(users_form.elements['cpi_min'].value) || parseFloat(users_form.elements['cpi_max'].value) < parseFloat(data[2]))return false;
+        var users_form = document.forms['scores-form'];
+        if(data[1]=="-")data[1]=0.00;
+        if(data[1]=="-")data[2]=0.00;
+        if(data[1]=="-")data[3]=0.00;
+        if(data[1]=="-")data[4]=0.00;
+        if(data[1]=="-")data[5]=0.00;
+        if(data[5]=="Infinity")data[5]=5000.00;
+        if(parseFloat(data[1]) < parseFloat(users_form.elements['EASY_min'].value) || parseFloat(users_form.elements['EASY_max'].value) < parseFloat(data[1]))return false;
+        if(parseFloat(data[2]) < parseFloat(users_form.elements['CLEAR_min'].value) || parseFloat(users_form.elements['CLEAR_max'].value) < parseFloat(data[2]))return false;
+        if(parseFloat(data[3]) < parseFloat(users_form.elements['HARD_min'].value) || parseFloat(users_form.elements['HARD_max'].value) < parseFloat(data[3]))return false;
+        if(parseFloat(data[4]) < parseFloat(users_form.elements['EXHARD_min'].value) || parseFloat(users_form.elements['EXHARD_max'].value) < parseFloat(data[4]))return false;
+        if(parseFloat(data[5]) < parseFloat(users_form.elements['FULLCOMBO_min'].value) || parseFloat(users_form.elements['FULLCOMBO_max'].value) < parseFloat(data[5]))return false;
         return true;
     }
 );

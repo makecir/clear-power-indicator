@@ -63,6 +63,17 @@ class IndicatorComponent extends Component
         7 => "#FF9966",
     ];
 
+    public $color_light_info=[
+        0 => "#FFFFFF",
+        1 => "#E6E6E6",
+        2 => "#FFB2E6",
+        3 => "#CCFFCC",
+        4 => "#CCE6FF",
+        5 => "#FFB2B2",
+        6 => "#FFFFCC",
+        7 => "#FFCCB2",
+    ];
+
     public $pred_target=[
         3 => "easy",
         4 => "clear",
@@ -92,6 +103,7 @@ class IndicatorComponent extends Component
             $result['version'] = $score['version_info'];
             $result['title'] = $score['title_info'];
             $result['lamp'] = $lamp;
+            $result['id'] = $score['id'];
             $result['lamp_color'] = $this->color_info[$lamp];
             if($lamp >= 3){
                 if($score->is_rated == 1){
@@ -125,6 +137,7 @@ class IndicatorComponent extends Component
                 //predict
                 $pred['version'] = $score['version_info'];
                 $pred['title'] = $score['title_info'];
+                $pred['id'] = $score['id'];
                 $pred['lamp_cur'] = $my_lamps[$score['id']]??0;
                 $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
                 $pred['lamp_tar'] = $tar;
@@ -162,6 +175,7 @@ class IndicatorComponent extends Component
             if($tar < 3) continue;
             $pred['version'] = $score['version_info'];
             $pred['title'] = $score['title_info'];
+            $pred['id'] = $score['id'];
             $pred['lamp'] = $tar;
             $pred['lamp_color'] = $this->color_info[$tar];
             $intercept = $score[$this->pred_target[$tar]."_intercept"];
@@ -238,6 +252,7 @@ class IndicatorComponent extends Component
             $rival_lamp = $rival_lamps[$score['id']]??0;
             $result['version'] = $score['version_info'];
             $result['title'] = $score['title_info'];
+            $result['id'] = $score['id'];
             $result['my_lamp'] = $my_lamp;
             $result['my_lamp_color'] = $this->color_info[$my_lamp];
             $result['rival_lamp'] = $rival_lamp;
@@ -255,6 +270,7 @@ class IndicatorComponent extends Component
         $top_change['lamp'] = 0;
         foreach($user_history->lamp_changes as $change){
             $result['title'] = $change->score->title_info;
+            $result['id'] =  $change->score->id;
             $result['diff'] = $change->score->difficulty;
             $result['before_lamp'] = $change->before_lamp;
             $result['after_lamp'] = $change->after_lamp;
