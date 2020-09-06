@@ -5,7 +5,7 @@
  */
 
 $tweet_text = $userHistory->user->user_detail->dj_name.'さんがCPIを更新しました：'.$userHistory->rating_cur_info.' ('.$userHistory->rating_diff_info.")\n";
-if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' 【'.($lamp_info[$top_change['lamp']]).'】 (適正CPI'.(sprintf('%.0f',$top_change['cpi'])).")\n";
+if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['title']).' 【'.($lamp_info[$top_change['lamp']]).'】 (適正CPI'.$top_change['cpi'].")\n";
 
 ?>
 <div class="users view content">
@@ -105,7 +105,7 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                         <tbody>
                             <?php foreach ($changes_table as $row): ?>
                                 <tr>
-                                <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                 <td align="center" bgcolor=<?= $change_counts_color[$row['before_lamp']] ?>>
                                     <div class="pc-dsp"><?= $lamp_info[$row['before_lamp']] ?></div>
                                     <div class="sp-dsp"><?= $change_counts_label[$row['before_lamp']] ?></div>

@@ -810,3 +810,7 @@ msgstr "自分"
 
 msgid "Rival Lamp"
 msgstr "相手"
+
+msgid "Scores"
+msgstr "譜面一覧"
+
