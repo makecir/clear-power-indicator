@@ -53,11 +53,12 @@
                     <thead>
                         <tr>
                             <th><?= __('TITLE') ?></th>
-                            <th bgcolor=<?= $display_info['color'][3] ?>>EASY</th>
-                            <th bgcolor=<?= $display_info['color'][4] ?>>CLEAR</th>
-                            <th bgcolor=<?= $display_info['color'][5] ?>>HARD</th>
-                            <th bgcolor=<?= $display_info['color'][6] ?>>EXHARD</th>
-                            <th bgcolor=<?= $display_info['color'][7] ?>>FC</th>
+                            <?php for($i=3 ; $i<=7 ; $i++): ?>
+                                <th align="center" bgcolor=<?= $display_info['color'][$i] ?>>
+                                    <div class="score-index-lg-dsp"><div style="width:4.5rem;"><?= $display_info['cur_lamp'][$i] ?></div></div>
+                                    <div class="score-index-md-dsp"><?= $display_info['lamp_short'][$i] ?></div>
+                                </th>
+                            <?php endfor; ?>
                         </tr>
                     </thead>
                     <tbody>

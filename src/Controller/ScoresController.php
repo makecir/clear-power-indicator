@@ -22,9 +22,12 @@ class ScoresController extends AppController
 
         $dtables=['score-index'];
         $this->loadComponent('Indicator');
+        $this->loadComponent('Lamp');
         $display_info['cur_lamp'] = $this->Indicator->lamp_info;
+        $display_info['cur_lamp'][7] = "FC";
         $display_info['color'] = $this->Indicator->color_info;
         $display_info['color_light'] = $this->Indicator->color_light_info;
+        $display_info['lamp_short'] = $this->Lamp->lamp_short_info;
         $this->set(compact('scores','display_info','dtables'));
     }
 

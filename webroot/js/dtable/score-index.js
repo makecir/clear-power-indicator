@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var table = $('#scores-index').DataTable({
         lengthMenu: [ 20, 50, 100, 1000],
-        displayLength: 20,
+        displayLength: 50,
         order:  [ [0, "asc"] ],
         oLanguage: {
             /* 日本語化設定 */
@@ -43,7 +43,7 @@ $.fn.dataTable.ext.search.push(
         if(parseFloat(data[2]) < parseFloat(users_form.elements['CLEAR_min'].value) || parseFloat(users_form.elements['CLEAR_max'].value) < parseFloat(data[2]))return false;
         if(parseFloat(data[3]) < parseFloat(users_form.elements['HARD_min'].value) || parseFloat(users_form.elements['HARD_max'].value) < parseFloat(data[3]))return false;
         if(parseFloat(data[4]) < parseFloat(users_form.elements['EXHARD_min'].value) || parseFloat(users_form.elements['EXHARD_max'].value) < parseFloat(data[4]))return false;
-        if(parseFloat(data[5]) < parseFloat(users_form.elements['FULLCOMBO_min'].value) || parseFloat(users_form.elements['FULLCOMBO_max'].value) < parseFloat(data[5]))return false;
+        if(parseFloat(data[5]) < parseFloat(users_form.elements['FC_min'].value) || parseFloat(users_form.elements['FC_max'].value) < parseFloat(data[5]))return false;
         return true;
     }
 );
