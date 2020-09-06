@@ -117,21 +117,8 @@ class LampComponent extends Component
                 $new_scores[] = ['user_id'=>$user->id, 'score_id'=>$s_id, 'lamp'=>$lamp['lamp'], 'miss_count'=>$lamp['miss_count']];
             }
         }
-        if(count($lamp_changes) === 0)return null;
 
         $this->allClearLamps($user);
-
-        $user_history = $UserHistories->newEmptyEntity();
-        $user_history->user_id = $user->id;
-        $UserHistories->save($user_history);
-
-        if($invalid){
-            $ConciseLogs = TableRegistry::getTableLocator()->get('ConciseLogs');
-            $concise_log = $ConciseLogs->newEmptyEntity();
-            $concise_log->type_id = 2;
-            $concise_log->user_id = $user->id;
-            $ConciseLogs->save($concise_log);
-        }
 
         if(count($new_scores) !== 0){
             $query = $UserLamps->query();
@@ -142,6 +129,12 @@ class LampComponent extends Component
             $query->execute();
         }
 
+        if(count($lamp_changes) === 0)return null;
+
+        $user_history = $UserHistories->newEmptyEntity();
+        $user_history->user_id = $user->id;
+        $UserHistories->save($user_history);
+
         if(count($lamp_changes) !== 0){
             $query = $LampChanges->query();
             $query->insert(['score_id', 'before_lamp', 'after_lamp', 'user_history_id']);
@@ -151,6 +144,15 @@ class LampComponent extends Component
             }
             $query->execute();
         }
+        
+        if($invalid){
+            $ConciseLogs = TableRegistry::getTableLocator()->get('ConciseLogs');
+            $concise_log = $ConciseLogs->newEmptyEntity();
+            $concise_log->type_id = 2;
+            $concise_log->user_id = $user->id;
+            $ConciseLogs->save($concise_log);
+        }
+
 
         return $user_history;
     }
