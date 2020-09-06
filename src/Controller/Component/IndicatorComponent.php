@@ -63,6 +63,17 @@ class IndicatorComponent extends Component
         7 => "#FF9966",
     ];
 
+    public $color_light_info=[
+        0 => "#FFFFFF",
+        1 => "#E6E6E6",
+        2 => "#FFB2E6",
+        3 => "#CCFFCC",
+        4 => "#CCE6FF",
+        5 => "#FFB2B2",
+        6 => "#FFFFCC",
+        7 => "#FFCCB2",
+    ];
+
     public $pred_target=[
         3 => "easy",
         4 => "clear",
@@ -89,15 +100,16 @@ class IndicatorComponent extends Component
         $results = array();
         foreach($scores as $score){
             $lamp = $my_lamps[$score['id']]??0;
-            $result['version'] = $this->version_info[$score['version_num']??5];
+            $result['version'] = $score['version_info'];
             $result['title'] = $score['title_info'];
             $result['lamp'] = $lamp;
+            $result['id'] = $score['id'];
             $result['lamp_color'] = $this->color_info[$lamp];
             if($lamp >= 3){
                 if($score->is_rated == 1){
                     $intercept = $score[$this->pred_target[$lamp]."_intercept"];
                     $coefficient = $score[$this->pred_target[$lamp]."_coefficient"];
-                    $fifty = sprintf('%.2f',$this->fifty($intercept,$coefficient));
+                    $fifty = $this->fiftyInfo($intercept,$coefficient);
                 }
                 else $fifty = "未対応";
             }
@@ -123,8 +135,9 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             for( $tar = max($my_lamps[$score['id']]??0,2)+1 ; $tar < $lamp_num ; $tar++ ){
                 //predict
-                $pred['version'] = $this->version_info[$score['version_num']??5];
+                $pred['version'] = $score['version_info'];
                 $pred['title'] = $score['title_info'];
+                $pred['id'] = $score['id'];
                 $pred['lamp_cur'] = $my_lamps[$score['id']]??0;
                 $pred['lamp_cur_color'] = $this->color_info[$my_lamps[$score['id']]??0];
                 $pred['lamp_tar'] = $tar;
@@ -134,7 +147,7 @@ class IndicatorComponent extends Component
                 $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
                 $pred['diff'] = $score['difficulty'];
                 if($pred['probability'] > $top_tweet_info['rec']['prob']){
-                    $top_tweet_info['rec']['cpi'] = $this->fifty($intercept,$coefficient);
+                    $top_tweet_info['rec']['cpi'] = $this->fiftyInfo($intercept,$coefficient);
                     $top_tweet_info['rec']['title'] = $score['title_info'];
                     $top_tweet_info['rec']['lamp'] = $this->tar_lamp_info[$tar];
                     $top_tweet_info['rec']['prob'] = $pred['probability'];
@@ -160,8 +173,9 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             $tar = $my_lamps[$score['id']]??0;
             if($tar < 3) continue;
-            $pred['version'] = $this->version_info[$score['version_num']??5];
+            $pred['version'] = $score['version_info'];
             $pred['title'] = $score['title_info'];
+            $pred['id'] = $score['id'];
             $pred['lamp'] = $tar;
             $pred['lamp_color'] = $this->color_info[$tar];
             $intercept = $score[$this->pred_target[$tar]."_intercept"];
@@ -170,7 +184,7 @@ class IndicatorComponent extends Component
             if($pred['probability']>50.0)continue;
             $pred['diff'] = $score['difficulty'];
             if($pred['probability'] < $top_tweet_info['bte']['prob']){
-                $top_tweet_info['bte']['cpi'] = $this->fifty($intercept,$coefficient);
+                $top_tweet_info['bte']['cpi'] = $this->fiftyInfo($intercept,$coefficient);
                 $top_tweet_info['bte']['title'] = $score['title_info'];
                 $top_tweet_info['bte']['lamp'] = $this->tar_lamp_info[$tar];
                 $top_tweet_info['bte']['prob'] = $pred['probability'];
@@ -236,8 +250,9 @@ class IndicatorComponent extends Component
         foreach($scores as $score){
             $my_lamp = $my_lamps[$score['id']]??0;
             $rival_lamp = $rival_lamps[$score['id']]??0;
-            $result['version'] = $this->version_info[$score['version_num']??5];
+            $result['version'] = $score['version_info'];
             $result['title'] = $score['title_info'];
+            $result['id'] = $score['id'];
             $result['my_lamp'] = $my_lamp;
             $result['my_lamp_color'] = $this->color_info[$my_lamp];
             $result['rival_lamp'] = $rival_lamp;
@@ -255,13 +270,14 @@ class IndicatorComponent extends Component
         $top_change['lamp'] = 0;
         foreach($user_history->lamp_changes as $change){
             $result['title'] = $change->score->title_info;
+            $result['id'] =  $change->score->id;
             $result['diff'] = $change->score->difficulty;
             $result['before_lamp'] = $change->before_lamp;
             $result['after_lamp'] = $change->after_lamp;
             if($change->after_lamp >= 3 && $change->score->is_rated == 1){
                 $intercept = $change->score[$this->pred_target[$change->after_lamp]."_intercept"];
                 $coefficient = $change->score[$this->pred_target[$change->after_lamp]."_coefficient"];
-                $fifty = sprintf('%.2f',$this->fifty($intercept,$coefficient));
+                $fifty = $this->fiftyInfo($intercept,$coefficient);
                 if($fifty > $top_change['cpi']){
                     $top_change['cpi'] = $fifty;
                     $top_change['title'] = $change->score->title_info;
@@ -275,9 +291,37 @@ class IndicatorComponent extends Component
         return $results;
     }
 
+    public function getPredictLineResults(&$score){
+        $result['x'] = array();
+        $result['easy'] = array();
+        $result['clear'] = array();
+        $result['hard'] = array();
+        $result['exhard'] = array();
+        $result['fc'] = array();
+        for($x = 800 ; $x <= 4200 ; $x = $x+50){
+            $easy = sprintf('%.2f',100 * $this->predict($x, $score->easy_intercept, $score->easy_coefficient));
+            if($easy < "0.10")continue;
+            $fc = sprintf('%.2f',100 * $this->predict($x, $score->fc_intercept, $score->fc_coefficient));
+            if($fc > "99.90")continue;
+            $result['x'][] = $x;
+            $result['easy'][] = $easy;
+            $result['clear'][] = sprintf('%.2f',100 * $this->predict($x, $score->clear_intercept, $score->clear_coefficient));
+            $result['hard'][] = sprintf('%.2f',100 * $this->predict($x, $score->hard_intercept, $score->hard_coefficient));
+            $result['exhard'][] = sprintf('%.2f',100 * $this->predict($x, $score->exhard_intercept, $score->exhard_coefficient));
+            $result['fc'][] = $fc;
+        }
+        return $result;
+    }
+
     public function fifty(&$intercept, &$coefficient){
         if($coefficient === 0) return -1;
         return - ($intercept / $coefficient);
+    }
+    
+    public function fiftyInfo(&$intercept, &$coefficient){
+        $ret = $this->fifty($intercept, $coefficient);
+        if($ret > 5000 || $ret < -5000)return "Infinity";
+        else return sprintf('%.2f',$ret);
     }
 
     public function predict(&$rating, &$intercept, &$coefficient){

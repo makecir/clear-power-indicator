@@ -27,7 +27,7 @@
                 <h4 class="card-title">CPIとは？</h4>
                 <p>
                     Clear Power Indicator(CPI)へようこそ！</br>
-                    当サイトはBeatmania IIDXのプレイデータを読み込むことで、SP☆12のクリア力や、曲やクリアオプションごとの達成確率を推定するサイトです。
+                    当サイトはBeatmania IIDXのプレイデータを読み込むことで、SP☆12のクリア力や、曲やクリアオプションごとの達成確率を推定する非公式ファンサイトです。
                 </p>
                 <div class="text-danger">推定には、IIDX公式のプレミアムコース登録が必要になります。</div>
             </div>

@@ -176,7 +176,7 @@
                 「SP」->「ダウンロード」からプレーデータのテキスト全てをコピー、または、CSVをダウンロードします。
                 <li>
                     <?= $this->Html->link(
-                        'CP更新/プレイデータ登録',
+                        'CPI更新/プレイデータ登録',
                         ['controller' => 'Users', 'action' => 'edit', $identity->id??null],
                     )?>
                     (要ログイン)の「①テキスト」にコピーしたプレイデータをペーストし「テキスト読み込み」をクリック。</br>
@@ -185,6 +185,24 @@
                 <li>算出に20秒程度掛かります。お待ちください。</li>
                 <li>ページが更新され、ダイアログが出たら推定および更新完了です。</li>
             </ol>
+        </div>
+    </div>
+
+    <div class="card border-secondary mb-3" id="another-site">
+        <div class="card-header">
+            <h5 class="mb-0">
+                外部サイトについて
+            </h5>
+        </div>
+        <div class="card-body text-dark">
+            <div class="mb-3">
+                <dl class="list">
+                    <dt><?= $this->Html->link("TexTage","https://textage.cc",['target'=>"_blank"]) ?> 様</dt>
+                    <dd>
+                        譜面情報のリンク先として設定させていただいております。
+                    </dd>
+                </dl>
+            </div>
         </div>
     </div>
 

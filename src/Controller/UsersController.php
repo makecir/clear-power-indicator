@@ -36,6 +36,7 @@ class UsersController extends AppController
     
             //return $this->redirect($redirect);
             $this->Flash->success(__('successfully signed in.'));
+            //return $this->redirect($redirect);
             return $this->redirect(['action' => 'view', $this->request->getAttribute('identity')->id]);
         }
         // ユーザーが submit 後、認証失敗した場合は、エラーを表示します

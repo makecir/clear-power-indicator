@@ -189,8 +189,8 @@
                     <tbody>
                         <?php foreach ($compare_table as $row): ?>
                             <tr>
-                                <td align="center"><?= h($row['version']) ?></td>
-                                <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                 <td align="center" bgcolor=<?= h($row['my_lamp_color']) ?>>
                                     <div class="pc-dsp"><?= $display_info['cur_lamp'][$row['my_lamp']] ?></div>
                                     <div class="sp-dsp"><?= $display_info['lamp_short'][$row['my_lamp']] ?></div>

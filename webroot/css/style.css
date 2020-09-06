@@ -42,7 +42,7 @@
 .sp-dsp { display:none; }
 
 
-@media (max-width:769px) { 
+@media (max-width:767px) { 
 .table-smart-phone-xx th { font-size:xx-small;}
 .table-smart-phone-xx td { font-size:xx-small;}
 .table-smart-phone-xx th { padding: .25rem!important; }
@@ -66,6 +66,15 @@
 .sp-dsp { display:block; }
 
 }
+
+.score-index-lg-dsp { display:block; }
+.score-index-md-dsp { display:none; }
+
+@media (max-width:991px) { 
+.score-index-lg-dsp { display:none; }
+.score-index-md-dsp { display:block; }
+}
+
 
 .table-hid{
   display:none !important;

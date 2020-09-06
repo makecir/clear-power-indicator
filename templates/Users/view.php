@@ -7,9 +7,9 @@
 $tweet_text_lamp = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating.' (推定順位：'.$user->user_detail->standing."位程度)\n".
 "SP☆12ランプ詳細はこちら";
 $tweet_text_rec = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
-"リコメンドTOP：".$tweet_top_info['rec']['title']." 【".$tweet_top_info['rec']['lamp']."】 ".sprintf("%.2f%%",$tweet_top_info['rec']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['rec']['cpi']).")\n";
+"リコメンドTOP：".$tweet_top_info['rec']['title']." 【".$tweet_top_info['rec']['lamp']."】 ".sprintf("%.2f%%",$tweet_top_info['rec']['prob'])." (適正CPI ".$tweet_top_info['rec']['cpi'].")\n";
 $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_detail->rating."\n".
-"逆リコメンドTOP：".$tweet_top_info['bte']['title']." 【".$tweet_top_info['bte']['lamp']."】 ".sprintf("%.2f%%",$tweet_top_info['bte']['prob'])." (適正CPI ".sprintf("%.0f",$tweet_top_info['bte']['cpi']).")\n";
+"逆リコメンドTOP：".$tweet_top_info['bte']['title']." 【".$tweet_top_info['bte']['lamp']."】 ".sprintf("%.2f%%",$tweet_top_info['bte']['prob'])." (適正CPI ".$tweet_top_info['bte']['cpi'].")\n";
 ?>
 <div class="users view content">
     <div class="card border-secondary mb-3">
@@ -214,8 +214,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <tbody>
                                 <?php foreach ($detail_table as $row): ?>
                                 <tr>
-                                    <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                    <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
@@ -330,8 +330,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <tbody>
                                 <?php foreach ($rec_table as $row): ?>
                                     <tr>
-                                    <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                    <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_cur_color']) ?>>
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp_cur']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp_cur']] ?></div>
@@ -425,8 +425,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                             <tbody>
                                 <?php foreach ($bte_table as $row): ?>
                                 <tr>
-                                    <td align="center"><?= h($row['version']) ?></td>
-                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['title']) ?></td>
+                                    <td align="center"<?= ($row['diff']>3?" bgcolor='#CC66FF' style='color:#FFFFFF;'":"") ?>><?= h($row['version']) ?></td>
+                                    <td align="center"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                     <td align="center" bgcolor=<?= h($row['lamp_color']) ?>>
                                         <div class="pc-dsp"><?= $checkbox['cur_lamp'][$row['lamp']] ?></div>
                                         <div class="sp-dsp"><?= $checkbox['lamp_short'][$row['lamp']] ?></div>
