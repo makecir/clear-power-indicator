@@ -81,11 +81,11 @@
                                     <?php endfor; ?>
                                 </tr>
                                 <tr>
-                                    <td align="center"><?= $score->fifty_rating_easy ?></td>
-                                    <td align="center"><?= $score->fifty_rating_clear ?></td>
-                                    <td align="center"><?= $score->fifty_rating_hard ?></td>
-                                    <td align="center"><?= $score->fifty_rating_exhard ?></td>
-                                    <td align="center"><?= $score->fifty_rating_fc ?></td>
+                                    <td align="center"><?= $score->fifty_rating_easy." (".$score->predicted_easy_rank."位)" ?></td>
+                                    <td align="center"><?= $score->fifty_rating_clear." (".$score->predicted_clear_rank."位)" ?></td>
+                                    <td align="center"><?= $score->fifty_rating_hard." (".$score->predicted_hard_rank."位)" ?></td>
+                                    <td align="center"><?= $score->fifty_rating_exhard." (".$score->predicted_exhard_rank."位)" ?></td>
+                                    <td align="center"><?= $score->fifty_rating_fc." (".$score->predicted_fc_rank."位)" ?></td>
                                 </tr>
                                 <?php if(isset($identity)):?>
                                     <tr>
