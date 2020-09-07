@@ -142,6 +142,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            xAxisID: 'x-axis-0',
                                             yAxisID: 'y-axis-0'
                                         },
                                         {
@@ -151,6 +152,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            xAxisID: 'x-axis-0',
                                             yAxisID: 'y-axis-0'
                                         },
                                         {
@@ -160,6 +162,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            xAxisID: 'x-axis-0',
                                             yAxisID: 'y-axis-0'
                                         },
                                         {
@@ -169,6 +172,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            xAxisID: 'x-axis-0',
                                             yAxisID: 'y-axis-0'
                                         },
                                         {
@@ -178,6 +182,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            xAxisID: 'x-axis-0',
                                             yAxisID: 'y-axis-0'
                                         },
                                     ]
