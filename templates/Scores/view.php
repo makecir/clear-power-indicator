@@ -36,7 +36,7 @@
                                 <th align="center">BP</th>
                             </tr>
                             <tr>
-                                <td align="center"><?= $this->Html->link($me->user_detail->dj_name,['action'=>'view',$me->id],) ?></td>
+                                <td align="center"><?= $this->Html->link($me->user_detail->dj_name,['controller'=>"Users",'action'=>'view',$me->id],) ?></td>
                                 <td align="center"><?= $me->user_detail->rating_info ?></td>
                                 <td align="center" bgcolor=<?= $display_info['color'][$my_data->lamp] ?>><?= $display_info['cur_lamp'][$my_data->lamp] ?></td>
                                 <td align="center"><?= $my_data->miss_count??"---" ?></td>
