@@ -28,12 +28,12 @@
                                 <li class="nav-item">
                                     <h5 class="card-title">
                                         <?= $display_info['cur_lamp'][$i] ?>
-                                        <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('scores-form',{'<?= $display_info['cur_lamp'][$i] ?>_min':'0.00','<?= $display_info['cur_lamp'][$i] ?>_max':'5000.00',});">リセット</div>
+                                        <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('scores-form',{'<?= $display_info['cur_lamp'][$i] ?>_min':'0.01','<?= $display_info['cur_lamp'][$i] ?>_max':'5000.00',});">リセット</div>
                                     </h5>
                                     <ul>
                                         <div class="form-row">
                                             <div class="col-6">
-                                                <?= $this->Form->control($display_info['cur_lamp'][$i].'_min',['label' => 'min', 'name'=>$display_info['cur_lamp'][$i].'_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.00', 'placeholder'=>'0.00', 'required' => true]); ?>
+                                                <?= $this->Form->control($display_info['cur_lamp'][$i].'_min',['label' => 'min', 'name'=>$display_info['cur_lamp'][$i].'_min', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'0.01', 'placeholder'=>'0.01', 'required' => true]); ?>
                                             </div>
                                             <div class="col-6">
                                                 <?= $this->Form->control($display_info['cur_lamp'][$i].'_max',['label' => 'max', 'name'=>$display_info['cur_lamp'][$i].'_max', 'class' => 'form-control mb-3', 'type' => 'number', 'step' => '0.01', 'value'=>'5000.00', 'placeholder'=>'5000.00', 'required' => true]); ?>
