@@ -142,6 +142,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            yAxisID: 'y-axis-0'
                                         },
                                         {
                                             label: 'CLEAR',
@@ -150,6 +151,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            yAxisID: 'y-axis-0'
                                         },
                                         {
                                             label: 'HARD',
@@ -158,6 +160,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            yAxisID: 'y-axis-0'
                                         },
                                         {
                                             label: 'EXHARD',
@@ -166,6 +169,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            yAxisID: 'y-axis-0'
                                         },
                                         {
                                             label: 'FULLCOMBO',
@@ -174,6 +178,7 @@
                                             pointRadius: 0,
                                             showLine: true,
                                             fill: false,
+                                            yAxisID: 'y-axis-0'
                                         },
                                     ]
                                 },
@@ -183,11 +188,13 @@
                                     //maintainAspectRatio: false,
                                     scales: {
                                         xAxes: [{
+                                            id: 'x-axis-0',
                                             ticks: {
                                                 stepSize: 50
                                             }
                                         }],
                                         yAxes: [{
+                                            id: 'y-axis-0',
                                             ticks: {
                                                 callback: function(value, index, values) {
                                                     return value + "%";
@@ -201,7 +208,7 @@
                                             {
                                                 type: "line",
                                                 mode: "vertical",
-                                                scaleID: "x-axis-1",
+                                                scaleID: "x-axis-0",
                                                 value: <?= $me->user_detail->rating_info ?>,
                                                 borderColor: "black",
                                                 label: {
@@ -221,7 +228,7 @@
                                                 var getParentIdName = this.chart.canvas.attributes.id.value,
                                                     targetElement = document.getElementById("myChartAxis"),
                                                     sourceElement = document.getElementById("myChart"),
-                                                    copyWidth = this.scales["y-axis-1"].width - 9, // we are copying the width of actual chart
+                                                    copyWidth = this.scales["y-axis-0"].width - 9, // we are copying the width of actual chart
                                                     copyHeight = this.chart.height - 30 , // we are copying the width of actual chart
                                                     targetElementWidth = sourceElement.getContext("2d").canvas.clientWidth,
                                                     targetElementHeight = sourceElement.getContext("2d").canvas.clientHeight,
@@ -241,7 +248,7 @@
                                         },
                                         onProgress: function () {
                                             if (rectangleSet === true) {
-                                                var copyWidth = myChart.scales["y-axis-1"].width - 9;
+                                                var copyWidth = myChart.scales["y-axis-0"].width - 9;
                                                 var copyHeight = myChart.chart.height - 30;
 
                                                 var sourceCtx = myChart.chart.canvas.getContext('2d');
