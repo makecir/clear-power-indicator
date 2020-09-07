@@ -204,27 +204,22 @@
                                                 callback: function(value, index, values) {
                                                     return value + "%";
                                                 }
+                                            },
+                                            gridLines: {
+                                                color: ['rgba(0, 0, 0, 0.2)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.2)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                                'rgba(0, 0, 0, 0.1)',
+                                            ]
                                             }
                                         }]
                                     },
-                                    <?php if(isset($identity)&&isset($me->user_detail->rating_info)&& $me->user_detail->rating >= reset($predict_line['x']) && $me->user_detail->rating <= end($predict_line['x'])):?>
-                                    annotation: {
-                                        annotations: [
-                                            {
-                                                type: "line",
-                                                mode: "vertical",
-                                                scaleID: "x-axis-0",
-                                                value: <?= $me->user_detail->rating_info ?>,
-                                                borderColor: "black",
-                                                label: {
-                                                    // content: "you",
-                                                    // enabled: true,
-                                                    // position: "top"
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    <?php endif; ?>
                                     animation: {
                                         onComplete : function () {
                                             if (!rectangleSet) {
@@ -234,7 +229,7 @@
                                                     targetElement = document.getElementById("myChartAxis"),
                                                     sourceElement = document.getElementById("myChart"),
                                                     copyWidth = this.scales["y-axis-0"].width - 9, // we are copying the width of actual chart
-                                                    copyHeight = this.chart.height - 30 , // we are copying the width of actual chart
+                                                    copyHeight = this.scales["y-axis-0"].height + 15, // we are copying the width of actual chart
                                                     targetElementWidth = sourceElement.getContext("2d").canvas.clientWidth,
                                                     targetElementHeight = sourceElement.getContext("2d").canvas.clientHeight,
                                                     targetCtx = targetElement.getContext("2d");
@@ -254,13 +249,31 @@
                                         onProgress: function () {
                                             if (rectangleSet === true) {
                                                 var copyWidth = myChart.scales["y-axis-0"].width - 9;
-                                                var copyHeight = myChart.chart.height - 30;
+                                                var copyHeight = myChart.scales["y-axis-0"].height + 15;
 
                                                 var sourceCtx = myChart.chart.canvas.getContext('2d');
                                                 sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
                                             }
                                         }
-                                    }
+                                    },
+                                    <?php if(isset($identity)&&isset($me->user_detail->rating_info)&& $me->user_detail->rating >= reset($predict_line['x']) && $me->user_detail->rating <= end($predict_line['x'])):?>
+                                    annotation: {
+                                        annotations: [
+                                            {
+                                                type: "line",
+                                                mode: "vertical",
+                                                scaleID: "x-axis-0",
+                                                value: <?= $me->user_detail->rating_info ?>,
+                                                borderColor: "black",
+                                                // label: {
+                                                //     // content: "you",
+                                                //     // enabled: true,
+                                                //     // position: "top"
+                                                // }
+                                            }
+                                        ]
+                                    },
+                                    <?php endif; ?>
                                 },
                             });
                             <?php if(isset($identity)&&isset($me->user_detail->rating_info)):?>
@@ -272,6 +285,7 @@
                         }
                     </script>
                 </div>
+                <div class="text-muted" style="font-size: 12px;">※ 一部環境ではグラフが正常に表示されないことがあります。</div>
             <?php else:?>
                 <h4>CPI算出未対応曲です。</h4>
             <?php endif;?>
