@@ -50,7 +50,7 @@
                     <div class="mb-1 pc-dsp">
                         <h4 style="display:inline;">適正CPI</h4>
                         <?php if(isset($identity)):?>
-                            <h4 style="display:inline;">・クリア確率</h6>
+                            <h4 style="display:inline;">・クリア割合</h6>
                         <?php endif;?>
                     </div>
                     <div class="mb-1 sp-dsp">
