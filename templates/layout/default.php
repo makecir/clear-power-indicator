@@ -35,7 +35,7 @@ $source_version = "?ver=1.009";
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@IIDX_CPI">
     <meta property="og:title" content="Clear Power Indicator">
-    <meta property="og:description" content="CPIは、BeatmaniaIIDXのSP☆12のクリア力や、曲やクリアオプションごとの達成確率を推定する非公式ファンサイトです">
+    <meta property="og:description" content="CPIは、BeatmaniaIIDXのSP☆12のクリア力や、曲やクリアオプションごとの達成割合を推定する非公式ファンサイトです">
     <meta property="og:image" content="<?= Router::url('/img/cpi_144_144.png',true)?>">
     
     <title>

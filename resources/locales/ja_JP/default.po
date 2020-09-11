@@ -736,7 +736,7 @@ msgid "Lamp tar"
 msgstr "目標ランプ"
 
 msgid "Clear Prob"
-msgstr "クリア確率"
+msgstr "クリア割合"
 
 msgid "DJ Name"
 msgstr "DJ NAME"

@@ -286,7 +286,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <hr>
                                         <li class="nav-item">
                                             <h5 class="card-title">
-                                                クリア確率
+                                                クリア割合
                                                 <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('rec-form',{'rec_min':'0.00','rec_max':'100.00',});">リセット</div>
                                             </h5>
                                             <ul>
@@ -393,7 +393,7 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                                         <hr>
                                         <li class="nav-item">
                                             <h5 class="card-title">
-                                                クリア確率
+                                                クリア割合
                                                 <div class="btn btn-sm btn-outline-secondary my-auto ml-2" onclick="setValue('bte-form',{'bte_min':'0.00','bte_max':'50.00',});">リセット</div>
                                             </h5>
                                             <ul>
