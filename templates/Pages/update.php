@@ -9,6 +9,10 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2020/09/14</dt>
+                <dd>ホーム画面にTwitterと更新を表示</dd>
+                <dt>2020/09/07</dt>
+                <dd>譜面一覧・譜面詳細を追加</dd>
                 <dt>2020/09/02</dt>
                 <dd>プレイヤー比較機能を追加・軽微な不具合を修正</dd>
                 <dt>2020/08/22</dt>
