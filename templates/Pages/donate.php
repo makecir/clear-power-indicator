@@ -38,6 +38,7 @@
                 <li>norimisoIIDX 様</li>
                 <li>shuymn 様</li>
                 <li>ナナメ 様</li>
+                <li>smania0711 様</li>
             </dl>
         </div>
     </div>
