@@ -43,11 +43,12 @@
                 </div>
                 <div class="card col-md-5 m-3">
                     <div class="mb-1 mt-1">
+                    <div id="drop-zone">
                         <p>②CSVアップロード</p>
                         <div class="mb-1 mt-2 text-center">
                             <?= $this->Form->create($csvform, ['type' => 'file', 'style' => "display:inline-block"]); ?>
                             <label class="btn btn-outline-secondary my-auto" style="display:inline-block">
-                                <span id="imported-filename">CSV選択</span>
+                                <span id="imported-filename">CSV選択またはドロップ</span>
                                 <span style="display:none;">
                                     <?= $this->Form->control('upload-csv', ['type' => 'file', 'accept' => '.csv', 'label' => '', 'style'=>"display:none;"]); ?>
                                 </span>
@@ -57,6 +58,7 @@
                             </div>
                             <?= $this->Form->end(); ?>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

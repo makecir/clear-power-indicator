@@ -96,4 +96,37 @@
             </div>
         </div>
     </div>
+    <div class="card border-secondary mb-3">
+        <div class="card-header">
+            <h4 class="mb-0">
+                最近の更新
+            </h4>
+        </div>
+        <div class="card-body text-dark">
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="twitter-timeline" data-lang="ja" data-height="400" href="https://twitter.com/IIDX_CPI?ref_src=twsrc%5Etfw">Tweets by IIDX_CPI</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <div class="col-md-5 mt-3">
+                    <h4>更新内容（一部）</h4>
+                    <dl class="list">
+                        <dt>2020/09/14</dt>
+                        <dd>ホーム画面にTwitterと更新を表示・CSVのドロップに対応</dd>
+                        <dt>2020/09/07</dt>
+                        <dd>譜面一覧と譜面詳細を追加・BPを捕捉するように変更</dd>
+                        <dt>2020/09/02</dt>
+                        <dd>プレイヤー比較機能を追加</dd>
+                        <dt>2020/08/22</dt>
+                        <dd>正式サービス開始</dd>
+                    </dl>
+                    <p>
+                    全ての変更は<?= $this->Html->link(
+                        '更新履歴',
+                        ['action' => 'update'],)
+                    ?>をご覧ください。
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
