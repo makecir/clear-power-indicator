@@ -14,7 +14,26 @@ $(function() {
 $('#upload-csv').change(function (e) {
     var val = $('#upload-csv').val();
     if (val) $('#submit-csv').show();
-    $('#imported-filename').text('CSV選択：' + val.substr(val.lastIndexOf("\\") + 1));
+    $('#imported-filename').text('CSV選択中：' + val.substr(val.lastIndexOf("\\") + 1));
+});
+
+$("#drop-zone").on("drop",function(e){
+    e.preventDefault();
+    $(this).removeClass("dragover");
+    console.log(e.originalEvent.dataTransfer.files);
+});
+$("#drop-zone").on("dragover",function(e){
+    e.preventDefault();
+    $(this).addClass("dragover");
+});
+$("#drop-zone").on("drop", function(e){
+    e.preventDefault();
+    document.getElementById("upload-csv").files = e.originalEvent.dataTransfer.files;
+    $("#upload-csv").change();
+});
+$("#drop-zone").on("dragleave",function(e){
+    e.preventDefault();
+    $(this).removeClass("dragover");
 });
 
 $('#upload-playtext').on('click', function(){
