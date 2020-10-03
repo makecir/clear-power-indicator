@@ -39,6 +39,8 @@
                 <li>shuymn 様</li>
                 <li>ナナメ 様</li>
                 <li>smania0711 様</li>
+                <li>*-:Ruka:-* Amrilato&Memorajxo❤ 様</li>
+                <li>yonexun 様</li>
             </dl>
         </div>
     </div>
