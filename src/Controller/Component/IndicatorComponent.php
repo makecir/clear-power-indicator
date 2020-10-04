@@ -298,7 +298,7 @@ class IndicatorComponent extends Component
         $result['hard'] = array();
         $result['exhard'] = array();
         $result['fc'] = array();
-        for($x = 800 ; $x <= 4200 ; $x = $x+50){
+        for($x = 800 ; $x <= 4200 ; $x = $x+10){
             $easy = sprintf('%.2f',100 * $this->predict($x, $score->easy_intercept, $score->easy_coefficient));
             if($easy < "0.10")continue;
             $fc = sprintf('%.2f',100 * $this->predict($x, $score->fc_intercept, $score->fc_coefficient));
