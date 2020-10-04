@@ -329,11 +329,11 @@ class IndicatorComponent extends Component
     }
 
     public function getGhostNum() {
-        return 30206;
+        return 31402;
     }
 
     public function getSeason() {
-        return 1;
+        return 2;
     }
 
     public function setRating(&$user, $user_history){
@@ -359,19 +359,30 @@ class IndicatorComponent extends Component
             if($battle_count > 0) $win++;
             if($battle_count < 0) $win--;
         }
-        $new_standing = $GHOST_NUM - ($win + $GHOST_NUM)/2.0 + 1;
+        //$new_standing = $GHOST_NUM - ($win + $GHOST_NUM)/2.0 + 1;
         $reswin = ($win + $GHOST_NUM + 1)/2.0;
         $new_rating = 400.00*log10( $reswin / ($GHOST_NUM + 1 - $reswin) ) + 1500.0000;
+
+        $Ghosts = TableRegistry::getTableLocator()->get('Ghosts');
+        $ghosts = $Ghosts->find();
+        $new_standing = 1;
+        foreach($ghosts as $ghost){
+            if($ghost->rating > $new_rating) $new_standing+=1;
+            if($ghost->rating == $new_rating) $new_standing+=0.5;
+        }
 
         $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
         $rating_diff = (isset($user->user_detail->rating)?($new_rating - $user->user_detail->rating):0.00);
         $rating_diff = (($user->user_detail->season??0 == $SEASON)?($new_rating - $user->user_detail->rating):0.00);
         $standing_diff = (($user->user_detail->season??0 == $SEASON)?($new_standing - $user->user_detail->standing):0);
+        if($user->user_detail->season!=NULL && $SEASON!=$user->user_detail->season){$is_season_change = 1;}
+        else{$is_season_change = 0;}
         $user_history = $UserHistories->patchEntity($user_history, [
             'rating_cur' => $new_rating,
             'rating_diff' => $rating_diff,
             'standing_cur' => $new_standing,
             'standing_diff' => $standing_diff,
+            'is_season_change' => $is_season_change,
         ]);
         $UserHistories->save($user_history);
 

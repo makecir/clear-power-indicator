@@ -51,6 +51,13 @@ if($top_change['cpi']!=0)$tweet_text = $tweet_text."更新TOP：".($top_change['
                                     <i class="fas fa-question-circle"></i>
                                 </span>
                             </div>
+                            <?php if($userHistory->is_season_change!=0):?>
+                                <div class="mb-2">
+                                    <h6 class="card-subtitle mb-2" style="display:inline;">
+                                        <div class="text-danger">※算出用のアルゴリズムまたは元データに変更があったため、CPIと順位の差分を記録しません。</div>
+                                    </h6>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-7 col-lg-8 p-3">
                             <div class="table-responsive table-smart-phone-sm">
