@@ -9,7 +9,7 @@
             <p>
             beatmania IIDXのプレイデータ（八段～皆伝かつ公開設定、約30,000名）を基に独自の方式でSP☆12の譜面難易度を推定しています。</br>
             スコアデータCSVを登録することで、あなたのSP☆12クリア力をレーティングし、同じくらいのクリア力のプレイヤーにおいてクリア確率の高い譜面をリコメンドします。</br>
-            推定手法の詳細については<a href="https://note.com/rice_place/n/n55faf1a5c882" target="_blank">こちら</a>および関連記事をご覧ください。</br>
+            推定手法の詳細については<a href="https://riceplace.hatenablog.jp/entry/2020/10/03/164936" target="_blank">こちら</a>および関連記事をご覧ください。</br>
             </p>
         </div>
     </div>
@@ -144,17 +144,16 @@
             </div>
             <div class="mb-3">
                 <h4 class="card-title">対応譜面</h4>
-                <div class="text-dark"><p>更新日：2020/08/21</p></div> 
+                <div class="text-dark"><p>更新日：2020/10/04</p></div> 
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                        2020/05/20頃までに追加された要解禁譜面 + 2020/06/20頃までに追加された解禁不要譜面</br>
-                        （IIDX26までの全譜面 + AKASHIC BREAK、Inferno of Fomalhaut、LASER CRUSTER (IGNITE REMIX)、LIGHTNING STRIKES、Lords Of The Roundtable、Matt Silver、Primitive Vibes、Rave Patroller、SCREW // owo // SCREW、T-REX vs Velociraptor (In the Far east euphoria)、TECHNO Style Essentials、THE BRAVE MUST DIE、THE F∀UST、TRIUMPH、Vinculum stellarum、がっつり陰キャ!? 怪盗いいんちょの億劫^^;、深淵に捧ぐレクイエム、華麗なる大犬円舞曲、千年ノ理[L]、TITANS RETURN[L]、snow storm[L])
-                        </dd>
+                    2020/07/30頃までに追加された要解禁譜面 + 2020/08/30頃までに追加された解禁不要譜面
+                    （前回更新分 + Artist, BEAT PRISONER, Double Dribble, Everlasting Message, Friction[!]Function, Level 2, TRANOID [L], Vinculum stellarum, ピアノ協奏曲第1番”蠍火” (BlackY Remix), ZEPHYRANTHES[L])                        </dd>
                     <dt>ランプ一覧で扱う対応譜面</dt>
                     <dd>
-                    上記に加えて2020/07/20頃までに追加された譜面</br>
-                    （Artist、BEAT PRISONER、Double Dribble、Everlasting Message、Friction[!]Function、Level 2、Vinculum stellarum、ピアノ協奏曲第1番”蠍火” (BlackY Remix)、ZEPHYRANTHES[L]）</br>
+                    上記に加えて2020/10/04頃までに追加された譜面</br>
+                    （EROICA, Megalara Garuda, ORCA, Secrets [L], Smashing Wedge, 魅惑のYUMMYスイーツ）
                     この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。
                     </dd>
                 </dl>
