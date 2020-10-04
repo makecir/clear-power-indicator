@@ -373,8 +373,8 @@ class IndicatorComponent extends Component
 
         $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
         $rating_diff = (isset($user->user_detail->rating)?($new_rating - $user->user_detail->rating):0.00);
-        $rating_diff = (($user->user_detail->season??0 == $SEASON)?($new_rating - $user->user_detail->rating):0.00);
-        $standing_diff = (($user->user_detail->season??0 == $SEASON)?($new_standing - $user->user_detail->standing):0);
+        $rating_diff = (!($user->user_detail->season!=NULL && $SEASON!=$user->user_detail->season)?($new_rating - $user->user_detail->rating):0.00);
+        $standing_diff = (!($user->user_detail->season!=NULL && $SEASON!=$user->user_detail->season)?($new_standing - $user->user_detail->standing):0);
         if($user->user_detail->season!=NULL && $SEASON!=$user->user_detail->season){$is_season_change = 1;}
         else{$is_season_change = 0;}
         $user_history = $UserHistories->patchEntity($user_history, [

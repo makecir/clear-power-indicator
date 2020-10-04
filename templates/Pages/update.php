@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2020/10/04</dt>
+                <dd>難易度推定手法の変更（抽出補正を旧曲にも適用・外れ値の影響を少なくする手法の採用）</dd>
                 <dt>2020/09/14</dt>
                 <dd>ホーム画面にTwitterと更新を表示・CSVファイルのドロップに対応</dd>
                 <dt>2020/09/07</dt>
