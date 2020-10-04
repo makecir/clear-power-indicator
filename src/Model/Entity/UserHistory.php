@@ -34,6 +34,7 @@ class UserHistory extends Entity
         'rating_diff' => true,
         'standing_cur' => true,
         'standing_diff' => true,
+        'is_season_change' => true,
         'created_at' => true,
         'user' => true,
         'lamp_changes' => true,
