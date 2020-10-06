@@ -16,7 +16,7 @@
 use Cake\Routing\Router;
 
 $cakeDescription = 'CPI : Clear Power Indicator ';
-$source_version = "?ver=1.011";
+$source_version = "?ver=1.012";
 ?>
 <!DOCTYPE html>
 <html>
