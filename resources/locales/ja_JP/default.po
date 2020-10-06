@@ -764,7 +764,7 @@ msgid "Contains inconsistent data."
 msgstr "更新内容に不整合がありました。意図的に過去に戻すような変更はご遠慮ください。(このメッセージは公式による曲の削除によっても出現する可能性があります)"
 
 msgid "No changing. Please, check your play data."
-msgstr "☆12のランプの変更を検知できなかったため、レーティングの再計算は行われません。BPのみ反映しました。"
+msgstr "算出対象の☆12のランプの変更を検知できなかったため、レーティングの再計算は行われません。BPと対象外のランプ変更のみ反映しました。"
 
 msgid "The rating has been saved."
 msgstr "レーティングを推定し、保存しました。"
