@@ -173,6 +173,7 @@ class UsersController extends AppController
         $result = $identity->canResult('edit', $user);
         if ($result->getStatus()) {
             $csvform = new CSVForm();
+            if(preg_match("/\A([0-9]{8})\z/", $user->user_detail->iidx_id)===1)$user->user_detail->iidx_id=substr($user->user_detail->iidx_id,0,4)."-".substr($user->user_detail->iidx_id,4,4);
             if ($this->request->is(['patch', 'post', 'put'])) {
                 //$this->loadComponent('OGP');
                 $csv_data = $this->request->getData('upload-csv');
@@ -210,6 +211,7 @@ class UsersController extends AppController
                 else{
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
+                    if(preg_match("/\A([0-9]{8})\z/", $user->user_detail->iidx_id)===1)$user->user_detail->iidx_id=substr($user->user_detail->iidx_id,0,4)."-".substr($user->user_detail->iidx_id,4,4);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
