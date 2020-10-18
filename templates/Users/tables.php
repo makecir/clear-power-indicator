@@ -142,26 +142,52 @@ $tables_id=["easy","clear","hard","exh","fc"];
             <div class="card-body text-dark tab-content padding-sm">
                 <?php foreach ($tables_id as $i => $table_id): ?>
                     <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
-                        <h3>達成済 <?= $archive_counts[$i]."/".count($difficulty_tables[$i])." ( 残り".(count($difficulty_tables[$i])-$archive_counts[$i])."譜面 )" ?></h3>
-                        <h6>ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
+                        <h3>達成済 <?= $archive_counts[$i][0]."/".$archive_counts[$i][1]." ( 残り".($archive_counts[$i][1]-$archive_counts[$i][0])."譜面 )" ?></h3>
+                        <h6>※ 各項目内の譜面は曲名順です </h6>
+                        <h6>※ ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
                                         'こちら',
                                         ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
                                     ) ?></h6>
-                        <div class="table table-responsive table-smart-phone-xx" style="table-layout: fixed;">
+                        <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered">
-                                <?php $col=0; $under=7000?>
                                 <tbody>
-                                    <?php foreach ($difficulty_tables[$i]??[] as $row): ?>
-                                        <?php if($under > $row['fifty']): ?>
-                                            <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                                            <?php $under = floor($row['fifty']/50)*50;?>
-                                            <thead>
-                                                <tr class="text-center" bgcolor=#444444>
-                                                    <th colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= ($under>=5000?"Infinity":($under+50)." ~ ".$under) ?></th>
-                                                </tr>
-                                            </thead>
-                                            <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                                        <?php endif; ?>
+                                    <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
+                                        <tr class="text-center" bgcolor=#444444>
+                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI Infinity</td>
+                                        </tr>
+                                        <?php $col=0;?>
+                                        <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
+                                            <?php if($col==0): ?><tr><?php endif; ?>
+                                                <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <?php $col++;?>
+                                            <?php if($col==3): $col=0?></tr><?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                        <tr class="blank_row">
+                                        <td colspan="1" style="border: 0px none;">&nbsp;</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php foreach ($difficulty_tables[$i]['rated']??[] as $section_key => $section): ?>
+                                        <tr class="text-center" bgcolor=#444444>
+                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
+                                        </tr>
+                                        <?php $col=0;?>
+                                        <?php foreach ($section as $row): ?>
+                                            <?php if($col==0): ?><tr><?php endif; ?>
+                                                <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <?php $col++;?>
+                                            <?php if($col==3): $col=0?></tr><?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <tr class="blank_row">
+                                        <td colspan="1" style="border: 0px none;">&nbsp;</td>
+                                    </tr>
+                                    <tr class="text-center" bgcolor=#444444>
+                                        <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI 算出対象外</td>
+                                    </tr>
+                                    <?php $col=0;?>
+                                    <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
                                         <?php if($col==0): ?><tr><?php endif; ?>
                                             <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                         <?php $col++;?>
