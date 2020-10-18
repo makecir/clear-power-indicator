@@ -82,6 +82,16 @@ class IndicatorComponent extends Component
         7 => "fc",
     ];
     
+    function sortByKey($key_name, $sort_order, $array) {
+        foreach ($array as $key => $value) {
+            $standard_key_array[$key] = $value[$key_name];
+        }
+    
+        array_multisort($standard_key_array, $sort_order, $array);
+    
+        return $array;
+    }
+
     public function getLampCounts(&$my_lamps){
         $Scores = TableRegistry::getTableLocator()->get('Scores');
         $scores = $Scores->find('available');
@@ -311,6 +321,42 @@ class IndicatorComponent extends Component
             $result['fc'][] = $fc;
         }
         return $result;
+    }
+
+    public function getDifficultyTables(&$my_lamps){
+        $Scores = TableRegistry::getTableLocator()->get('Scores');
+        $scores = $Scores->find('rated')->toArray();
+        $lamp_num = sizeof($this->lamp_info);
+        $results = [[],[],[],[],[]];
+        foreach($scores as $score){
+            $result=[];
+            $result['lamp'] = $my_lamps[$score['id']]??0;
+            $result['title'] = $score['title_info'];
+            $result['id'] = $score['id'];
+
+            for($i=0;$i<5;$i++){
+                $intercept = $score[$this->pred_target[$i+3]."_intercept"];
+                $coefficient = $score[$this->pred_target[$i+3]."_coefficient"];
+                $result['fifty'] = $this->fiftyInfo($intercept,$coefficient);
+                if($result['fifty']=="Infinity") $result['fifty'] = 5050;
+                $results[$i][] = $result;
+            }
+
+        }
+        for($i=0;$i<5;$i++){
+            $results[$i] = $this->sortByKey('fifty', SORT_DESC, $results[$i]);
+        }
+        return $results;
+    }
+
+    public function getArchiveCounts(&$difficulty_tables){
+        $results = [0,0,0,0,0];
+        foreach($difficulty_tables as $i => $table){
+            foreach($table as $score){
+                if($score['lamp']>=$i+3)$results[$i]++;
+            }
+        }
+        return $results;
     }
 
     public function fifty(&$intercept, &$coefficient){

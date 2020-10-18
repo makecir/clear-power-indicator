@@ -381,6 +381,41 @@ class UsersController extends AppController
         }
     }
 
+    public function tables($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails',
+                'Scores',
+                'UserHistories',
+                'FollowUsers' => ['UserDetails'], 
+                'FollowedUsers' => ['UserDetails'],
+            ],
+        ]);
+
+        $this->loadComponent('Indicator');
+        $this->loadComponent('Lamp');
+        $this->loadComponent('Follow');
+        $my_lamps = $user->user_detail->my_lamps_array;
+        $difficulty_tables = $this->Indicator->getDifficultyTables($my_lamps);
+        $archive_counts = $this->Indicator->getArchiveCounts($difficulty_tables);
+        $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
+        $checkbox['version'] = $this->Indicator->version_info;
+        $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
+        $checkbox['tar_lamp'] = $this->Indicator->tar_lamp_info;
+        $checkbox['color'] = $this->Indicator->color_info;
+        $checkbox['lamp_class'] = $this->Lamp->lamp_class_info;
+        $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
+        $identity = $this->request->getAttribute('identity');
+        $mypage = isset($identity) && ($identity->id === $user->id);
+        $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $user->id);
+        $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
+
+
+        $this->set(compact('user','difficulty_tables','archive_counts', 'lamp_counts','mypage', 'follow_flag', 'is_permitted', 'checkbox'));
+    }
+
     public function recalclate($id = null)
     {
         $user = $this->Users->get($id, [

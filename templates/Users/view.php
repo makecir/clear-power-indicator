@@ -14,8 +14,8 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
 <div class="users view content">
     <div class="card border-secondary mb-3">
         <div class="card-header padding-sm">
-            <h3 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h3>
-            <h5 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h5>
+            <h4 class="card-title" style="display:inline;"><?= $user->user_detail->dj_name ?></h4>
+            <h6 class="card-subtitle mb-2 text-muted" style="display:inline;"><?= $user->user_detail->iidx_id ?></h6>
             <?php if(!$isLoggedIn):?>
             <?php elseif($mypage):?>
                 <?= $this->Html->link(
@@ -103,6 +103,11 @@ $tweet_text_bte = $user->user_detail->dj_name.'さんのCPI：'.$user->user_deta
                 </div>
             </div>
             <div class='text-center'>
+            <?= $this->Html->link(
+                        "難易度表ページ",
+                        ['controller'=>'Users', 'action'=>'tables', $user->id],
+                        ['class' => 'btn btn-success'])
+                    ?>
                 <?php if($isLoggedIn && !$mypage):?>
                     <?= $this->Html->link(
                         __('Compare with me'),
