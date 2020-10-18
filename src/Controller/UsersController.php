@@ -173,6 +173,7 @@ class UsersController extends AppController
         $result = $identity->canResult('edit', $user);
         if ($result->getStatus()) {
             $csvform = new CSVForm();
+            if(preg_match("/\A([0-9]{8})\z/", $user->user_detail->iidx_id)===1)$user->user_detail->iidx_id=substr($user->user_detail->iidx_id,0,4)."-".substr($user->user_detail->iidx_id,4,4);
             if ($this->request->is(['patch', 'post', 'put'])) {
                 //$this->loadComponent('OGP');
                 $csv_data = $this->request->getData('upload-csv');
@@ -210,6 +211,7 @@ class UsersController extends AppController
                 else{
                     $user = $this->Users->patchEntity($user, $this->request->getData());
                     $user->user_detail->dj_name = strtoupper($user->user_detail->dj_name);
+                    if(preg_match("/\A([0-9]{8})\z/", $user->user_detail->iidx_id)===1)$user->user_detail->iidx_id=substr($user->user_detail->iidx_id,0,4)."-".substr($user->user_detail->iidx_id,4,4);
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The user has been saved.'));
                         return $this->redirect(['action' => 'view', $user->id]);
@@ -377,6 +379,41 @@ class UsersController extends AppController
             $this->Flash->error(__('Permission denied'));
             return $this->redirect(['action' => 'view', $rival_id]);
         }
+    }
+
+    public function tables($id = null)
+    {
+        $this->Authorization->skipAuthorization();
+
+        $user = $this->Users->get($id, [
+            'contain' => ['UserDetails',
+                'Scores',
+                'UserHistories',
+                'FollowUsers' => ['UserDetails'], 
+                'FollowedUsers' => ['UserDetails'],
+            ],
+        ]);
+
+        $this->loadComponent('Indicator');
+        $this->loadComponent('Lamp');
+        $this->loadComponent('Follow');
+        $my_lamps = $user->user_detail->my_lamps_array;
+        $difficulty_tables = $this->Indicator->getDifficultyTables($my_lamps);
+        $archive_counts = $this->Indicator->getArchiveCounts($difficulty_tables);
+        $lamp_counts = $this->Indicator->getLampCounts($my_lamps);
+        $checkbox['version'] = $this->Indicator->version_info;
+        $checkbox['cur_lamp'] = $this->Indicator->lamp_info;
+        $checkbox['tar_lamp'] = $this->Indicator->tar_lamp_info;
+        $checkbox['color'] = $this->Indicator->color_info;
+        $checkbox['lamp_class'] = $this->Lamp->lamp_class_info;
+        $checkbox['lamp_short'] = $this->Lamp->lamp_short_info;
+        $identity = $this->request->getAttribute('identity');
+        $mypage = isset($identity) && ($identity->id === $user->id);
+        $follow_flag = isset($identity) && $this->Follow->isfollow($identity->id, $user->id);
+        $is_permitted = $user->private_level===0|| $mypage || $follow_flag;
+
+
+        $this->set(compact('user','difficulty_tables','archive_counts', 'lamp_counts','mypage', 'follow_flag', 'is_permitted', 'checkbox'));
     }
 
     public function recalclate($id = null)

@@ -69,6 +69,7 @@ class UserDetailsTable extends Table
             ->allowEmptyString('iidx_id')
             ->add('iidx_id', 'iidxIdFormat', [
                 'rule' => function ($value) {
+                    if(preg_match("/\A([0-9]{8})\z/", $value)===1)$value=substr($value,0,4)."-".substr($value,4,4);
                     return preg_match("/\A([0-9]{4}-?[0-9]{4})|(XXXX-XXXX)\z/", $value)===1;
                 },
                 'message' => 'IIDXidとして認識できません',
@@ -80,7 +81,7 @@ class UserDetailsTable extends Table
             ->notEmptyString('dj_name')
             ->add('dj_name', 'djNameFormat', [
                 'rule' => function ($value) {
-                    return preg_match("/\A[a-zA-Z0-9\$\.\*\-$!?]{1,6}\z/", $value)===1;
+                    return preg_match("/\A[a-zA-Z0-9\$\.\*\-$!?&#]{1,6}\z/", $value)===1;
                 },
                 'message' => 'DJネームとして認識できません',
             ]);
