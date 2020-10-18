@@ -123,53 +123,57 @@ $tables_id=["easy","clear","hard","exh","fc"];
         </div>
     </div>
 
-    <div class="card border-secondary mb-3">
-        <div class="card-header">
-            <h4 class="mb-2">
-                <?= "CPI難易度表" ?>
-            </h4>
-            <ul class="nav nav-tabs card-header-tabs">
+    <?php if(!$is_permitted):?>
+        <div class="card border-secondary mb-3"><div class="text-center pt-5 pb-5"><i class="fas fa-lock fa-3x"></i></div></div>
+    <?php else:?>
+        <div class="card border-secondary mb-3">
+            <div class="card-header">
+                <h4 class="mb-2">
+                    <?= "CPI難易度表" ?>
+                </h4>
+                <ul class="nav nav-tabs card-header-tabs">
+                    <?php foreach ($tables_id as $i => $table_id): ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?= $i==0?"active":""?>" href="#<?= $table_id ?>" data-toggle="tab"><?= strtoupper($table_id) ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="card-body text-dark tab-content padding-sm">
                 <?php foreach ($tables_id as $i => $table_id): ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $i==0?"active":""?>" href="#<?= $table_id ?>" data-toggle="tab"><?= strtoupper($table_id) ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <div class="card-body text-dark tab-content padding-sm">
-            <?php foreach ($tables_id as $i => $table_id): ?>
-                <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
-                    <h3>達成済 <?= $archive_counts[$i]."/".count($difficulty_tables[$i])." ( 残り".(count($difficulty_tables[$i])-$archive_counts[$i])."譜面 )" ?></h3>
-                    <h6>ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
-                                    'こちら',
-                                    ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
-                                ) ?></h6>
-                    <div class="table table-responsive table-smart-phone-xx" style="table-layout: fixed;">
-                        <table id="<?= $table_id."_table" ?>" class="table table-bordered">
-                            <?php $col=0; $under=7000?>
-                            <tbody>
-                                <?php foreach ($difficulty_tables[$i]??[] as $row): ?>
-                                    <?php if($under > $row['fifty']): ?>
-                                        <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                                        <?php $under = floor($row['fifty']/50)*50;?>
-                                        <thead>
-                                            <tr class="text-center" bgcolor=#444444>
-                                                <th colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= ($under>=5000?"Infinity":($under+50)." ~ ".$under) ?></th>
-                                            </tr>
-                                        </thead>
-                                        <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                                    <?php endif; ?>
-                                    <?php if($col==0): ?><tr><?php endif; ?>
-                                        <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
-                                    <?php $col++;?>
-                                    <?php if($col==3): $col=0?></tr><?php endif; ?>
-                                <?php endforeach; ?>
-                                <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                            </tbody>
-                        </table>
+                    <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
+                        <h3>達成済 <?= $archive_counts[$i]."/".count($difficulty_tables[$i])." ( 残り".(count($difficulty_tables[$i])-$archive_counts[$i])."譜面 )" ?></h3>
+                        <h6>ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
+                                        'こちら',
+                                        ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
+                                    ) ?></h6>
+                        <div class="table table-responsive table-smart-phone-xx" style="table-layout: fixed;">
+                            <table id="<?= $table_id."_table" ?>" class="table table-bordered">
+                                <?php $col=0; $under=7000?>
+                                <tbody>
+                                    <?php foreach ($difficulty_tables[$i]??[] as $row): ?>
+                                        <?php if($under > $row['fifty']): ?>
+                                            <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                            <?php $under = floor($row['fifty']/50)*50;?>
+                                            <thead>
+                                                <tr class="text-center" bgcolor=#444444>
+                                                    <th colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= ($under>=5000?"Infinity":($under+50)." ~ ".$under) ?></th>
+                                                </tr>
+                                            </thead>
+                                            <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if($col==0): ?><tr><?php endif; ?>
+                                            <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                        <?php $col++;?>
+                                        <?php if($col==3): $col=0?></tr><?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+    <?php endif;?>
 </div>
