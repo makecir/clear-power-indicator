@@ -325,9 +325,14 @@ class IndicatorComponent extends Component
 
     public function getDifficultyTables(&$my_lamps){
         $Scores = TableRegistry::getTableLocator()->get('Scores');
-        $scores = $Scores->find('rated')->toArray();
+        $scores = $Scores->find('available')->order(['title' => 'ASC'])->toArray();
         $lamp_num = sizeof($this->lamp_info);
         $results = [[],[],[],[],[]];
+        for($i=0;$i<5;$i++){
+            for( $j=5000 ; $j>0 ; $j=$j-50 ){
+                $results[$i]['rated'][strval($j)] = [];
+            }
+        }
         foreach($scores as $score){
             $result=[];
             $result['lamp'] = $my_lamps[$score['id']]??0;
@@ -335,25 +340,70 @@ class IndicatorComponent extends Component
             $result['id'] = $score['id'];
 
             for($i=0;$i<5;$i++){
-                $intercept = $score[$this->pred_target[$i+3]."_intercept"];
-                $coefficient = $score[$this->pred_target[$i+3]."_coefficient"];
-                $result['fifty'] = $this->fiftyInfo($intercept,$coefficient);
-                if($result['fifty']=="Infinity") $result['fifty'] = 5050;
-                $results[$i][] = $result;
+                if($score['is_rated'] == 1){
+                    $intercept = $score[$this->pred_target[$i+3]."_intercept"];
+                    $coefficient = $score[$this->pred_target[$i+3]."_coefficient"];
+                    $result['fifty'] = $this->fiftyInfo($intercept,$coefficient);
+                    if($result['fifty']=="Infinity") {
+                        $result['fifty'] = 5000;
+                        $results[$i]['infinity'][] = $result;
+                    }
+                    else $results[$i]['rated'][strval(floor($result['fifty']/50)*50)][] = $result;
+                }
+                else{
+                    $result['fifty'] = 0;
+                    $results[$i]['unrated'][] = $result;
+                }
             }
-
         }
         for($i=0;$i<5;$i++){
-            $results[$i] = $this->sortByKey('fifty', SORT_DESC, $results[$i]);
+            for( $j=5000 ; $j>0 ; $j=$j-50 ){
+                if(count($results[$i]['rated'][strval($j)])!=0)break;
+                unset($results[$i]['rated'][strval($j)]);
+            }
+            for( $j=50 ; $j<=5000 ; $j=$j+50 ){
+                if(count($results[$i]['rated'][strval($j)])!=0)break;
+                unset($results[$i]['rated'][strval($j)]);
+            }
         }
         return $results;
     }
 
     public function getArchiveCounts(&$difficulty_tables){
-        $results = [0,0,0,0,0];
+        $results = [[],[],[],[],[]];
+        for($i=0;$i<5;$i++){
+            $results[$i]['sum']=[0,0];
+            $results[$i]['rated']=[];
+            $results[$i]['unrated']=[0,0];
+            $results[$i]['infinity']=[0,0];
+        }
         foreach($difficulty_tables as $i => $table){
-            foreach($table as $score){
-                if($score['lamp']>=$i+3)$results[$i]++;
+            foreach($table['rated']??[] as $section_key => $section){
+                $results[$i]['rated'][$section_key] = [0,0];
+                foreach($section as $score){
+                    if($score['lamp']>=$i+3){
+                        $results[$i]['sum'][0]++;
+                        $results[$i]['rated'][$section_key][0]++;
+                    }
+                    $results[$i]['sum'][1]++;
+                    $results[$i]['rated'][$section_key][1]++;
+                }
+            }
+            foreach($table['unrated']??[] as $score){
+                if($score['lamp']>=$i+3){
+                    $results[$i]['sum'][0]++;
+                    $results[$i]['unrated'][0]++;
+                }
+                $results[$i]['sum'][1]++;
+                $results[$i]['unrated'][1]++;
+            }
+            foreach($table['infinity']??[] as $score){
+                if($score['lamp']>=$i+3){
+                    $results[$i]['sum'][0]++;
+                    $results[$i]['infinity'][0]++;
+                }
+                $results[$i]['sum'][1]++;
+                $results[$i]['infinity'][1]++;
             }
         }
         return $results;

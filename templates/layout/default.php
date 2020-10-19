@@ -16,7 +16,7 @@
 use Cake\Routing\Router;
 
 $cakeDescription = 'CPI : Clear Power Indicator ';
-$source_version = "?ver=1.013";
+$source_version = "?ver=1.014";
 ?>
 <!DOCTYPE html>
 <html>
@@ -116,6 +116,11 @@ $source_version = "?ver=1.013";
                             <?= $this->Html->link(
                                 __('My page'),
                                 ['controller' => 'Users', 'action' => 'view', $identity->id],
+                                ['class' => 'dropdown-item'])
+                            ?>
+                            <?= $this->Html->link(
+                                "難易度表ページ",
+                                ['controller'=>'Users', 'action'=>'tables', $user->id],
                                 ['class' => 'dropdown-item'])
                             ?>
                             <?= $this->Html->link(
