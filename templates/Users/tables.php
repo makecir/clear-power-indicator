@@ -14,6 +14,7 @@ $color_info=[
     7 => "#FF9966",
 ];
 $tables_id=["easy","clear","hard","exh","fc"];
+$tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこちら';
 ?>
 <style type="text/css">
     td a:link,td a:visited,td a:hover,td a:active      {display:block;width:100%;height:100%;color: inherit;}
@@ -128,9 +129,14 @@ $tables_id=["easy","clear","hard","exh","fc"];
     <?php else:?>
         <div class="card border-secondary mb-3">
             <div class="card-header">
-                <h4 class="mb-2">
-                    <?= "CPI難易度表" ?>
-                </h4>
+                <div class="mb-2" >
+                    <h4 class="mb-2" style="display:inline;">
+                        <?= "CPI難易度表" ?>
+                    </h4>
+                    <div class='text-right mb-1' id="lamp-tweet"  style="float:right;display:inline;">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_tables ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
                 <ul class="nav nav-tabs card-header-tabs">
                     <?php foreach ($tables_id as $i => $table_id): ?>
                         <li class="nav-item">
@@ -253,6 +259,17 @@ $tables_id=["easy","clear","hard","exh","fc"];
                                             'こちら',
                                             ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
                                         ) ?></h6>
+                        </div>
+                        <div class="mb-3">
+                            <label>
+                                <h5 style="display:inline;">共有用URL</h5>
+                                <h6 style="display:inline;">(デフォルトでこのタブを開くURL)</h6>
+                                <button class="btn btn-sm btn-outline-info" onclick="copyToClipboard('url_<?= $table_id ?>');appear('copy_success_<?= $table_id ?>');">copy</button>
+                            </label>
+                            <input id="url_<?= $table_id ?>" class="form-control" type="text" value="<?= $this->Url->build(NULL,['fullBase' => true,])."#".$table_id?>" readonly>
+                            <div id="copy_success_<?= $table_id ?>" style="display:none;">
+                                <small class="form-text text-muted mb-3">コピーしました！</small>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

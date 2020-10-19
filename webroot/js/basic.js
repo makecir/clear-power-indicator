@@ -54,3 +54,17 @@ $(function(){
     $('ul.list > li').prepend('<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>');
     $('dl.list dt').prepend('<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>');
   });
+
+function copyToClipboard(str) {
+    var range = document.createRange();
+    var element = document.getElementById(str);
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    element.select();
+    document.execCommand("Copy");
+    selection.removeAllRanges();
+}
+function appear(str) {
+    document.getElementById(str).style.display ="";
+}
