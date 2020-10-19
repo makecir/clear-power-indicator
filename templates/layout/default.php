@@ -125,7 +125,7 @@ $source_version = "?ver=1.014";
                             ?>
                             <?= $this->Html->link(
                                 "難易度表ページ",
-                                ['controller'=>'Users', 'action'=>'tables', $user->id],
+                                ['controller'=>'Users', 'action'=>'tables', $identity->id],
                                 ['class' => 'dropdown-item'])
                             ?>
                             <?= $this->Html->link(
