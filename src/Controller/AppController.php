@@ -60,7 +60,7 @@ class AppController extends Controller
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'display']);
+        $this->Authentication->addUnauthenticatedActions(['index', 'view', 'display', 'tables']);
         //$identity = $this->request->getAttribute('authentication')->getIdentity();
         $isLoggedIn = $this->Authentication->getResult()->isValid();
         $identity = $this->request->getAttribute('identity');
