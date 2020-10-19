@@ -814,3 +814,5 @@ msgstr "相手"
 msgid "Scores"
 msgstr "譜面一覧"
 
+msgid "Tables"
+msgstr "難易度表"
