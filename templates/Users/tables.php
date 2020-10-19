@@ -149,7 +149,8 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                 <?php foreach ($tables_id as $i => $table_id): ?>
                     <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
                         <div class="mb-3">
-                            <h3>達成済 <?= $archive_counts[$i]['sum'][0]."/".$archive_counts[$i]['sum'][1]." ( 残り".($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])."譜面 )" ?></h3>
+                            <h3 style="display:inline;">達成済 <?= $archive_counts[$i]['sum'][0]." / ".$archive_counts[$i]['sum'][1] ?></h3>
+                            <h4 class="ml-1" style="display:inline;"><?= " ( ".sprintf("%d",($archive_counts[$i]['sum'][0]*100/$archive_counts[$i]['sum'][1]))."% )" ?></h4>
                         </div>
                         <div class="mb-3">
                             <div class="mb-1 pb-2 border-bottom">
@@ -175,8 +176,8 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                 <?php endif;?>
                                 <?php foreach ($archive_counts[$i]['rated']??[] as $section_key => $section): ?>
                                     <?php if($section[1]!=0):?>
-                                        <div class="mb-1">
-                                            <div class="mr-2 text-right" style="width:6rem;float:left;"><?= sprintf("%4d~%4d",$section_key,intval($section_key)+50) ?></div>
+                                        <div class="mb-0.8">
+                                            <div class="mr-2 text-right" style="line-height:1.2;width:6rem;float:left;"><?= sprintf("%4d~%4d",$section_key,intval($section_key)+50) ?></div>
                                             <div class="pt-1">
                                                 <div class="progress" style="">
                                                     <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $section[0]*100 ?>%" aria-valuenow="<?= $section[0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>

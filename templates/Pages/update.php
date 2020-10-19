@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2020/10/20</dt>
+                <dd>難易度表を追加・DJネームの不具合を修正</dd>
                 <dt>2020/10/06</dt>
                 <dd>リコメンドの「現ランプの次にランプのみ表示」の挙動を修正</dd>
                 <dt>2020/10/04</dt>

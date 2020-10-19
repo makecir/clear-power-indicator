@@ -90,6 +90,11 @@ $source_version = "?ver=1.014";
                         ['class' => 'nav-link'])
                     ?>
                 </li>
+                <?= $this->Html->link(
+                    __('Tables'),
+                    ['controller'=>'Scores', 'action'=>'tables'],
+                    ['class' => 'nav-link'])
+                ?>
                 <li class="nav-item">
                     <?= $this->Html->link(
                         __('About'),
