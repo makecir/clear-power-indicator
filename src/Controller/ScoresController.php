@@ -69,4 +69,18 @@ class ScoresController extends AppController
         $this->set(compact('score', 'predict_line', 'display_info'));
     }
 
+
+    public function tables()
+    {
+        $this->Authorization->skipAuthorization();
+
+        $this->loadComponent('Indicator');
+        $this->loadComponent('Lamp');
+        $empty=array();
+        $difficulty_tables = $this->Indicator->getDifficultyTables($empty);
+        $archive_counts = $this->Indicator->getArchiveCounts($difficulty_tables);
+
+        $this->set(compact('difficulty_tables','archive_counts'));
+    }
+
 }
