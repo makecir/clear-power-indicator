@@ -370,21 +370,40 @@ class IndicatorComponent extends Component
     }
 
     public function getArchiveCounts(&$difficulty_tables){
-        $results = [[0,0],[0,0],[0,0],[0,0],[0,0]];
+        $results = [[],[],[],[],[]];
+        for($i=0;$i<5;$i++){
+            $results[$i]['sum']=[0,0];
+            $results[$i]['rated']=[];
+            $results[$i]['unrated']=[0,0];
+            $results[$i]['infinity']=[0,0];
+        }
         foreach($difficulty_tables as $i => $table){
-            foreach($table['rated']??[] as $section){
+            foreach($table['rated']??[] as $section_key => $section){
+                $results[$i]['rated'][$section_key] = [0,0];
                 foreach($section as $score){
-                    if($score['lamp']>=$i+3)$results[$i][0]++;
-                    $results[$i][1]++;
+                    if($score['lamp']>=$i+3){
+                        $results[$i]['sum'][0]++;
+                        $results[$i]['rated'][$section_key][0]++;
+                    }
+                    $results[$i]['sum'][1]++;
+                    $results[$i]['rated'][$section_key][1]++;
                 }
             }
             foreach($table['unrated']??[] as $score){
-                if($score['lamp']>=$i+3)$results[$i][0]++;
-                $results[$i][1]++;
+                if($score['lamp']>=$i+3){
+                    $results[$i]['sum'][0]++;
+                    $results[$i]['unrated'][0]++;
+                }
+                $results[$i]['sum'][1]++;
+                $results[$i]['unrated'][1]++;
             }
             foreach($table['infinity']??[] as $score){
-                if($score['lamp']>=$i+3)$results[$i][0]++;
-                $results[$i][1]++;
+                if($score['lamp']>=$i+3){
+                    $results[$i]['sum'][0]++;
+                    $results[$i]['infinity'][0]++;
+                }
+                $results[$i]['sum'][1]++;
+                $results[$i]['infinity'][1]++;
             }
         }
         return $results;

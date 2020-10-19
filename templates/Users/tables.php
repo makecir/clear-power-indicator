@@ -142,12 +142,62 @@ $tables_id=["easy","clear","hard","exh","fc"];
             <div class="card-body text-dark tab-content padding-sm">
                 <?php foreach ($tables_id as $i => $table_id): ?>
                     <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
-                        <h3>達成済 <?= $archive_counts[$i][0]."/".$archive_counts[$i][1]." ( 残り".($archive_counts[$i][1]-$archive_counts[$i][0])."譜面 )" ?></h3>
-                        <h6>※ 各項目内の譜面は曲名順です </h6>
-                        <h6>※ ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
-                                        'こちら',
-                                        ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
-                                    ) ?></h6>
+                        <div class="mb-3">
+                            <h3>達成済 <?= $archive_counts[$i]['sum'][0]."/".$archive_counts[$i]['sum'][1]." ( 残り".($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])."譜面 )" ?></h3>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-1 pb-2 border-bottom">
+                                <div class="mr-2 text-right" style="width:6rem;float:left;">Total</div>
+                                <div class="pt-1">
+                                    <div class="progress" style="">
+                                        <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['sum'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['sum'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])*100 ?>%" aria-valuenow="<?= ($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="collapse" id="collapseProgressDetail<?= $table_id ?>">
+                                <?php if($archive_counts[$i]['infinity'][1]!=0):?>
+                                    <div class="mb-1">
+                                        <div class="mr-2 text-right" style="width:6rem;float:left;">Inf</div>
+                                        <div class="pt-1">
+                                            <div class="progress" style="">
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['infinity'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['infinity'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($archive_counts[$i]['infinity'][1]-$archive_counts[$i]['infinity'][0])*100 ?>%" aria-valuenow="<?= ($archive_counts[$i]['infinity'][1]-$archive_counts[$i]['infinity'][0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                                <?php foreach ($archive_counts[$i]['rated']??[] as $section_key => $section): ?>
+                                    <?php if($section[1]!=0):?>
+                                        <div class="mb-1">
+                                            <div class="mr-2 text-right" style="width:6rem;float:left;"><?= sprintf("%4d~%4d",$section_key,intval($section_key)+50) ?></div>
+                                            <div class="pt-1">
+                                                <div class="progress" style="">
+                                                    <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $section[0]*100 ?>%" aria-valuenow="<?= $section[0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($section[1]-$section[0])*100 ?>%" aria-valuenow="<?= ($section[1]-$section[0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif;?>
+                                <?php endforeach; ?>
+                                <?php if($archive_counts[$i]['unrated'][1]!=0):?>
+                                    <div class="mb-1 mt-1">
+                                        <div class="mr-2 text-right" style="width:6rem;float:left;">Other</div>
+                                        <div class="pt-1">
+                                            <div class="progress" style="">
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['unrated'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['unrated'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($archive_counts[$i]['unrated'][1]-$archive_counts[$i]['unrated'][0])*100 ?>%" aria-valuenow="<?= ($archive_counts[$i]['unrated'][1]-$archive_counts[$i]['unrated'][0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                            <div class="text-center mt-2">
+                                <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseProgressDetail<?= $table_id ?>" role="button" aria-expanded="false" aria-controls="collapseProgressDetail<?= $table_id ?>">
+                                    詳細
+                                </a>
+                            </div>
+                        </div>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered">
                                 <tbody>
@@ -196,6 +246,13 @@ $tables_id=["easy","clear","hard","exh","fc"];
                                     <?php if($col!==0): $col=0?></tr><?php endif; ?>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="mb-3">
+                            <h6>※ 各項目内の譜面は曲名順です </h6>
+                            <h6>※ ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
+                                            'こちら',
+                                            ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
+                                        ) ?></h6>
                         </div>
                     </div>
                 <?php endforeach; ?>
