@@ -14,6 +14,7 @@ $color_info=[
     7 => "#FF9966",
 ];
 $tables_id=["easy","clear","hard","exh","fc"];
+$tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこちら';
 ?>
 <style type="text/css">
     td a:link,td a:visited,td a:hover,td a:active      {display:block;width:100%;height:100%;color: inherit;}
@@ -128,9 +129,14 @@ $tables_id=["easy","clear","hard","exh","fc"];
     <?php else:?>
         <div class="card border-secondary mb-3">
             <div class="card-header">
-                <h4 class="mb-2">
-                    <?= "CPI難易度表" ?>
-                </h4>
+                <div class="mb-2" >
+                    <h4 class="mb-2" style="display:inline;">
+                        <?= "CPI難易度表" ?>
+                    </h4>
+                    <div class='text-right mb-1' id="lamp-tweet"  style="float:right;display:inline;">
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_tables ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
                 <ul class="nav nav-tabs card-header-tabs">
                     <?php foreach ($tables_id as $i => $table_id): ?>
                         <li class="nav-item">
@@ -142,26 +148,102 @@ $tables_id=["easy","clear","hard","exh","fc"];
             <div class="card-body text-dark tab-content padding-sm">
                 <?php foreach ($tables_id as $i => $table_id): ?>
                     <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
-                        <h3>達成済 <?= $archive_counts[$i]."/".count($difficulty_tables[$i])." ( 残り".(count($difficulty_tables[$i])-$archive_counts[$i])."譜面 )" ?></h3>
-                        <h6>ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
-                                        'こちら',
-                                        ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
-                                    ) ?></h6>
-                        <div class="table table-responsive table-smart-phone-xx" style="table-layout: fixed;">
+                        <div class="mb-3">
+                            <h3>達成済 <?= $archive_counts[$i]['sum'][0]."/".$archive_counts[$i]['sum'][1]." ( 残り".($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])."譜面 )" ?></h3>
+                        </div>
+                        <div class="mb-3">
+                            <div class="mb-1 pb-2 border-bottom">
+                                <div class="mr-2 text-right" style="width:6rem;float:left;">Total</div>
+                                <div class="pt-1">
+                                    <div class="progress" style="">
+                                        <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['sum'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['sum'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])*100 ?>%" aria-valuenow="<?= ($archive_counts[$i]['sum'][1]-$archive_counts[$i]['sum'][0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="collapse" id="collapseProgressDetail<?= $table_id ?>">
+                                <?php if($archive_counts[$i]['infinity'][1]!=0):?>
+                                    <div class="mb-1">
+                                        <div class="mr-2 text-right" style="width:6rem;float:left;">Inf</div>
+                                        <div class="pt-1">
+                                            <div class="progress" style="">
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['infinity'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['infinity'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($archive_counts[$i]['infinity'][1]-$archive_counts[$i]['infinity'][0])*100 ?>%" aria-valuenow="<?= ($archive_counts[$i]['infinity'][1]-$archive_counts[$i]['infinity'][0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                                <?php foreach ($archive_counts[$i]['rated']??[] as $section_key => $section): ?>
+                                    <?php if($section[1]!=0):?>
+                                        <div class="mb-1">
+                                            <div class="mr-2 text-right" style="width:6rem;float:left;"><?= sprintf("%4d~%4d",$section_key,intval($section_key)+50) ?></div>
+                                            <div class="pt-1">
+                                                <div class="progress" style="">
+                                                    <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $section[0]*100 ?>%" aria-valuenow="<?= $section[0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($section[1]-$section[0])*100 ?>%" aria-valuenow="<?= ($section[1]-$section[0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif;?>
+                                <?php endforeach; ?>
+                                <?php if($archive_counts[$i]['unrated'][1]!=0):?>
+                                    <div class="mb-1 mt-1">
+                                        <div class="mr-2 text-right" style="width:6rem;float:left;">Other</div>
+                                        <div class="pt-1">
+                                            <div class="progress" style="">
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['unrated'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['unrated'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][0] ?>" role="progressbar" style="width: <?= ($archive_counts[$i]['unrated'][1]-$archive_counts[$i]['unrated'][0])*100 ?>%" aria-valuenow="<?= ($archive_counts[$i]['unrated'][1]-$archive_counts[$i]['unrated'][0])*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                            <div class="text-center mt-2">
+                                <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseProgressDetail<?= $table_id ?>" role="button" aria-expanded="false" aria-controls="collapseProgressDetail<?= $table_id ?>">
+                                    詳細
+                                </a>
+                            </div>
+                        </div>
+                        <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered">
-                                <?php $col=0; $under=7000?>
                                 <tbody>
-                                    <?php foreach ($difficulty_tables[$i]??[] as $row): ?>
-                                        <?php if($under > $row['fifty']): ?>
-                                            <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                                            <?php $under = floor($row['fifty']/50)*50;?>
-                                            <thead>
-                                                <tr class="text-center" bgcolor=#444444>
-                                                    <th colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= ($under>=5000?"Infinity":($under+50)." ~ ".$under) ?></th>
-                                                </tr>
-                                            </thead>
-                                            <?php if($col!==0): $col=0?></tr><?php endif; ?>
-                                        <?php endif; ?>
+                                    <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
+                                        <tr class="text-center" bgcolor=#444444>
+                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI Infinity</td>
+                                        </tr>
+                                        <?php $col=0;?>
+                                        <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
+                                            <?php if($col==0): ?><tr><?php endif; ?>
+                                                <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <?php $col++;?>
+                                            <?php if($col==3): $col=0?></tr><?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                        <tr class="blank_row">
+                                        <td colspan="1" style="border: 0px none;">&nbsp;</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php foreach ($difficulty_tables[$i]['rated']??[] as $section_key => $section): ?>
+                                        <tr class="text-center" bgcolor=#444444>
+                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
+                                        </tr>
+                                        <?php $col=0;?>
+                                        <?php foreach ($section as $row): ?>
+                                            <?php if($col==0): ?><tr><?php endif; ?>
+                                                <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <?php $col++;?>
+                                            <?php if($col==3): $col=0?></tr><?php endif; ?>
+                                        <?php endforeach; ?>
+                                        <?php if($col!==0): $col=0?></tr><?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <tr class="blank_row">
+                                        <td colspan="1" style="border: 0px none;">&nbsp;</td>
+                                    </tr>
+                                    <tr class="text-center" bgcolor=#444444>
+                                        <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI 算出対象外</td>
+                                    </tr>
+                                    <?php $col=0;?>
+                                    <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
                                         <?php if($col==0): ?><tr><?php endif; ?>
                                             <td align="center" bgcolor=<?= $color_info[$row['lamp']] ?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                         <?php $col++;?>
@@ -170,6 +252,24 @@ $tables_id=["easy","clear","hard","exh","fc"];
                                     <?php if($col!==0): $col=0?></tr><?php endif; ?>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="mb-3">
+                            <h6>※ 各項目内の譜面は曲名順です </h6>
+                            <h6>※ ごく最近の一部譜面については集計の対象外です 詳しくは<?= $this->Html->link(
+                                            'こちら',
+                                            ['controller' => 'Pages', 'action' => 'about', '#'=>'update'],
+                                        ) ?></h6>
+                        </div>
+                        <div class="mb-3">
+                            <label>
+                                <h5 style="display:inline;">共有用URL</h5>
+                                <h6 style="display:inline;">(デフォルトでこのタブを開くURL)</h6>
+                                <button class="btn btn-sm btn-outline-info" onclick="copyToClipboard('url_<?= $table_id ?>');appear('copy_success_<?= $table_id ?>');">copy</button>
+                            </label>
+                            <input id="url_<?= $table_id ?>" class="form-control" type="text" value="<?= $this->Url->build(NULL,['fullBase' => true,])."#".$table_id?>" readonly>
+                            <div id="copy_success_<?= $table_id ?>" style="display:none;">
+                                <small class="form-text text-muted mb-3">コピーしました！</small>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
