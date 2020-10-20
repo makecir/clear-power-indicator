@@ -19,7 +19,7 @@ $cakeDescription = 'CPI : Clear Power Indicator ';
 $source_version = "?ver=1.014";
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175924766-1"></script>
@@ -124,7 +124,7 @@ $source_version = "?ver=1.014";
                                 ['class' => 'dropdown-item'])
                             ?>
                             <?= $this->Html->link(
-                                "難易度表ページ",
+                                "マイ難易度表",
                                 ['controller'=>'Users', 'action'=>'tables', $identity->id],
                                 ['class' => 'dropdown-item'])
                             ?>

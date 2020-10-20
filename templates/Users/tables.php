@@ -133,9 +133,11 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                     <h4 class="mb-2" style="display:inline;">
                         <?= "CPI難易度表" ?>
                     </h4>
-                    <div class='text-right mb-1' id="lamp-tweet"  style="float:right;display:inline;">
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_tables ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
+                    <?php if($mypage):?>
+                        <div class='text-right mb-1' id="lamp-tweet"  style="float:right;display:inline;">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text='<?= $tweet_text_tables ?>' data-url="<?= $this->Url->build(NULL,['fullBase' => true,])?>" data-hashtags="CPI_IIDX" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <ul class="nav nav-tabs card-header-tabs">
                     <?php foreach ($tables_id as $i => $table_id): ?>
