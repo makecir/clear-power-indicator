@@ -46,7 +46,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                 <tbody>
                                     <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
                                         <tr class="text-center" bgcolor=#444444>
-                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI Infinity</td>
+                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI Infinity</td>
                                         </tr>
                                         <?php $col=0;?>
                                         <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
@@ -62,7 +62,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                     <?php endif; ?>
                                     <?php foreach ($difficulty_tables[$i]['rated']??[] as $section_key => $section): ?>
                                         <tr class="text-center" bgcolor=#444444>
-                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;">適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
+                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
                                         </tr>
                                         <?php $col=0;?>
                                         <?php foreach ($section as $row): ?>
@@ -77,7 +77,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <td colspan="1" style="border: 0px none;">&nbsp;</td>
                                     </tr>
                                     <tr class="text-center" bgcolor=#444444>
-                                        <td colspan="3" align="center" class="text-white" style="width: 100%;">適正CPI 算出対象外</td>
+                                        <td colspan="3" align="center" class="text-white" style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI 算出対象外</td>
                                     </tr>
                                     <?php $col=0;?>
                                     <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
