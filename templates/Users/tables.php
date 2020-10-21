@@ -167,7 +167,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                             <div class="collapse" id="collapseProgressDetail<?= $table_id ?>">
                                 <?php if($archive_counts[$i]['infinity'][1]!=0):?>
                                     <div class="mb-1">
-                                        <div class="mr-2 text-right" style="width:6rem;float:left;">Inf</div>
+                                        <div class="mr-2 text-right" style="width:6rem;float:left;"><a href="#<?= $table_id."-infinity" ?>">Infinity</a></div>
                                         <div class="pt-1">
                                             <div class="progress" style="">
                                                 <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['infinity'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['infinity'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
@@ -179,7 +179,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                 <?php foreach ($archive_counts[$i]['rated']??[] as $section_key => $section): ?>
                                     <?php if($section[1]!=0):?>
                                         <div class="mb-0.8">
-                                            <div class="mr-2 text-right" style="line-height:1.2;width:6rem;float:left;"><?= sprintf("%4d~%4d",$section_key,intval($section_key)+50) ?></div>
+                                            <div class="mr-2 text-right" style="line-height:1.2;width:6rem;float:left;"><a href="#<?= $table_id."-".$section_key ?>"><?= sprintf("%4d~%4d",$section_key,intval($section_key)+50) ?></a></div>
                                             <div class="pt-1">
                                                 <div class="progress" style="">
                                                     <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $section[0]*100 ?>%" aria-valuenow="<?= $section[0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
@@ -191,7 +191,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                 <?php endforeach; ?>
                                 <?php if($archive_counts[$i]['unrated'][1]!=0):?>
                                     <div class="mb-1 mt-1">
-                                        <div class="mr-2 text-right" style="width:6rem;float:left;">Other</div>
+                                        <div class="mr-2 text-right" style="width:6rem;float:left;"><a href="#<?= $table_id."-unrated" ?>">Unrated</a></div>
                                         <div class="pt-1">
                                             <div class="progress" style="">
                                                 <div class="progress-bar progress-bar-<?= $checkbox['lamp_class'][$i+3] ?>" role="progressbar" style="width: <?= $archive_counts[$i]['unrated'][0]*100 ?>%" aria-valuenow="<?= $archive_counts[$i]['unrated'][0]*100 ?>" aria-valuemin="0" aria-valuemax="100"></div>
@@ -203,7 +203,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                             </div>
                             <div class="text-center mt-2">
                                 <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseProgressDetail<?= $table_id ?>" role="button" aria-expanded="false" aria-controls="collapseProgressDetail<?= $table_id ?>">
-                                    詳細
+                                    グラフ詳細
                                 </a>
                             </div>
                         </div>
@@ -211,7 +211,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered">
                                 <tbody>
                                     <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
-                                        <tr class="text-center" bgcolor=#444444>
+                                        <tr class="text-center" bgcolor=#444444 id="<?= $table_id."-infinity" ?>">
                                             <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI Infinity</td>
                                         </tr>
                                         <?php $col=0;?>
@@ -227,7 +227,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                         </tr>
                                     <?php endif; ?>
                                     <?php foreach ($difficulty_tables[$i]['rated']??[] as $section_key => $section): ?>
-                                        <tr class="text-center" bgcolor=#444444>
+                                        <tr class="text-center" bgcolor=#444444 id="<?= $table_id."-".$section_key ?>">
                                             <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
                                         </tr>
                                         <?php $col=0;?>
@@ -242,7 +242,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                     <tr class="blank_row">
                                         <td colspan="1" style="border: 0px none;">&nbsp;</td>
                                     </tr>
-                                    <tr class="text-center" bgcolor=#444444>
+                                    <tr class="text-center" bgcolor=#444444 id="<?= $table_id."-unrated" ?>">
                                         <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI 算出対象外</td>
                                     </tr>
                                     <?php $col=0;?>
