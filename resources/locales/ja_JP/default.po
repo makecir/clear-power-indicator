@@ -126,6 +126,9 @@ msgstr "新しいパスワードが不正です。"
 msgid "Wrong password."
 msgstr "パスワードが誤っています。"
 
+msgid "New password has been saved."
+msgstr "パスワードを変更しました。"
+
 msgid "The usrename should be unique."
 msgstr "ユーザーIDが使用済みです。"
 
