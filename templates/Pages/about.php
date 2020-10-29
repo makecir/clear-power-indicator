@@ -51,7 +51,7 @@
                             サービスに意図的に負荷をかける行為はご遠慮ください。
                         </li>
                         <li>
-                            その他、悪意を持ってサイト運営・他利用者・サービス外の第三者に不利益を及ぼす行為をしていると運営が判断した場合、アカウントの停止を含むその他の措置を行う可能性があります。
+                            その他、悪意を以てサイト運営・他利用者・サービス外の第三者に不利益を及ぼす行為をしていると運営が判断した場合、アカウントの停止を含むその他の措置を行う可能性があります。
                         </li>
                     </ul>
                 </li>
@@ -144,16 +144,15 @@
             </div>
             <div class="mb-3">
                 <h4 class="card-title">対応譜面</h4>
-                <div class="text-dark"><p>更新日：2020/10/04</p></div> 
+                <div class="text-dark"><p>更新日：2020/10/29</p></div> 
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    2020/07/30頃までに追加された要解禁譜面 + 2020/08/30頃までに追加された解禁不要譜面
-                    （前回更新分 + Artist, BEAT PRISONER, Double Dribble, Everlasting Message, Friction[!]Function, Level 2, TRANOID [L], Vinculum stellarum, ピアノ協奏曲第1番”蠍火” (BlackY Remix), ZEPHYRANTHES[L])                        </dd>
-                    <dt>ランプ一覧で扱う対応譜面</dt>
+                    IIDX27収録曲のうち、2020/09/01以降に追加された譜面（下記）およびIIDX28で削除された曲（ELECTRIC MASSIVE DIVER, VOX RUSH）以外の譜面</dd>
+                    <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                    上記に加えて2020/10/04頃までに追加された譜面</br>
-                    （EROICA, Megalara Garuda, ORCA, Secrets [L], Smashing Wedge, 魅惑のYUMMYスイーツ）
+                    IIDX27収録曲のうち、2020/09/01以降に追加された譜面</br>
+                    （Dans la nuit de l'eternite, EROICA, GuNGNiR [L], Megalara Garuda, ORCA, Secrets [L], Smashing Wedge, 魅惑のYUMMYスイーツ）
                     この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。
                     </dd>
                 </dl>
