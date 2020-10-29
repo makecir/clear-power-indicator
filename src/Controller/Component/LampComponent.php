@@ -68,6 +68,19 @@ class LampComponent extends Component
                     $title = $elements[1];
                     for($j=2 ; $j<5 ; $j++){
                         $tar = $j*7 + 5;
+
+                        // 誤植に対応する例外処理
+                        if($j==4&&(
+                            $title == "GuNGNiR" ||
+                            $title == "Secrets" ||
+                            $title == "TITANS RETURN" ||
+                            $title == "TRANOID" ||
+                            $title == "ZEPHYRANTHES"
+                        )){
+                            $elements[$tar] = 12;
+                        }
+                        // 誤植に対応する例外処理　ここまで
+
                         if($elements[$tar] == 12){
                             $ret[$title][$j]['lamp'] = $clear_str2num[$elements[$tar+5]];
                             $ret[$title][$j]['miss_count'] = ( $elements[$tar+4]!="---" ? $elements[$tar+4] : NULL);
