@@ -79,6 +79,7 @@ class Score extends Entity
         'modified_at' => true,
         'users' => true,
         'title_info' => true,
+        'title_info_for_tweet' => true,
         'fifty_rating_easy'=>true,
         'fifty_rating_clear'=>true,
         'fifty_rating_hard'=>true,
@@ -95,6 +96,21 @@ class Score extends Entity
             if($this->difficulty >= 3) $suffix = " [A]";
         }
         return $this->title.$suffix;
+    }
+
+    protected function _getTitleInfoForTweet(){
+        $suffix = "";
+        if($this->difficulty >= 4) $suffix = " [L]";
+        elseif($this->title == "gigadelic" || $this->title == "Innocent Walls"){
+            if($this->difficulty == 2) $suffix = " [H]";
+            if($this->difficulty >= 3) $suffix = " [A]";
+        }
+        if($this->title=="We're so Happy (P*Light Remix) IIDX ver."){
+            return "We`re so Happy (P*Light Remix) IIDX ver.".$suffix;
+        }
+        else{
+            return $this->title.$suffix;
+        }
     }
 
     protected function _getVersionDict(){
