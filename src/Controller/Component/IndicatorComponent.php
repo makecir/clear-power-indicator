@@ -158,7 +158,7 @@ class IndicatorComponent extends Component
                 $pred['diff'] = $score['difficulty'];
                 if($pred['probability'] > $top_tweet_info['rec']['prob']){
                     $top_tweet_info['rec']['cpi'] = $this->fiftyInfo($intercept,$coefficient);
-                    $top_tweet_info['rec']['title'] = $score['title_info'];
+                    $top_tweet_info['rec']['title'] = $score['title_info_for_tweet'];
                     $top_tweet_info['rec']['lamp'] = $this->tar_lamp_info[$tar];
                     $top_tweet_info['rec']['prob'] = $pred['probability'];
                 }
@@ -195,7 +195,7 @@ class IndicatorComponent extends Component
             $pred['diff'] = $score['difficulty'];
             if($pred['probability'] < $top_tweet_info['bte']['prob']){
                 $top_tweet_info['bte']['cpi'] = $this->fiftyInfo($intercept,$coefficient);
-                $top_tweet_info['bte']['title'] = $score['title_info'];
+                $top_tweet_info['bte']['title'] = $score['title_info_for_tweet'];
                 $top_tweet_info['bte']['lamp'] = $this->tar_lamp_info[$tar];
                 $top_tweet_info['bte']['prob'] = $pred['probability'];
             }
@@ -290,7 +290,7 @@ class IndicatorComponent extends Component
                 $fifty = $this->fiftyInfo($intercept,$coefficient);
                 if($fifty > $top_change['cpi']){
                     $top_change['cpi'] = $fifty;
-                    $top_change['title'] = $change->score->title_info;
+                    $top_change['title'] = $change->score->title_info_for_tweet;
                     $top_change['lamp'] = $change->after_lamp;
                 }
             }

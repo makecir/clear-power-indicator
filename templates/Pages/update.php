@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2020/11/18</dt>
+                <dd>ツイートの内容に関する不具合を修正</dd>
                 <dt>2020/10/29</dt>
                 <dd>難易度推定手法の変更（更新）</dd>
                 <dt>2020/10/20</dt>
