@@ -108,6 +108,21 @@ class Score extends Entity
         if($this->title=="We're so Happy (P*Light Remix) IIDX ver."){
             return "We`re so Happy (P*Light Remix) IIDX ver.".$suffix;
         }
+        else if($this->title=="Thor's Hammer"){
+            return "Thor`s Hammer".$suffix;
+        }
+        else if($this->title=="ra'am"){
+            return "ra`am".$suffix;
+        }
+        else if($this->title=="Devil's Gear"){
+            return "Devil`s Gear".$suffix;
+        }
+        else if($this->title=="PLEASE DON'T GO"){
+            return "PLEASE DON`T GO".$suffix;
+        }
+        else if($this->title=="Dans la nuit de l'eternite"){
+            return "Dans la nuit de l`eternite".$suffix;
+        }
         else{
             return $this->title.$suffix;
         }
