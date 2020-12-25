@@ -153,6 +153,7 @@ class Score extends Entity
            25 => "CANNON BALLERS",
            26 => "Rootage",
            27 => "HEROIC VERSE",
+           28 => "BISTROVER",
         ];
         return $version_dict;
     }
