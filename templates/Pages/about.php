@@ -74,7 +74,7 @@
                 <dt>CPI</dt>
                 <dd>
                     SP☆12のクリア力を表す当サイト独自の指標です。</br>
-                    数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。</br>
+                    数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。（IIDX27時点）</br>
                     <div class="row justify-content-around">
                         <div class="col-12">
                             <table class="table table-sm table-bordered">
