@@ -136,24 +136,27 @@
             <div class="mb-3">
                 <h4 class="card-title">CPIサービスの更新履歴</h4>
                 <p>
-                    <?= $this->Html->link(
-                        '更新履歴',
+                    詳しくは <?= $this->Html->link(
+                        '更新履歴一覧',
                         ['action' => 'update'],)
-                    ?>をご覧ください。
+                    ?>
+                    ・
+                     <a href="https://twitter.com/IIDX_CPI" target="_blank">CPI公式Twitter</a>
+                    をご覧ください。
                 </p>
             </div>
             <div class="mb-3">
                 <h4 class="card-title">対応譜面</h4>
-                <div class="text-dark"><p>更新日：2020/10/29</p></div> 
+                <div class="text-dark"><p>更新日：2020/12/25</p></div> 
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    IIDX27収録曲のうち、2020/09/01以降に追加された譜面（下記）およびIIDX28で削除された曲（ELECTRIC MASSIVE DIVER, VOX RUSH）以外の譜面</dd>
+                    IIDX27以前の収録曲（削除曲を除く）+ IIDX28デフォルト☆12（隠しLEGGENDARIAを含む）</dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                    IIDX27収録曲のうち、2020/09/01以降に追加された譜面</br>
-                    （Dans la nuit de l'eternite, EROICA, GuNGNiR [L], Megalara Garuda, ORCA, Secrets [L], Smashing Wedge, 魅惑のYUMMYスイーツ）
-                    この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。
+                    IIDX28追加☆12譜面</br>
+                    （3!dolon Forc3, Fire Beat, THE PEERLESS UNDER HEAVEN, Viridian, 世界の果てに約束の凱歌を -ReUnion-, 閠槞彁の願い）
+                    この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 
                     </dd>
                 </dl>
             </div>
