@@ -40,6 +40,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                     <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
                         <div class="mb-3">
                             <h3>全 <?= $archive_counts[$i]['sum'][1]." 譜面" ?></h3>
+                            <p> ※曲名をクリックすると楽曲詳細ページに移動します </p>
                         </div>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered">
