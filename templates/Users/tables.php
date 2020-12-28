@@ -206,6 +206,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                     グラフ詳細
                                 </a>
                             </div>
+                            <p> ※曲名をクリックすると楽曲詳細ページに移動します </p>
                         </div>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered">
