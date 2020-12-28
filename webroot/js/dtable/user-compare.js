@@ -69,6 +69,7 @@ $(function($){
           case 'CANNON BALLERS':return '25';
           case 'Rootage':return '26';
           case 'HEROIC VERSE':return '27';
+          case 'BISTROVER':return '28';
 
           default:
             return '00';
@@ -120,7 +121,8 @@ var versions = new Array('5th style',
     'SINOBUZ',
     'CANNON BALLERS',
     'Rootage',
-    'HEROIC VERSE'
+    'HEROIC VERSE',
+    'BISTROVER'
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',
