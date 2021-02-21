@@ -1,3 +1,7 @@
+<?php
+    use Cake\Routing\Router;
+?>
+
 <div class="display home content">
 
     <div class="card border-info mb-3" id="about">
@@ -23,29 +27,44 @@
             </h3>
         </div>
         <div class="card-body text-dark">
-            <div class="mb-3">
-                <h4 class="card-title">CPIとは？</h4>
-                <p>
-                    Clear Power Indicator(CPI)へようこそ！</br>
-                    当サイトはBeatmania IIDXのプレイデータを読み込むことで、SP☆12のクリア力や、曲やクリアオプションごとの達成割合を推定する非公式ファンサイトです。
-                </p>
-                <div class="text-danger">推定には、IIDX公式のプレミアムコース登録が必要になります。</div>
-            </div>
-            <div class="mb-3">
-                <h4 class="card-title">利用できる機能</h4>
-                <ul class="list">
-                    <li>☆12のクリア力を算出</li>
-                    <li>リコメンド・逆リコメンドを表示</li>
-                    <li>フォローしたユーザーとの比較</li>
-                </ul>
-            </div>
-            <div class="mb-3">
-                <h4 class="card-title">ベータ版をご利用戴いた皆様へ</h4>
-                <p>
-                    ベータ版をご利用いただいた方、SNSにて共有していただいた方、アンケートでフィードバックをくださった方、開発者支援をして下さった方に感謝を申し上げます。</br>
-                    アンケートにてたくさんのご要望を頂きましたが、技術的に困難なものも含め、一部対応できていないものがあります。</br>
-                    いただいたご意見は、今後の機能の向上に役立てさせていただきます。</br>
-                </p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h4 class="card-title">CPIとは？</h4>
+                            <p>
+                                Clear Power Indicator(CPI)へようこそ！</br>
+                                当サイトはBeatmania IIDXのプレイデータを読み込むことで、SP☆12のクリア力や、曲やクリアオプションごとの達成割合を推定する非公式ファンサイトです。
+                            </p>
+                            <div class="text-danger">推定には、IIDX公式のプレミアムコース登録が必要になります。</div>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="card-title">利用できる機能</h4>
+                            <ul class="list">
+                                <li>☆12のクリア力を算出</li>
+                                <li>リコメンド・逆リコメンドを表示</li>
+                                <li>フォローしたユーザーとの比較</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="card-title">ベータ版をご利用戴いた皆様へ</h4>
+                            <p>
+                                ベータ版をご利用いただいた方、SNSにて共有していただいた方、アンケートでフィードバックをくださった方、開発者支援をして下さった方に感謝を申し上げます。</br>
+                                アンケートにてたくさんのご要望を頂きましたが、技術的に困難なものも含め、一部対応できていないものがあります。</br>
+                                いただいたご意見は、今後の機能の向上に役立てさせていただきます。</br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h4 class="card-title">CPIイメージキャラクター</h4>
+                            <img src="<?= Router::url('/img/cpi_char.png',true)?>" class="img-fluid" alt="Responsive image">
+                            <p style="text-align:right">
+                                artist : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
