@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2021/02/21</dt>
+                <dd>イメージキャラクターを追加</dd>
                 <dt>2020/12/25</dt>
                 <dd>難易度推定手法の変更（更新・外れ値の影響を少なくする手法を追加）</dd>
                 <dt>2020/11/18</dt>
