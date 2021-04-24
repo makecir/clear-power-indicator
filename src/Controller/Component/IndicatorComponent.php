@@ -426,11 +426,11 @@ class IndicatorComponent extends Component
     }
 
     public function getGhostNum() {
-        return 22723;
+        return 26711;
     }
 
     public function getSeason() {
-        return 4;
+        return 5;
     }
 
     public function setRating(&$user, $user_history){
