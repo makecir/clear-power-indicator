@@ -22,7 +22,7 @@
                                 ['controller' => 'Pages', 'action' => 'about', '#'=>'how-to-update'],
                             )?>
                             をご覧ください</li>
-                        <li><font color="#d9534f">算出に20秒程度要します</font> ゆっくりお待ちください</li>
+                        <li><font color="#d9534f">算出に30秒程度要します</font> ゆっくりお待ちください</li>
                     </ul>
                 </p>
             </div>
