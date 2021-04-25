@@ -76,7 +76,7 @@ class ScoresTable extends Table
 
         $validator
             ->scalar('title')
-            ->maxLength('title', 50)
+            ->maxLength('title', 100)
             ->allowEmptyString('title');
 
         $validator
