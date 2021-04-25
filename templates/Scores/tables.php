@@ -43,7 +43,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                             <p> ※曲名をクリックすると楽曲詳細ページに移動します </p>
                         </div>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
-                            <table id="<?= $table_id."_table" ?>" class="table table-bordered">
+                            <table id="<?= $table_id."_table" ?>" class="table table-bordered" style="table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;">
                                 <tbody>
                                     <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
                                         <tr class="text-center" bgcolor=#444444>

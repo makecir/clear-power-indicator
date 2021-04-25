@@ -209,7 +209,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                             <p> ※曲名をクリックすると楽曲詳細ページに移動します </p>
                         </div>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
-                            <table id="<?= $table_id."_table" ?>" class="table table-bordered">
+                            <table id="<?= $table_id."_table" ?>" class="table table-bordered"  style="table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;">
                                 <tbody>
                                     <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
                                         <tr class="text-center" bgcolor=#444444 id="<?= $table_id."-infinity" ?>">
@@ -218,7 +218,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                         <?php $col=0;?>
                                         <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center" bgcolor=<?= $color_info[$row['lamp']] width="33%"?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td align="center" bgcolor=<?= $color_info[$row['lamp']]?> width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -229,7 +229,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                     <?php endif; ?>
                                     <?php foreach ($difficulty_tables[$i]['rated']??[] as $section_key => $section): ?>
                                         <tr class="text-center" bgcolor=#444444 id="<?= $table_id."-".$section_key ?>">
-                                            <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
+                                            <td colspan="3" align="center" class="text-white" style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI <?= (intval($section_key))." ~ ".(intval($section_key)+50) ?></td>
                                         </tr>
                                         <?php $col=0;?>
                                         <?php foreach ($section as $row): ?>
@@ -244,12 +244,12 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                         <td colspan="1" style="border: 0px none;">&nbsp;</td>
                                     </tr>
                                     <tr class="text-center" bgcolor=#444444 id="<?= $table_id."-unrated" ?>">
-                                        <td colspan="3" align="center" class="text-white"  style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI 算出対象外</td>
+                                        <td colspan="3" align="center" class="text-white" style="width: 100%;"><?= strtoupper($table_id) ?> 適正CPI 算出対象外</td>
                                     </tr>
                                     <?php $col=0;?>
                                     <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
                                         <?php if($col==0): ?><tr><?php endif; ?>
-                                            <td align="center" bgcolor=<?= $color_info[$row['lamp']] width="33%"?>><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <td align="center" bgcolor=<?= $color_info[$row['lamp']]?> width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                         <?php $col++;?>
                                         <?php if($col==3): $col=0?></tr><?php endif; ?>
                                     <?php endforeach; ?>
