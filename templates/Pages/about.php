@@ -74,7 +74,7 @@
                 <dt>CPI</dt>
                 <dd>
                     SP☆12のクリア力を表す当サイト独自の指標です。</br>
-                    数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。（IIDX27時点）</br>
+                    数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。（IIDX28時点）</br>
                     <div class="row justify-content-around">
                         <div class="col-12">
                             <table class="table table-sm table-bordered">
@@ -90,10 +90,10 @@
                                 <tbody>
                                     <tr>
                                         <th align="center">中央値</th>
-                                        <td align="center">1340</th>
-                                        <td align="center">1500</th>
-                                        <td align="center">1620</th>
-                                        <td align="center">1880</th>
+                                        <td align="center">1330</th>
+                                        <td align="center">1520</th>
+                                        <td align="center">1600</th>
+                                        <td align="center">1850</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -151,11 +151,11 @@
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    IIDX27以前の収録曲（削除曲を除く）+ IIDX28デフォルト☆12（隠しLEGGENDARIAを含む）</dd>
+                    IIDX27以前の収録曲（削除曲を除く）+ IIDX28に3/4までに収録された譜面</dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
                     IIDX28追加☆12譜面</br>
-                    （3!dolon Forc3, Fire Beat, THE PEERLESS UNDER HEAVEN, Viridian, 世界の果てに約束の凱歌を -ReUnion-, 閠槞彁の願い）
+                    3/18（召しませ!BISTROVER Northern landエリア実装日）以降に追加された譜面</br>
                     この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 
                     </dd>
                 </dl>

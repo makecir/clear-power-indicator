@@ -10,7 +10,7 @@
         <div class="card-body text-dark">
             <dl class="list">
                 <dt>2021/04/25</dt>
-                <dd>難易度推定手法の変更・新曲対応</dd>
+                <dd>新曲対応</dd>
                 <dt>2021/03/01</dt>
                 <dd>リンクを修正</dd>
                 <dt>2021/02/21</dt>
