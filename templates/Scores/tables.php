@@ -52,7 +52,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php $col=0;?>
                                         <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center"?><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -68,7 +68,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php $col=0;?>
                                         <?php foreach ($section as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center"?><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -83,7 +83,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                     <?php $col=0;?>
                                     <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
                                         <?php if($col==0): ?><tr><?php endif; ?>
-                                            <td align="center"?><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                         <?php $col++;?>
                                         <?php if($col==3): $col=0?></tr><?php endif; ?>
                                     <?php endforeach; ?>
