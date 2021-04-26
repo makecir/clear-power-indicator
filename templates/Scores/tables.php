@@ -43,7 +43,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                             <p> ※曲名をクリックすると楽曲詳細ページに移動します </p>
                         </div>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
-                            <table id="<?= $table_id."_table" ?>" class="table table-bordered">
+                            <table id="<?= $table_id."_table" ?>" class="table table-bordered" style="table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;">
                                 <tbody>
                                     <?php if(count($difficulty_tables[$i]['infinity']??[])!=0): ?>
                                         <tr class="text-center" bgcolor=#444444>
@@ -52,7 +52,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php $col=0;?>
                                         <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center"?><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -68,7 +68,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php $col=0;?>
                                         <?php foreach ($section as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center"?><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -83,7 +83,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                     <?php $col=0;?>
                                     <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
                                         <?php if($col==0): ?><tr><?php endif; ?>
-                                            <td align="center"?><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
                                         <?php $col++;?>
                                         <?php if($col==3): $col=0?></tr><?php endif; ?>
                                     <?php endforeach; ?>
