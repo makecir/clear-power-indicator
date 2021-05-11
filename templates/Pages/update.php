@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2021/05/11</dt>
+                <dd>CPIの分布の画像を追加</dd>
                 <dt>2021/05/04</dt>
                 <dd>ドキュメントを追記</dd>
                 <dt>2021/04/25</dt>
