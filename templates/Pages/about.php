@@ -1,3 +1,7 @@
+<?php
+    use Cake\Routing\Router;
+?>
+
 <div class="display about content">
     <div class="card border-secondary mb-3" id="about">
         <div class="card-header">
@@ -98,6 +102,9 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div style="text-align:center;">
+                        <img src="<?= Router::url('/img/distribution_cpi.png',true)?>" class="img-fluid" alt="Responsive image">
                     </div>
                     具体的には、データベース上の約30,000名のプレイヤーとクリアランプ勝敗を比較し、イロレーティング方式（係数400・平均1500）に変換して表示しています。</br>
                     （例：データベースのプレイヤーに19500勝9500敗1000分の場合、引き分けを0.5勝換算として勝率は約2/3なので、CPIは1620程度となります）
