@@ -40,8 +40,12 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                     <div id="<?= $table_id ?>" class="tab-pane fade <?= $i==0?"show active":""?>">
                         <div class="mb-3">
                             <h3>全 <?= $archive_counts[$i]['sum'][1]." 譜面" ?></h3>
-                            <p> ※曲名をクリックすると楽曲詳細ページに移動します </p>
+                            <h6> ※ 曲名をクリックすると楽曲詳細ページに移動します </h6>
+                            <h6> ※ 曲名の下の数字は適正CPI/個人差度です。 </h6>
+                            <h6> ※ 適正CPIは、クリア割合が50%となるプレイヤーのCPIを表します。 </h6>
+                            <h6> ※ 個人差度が大きい譜面では、プレイヤーのCPI上昇に対してクリア割合が上がりにくくなります。 </h6>
                         </div>
+                        <input type="checkbox" id="det_visible" checked="checked"/><label class=mr-3 for="det_visible"> 適正CPI・個人差度を表示する</label>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
                             <table id="<?= $table_id."_table" ?>" class="table table-bordered" style="table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;">
                                 <tbody>
@@ -52,7 +56,10 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php $col=0;?>
                                         <?php foreach ($difficulty_tables[$i]['infinity'] as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td class="table-elem" align="center" width="33%">
+                                                    <?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?>
+                                                    <div class="small-txt" style="font-size:small;"><?= "inf"." / ".($row['ind_diff']) ?></div>
+                                                </td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -68,7 +75,10 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php $col=0;?>
                                         <?php foreach ($section as $row): ?>
                                             <?php if($col==0): ?><tr><?php endif; ?>
-                                                <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                                <td class="table-elem" align="center" width="33%">
+                                                    <?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?>
+                                                    <div class="small-txt" style="font-size:small;"><?= ($row['fifty'])." / ".($row['ind_diff']) ?></div>
+                                                </td>
                                             <?php $col++;?>
                                             <?php if($col==3): $col=0?></tr><?php endif; ?>
                                         <?php endforeach; ?>
@@ -83,7 +93,10 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                     <?php $col=0;?>
                                     <?php foreach ($difficulty_tables[$i]['unrated']??[] as $row): ?>
                                         <?php if($col==0): ?><tr><?php endif; ?>
-                                            <td align="center" width="33%"><?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?></td>
+                                            <td class="table-elem" align="center" width="33%">
+                                                <?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?>
+                                                <div class="small-txt" style="font-size:small;"><?= ($row['fifty'])." / ".($row['ind_diff']) ?></div>
+                                            </td>
                                         <?php $col++;?>
                                         <?php if($col==3): $col=0?></tr><?php endif; ?>
                                     <?php endforeach; ?>
