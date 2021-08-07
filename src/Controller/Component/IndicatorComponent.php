@@ -432,6 +432,10 @@ class IndicatorComponent extends Component
         return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
     }
 
+    public function getBaseAverage() {
+        return 1494.223;
+    }
+
     public function getGhostNum() {
         return 26711;
     }
@@ -443,6 +447,7 @@ class IndicatorComponent extends Component
     public function setRating(&$user, $user_history){
         $GHOST_NUM = $this->getGhostNum();
         $SEASON = $this->getSeason();
+        $AVERAGE = $this->getBaseAverage();
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         if(count($my_lamps)==0)return false;
@@ -465,7 +470,7 @@ class IndicatorComponent extends Component
         }
         //$new_standing = $GHOST_NUM - ($win + $GHOST_NUM)/2.0 + 1;
         $reswin = ($win + $GHOST_NUM + 1)/2.0;
-        $new_rating = 400.00*log10( $reswin / ($GHOST_NUM + 1 - $reswin) ) + 1500.0000;
+        $new_rating = 400.00*log10( $reswin / ($GHOST_NUM + 1 - $reswin) ) + $AVERAGE;
 
         $Ghosts = TableRegistry::getTableLocator()->get('Ghosts');
         $ghosts = $Ghosts->find();
