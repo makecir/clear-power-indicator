@@ -441,7 +441,7 @@ class IndicatorComponent extends Component
     }
 
     public function getSeason() {
-        return 6;
+        return 7;
     }
 
     public function setRating(&$user, $user_history){
