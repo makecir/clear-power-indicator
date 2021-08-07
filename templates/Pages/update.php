@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2021/08/07</dt>
+                <dd>難易度推定手法の変更（更新・基準値の変更）・個人差度表示</dd>
                 <dt>2021/05/11</dt>
                 <dd>CPIの分布の画像を追加</dd>
                 <dt>2021/05/04</dt>
