@@ -259,7 +259,7 @@ $tweet_text_tables = $user->user_detail->dj_name.'さんのCPI難易度表はこ
                                         <?php if($col==0): ?><tr><?php endif; ?>
                                             <td align="center" bgcolor=<?= $color_info[$row['lamp']]?> width="33%">
                                                 <?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?>
-                                                <div class="small-txt" style="font-size:small;"><?= ($row['fifty'])." / ".($row['ind_diff']) ?></div>
+                                                <div class="small-txt" style="font-size:small;"><?= "-"." / "."-" ?></div>
                                             </td>
                                         <?php $col++;?>
                                         <?php if($col==3): $col=0?></tr><?php endif; ?>

@@ -341,11 +341,11 @@ class IndicatorComponent extends Component
             $result['id'] = $score['id'];
 
             for($i=0;$i<5;$i++){
-                $result['ind_diff'] = $this->individualDiff($coefficient);
                 if($score['is_rated'] == 1){
                     $intercept = $score[$this->pred_target[$i+3]."_intercept"];
                     $coefficient = $score[$this->pred_target[$i+3]."_coefficient"];
                     $result['fifty'] = $this->fiftyInfo($intercept,$coefficient);
+                    $result['ind_diff'] = $this->individualDiff($coefficient);
                     if($result['fifty']=="Infinity") {
                         $result['fifty'] = 5000;
                         $results[$i]['infinity'][] = $result;
@@ -354,6 +354,7 @@ class IndicatorComponent extends Component
                 }
                 else{
                     $result['fifty'] = 0;
+                    $result['ind_diff'] = 0;
                     $results[$i]['unrated'][] = $result;
                 }
             }
@@ -423,7 +424,7 @@ class IndicatorComponent extends Component
     }
 
     public function individualDiff(&$coefficient){
-        if($coefficient == 0) return "-1";
+        if($coefficient <= 0.0001) return "-1";
         $ret = (1.0 / $coefficient);
         return sprintf('%.2f',$ret);
     }
