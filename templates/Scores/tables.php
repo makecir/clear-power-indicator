@@ -93,7 +93,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                                         <?php if($col==0): ?><tr><?php endif; ?>
                                             <td class="table-elem" align="center" width="33%">
                                                 <?= $this->Html->link($row['title'], ['controller'=>'Scores','action' => 'view', $row['id']]) ?>
-                                                <div class="small-txt" style="font-size:small;"><?= ($row['fifty'])." / ".($row['ind_diff']) ?></div>
+                                                <div class="small-txt" style="font-size:small;"><?= "-"." / "."-" ?></div>
                                             </td>
                                         <?php $col++;?>
                                         <?php if($col==3): $col=0?></tr><?php endif; ?>
