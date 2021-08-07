@@ -45,6 +45,7 @@
 @media (max-width:767px) { 
 .table-smart-phone-xx th { font-size:xx-small;}
 .table-smart-phone-xx td { font-size:xx-small;}
+.table-smart-phone-xx td .small-txt{ font-size:xx-small!important; }
 .table-smart-phone-xx th { padding: .25rem!important; }
 .table-smart-phone-xx td { padding: .25rem!important; }
 
@@ -122,4 +123,15 @@ ol.list > li:before {
   position: absolute;
   top: 0;
   left: 0;
+}
+.table-elem{
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+.small-txt{
+  display:none;
+}
+input#det_visible:checked ~ div div.small-txt{
+  display:inline-block;
 }
