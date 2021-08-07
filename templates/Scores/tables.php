@@ -41,7 +41,7 @@ $tweet_text_tables = 'CPI難易度表はこちら';
                         <div class="mb-3">
                             <h3>全 <?= $archive_counts[$i]['sum'][1]." 譜面" ?></h3>
                             <h6> ※ 曲名をクリックすると楽曲詳細ページに移動します </h6>
-                            <h6> ※ 曲名の下の数字は適正CPI/個人差度です。適正CPIはクリア割合が50%となるプレイヤーのCPIを表します。個人差度が大きい譜面では、プレイヤーのCPI上昇に対してクリア割合が上がりにくくなります。 </h6>
+                            <h6> ※ チェックボックスを選択すると曲名の下に適正CPI/個人差度が表示されます。適正CPIはクリア割合が50%となるプレイヤーのCPIを表し、個人差度はプレイヤーのCPI上昇に対するクリア割合の上がりにくさを表します。  </h6>
                         </div>
                         <input type="checkbox" id="det_visible"/><label class=mr-3 for="det_visible"> 適正CPI・個人差度を表示する</label>
                         <div class="table table-responsive table-smart-phone-xx mb-3" style="table-layout: fixed;">
