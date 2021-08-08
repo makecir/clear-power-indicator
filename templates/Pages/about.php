@@ -94,10 +94,10 @@
                                 <tbody>
                                     <tr>
                                         <th align="center">中央値</th>
-                                        <td align="center">1330</th>
-                                        <td align="center">1520</th>
-                                        <td align="center">1600</th>
-                                        <td align="center">1850</th>
+                                        <td align="center">1330</td>
+                                        <td align="center">1520</td>
+                                        <td align="center">1600</td>
+                                        <td align="center">1850</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -130,7 +130,38 @@
                 </dd>
                 <dt>個人差度</dt>
                 <dd>
-                    個人差度が大きい譜面では、プレイヤーのCPI上昇に対してクリア割合が上がりにくくなります。個人差度が小さい譜面と比較すると、総合的なクリア力が低いプレイヤーでもクリアできる確率が高く、高いプレイヤーでもクリアできない確率が高くなる傾向にあります。詳しくは<a href="https://riceplace.hatenablog.jp/entry/2021/02/27/203737" target="_blank">こちらの記事</a>をご覧ください。</br>
+                    個人差度が大きい譜面では、プレイヤーのCPI上昇に対してクリア割合が上がりにくくなります。
+                    個人差度が小さい譜面と比較すると、総合的なクリア力が低いプレイヤーでもクリアできる確率が高く、高いプレイヤーでもクリアできない確率が高くなる傾向にあります。
+                    詳しくは<a href="https://riceplace.hatenablog.jp/entry/2021/02/27/203737" target="_blank">こちらの記事</a>をご覧ください。</br>
+                    適正CPI=x、個人差度=yとすると、プレイヤーCPIに対するクリア割合は以下のようになります。</br>
+                    <div class="row justify-content-around table-smart-phone-x">
+                        <div class="col-12">
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>x-3y</th>
+                                        <th>x-2y</th>
+                                        <th>x-y</th>
+                                        <th>x</th>
+                                        <th>x+y</th>
+                                        <th>x+2y</th>
+                                        <th>x+3y</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td align="center">5%</td>
+                                        <td align="center">12%</td>
+                                        <td align="center">27%</td>
+                                        <td align="center">50%</td>
+                                        <td align="center">73%</td>
+                                        <td align="center">88%</td>
+                                        <td align="center">95%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     個人差度の大小には、譜面要素（スクラッチ・ソフランの有無など）以外にも譜面難易度・実装からの日数・解禁の要否などが影響しており、さらに一部の超高難易度クリアランプに関してはサンプル数の不足から不正確な値が算出されることがあります。
                 </dd>
                 <dt>更新詳細</dt>
