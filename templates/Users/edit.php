@@ -11,7 +11,7 @@
             <h4 class="card-title" style="display:inline;"><?= __('CPI update') ?>/<?= __('Record Playdaya') ?></h4>
         </div>
         <div class="card-body text-dark">
-            <?php if(true): ?>
+            <?php if(false): ?>
                 <div class="text-danger">
                     ※ 新作の稼働に伴う変更の調査と対応のため、10月13日から一定期間、プレイデータの登録および更新が利用できない状態になります。<br>
                     ※ 調査対応期間は数日程度を予定しております。<br>
