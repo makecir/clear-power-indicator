@@ -70,6 +70,7 @@ $(function($){
           case 'Rootage':return '26';
           case 'HEROIC VERSE':return '27';
           case 'BISTROVER':return '28';
+          case 'CastHour':return '29';
 
           default:
             return '00';
