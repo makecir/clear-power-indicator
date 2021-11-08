@@ -340,7 +340,8 @@ var versions = new Array('5th style',
     'CANNON BALLERS',
     'Rootage',
     'HEROIC VERSE',
-    'BISTROVER'
+    'BISTROVER',
+    'CastHour',
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',
