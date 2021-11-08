@@ -51,6 +51,7 @@ class IndicatorComponent extends Component
         26 => "Rootage",
         27 => "HEROIC VERSE",
         28 => "BISTROVER",
+        29 => "CastHour",
     ];
 
     public $color_info=[
@@ -434,15 +435,15 @@ class IndicatorComponent extends Component
     }
 
     public function getBaseAverage() {
-        return 1507.433;
+        return 1505.127;
     }
 
     public function getGhostNum() {
-        return 28521;
+        return 29775;
     }
 
     public function getSeason() {
-        return 7;
+        return 8;
     }
 
     public function setRating(&$user, $user_history){

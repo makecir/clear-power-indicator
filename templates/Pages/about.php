@@ -199,11 +199,11 @@
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                        IIDX27以前の収録曲（削除曲を除く）+ IIDX28に2021/5/20までに収録された譜面
+                        IIDX27以前の収録曲（削除曲を除く）+ IIDX28に2021/10/19までに収録された譜面 
                     </dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                        ΕΛΠΙΣ [L]、Ignis†Irae、Sinus Iridum</br>
+                        COSMIC RAY、DUAL STRIKER、LOCUS OF THE TRAVEL、Level 3、SAMURAI-Scramble [L]</br>
                         この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 </br>
                     </dd>
                 </dl>
@@ -221,7 +221,7 @@
         <div class="card-body text-dark">
             <div class="text-danger"><p>推定には、IIDX公式のプレミアムコース登録が必要になります。</p></div> 
             <ol class="list">
-                <li><a href="https://p.eagate.573.jp/game/2dx/28/djdata/score_download.html?style=SP" target="_blank">公式サイト</a>にアクセスします。</br>
+                <li><a href="https://p.eagate.573.jp/game/2dx/29/djdata/score_download.html?style=SP" target="_blank">公式サイト</a>にアクセスします。</br>
                 「SP」->「ダウンロード」からプレーデータのテキスト全てをコピー、または、CSVをダウンロードします。
                 <li>
                     <?= $this->Html->link(

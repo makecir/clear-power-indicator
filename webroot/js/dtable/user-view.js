@@ -248,6 +248,7 @@ $(function($){
           case 'Rootage':return '26';
           case 'HEROIC VERSE':return '27';
           case 'BISTROVER':return '28';
+          case 'CastHour':return '29';
 
           case 'NO PLAY':return '90';
           case 'FAILED':return '91';
@@ -339,7 +340,8 @@ var versions = new Array('5th style',
     'CANNON BALLERS',
     'Rootage',
     'HEROIC VERSE',
-    'BISTROVER'
+    'BISTROVER',
+    'CastHour',
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',
