@@ -78,33 +78,10 @@
                 <dt>CPI</dt>
                 <dd>
                     SP☆12のクリア力を表す当サイト独自の指標です。</br>
-                    数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。（IIDX28時点）</br>
-                    <div class="row justify-content-around">
-                        <div class="col-12">
-                            <table class="table table-sm table-bordered">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th></th>
-                                        <th>九段</th>
-                                        <th>十段</th>
-                                        <th>中伝</th>
-                                        <th>皆伝</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th align="center">中央値</th>
-                                        <td align="center">1330</td>
-                                        <td align="center">1520</td>
-                                        <td align="center">1600</td>
-                                        <td align="center">1850</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。</br>
+                    （IIDX28終了時点・PC閲覧推奨）</br>
                     <div style="text-align:center;">
-                        <img src="<?= Router::url('/img/distribution_cpi.png',true)?>" class="img-fluid" alt="Responsive image">
+                        <img src="<?= Router::url('/img/cpi_distribution_28.png',true)?>" class="img-fluid" alt="Responsive image">
                     </div>
                     具体的には、データベース上の約30,000名のプレイヤーとクリアランプ勝敗を比較し、イロレーティング方式（係数400）に変換した上で、対象☆12全譜面のHARD CLEAR適正CPIの中央値が1600となるように定義して表示しています。</br>
                 </dd>
