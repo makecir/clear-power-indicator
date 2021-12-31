@@ -48,7 +48,7 @@
                 <li>char_c3 様</li>
                 <li>かいん 様</li>
                 <li>BON 様</li>
-            </dl>
+            </ul>
         </div>
     </div>
 
