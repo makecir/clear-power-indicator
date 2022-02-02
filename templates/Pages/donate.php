@@ -48,6 +48,7 @@
                 <li>char_c3 様</li>
                 <li>かいん 様</li>
                 <li>BON 様</li>
+                <li>masa＠横浜 様</li>
             </ul>
         </div>
     </div>
