@@ -176,11 +176,11 @@
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                        IIDX27以前の収録曲（削除曲を除く）+ IIDX28に2021/10/19までに収録された譜面 
+                    IIDX28以前の収録曲（削除曲を除く）+ IIDX29に2021/12までに収録された譜面 
                     </dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                        COSMIC RAY、DUAL STRIKER、LOCUS OF THE TRAVEL、Level 3、SAMURAI-Scramble [L]</br>
+                        2 Beasts Unchained、ABSOLUTE EVIL、Binary Black Hole、Silver Bullet、n/a、逆月、NEW GENERATION -もう、お前しか見えない- [L]</br>
                         この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 </br>
                     </dd>
                 </dl>
