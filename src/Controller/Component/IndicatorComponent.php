@@ -443,7 +443,7 @@ class IndicatorComponent extends Component
     }
 
     public function getSeason() {
-        return 10;
+        return 11;
     }
 
     public function setRating(&$user, $user_history){
@@ -453,7 +453,7 @@ class IndicatorComponent extends Component
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         if(count($my_lamps)==0)return false;
-        foreach($my_lamps as $my_lamp){
+        foreach($my_lamps as &$my_lamp){
             if($my_lamp==2)$my_lamp=1;
         }
         $GhostLamps = TableRegistry::getTableLocator()->get('GhostLamps');
