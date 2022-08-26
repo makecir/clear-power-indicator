@@ -9,6 +9,8 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
+                <dt>2022/08/27</dt>
+                <dd>難易度推定手法の変更（更新・基準値の変更）</dd>
                 <dt>2022/05/29</dt>
                 <dd>難易度推定手法の変更（更新・基準値の変更・不具合の修正）</dd>
                 <dt>2022/02/07</dt>
