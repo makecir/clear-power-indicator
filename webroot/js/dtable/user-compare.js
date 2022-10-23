@@ -71,6 +71,7 @@ $(function($){
           case 'HEROIC VERSE':return '27';
           case 'BISTROVER':return '28';
           case 'CastHour':return '29';
+          case 'RESIDENT':return '30';
 
           default:
             return '00';
@@ -125,6 +126,7 @@ var versions = new Array('5th style',
     'HEROIC VERSE',
     'BISTROVER',
     'CastHour',
+    'RESIDENT',
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',

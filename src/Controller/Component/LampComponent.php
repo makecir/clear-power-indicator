@@ -66,6 +66,11 @@ class LampComponent extends Component
                 if(sizeof($elements) == 1) continue;
                 else{
                     $title = $elements[1];
+
+                    // 表記ゆれへの対処
+                    if($title == "Idola ") $title = "Idola";
+                    if($title == "Rave*it!! Rave*it!! ") $title = "Rave*it!! Rave*it!!";
+
                     for($j=2 ; $j<5 ; $j++){
                         $tar = $j*7 + 5;
 

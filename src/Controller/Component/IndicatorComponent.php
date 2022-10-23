@@ -52,6 +52,7 @@ class IndicatorComponent extends Component
         27 => "HEROIC VERSE",
         28 => "BISTROVER",
         29 => "CastHour",
+        30 => "RESIDENT",
     ];
 
     public $color_info=[
