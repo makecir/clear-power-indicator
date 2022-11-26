@@ -22,7 +22,7 @@
                     <h5 class="card-title" style="display:inline;">スコアを登録すると自動的にCPIが更新されます</h5>
                     <p class="card-text">
                         <ul class="list">
-                            <li>プレイデータのテキストまたはCSVのダウンロードは<a href="https://p.eagate.573.jp/game/2dx/29/djdata/score_download.html?style=SP" target="_blank">こちら</a>から</li>
+                            <li>プレイデータのテキストまたはCSVのダウンロードは<a href="https://p.eagate.573.jp/game/2dx/30/djdata/score_download.html?style=SP" target="_blank">こちら</a>から</li>
                             <li>方法の詳しい説明は
                                 <?= $this->Html->link(
                                     'スコア登録方法',

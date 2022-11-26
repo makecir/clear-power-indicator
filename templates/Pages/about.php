@@ -198,7 +198,7 @@
         <div class="card-body text-dark">
             <div class="text-danger"><p>推定には、IIDX公式のプレミアムコース登録が必要になります。</p></div> 
             <ol class="list">
-                <li><a href="https://p.eagate.573.jp/game/2dx/29/djdata/score_download.html?style=SP" target="_blank">公式サイト</a>にアクセスします。</br>
+                <li><a href="https://p.eagate.573.jp/game/2dx/30/djdata/score_download.html?style=SP" target="_blank">公式サイト</a>にアクセスします。</br>
                 「SP」->「ダウンロード」からプレーデータのテキスト全てをコピー、または、CSVをダウンロードします。
                 <li>
                     <?= $this->Html->link(
