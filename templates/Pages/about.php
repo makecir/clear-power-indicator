@@ -79,9 +79,9 @@
                 <dd>
                     SP☆12のクリア力を表す当サイト独自の指標です。</br>
                     数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。</br>
-                    （IIDX28終了時点・PC閲覧推奨）</br>
+                    （IIDX29終了時点・PC閲覧推奨）</br>
                     <div style="text-align:center;">
-                        <img src="<?= Router::url('/img/cpi_distribution_28.png',true)?>" class="img-fluid" alt="Responsive image">
+                        <img src="<?= Router::url('/img/distribution_20221127.png',true)?>" class="img-fluid" alt="Responsive image">
                     </div>
                     具体的には、データベース上の約30,000名のプレイヤーとクリアランプ勝敗を比較し、イロレーティング方式（係数400）に変換した上で、対象☆12全譜面のHARD CLEAR適正CPIの中央値が1600となるように定義して表示しています。</br>
                 </dd>
