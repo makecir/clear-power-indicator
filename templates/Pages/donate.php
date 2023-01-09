@@ -52,7 +52,7 @@
                 <li>堀内ファンクラブ 様</li>
                 <li>ultger 様</li>
                 <li>cogit 様</li>
-                <li>Xemno 様</li>
+                <li>ロボたいしょう 様</li>
             </ul>
         </div>
     </div>
