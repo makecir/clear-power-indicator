@@ -54,6 +54,7 @@
                 <li>cogit 様</li>
                 <li>ロボたいしょう 様</li>
                 <li>グレー猫すぴお 様</li>
+                <li>MUGI. 様</li>
             </ul>
         </div>
     </div>
