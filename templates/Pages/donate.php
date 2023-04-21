@@ -56,6 +56,7 @@
                 <li>グレー猫すぴお 様</li>
                 <li>MUGI. 様</li>
                 <li>めれてぃ 様</li>
+                <li>三田皓介(MITAKO)@CPI2100記念 様</li>
             </ul>
         </div>
     </div>
