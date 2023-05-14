@@ -57,6 +57,8 @@
                 <li>MUGI. 様</li>
                 <li>めれてぃ 様</li>
                 <li>三田皓介(MITAKO)@CPI2100記念 様</li>
+                <li>ENIGMA 様</li>
+                <li>ueno_cpp 様</li>
             </ul>
         </div>
     </div>
