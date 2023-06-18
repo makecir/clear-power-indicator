@@ -58,10 +58,18 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <h4 class="card-title">CPIイメージキャラクター</h4>
-                            <img src="<?= Router::url('/img/cpi_char.png',true)?>" class="img-fluid" alt="Responsive image">
-                            <p style="text-align:right">
-                                artist : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
-                            </p>
+                            <?php if($randomNum <= 0.5): ?>
+                                <img src="<?= Router::url('/img/cpi_char.png',true)?>" class="img-fluid" alt="Responsive image">
+                                <p style="text-align:right">
+                                    illustration / character design : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
+                                </p>
+                            <?php else: ?>
+                                <img src="<?= Router::url('/img/cpi_char_2.png',true)?>" class="img-fluid" alt="Responsive image">
+                                <p style="text-align:right">
+                                    illustration : 白井おこめ (<a href="https://twitter.com/_tkttnghn_" target="_blank">@_tkttnghn_</a>) / 
+                                    character design : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -129,14 +137,14 @@
                 <div class="col-md-5 mt-3">
                     <h4>更新内容（一部）</h4>
                     <dl class="list">
+                        <dt>2023/06/XX (予定)</dt>
+                        <dd>難易度推定手法の変更（更新・基準値の変更）</dd>
+                        <dt>2023/06/19</dt>
+                        <dd>イメージキャラクターイラストの追加</dd>
                         <dt>2022/11/27</dt>
                         <dd>難易度推定手法の変更（更新・基準値の変更・ver30 対応）</dd>
                         <dt>2022/10/24</dt>
                         <dd>不具合対応（ver30 での表記揺れに対処）</dd>
-                        <dt>2022/08/27</dt>
-                        <dd>難易度推定手法の変更（更新・基準値の変更）</dd>
-                        <dt>2022/05/29</dt>
-                        <dd>難易度推定手法の変更（更新・基準値の変更・不具合の修正）</dd>
                         <dt>2021/02/21</dt>
                         <dd>イメージキャラクターを追加</dd>
                     </dl>

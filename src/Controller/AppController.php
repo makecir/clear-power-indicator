@@ -65,6 +65,9 @@ class AppController extends Controller
         $isLoggedIn = $this->Authentication->getResult()->isValid();
         $identity = $this->request->getAttribute('identity');
         $this->set(compact('isLoggedIn','identity'));
+
+        $randomNum = mt_rand() / mt_getrandmax();
+        $this->set(compact('randomNum'));
     }
 
 }
