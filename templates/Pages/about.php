@@ -172,15 +172,15 @@
             </div>
             <div class="mb-3">
                 <h4 class="card-title">対応譜面</h4>
-                <div class="text-dark"><p>更新日: 2022/11/27</p></div> 
+                <div class="text-dark"><p>更新日: 2023/06/14</p></div> 
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    IIDX29に収録された譜面（Illegal Function Call [L]を除く）
+                    IIDX30に5月頃までに収録された譜面
                     </dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                        IIDX30に11月頃までに収録された譜面</br>
+                        BIGWAVERS, Somnidiscotheque, four pieces of heaven [L]</br>
                         この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 </br>
                     </dd>
                 </dl>

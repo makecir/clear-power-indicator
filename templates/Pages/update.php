@@ -9,7 +9,7 @@
         </div>
         <div class="card-body text-dark">
             <dl class="list">
-                <dt>2023/06/XX (予定)</dt>
+                <dt>2023/06/21</dt>
                 <dd>難易度推定手法の変更（更新・基準値の変更）</dd>
                 <dt>2023/06/19</dt>
                 <dd>イメージキャラクターイラストの追加</dd>
