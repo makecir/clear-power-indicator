@@ -436,15 +436,15 @@ class IndicatorComponent extends Component
     }
 
     public function getBaseAverage() {
-        return 1510.697;
+        return 1507.238;
     }
 
     public function getGhostNum() {
-        return 29285;
+        return 31372;
     }
 
     public function getSeason() {
-        return 14;
+        return 15;
     }
 
     public function setRating(&$user, $user_history){
