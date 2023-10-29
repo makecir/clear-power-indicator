@@ -79,9 +79,9 @@
                 <dd>
                     SP☆12のクリア力を表す当サイト独自の指標です。</br>
                     数値が高いほど、推定されたクリア力が高いことを示しており、各段位ごとにおおよそ下表のような分布になっています。</br>
-                    （IIDX29終了時点・PC閲覧推奨）</br>
+                    （IIDX30終了時点・PC閲覧推奨）</br>
                     <div style="text-align:center;">
-                        <img src="<?= Router::url('/img/distribution_20221127.png',true)?>" class="img-fluid" alt="Responsive image">
+                        <img src="<?= Router::url('/img/distribution_20231029.png',true)?>" class="img-fluid" alt="Responsive image">
                     </div>
                     具体的には、データベース上の約30,000名のプレイヤーとクリアランプ勝敗を比較し、イロレーティング方式（係数400）に変換した上で、対象☆12全譜面のHARD CLEAR適正CPIの中央値が1600となるように定義して表示しています。</br>
                 </dd>
@@ -172,16 +172,16 @@
             </div>
             <div class="mb-3">
                 <h4 class="card-title">対応譜面</h4>
-                <div class="text-dark"><p>更新日: 2023/06/14</p></div> 
+                <div class="text-dark"><p>更新日: 2023/10/29</p></div> 
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    IIDX30に5月頃までに収録された譜面
+                    IIDX30で収録された譜面（Dances with Snow Fairies [L]を除く）
                     </dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                        BIGWAVERS, Somnidiscotheque, four pieces of heaven [L]</br>
-                        この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 </br>
+                    IIDX30 Dances with Snow Fairies [L]/IIDX31 初期隠し☆12 + デフォルト☆12 
+                    この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 
                     </dd>
                 </dl>
             </div>
@@ -198,7 +198,7 @@
         <div class="card-body text-dark">
             <div class="text-danger"><p>推定には、IIDX公式のプレミアムコース登録が必要になります。</p></div> 
             <ol class="list">
-                <li><a href="https://p.eagate.573.jp/game/2dx/30/djdata/score_download.html?style=SP" target="_blank">公式サイト</a>にアクセスします。</br>
+                <li><a href="https://p.eagate.573.jp/game/2dx/31/djdata/score_download.html?style=SP" target="_blank">公式サイト</a>にアクセスします。</br>
                 「SP」->「ダウンロード」からプレーデータのテキスト全てをコピー、または、CSVをダウンロードします。
                 <li>
                     <?= $this->Html->link(
