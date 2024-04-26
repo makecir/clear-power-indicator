@@ -58,15 +58,21 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <h4 class="card-title">CPIイメージキャラクター</h4>
-                            <?php if($randomNum <= 0.5): ?>
+                            <?php if($randomNum <= 0.25): ?>
                                 <img src="<?= Router::url('/img/cpi_char.png',true)?>" class="img-fluid" alt="Responsive image">
                                 <p style="text-align:right">
                                     illustration / character design : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
                                 </p>
-                            <?php else: ?>
+                            <?php elseif($randomNum <= 0.5): ?>
                                 <img src="<?= Router::url('/img/cpi_char_2.png',true)?>" class="img-fluid" alt="Responsive image">
                                 <p style="text-align:right">
                                     illustration : 白井おこめ (<a href="https://twitter.com/_tkttnghn_" target="_blank">@_tkttnghn_</a>) / 
+                                    character design : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
+                                </p>
+                            <?php else: ?>
+                                <img src="<?= Router::url('/img/cpi_char_3.png',true)?>" class="img-fluid" alt="Responsive image">
+                                <p style="text-align:right">
+                                    illustration : 48OKU (<a href="https://twitter.com/48okku" target="_blank">@48okku</a>) / 
                                     character design : だんごむし (<a href="https://twitter.com/denimchan" target="_blank">@denimchan</a>)
                                 </p>
                             <?php endif; ?>
