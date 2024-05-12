@@ -176,11 +176,11 @@
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    IIDX30で収録された譜面（Dances with Snow Fairies [L]を除く）
+                    IIDX31に2024/3月頃までに通常解禁可能な形式で収録された譜面 
                     </dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                    IIDX30 Dances with Snow Fairies [L]/IIDX31 初期隠し☆12 + デフォルト☆12 
+                    ACT0、Demon March、惑星鉄道、電腦都市、華蝶風雪 [L]
                     この項目の楽曲・譜面はプレイヤーのCPI算出には影響せず、適正CPI・クリア確率の推定は行われません。 
                     </dd>
                 </dl>
