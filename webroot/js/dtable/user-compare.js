@@ -72,6 +72,7 @@ $(function($){
           case 'BISTROVER':return '28';
           case 'CastHour':return '29';
           case 'RESIDENT':return '30';
+          case 'EPOLIS': return '31';
 
           default:
             return '00';
@@ -127,6 +128,7 @@ var versions = new Array('5th style',
     'BISTROVER',
     'CastHour',
     'RESIDENT',
+    'EPOLIS'
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',
