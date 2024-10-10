@@ -64,6 +64,7 @@
                 <li>MSSS 様</li>
                 <li>いくらどんのすけ 様</li>
                 <li>またたび(KELVIN) 様</li>
+                <li>豆電球 様</li>
             </ul>
         </div>
     </div>
