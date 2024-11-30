@@ -189,10 +189,10 @@ class UsersController extends AppController
                         $input_lines = explode(PHP_EOL, $text_data);
                     }
                     $new_lamps = $this->Lamp->getNewLampDict($user, $input_lines);
-                    if(is_null($new_lamps)){
-                        $this->Flash->error(__('Fial to read data. Please, try again.'));
-                        return $this->redirect(['action' => 'edit', $user->id]);
-                    }
+                    // if(is_null($new_lamps)){
+                    //     $this->Flash->error(__('Fial to read data. Please, try again.'));
+                    //     return $this->redirect(['action' => 'edit', $user->id]);
+                    // }
                     $invalid = false;
                     $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
                     if(is_null($user_history)){
