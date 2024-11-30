@@ -204,6 +204,7 @@ class UsersController extends AppController
                         if(is_null($user_history)){
                             // $this->Flash->warning(__('No changing. Please, check your play data.'));
                             // return $this->redirect(['action' => 'edit', $user->id]);
+                            $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
                             $user_history = $UserHistories->newEmptyEntity();
                             $user_history->user_id = $user->id;
                         }
