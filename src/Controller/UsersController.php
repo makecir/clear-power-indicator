@@ -202,8 +202,10 @@ class UsersController extends AppController
                         $invalid = false;
                         $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
                         if(is_null($user_history)){
-                            $this->Flash->warning(__('No changing. Please, check your play data.'));
-                            return $this->redirect(['action' => 'edit', $user->id]);
+                            // $this->Flash->warning(__('No changing. Please, check your play data.'));
+                            // return $this->redirect(['action' => 'edit', $user->id]);
+                            $user_history = $UserHistories->newEmptyEntity();
+                            $user_history->user_id = $user->id;
                         }
                     }
                     $this->Indicator->setRating($user, $user_history);
