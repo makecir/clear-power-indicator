@@ -193,11 +193,18 @@ class UsersController extends AppController
                     //     $this->Flash->error(__('Fial to read data. Please, try again.'));
                     //     return $this->redirect(['action' => 'edit', $user->id]);
                     // }
-                    $invalid = false;
-                    $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
-                    if(is_null($user_history)){
-                        $this->Flash->warning(__('No changing. Please, check your play data.'));
-                        return $this->redirect(['action' => 'edit', $user->id]);
+                    if(is_null($new_lamps)){
+                        $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
+                        $user_history = $UserHistories->newEmptyEntity();
+                        $user_history->user_id = $user->id;
+                    }
+                    else{
+                        $invalid = false;
+                        $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
+                        if(is_null($user_history)){
+                            $this->Flash->warning(__('No changing. Please, check your play data.'));
+                            return $this->redirect(['action' => 'edit', $user->id]);
+                        }
                     }
                     $this->Indicator->setRating($user, $user_history);
                     $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
