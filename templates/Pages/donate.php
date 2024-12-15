@@ -66,6 +66,7 @@
                 <li>またたび(KELVIN) 様</li>
                 <li>豆電球 様</li>
                 <li>ぴ〜やま 様</li>
+                <li>くろめ(KUROME) 様</li>
             </ul>
         </div>
     </div>
