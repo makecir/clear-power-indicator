@@ -67,6 +67,7 @@
                 <li>豆電球 様</li>
                 <li>ぴ〜やま 様</li>
                 <li>くろめ(KUROME) 様</li>
+                <li>qs 様</li>
             </ul>
         </div>
     </div>
