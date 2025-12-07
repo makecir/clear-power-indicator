@@ -24,14 +24,19 @@ use Cake\ORM\Entity;
  * @property int $is_rated
  * @property float|null $easy_intercept
  * @property float|null $easy_coefficient
+ * @property float|null $easy_cfactor
  * @property float|null $clear_intercept
  * @property float|null $clear_coefficient
+ * @property float|null $clear_cfactor
  * @property float|null $hard_intercept
  * @property float|null $hard_coefficient
+ * @property float|null $hard_cfactor
  * @property float|null $exhard_intercept
  * @property float|null $exhard_coefficient
+ * @property float|null $exhard_cfactor
  * @property float|null $fc_intercept
  * @property float|null $fc_coefficient
+ * @property float|null $fc_cfactor
  * @property \Cake\I18n\FrozenTime $created_at
  * @property \Cake\I18n\FrozenTime $modified_at
  *
@@ -67,14 +72,19 @@ class Score extends Entity
         'is_rated' => true,
         'easy_intercept' => true,
         'easy_coefficient' => true,
+        'easy_cfactor' => true,
         'clear_intercept' => true,
         'clear_coefficient' => true,
+        'clear_cfactor' => true,
         'hard_intercept' => true,
         'hard_coefficient' => true,
+        'hard_cfactor' => true,
         'exhard_intercept' => true,
         'exhard_coefficient' => true,
+        'exhard_cfactor' => true,
         'fc_intercept' => true,
         'fc_coefficient' => true,
+        'fc_cfactor' => true,
         'created_at' => true,
         'modified_at' => true,
         'users' => true,
@@ -157,6 +167,8 @@ class Score extends Entity
            29 => "CastHour",
            30 => "RESIDENT",
            31 => "EPOLIS",
+           32 => "Pinky Crush",
+           33 => "Sparkle Shower",
         ];
         return $version_dict;
     }
@@ -182,59 +194,72 @@ class Score extends Entity
     }
 
     protected function _getFiftyRatingEasy(){
-        $ret = $this->getFiftyRating($this->easy_intercept, $this->easy_coefficient);
+        $ret = $this->getFiftyRating($this->easy_intercept, $this->easy_coefficient, $this->easy_cfactor);
         if($ret == -1)return "-";
         else return sprintf('%.2f',$ret);
     }
 
     protected function _getFiftyRatingClear(){
-        $ret = $this->getFiftyRating($this->clear_intercept, $this->clear_coefficient);
+        $ret = $this->getFiftyRating($this->clear_intercept, $this->clear_coefficient, $this->clear_cfactor);
         if($ret == -1)return "-";
         else return sprintf('%.2f',$ret);
     }
 
     protected function _getFiftyRatingHard(){
-        $ret = $this->getFiftyRating($this->hard_intercept, $this->hard_coefficient);
+        $ret = $this->getFiftyRating($this->hard_intercept, $this->hard_coefficient, $this->hard_cfactor);
         if($ret == -1)return "-";
         else return sprintf('%.2f',$ret);
     }
 
     protected function _getFiftyRatingExhard(){
-        $ret = $this->getFiftyRating($this->exhard_intercept, $this->exhard_coefficient);
+        $ret = $this->getFiftyRating($this->exhard_intercept, $this->exhard_coefficient, $this->exhard_cfactor);
         if($ret == -1)return "-";
         else return sprintf('%.2f',$ret);
     }
 
     protected function _getFiftyRatingFc(){
-        $ret = $this->getFiftyRating($this->fc_intercept, $this->fc_coefficient);
+        $ret = $this->getFiftyRating($this->fc_intercept, $this->fc_coefficient, $this->fc_cfactor);
         if($ret == -1)return "-";
         else if($ret > 5000 || $ret < -5000)return "Infinity";
         else return sprintf('%.2f',$ret);
     }
 
-    protected function getFiftyRating(&$intercept, &$coefficient){
+    protected function getFiftyRating(&$intercept, &$coefficient, &$cfactor = null){
         if($this->is_rated == 0 || $coefficient === 0) return -1;
-        return - ($intercept / $coefficient);
+        // Default cfactor to 0 for backward compatibility
+        if($cfactor === null) $cfactor = 0;
+        // New formula: -(intercept+LN(2^EXP(-cfactor)-1))/elo
+        return - ($intercept + log(pow(2, exp(-$cfactor)) - 1)) / $coefficient;
     }
 
     public function getProbabilityEasy(&$rating){
-        return 1/(1+M_E**(-($this->easy_intercept + $this->easy_coefficient*$rating)));
+        $cfactor = $this->easy_cfactor ?? 0;
+        // New formula: 1/((1+exp(-intercept-x*elo))^exp(cfactor))
+        return 1 / pow(1 + exp(-($this->easy_intercept + $this->easy_coefficient * $rating)), exp($cfactor));
     }
 
     public function getProbabilityClear(&$rating){
-        return 1/(1+M_E**(-($this->clear_intercept + $this->clear_coefficient*$rating)));
+        $cfactor = $this->clear_cfactor ?? 0;
+        // New formula: 1/((1+exp(-intercept-x*elo))^exp(cfactor))
+        return 1 / pow(1 + exp(-($this->clear_intercept + $this->clear_coefficient * $rating)), exp($cfactor));
     }
 
     public function getProbabilityHard(&$rating){
-        return 1/(1+M_E**(-($this->hard_intercept + $this->hard_coefficient*$rating)));
+        $cfactor = $this->hard_cfactor ?? 0;
+        // New formula: 1/((1+exp(-intercept-x*elo))^exp(cfactor))
+        return 1 / pow(1 + exp(-($this->hard_intercept + $this->hard_coefficient * $rating)), exp($cfactor));
     }
 
     public function getProbabilityExhard(&$rating){
-        return 1/(1+M_E**(-($this->exhard_intercept + $this->exhard_coefficient*$rating)));
+        $cfactor = $this->exhard_cfactor ?? 0;
+        // New formula: 1/((1+exp(-intercept-x*elo))^exp(cfactor))
+        return 1 / pow(1 + exp(-($this->exhard_intercept + $this->exhard_coefficient * $rating)), exp($cfactor));
     }
 
     public function getProbabilityFc(&$rating){
-        return 1/(1+M_E**(-($this->fc_intercept + $this->fc_coefficient*$rating)));
+        $cfactor = $this->fc_cfactor ?? 0;
+        // New formula: 1/((1+exp(-intercept-x*elo))^exp(cfactor))
+        return 1 / pow(1 + exp(-($this->fc_intercept + $this->fc_coefficient * $rating)), exp($cfactor));
     }
 
 }

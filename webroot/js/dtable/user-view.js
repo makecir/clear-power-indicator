@@ -251,6 +251,8 @@ $(function($){
           case 'CastHour':return '29';
           case 'RESIDENT':return '30';
           case 'EPOLIS':return '31';
+          case 'Pinky Crush':return '32';
+          case 'Sparkle Shower':return '33';
 
           case 'NO PLAY':return '90';
           case 'FAILED':return '91';
@@ -346,6 +348,8 @@ var versions = new Array('5th style',
     'CastHour',
     'RESIDENT',
     'EPOLIS',
+    'Pinky Crush',
+    'Sparkle Shower',
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',

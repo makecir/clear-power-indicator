@@ -135,12 +135,20 @@ class ScoresTable extends Table
             ->allowEmptyString('easy_coefficient');
 
         $validator
+            ->numeric('easy_cfactor')
+            ->allowEmptyString('easy_cfactor');
+
+        $validator
             ->numeric('clear_intercept')
             ->allowEmptyString('clear_intercept');
 
         $validator
             ->numeric('clear_coefficient')
             ->allowEmptyString('clear_coefficient');
+
+        $validator
+            ->numeric('clear_cfactor')
+            ->allowEmptyString('clear_cfactor');
 
         $validator
             ->numeric('hard_intercept')
@@ -151,6 +159,10 @@ class ScoresTable extends Table
             ->allowEmptyString('hard_coefficient');
 
         $validator
+            ->numeric('hard_cfactor')
+            ->allowEmptyString('hard_cfactor');
+
+        $validator
             ->numeric('exhard_intercept')
             ->allowEmptyString('exhard_intercept');
 
@@ -159,12 +171,20 @@ class ScoresTable extends Table
             ->allowEmptyString('exhard_coefficient');
 
         $validator
+            ->numeric('exhard_cfactor')
+            ->allowEmptyString('exhard_cfactor');
+
+        $validator
             ->numeric('fc_intercept')
             ->allowEmptyString('fc_intercept');
 
         $validator
             ->numeric('fc_coefficient')
             ->allowEmptyString('fc_coefficient');
+
+        $validator
+            ->numeric('fc_cfactor')
+            ->allowEmptyString('fc_cfactor');
 
         $validator
             ->dateTime('created_at')
