@@ -172,16 +172,16 @@
             </div>
             <div class="mb-3">
                 <h4 class="card-title">対応譜面</h4>
-                <div class="text-dark"><p>更新日: 2024/11/29</p></div> 
+                <div class="text-dark"><p>更新日: 2025/12/08</p></div> 
                 <dl class="list">
                     <dt>適正CPIおよびクリア確率算出対応譜面</dt>
                     <dd>
-                    IIDX31に2024/10月頃までに通常解禁可能な形式で収録された☆12譜面
+                    IIDX31に2025/11月頃までに通常解禁可能な形式で収録された☆12譜面
                     </dd>
                     <dt>ランプ一覧のみで扱う対応譜面</dt>
                     <dd>
-                    AResonant、Seven Times Four、The Onlyonez、DEATH†ZIGOQ ～怒りの高速爆走野郎～ [L]、MAD ATTACK [L]、海神 [L]、
-                    およびIIDX32で追加された譜面
+                    Flamingo、Pinky Happy Crazy、uen、≡+≡ [L]、POLKAMANIA [L]、聖人の塔 [L]、INAZUMA [L]、
+                    およびIIDX33で追加された譜面
                     </dd>
                 </dl>
             </div>

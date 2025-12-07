@@ -73,6 +73,8 @@ $(function($){
           case 'CastHour':return '29';
           case 'RESIDENT':return '30';
           case 'EPOLIS': return '31';
+          case 'Pinky Crush': return '32';
+          case 'Sparkle Shower': return '33';
 
           default:
             return '00';
@@ -128,7 +130,9 @@ var versions = new Array('5th style',
     'BISTROVER',
     'CastHour',
     'RESIDENT',
-    'EPOLIS'
+    'EPOLIS',
+    'Pinky Crush',
+    'Sparkle Shower'
 );
 var cur_lamps = new Array('NO PLAY',
     'FAILED',
