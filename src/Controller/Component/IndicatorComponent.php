@@ -123,7 +123,8 @@ class IndicatorComponent extends Component
                 if($score->is_rated == 1){
                     $intercept = $score[$this->pred_target[$lamp]."_intercept"];
                     $coefficient = $score[$this->pred_target[$lamp]."_coefficient"];
-                    $fifty = $this->fiftyInfo($intercept,$coefficient);
+                    $cfactor = $score[$this->pred_target[$lamp]."_cfactor"] ?? 0;
+                    $fifty = $this->fiftyInfo($intercept,$coefficient,$cfactor);
                 }
                 else $fifty = "未対応";
             }
@@ -158,10 +159,11 @@ class IndicatorComponent extends Component
                 $pred['lamp_tar_color'] = $this->color_info[$tar];
                 $intercept = $score[$this->pred_target[$tar]."_intercept"];
                 $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
-                $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
+                $cfactor = $score[$this->pred_target[$tar]."_cfactor"] ?? 0;
+                $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient,$cfactor);
                 $pred['diff'] = $score['difficulty'];
                 if($pred['probability'] > $top_tweet_info['rec']['prob']){
-                    $top_tweet_info['rec']['cpi'] = $this->fiftyInfo($intercept,$coefficient);
+                    $top_tweet_info['rec']['cpi'] = $this->fiftyInfo($intercept,$coefficient,$cfactor);
                     $top_tweet_info['rec']['title'] = $score['title_info_for_tweet'];
                     $top_tweet_info['rec']['lamp'] = $this->tar_lamp_info[$tar];
                     $top_tweet_info['rec']['prob'] = $pred['probability'];
@@ -194,11 +196,12 @@ class IndicatorComponent extends Component
             $pred['lamp_color'] = $this->color_info[$tar];
             $intercept = $score[$this->pred_target[$tar]."_intercept"];
             $coefficient = $score[$this->pred_target[$tar]."_coefficient"];
-            $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient);
+            $cfactor = $score[$this->pred_target[$tar]."_cfactor"] ?? 0;
+            $pred['probability'] = 100 * $this->predict($rating,$intercept,$coefficient,$cfactor);
             if($pred['probability']>50.0)continue;
             $pred['diff'] = $score['difficulty'];
             if($pred['probability'] < $top_tweet_info['bte']['prob']){
-                $top_tweet_info['bte']['cpi'] = $this->fiftyInfo($intercept,$coefficient);
+                $top_tweet_info['bte']['cpi'] = $this->fiftyInfo($intercept,$coefficient,$cfactor);
                 $top_tweet_info['bte']['title'] = $score['title_info_for_tweet'];
                 $top_tweet_info['bte']['lamp'] = $this->tar_lamp_info[$tar];
                 $top_tweet_info['bte']['prob'] = $pred['probability'];
@@ -291,7 +294,8 @@ class IndicatorComponent extends Component
             if($change->after_lamp >= 3 && $change->score->is_rated == 1){
                 $intercept = $change->score[$this->pred_target[$change->after_lamp]."_intercept"];
                 $coefficient = $change->score[$this->pred_target[$change->after_lamp]."_coefficient"];
-                $fifty = $this->fiftyInfo($intercept,$coefficient);
+                $cfactor = $change->score[$this->pred_target[$change->after_lamp]."_cfactor"] ?? 0;
+                $fifty = $this->fiftyInfo($intercept,$coefficient,$cfactor);
                 if($fifty > $top_change['cpi']){
                     $top_change['cpi'] = $fifty;
                     $top_change['title'] = $change->score->title_info_for_tweet;
@@ -313,15 +317,15 @@ class IndicatorComponent extends Component
         $result['exhard'] = array();
         $result['fc'] = array();
         for($x = 800 ; $x <= 4200 ; $x = $x+10){
-            $easy = sprintf('%.2f',100 * $this->predict($x, $score->easy_intercept, $score->easy_coefficient));
+            $easy = sprintf('%.2f',100 * $this->predict($x, $score->easy_intercept, $score->easy_coefficient, $score->easy_cfactor));
             if($easy < "0.10")continue;
-            $fc = sprintf('%.2f',100 * $this->predict($x, $score->fc_intercept, $score->fc_coefficient));
+            $fc = sprintf('%.2f',100 * $this->predict($x, $score->fc_intercept, $score->fc_coefficient, $score->fc_cfactor));
             if($fc > "99.90")continue;
             $result['x'][] = $x;
             $result['easy'][] = $easy;
-            $result['clear'][] = sprintf('%.2f',100 * $this->predict($x, $score->clear_intercept, $score->clear_coefficient));
-            $result['hard'][] = sprintf('%.2f',100 * $this->predict($x, $score->hard_intercept, $score->hard_coefficient));
-            $result['exhard'][] = sprintf('%.2f',100 * $this->predict($x, $score->exhard_intercept, $score->exhard_coefficient));
+            $result['clear'][] = sprintf('%.2f',100 * $this->predict($x, $score->clear_intercept, $score->clear_coefficient, $score->clear_cfactor));
+            $result['hard'][] = sprintf('%.2f',100 * $this->predict($x, $score->hard_intercept, $score->hard_coefficient, $score->hard_cfactor));
+            $result['exhard'][] = sprintf('%.2f',100 * $this->predict($x, $score->exhard_intercept, $score->exhard_coefficient, $score->exhard_cfactor));
             $result['fc'][] = $fc;
         }
         return $result;
@@ -347,8 +351,9 @@ class IndicatorComponent extends Component
                 if($score['is_rated'] == 1){
                     $intercept = $score[$this->pred_target[$i+3]."_intercept"];
                     $coefficient = $score[$this->pred_target[$i+3]."_coefficient"];
-                    $result['fifty'] = $this->fiftyInfo($intercept,$coefficient);
-                    $result['ind_diff'] = $this->individualDiff($coefficient);
+                    $cfactor = $score[$this->pred_target[$i+3]."_cfactor"] ?? 0;
+                    $result['fifty'] = $this->fiftyInfo($intercept,$coefficient,$cfactor);
+                    $result['ind_diff'] = $this->individualDiff($coefficient,$cfactor);
                     if($result['fifty']=="Infinity") {
                         $result['fifty'] = 5000;
                         $results[$i]['infinity'][] = $result;
@@ -415,25 +420,35 @@ class IndicatorComponent extends Component
         return $results;
     }
 
-    public function fifty(&$intercept, &$coefficient){
+    public function fifty(&$intercept, &$coefficient, &$cfactor = null){
         if($coefficient == 0) return -1;
-        return - ($intercept / $coefficient);
+        // Default cfactor to 0 for backward compatibility
+        if($cfactor === null) $cfactor = 0;
+        // New formula: -(intercept+LN(2^EXP(-cfactor)-1))/elo
+        return - ($intercept + log(pow(2, exp(-$cfactor)) - 1)) / $coefficient;
     }
     
-    public function fiftyInfo(&$intercept, &$coefficient){
-        $ret = $this->fifty($intercept, $coefficient);
+    public function fiftyInfo(&$intercept, &$coefficient, &$cfactor = null){
+        $ret = $this->fifty($intercept, $coefficient, $cfactor);
         if($ret > 5000 || $ret < -5000)return "Infinity";
         else return sprintf('%.2f',$ret);
     }
 
-    public function individualDiff(&$coefficient){
+    public function individualDiff(&$coefficient, &$cfactor = null){
         if($coefficient <= 0.0001) return "-1";
-        $ret = (1.0 / $coefficient);
+        // Default cfactor to 0 for backward compatibility
+        if($cfactor === null) $cfactor = 0;
+        // New formula: (LN(4^EXP(-cfactor)-1)-LN((4/3)^EXP(-cfactor)-1))/elo
+        $exp_cfactor = exp(-$cfactor);
+        $ret = (log(pow(4, $exp_cfactor) - 1) - log(pow(4/3, $exp_cfactor) - 1)) / $coefficient;
         return sprintf('%.2f',$ret);
     }
 
-    public function predict(&$rating, &$intercept, &$coefficient){
-        return 1/(1+M_E**(-($intercept+$coefficient*$rating)));
+    public function predict(&$rating, &$intercept, &$coefficient, &$cfactor = null){
+        // Default cfactor to 0 for backward compatibility
+        if($cfactor === null) $cfactor = 0;
+        // New formula: 1/((1+exp(-intercept-x*elo))^exp(cfactor))
+        return 1 / pow(1 + exp(-($intercept + $coefficient * $rating)), exp($cfactor));
     }
 
     public function getBaseAverage() {
