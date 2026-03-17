@@ -69,6 +69,7 @@
                 <li>くろめ(KUROME) 様</li>
                 <li>qs 様</li>
                 <li>背中 様</li>
+                <li>amylase 様</li>
             </ul>
         </div>
     </div>
