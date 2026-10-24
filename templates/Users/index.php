@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
+ * @var array $rows
  */
 ?>
 <div class="users index content">
@@ -57,21 +57,13 @@
                             <th align="center"><?= __('Updated at') ?></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php foreach ($users as $user): ?>
-                        <tr>
-                            <td>
-                                <?= $this->Html->link($user->user_detail->dj_name, ['action' => 'view', $user->id]) ?>
-                                <?= ($user->private_level!==0?' <i class="fas fa-lock"></i>':'') ?>
-                            </td>
-                            <td><?= h($user->user_detail->iidx_id) ?></td>
-                            <td><?= h($user->user_detail->rating_info) ?></td>
-                            <td><?= h($user->user_detail->grade_sp_info) ?></td>
-                            <td align="center"><?= $user->private_level!==0?"---":$user->user_detail->modified_at->format('Y/m/d') ?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
+                <?php // 行は user-index.js が JSON から作る ?>
+                <script>
+                    var usersIndexRows = <?= json_encode($rows, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE) ?>;
+                    var usersIndexViewUrl = <?= json_encode($this->Url->build(['action' => 'view']), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+                </script>
             </div>
         </div>
     </div>

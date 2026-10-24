@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Form\CSVForm;
 use Cake\ORM\TableRegistry;
-use Cake\I18n\Time;
+use Cake\I18n\FrozenTime;
 /**
  * Users Controller
  *
@@ -70,9 +70,25 @@ class UsersController extends AppController
                 'UserDetails',
             ],
         ]) ?? [];
+        // 1 万人規模になると、全員分の行を HTML で出すとブラウザでの表の組み立てに時間がかかる。
+        // 行のデータを JSON で渡し、表示する行だけを DataTables に作らせる (webroot/js/dtable/user-index.js)
+        $rows = [];
+        foreach ($users as $user) {
+            $is_private = $user->private_level !== 0;
+            $rows[] = [
+                'id' => $user->id,
+                'dj_name' => $user->user_detail->dj_name,
+                'is_private' => $is_private,
+                'iidx_id' => $user->user_detail->iidx_id,
+                'cpi' => $user->user_detail->rating_info,
+                'grade_sp' => $user->user_detail->grade_sp ?? 0,
+                'grade_sp_info' => $user->user_detail->grade_sp_info,
+                'updated_at' => $is_private ? '---' : $user->user_detail->modified_at->format('Y/m/d'),
+            ];
+        }
         $dtables=['user-index'];
 
-        $this->set(compact('users','dtables'));
+        $this->set(compact('rows','dtables'));
     }
 
     /**
@@ -95,7 +111,6 @@ class UsersController extends AppController
             ],
         ]);
         
-        $this->loadModel('Scores');
         $this->loadComponent('Indicator');
         $this->loadComponent('Lamp');
         $this->loadComponent('Follow');
@@ -189,6 +204,7 @@ class UsersController extends AppController
                         $input_lines = explode(PHP_EOL, $text_data);
                     }
                     $new_lamps = $this->Lamp->getNewLampDict($user, $input_lines);
+                    $invalid = false;
                     // if(is_null($new_lamps)){
                     //     $this->Flash->error(__('Fial to read data. Please, try again.'));
                     //     return $this->redirect(['action' => 'edit', $user->id]);
@@ -199,7 +215,6 @@ class UsersController extends AppController
                         $user_history->user_id = $user->id;
                     }
                     else{
-                        $invalid = false;
                         $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
                         if(is_null($user_history)){
                             // $this->Flash->warning(__('No changing. Please, check your play data.'));
@@ -210,7 +225,7 @@ class UsersController extends AppController
                         }
                     }
                     $this->Indicator->setRating($user, $user_history);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  FrozenTime::now()]]);
                     if($invalid)$this->Flash->warning(__('Contains inconsistent data.'));
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
@@ -448,7 +463,7 @@ class UsersController extends AppController
             $user_history = $UserHistories->newEmptyEntity();
             $user_history->user_id = $user->id;
             if($this->Indicator->setRating($user, $user_history)){
-                $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  FrozenTime::now()]]);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The rating has been saved.'));
                     return $this->redirect(['controller'=>'UserHistories', 'action' => 'view', $user_history->id]);
