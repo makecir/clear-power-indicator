@@ -70,9 +70,25 @@ class UsersController extends AppController
                 'UserDetails',
             ],
         ]) ?? [];
+        // 1 万人規模になると、全員分の行を HTML で出すとブラウザでの表の組み立てに時間がかかる。
+        // 行のデータを JSON で渡し、表示する行だけを DataTables に作らせる (webroot/js/dtable/user-index.js)
+        $rows = [];
+        foreach ($users as $user) {
+            $is_private = $user->private_level !== 0;
+            $rows[] = [
+                'id' => $user->id,
+                'dj_name' => $user->user_detail->dj_name,
+                'is_private' => $is_private,
+                'iidx_id' => $user->user_detail->iidx_id,
+                'cpi' => $user->user_detail->rating_info,
+                'grade_sp' => $user->user_detail->grade_sp ?? 0,
+                'grade_sp_info' => $user->user_detail->grade_sp_info,
+                'updated_at' => $is_private ? '---' : $user->user_detail->modified_at->format('Y/m/d'),
+            ];
+        }
         $dtables=['user-index'];
 
-        $this->set(compact('users','dtables'));
+        $this->set(compact('rows','dtables'));
     }
 
     /**

@@ -1,5 +1,14 @@
 $(document).ready(function() {
+    // 行のデータは templates/Users/index.php が JSON で渡す。deferRender で表示する行だけを作る
+    var escapeHtml = $.fn.dataTable.render.text().display;
+    // HTML のエスケープは表示するときだけ行い、検索・並べ替えには元の値を使う
+    var displayText = function (value, type) {
+        if (value == null) value = '';
+        return type === 'display' ? escapeHtml(value) : value;
+    };
     var table = $('#users-index').DataTable({
+        data: usersIndexRows,
+        deferRender: true,
         lengthMenu: [ 20, 50, 100, 1000],
         displayLength: 20,
         order:  [ [4, "desc"] ],
@@ -16,15 +25,20 @@ $(document).ready(function() {
             sInfoEmpty : "0 件中 0件 を表示しています", // 行が表示されていない場合
             sInfoFiltered : "全 _MAX_ 件から絞り込み" 
         },
-        columnDefs : [
-            {},
-            {},
-            {},
+        columns : [
             {
-                'targets' :  3,
-                'orderable' : true,
-                'orderDataType' : 'grade-jp'
-            }
+                data: 'dj_name',
+                render: function (dj_name, type, row) {
+                    if (type !== 'display') return displayText(dj_name, type);
+                    return '<a href="' + escapeHtml(usersIndexViewUrl + '/' + row.id) + '">' + displayText(dj_name, type) + '</a>'
+                        + (row.is_private ? ' <i class="fas fa-lock"></i>' : '');
+                }
+            },
+            { data: 'iidx_id', render: displayText },
+            { data: 'cpi', render: displayText },
+            // 並べ替えは段位の数値で行う (七級 < 六級 < ... < 皆伝)。表示する段位名はサーバーの固定の値
+            { data: { _: 'grade_sp_info', sort: 'grade_sp', type: 'grade_sp' } },
+            { data: 'updated_at', className: 'text-center' }
         ]
     });
     $('form').on('change', function(event) {
@@ -40,39 +54,6 @@ $.fn.dataTable.ext.search.push(
         return true;
     }
 );
-
-$(function($){ 
-    $.fn.dataTable.ext.order['grade-jp'] = function (settings, col){
-      return this.api().column(col, {order:'index'}).nodes().map(function (td, i) {
-        switch ($(td).html()){
-
-          case '七級':return '138';
-          case '六級':return '139';
-          case '五級':return '140';
-          case '四級':return '141';
-          case '三級':return '142';
-          case '二級':return '143';
-          case '一級':return '144';
-          case '初段':return '145';
-          case '二段':return '146';
-          case '三段':return '147';
-          case '四段':return '148';
-          case '五段':return '149';
-          case '六段':return '150';
-          case '七段':return '151';
-          case '八段':return '152';
-          case '九段':return '153';
-          case '十段':return '154';
-          case '中伝':return '155';
-          case '皆伝':return '156';
-          
-          default:
-            return '00';
-        }
-      });
-    };  
-  
-}); 
 
 function setValue(form,dict){
     const forms = document.forms[form];
