@@ -2,8 +2,8 @@
 
 PHP / CakePHP のバージョンを上げるときに、手元で動作を確かめるための環境。本番では使わない。
 
-- `app`: PHP 8.3 + Apache。本番 (Xserver) は PHP 7.4 で動いているため、このバージョンを反映するときはサーバの PHP を 8.3 に切り替える
-- `db`: MySQL 8.0（本番は MySQL 5.7。理由は `compose.yaml` のコメントを参照）
+- `app`: PHP 8.3 + Apache（本番 (Xserver) も PHP 8.3）
+- `db`: MySQL 8.0（本番は MySQL 5.7。理由は `compose.yaml` のコメントを参照）。5.7 にはハッシュ結合がないため、8.0 でも無効にして、結合の遅さを本番と揃えている
 
 ## 起動
 
@@ -28,6 +28,16 @@ docker compose exec -T db mysql -ucpi -pcpi cpi_db < /path/to/schema.sql
 docker compose exec -T db mysql -ucpi -pcpi cpi_db < docker/db/seed.sql
 ```
 
+## 本番の DB に手で行った変更
+
+リポジトリではスキーマを管理していないため、本番の DB に直接行った変更をここに残す。手元で使うスキーマは、変更のあとに取り直したものを使う。DB の構造を変えたら、本番で `php bin/cake.php cache clear_all` を実行して CakePHP のテーブル定義のキャッシュも消す。
+
+| 日付 | 変更 | 理由 |
+|---|---|---|
+| 2026/10/25 | `ALTER TABLE user_details MODIFY user_id INT(11) NOT NULL;`（変更前は `varchar(16) CHARACTER SET utf8`） | `users.id`（int）と型が違い、MySQL 5.7 では結合に `user_details` の主キーが使えず、ユーザー一覧（約 1.3 万人）の表示に 20〜40 秒かかっていた。変更後は約 0.7 秒 |
+
+戻すとき：`ALTER TABLE user_details MODIFY user_id VARCHAR(16) CHARACTER SET utf8 NOT NULL;`
+
 ## スモークテスト
 
 新規登録 → ランプ登録 → 各ページの閲覧 → 設定変更 → 退会 までを順に実行し、各レスポンスのステータスと HTML、最後の DB の状態を保存する。DB は毎回作り直す。
@@ -45,5 +55,5 @@ diff /tmp/smoke-before/summary.txt /tmp/smoke-after/summary.txt
 
 ## 注意
 
-- レーティングの計算は `ghost_lamps` を全件読み込むので、ダミーデータでは約 250MB のメモリを使う。`app` の `memory_limit` は `PHP_MEMORY_LIMIT`（既定 512M）で変えられる
+- `app` の `memory_limit` は `PHP_MEMORY_LIMIT`（既定 512M）で変えられる
 - 更新前のコードと比べるときは、`git worktree` で更新前のコードを取り出し、同じイメージで別のコンテナ（例: ポート 8766）を立てて `BASE_URL=http://localhost:8766 tests/smoke/run.sh ...` を実行する。HTML にはポート番号が入るので、比べるときは置き換える

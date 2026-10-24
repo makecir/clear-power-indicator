@@ -28,7 +28,8 @@ services:
       MYSQL_DATABASE: cpi_db
       MYSQL_USER: cpi
       MYSQL_PASSWORD: cpi
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --sql-mode=${MYSQL_SQL_MODE:-NO_ENGINE_SUBSTITUTION}
+    # MySQL 5.7 にはハッシュ結合がないため、8.0 でも無効にして結合の遅さを本番と揃える
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --sql-mode=${MYSQL_SQL_MODE:-NO_ENGINE_SUBSTITUTION} --optimizer-switch=block_nested_loop=off
     volumes:
       - db-data:/var/lib/mysql
       - ./docker/db/init.sql:/docker-entrypoint-initdb.d/00-init.sql:ro
