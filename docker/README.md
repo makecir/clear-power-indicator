@@ -2,7 +2,7 @@
 
 PHP / CakePHP のバージョンを上げるときに、手元で動作を確かめるための環境。本番では使わない。
 
-- `app`: PHP + Apache。既定は本番と同じ PHP 7.4。`PHP_VERSION` で切り替えられる
+- `app`: PHP 8.3 + Apache。本番 (Xserver) は PHP 7.4 で動いているため、このバージョンを反映するときはサーバの PHP を 8.3 に切り替える
 - `db`: MySQL 8.0（本番は MySQL 5.7。理由は `compose.yaml` のコメントを参照）
 
 ## 起動
@@ -14,13 +14,10 @@ docker compose exec app composer install
 
 `http://localhost:8765` で開ける。`config/app_local.php` が無ければ、起動時に `docker/php/app_local.php` がコピーされる。
 
-PHP のバージョンを変えるときは次のようにする。
+PHP のバージョンは `PHP_VERSION` で変えられるが、今のパッケージで動くのは PHP 8.3 だけ。
 
-```sh
-PHP_VERSION=8.1 docker compose up -d --build
-```
-
-ただし `composer.json` の `config.platform.php` で PHP 7.4.33 に固定しているため、`composer.lock` は PHP 7.4 向けのパッケージのまま。PHP 8 系で確かめるときは、固定を外して `composer update` し直す。
+- `composer.json` で PHP 8.3 以上を要求しているため、8.2 以下では動かない
+- CakePHP 4 が使う laminas/laminas-diactoros 2.x が PHP 8.3 までの対応のため、8.4 以上は CakePHP 5 に上げてから使う
 
 ## DB の用意
 

@@ -26,6 +26,8 @@ mysql_db() {
 mysql_db -e "DROP DATABASE IF EXISTS cpi_db; CREATE DATABASE cpi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
 mysql_db cpi_db < "$SCHEMA_SQL"
 mysql_db cpi_db < "$ROOT/docker/db/seed.sql"
+# 前回の実行で残ったアップロードファイルを消す (最後に、今回の実行で残っていないかを数える)
+find "$ROOT/webroot/uploaded" -type f ! -name .gitkeep -delete
 docker compose -f "$ROOT/compose.yaml" exec -T app bin/cake cache clear_all > /dev/null
 
 n=0
@@ -203,6 +205,18 @@ allfc=$uid
 request r_allfc_tables GET "/users/tables/$allfc"
 request r_allfc_compare GET "/users/compare/$allfc/$expert"
 request r_allfc_logout GET /users/logout
+# CSV ファイルをアップロードしてランプを登録する (CSVComponent)。改行が LF と CRLF の両方を試す
+request r_csv_add POST /users/add --data-urlencode "username=r_csv" --data-urlencode "password=password1" --data-urlencode "retype_password=password1"
+csv_user=$(mysql_db -N cpi_db -e "SELECT id FROM users WHERE username = 'r_csv'")
+skill_csv 2000 > "$OUT/playdata_lf.csv"
+skill_csv 2100 | sed 's/$/\r/' > "$OUT/playdata_crlf.csv"
+request r_csv_upload_lf POST "/users/edit/$csv_user" -F "_method=POST" -F "upload-csv=@$OUT/playdata_lf.csv;filename=playdata.csv;type=text/csv"
+request r_csv_upload_crlf POST "/users/edit/$csv_user" -F "_method=POST" -F "upload-csv=@$OUT/playdata_crlf.csv;filename=playdata.csv;type=text/csv"
+# ファイル名にディレクトリの移動 (../) や % を含む場合も、ファイル名を使わずに読み込めること
+request r_csv_upload_traversal POST "/users/edit/$csv_user" -F "_method=POST" -F "upload-csv=@$OUT/playdata_lf.csv;filename=../../config/playdata.csv;type=text/csv"
+request r_csv_upload_percent POST "/users/edit/$csv_user" -F "_method=POST" -F "upload-csv=@$OUT/playdata_crlf.csv;filename=%d%s.csv;type=text/csv"
+request r_csv_view GET "/users/view/$csv_user"
+request r_csv_logout GET /users/logout
 # ランプが 1 つもない状態で再計算する
 request r_nolamp_add POST /users/add --data-urlencode "username=r_nolamp" --data-urlencode "password=password1" --data-urlencode "retype_password=password1"
 nolamp=$(mysql_db -N cpi_db -e "SELECT id FROM users WHERE username = 'r_nolamp'")
@@ -218,6 +232,9 @@ for f in "$OUT"/*.html; do
         -e 's#/debug-kit/toolbar/[0-9a-f-]+#/debug-kit/toolbar/X#g' \
         "$f" && rm -f "$f.bak"
 done
+
+# アップロードされた CSV はサーバに残らない (読み込んだあと削除される)
+echo "webroot/uploaded: $(find "$ROOT/webroot/uploaded" -type f ! -name .gitkeep | wc -l | tr -d ' ') files" | tee -a "$OUT/summary.txt"
 
 echo "DB:"
 mysql_db cpi_db -e "SELECT 'users', COUNT(*) FROM users UNION ALL SELECT 'user_details', COUNT(*) FROM user_details UNION ALL SELECT 'user_lamps', COUNT(*) FROM user_lamps UNION ALL SELECT 'user_histories', COUNT(*) FROM user_histories UNION ALL SELECT 'lamp_changes', COUNT(*) FROM lamp_changes UNION ALL SELECT 'followings', COUNT(*) FROM followings UNION ALL SELECT 'concise_logs', COUNT(*) FROM concise_logs" | tee -a "$OUT/summary.txt"
