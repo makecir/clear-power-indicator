@@ -52,16 +52,16 @@ class ScoresController extends AppController
         $display_info['lamp_short'] = $this->Lamp->lamp_short_info;
 
         if(isset($identity)){
-            $this->loadModel('Users');
-            $this->loadModel('UserLamps');
-            $me = $this->Users->get($identity->id, [
+            $Users = $this->fetchTable('Users');
+            $UserLamps = $this->fetchTable('UserLamps');
+            $me = $Users->get($identity->id, [
                 'contain' => [
                     'UserDetails',
                 ],
             ]);
-            if($this->UserLamps->exists(['user_id'=>$me->id,'score_id'=>$score->id]))$my_data = $this->UserLamps->get(['user_id'=>$me->id,'score_id'=>$score->id]);
+            if($UserLamps->exists(['user_id'=>$me->id,'score_id'=>$score->id]))$my_data = $UserLamps->get(['user_id'=>$me->id,'score_id'=>$score->id]);
             else{
-                $my_data = $this->UserLamps->newEntity(['lamp'=>0]);
+                $my_data = $UserLamps->newEntity(['lamp'=>0]);
             }
             $this->set(compact('me', 'my_data'));
         }

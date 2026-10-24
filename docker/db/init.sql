@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS cpi_test CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+GRANT ALL PRIVILEGES ON cpi_test.* TO 'cpi'@'%';
