@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\Routing\Router;
 
 /**
  * Error Handling Controller
@@ -54,6 +55,14 @@ class ErrorController extends AppController
     public function beforeRender(EventInterface $event)
     {
         parent::beforeRender($event);
+
+        // AppController::beforeFilter() を通らないため、レイアウトで使うログイン状態をここで渡す。
+        // エラーページのリクエストは認証前のものなので、コントローラに渡された認証後のリクエストを Router から取る。
+        // 認証やルーティングのミドルウェアでエラーになった場合は認証後のリクエストが無く、未ログインとして表示する
+        $request = Router::getRequest();
+        $identity = $request ? $request->getAttribute('identity') : null;
+        $isLoggedIn = $identity !== null;
+        $this->set(compact('isLoggedIn', 'identity'));
 
         $this->viewBuilder()->setTemplatePath('Error');
     }

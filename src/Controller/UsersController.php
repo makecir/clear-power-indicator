@@ -188,6 +188,7 @@ class UsersController extends AppController
                         $input_lines = explode(PHP_EOL, $text_data);
                     }
                     $new_lamps = $this->Lamp->getNewLampDict($user, $input_lines);
+                    $invalid = false;
                     // if(is_null($new_lamps)){
                     //     $this->Flash->error(__('Fial to read data. Please, try again.'));
                     //     return $this->redirect(['action' => 'edit', $user->id]);
@@ -198,7 +199,6 @@ class UsersController extends AppController
                         $user_history->user_id = $user->id;
                     }
                     else{
-                        $invalid = false;
                         $user_history = $this->Lamp->saveLamps($user, $new_lamps, $invalid);
                         if(is_null($user_history)){
                             // $this->Flash->warning(__('No changing. Please, check your play data.'));

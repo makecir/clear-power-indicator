@@ -1,13 +1,8 @@
-# 開発・検証用の PHP 環境。PHP_VERSION を変えると PHP 8 系での動作も確認できる
-ARG PHP_VERSION=7.4
+# 開発・検証用の PHP 環境
+ARG PHP_VERSION=8.3
 FROM php:${PHP_VERSION}-apache
 
-# PHP 7.4 の公式イメージは Debian 11 (bullseye) ベースで、セキュリティ更新が
-# deb.debian.org から取得できなくなっているため archive.debian.org を使う
-RUN if grep -q bullseye /etc/os-release; then \
-        sed -i 's!deb.debian.org/debian-security!archive.debian.org/debian-security!' /etc/apt/sources.list; \
-    fi \
-    && apt-get update \
+RUN apt-get update \
     && apt-get install -y --no-install-recommends libicu-dev libzip-dev unzip \
     && docker-php-ext-install intl pdo_mysql zip \
     && a2enmod rewrite \
