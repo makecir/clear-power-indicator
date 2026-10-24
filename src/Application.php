@@ -88,7 +88,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
-            ->add(new ErrorHandlerMiddleware(Configure::read('Error')))
+            ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
 
             // Handle plugin/theme assets like CakePHP normally does.
             ->add(new AssetMiddleware([
@@ -125,7 +125,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
         $authenticationService = new AuthenticationService([
             'unauthenticatedRedirect' => Router::url([
-                "_ssl" => env('HTTPS', true),
+                "_https" => env('HTTPS', true),
                 "controller" => "Users",
                 "action" => "login", 'plugin' => null, 'prefix' => null
             ]),
@@ -149,15 +149,15 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'password' => 'password',
             ],
             Router::url([
-                "_ssl" => env('HTTPS', true),
+                "_https" => env('HTTPS', true),
                 "controller" => "Users",
                 "action" => "login", 'plugin' => null, 'prefix' => null
             ]),
         ]);
         $authenticationService->loadAuthenticator('Authentication.Cookie',[
             'cookie' => [
-                'expire' => new \DateTime('+1 Year'),
-                'httpOnly' => true,
+                'expires' => new \DateTime('+1 Year'),
+                'httponly' => true,
                 'secure' => env('HTTPS', true),
             ],
         ]);

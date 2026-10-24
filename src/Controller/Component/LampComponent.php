@@ -140,7 +140,7 @@ class LampComponent extends Component
         $this->allClearLamps($user);
 
         if(count($new_scores) !== 0){
-            $query = $UserLamps->query();
+            $query = $UserLamps->insertQuery();
             $query->insert(['user_id', 'score_id', 'lamp', 'miss_count']);
             foreach ($new_scores as $new_score) {
                 $query->values($new_score);
@@ -155,7 +155,7 @@ class LampComponent extends Component
         $UserHistories->save($user_history);
 
         if(count($lamp_changes) !== 0){
-            $query = $LampChanges->query();
+            $query = $LampChanges->insertQuery();
             $query->insert(['score_id', 'before_lamp', 'after_lamp', 'user_history_id']);
             foreach ($lamp_changes as $lamp_change) {
                 $lamp_change['user_history_id'] = $user_history->id;
@@ -183,7 +183,7 @@ class LampComponent extends Component
         $my_lamps = $Scores->find()->matching(
             'Users' , function ($q) use ($user) {
             return $q->where(['Users.id' => $user->id]);
-         })->toList();
+         })->all()->toList();
         $Users->Scores->unlink($user, $my_lamps);
         return $my_lamps;
     }
