@@ -472,33 +472,31 @@ class IndicatorComponent extends Component
         // ここから
         $my_lamps = $user->user_detail->my_lamps_array;
         if(count($my_lamps)==0)return false;
-        foreach($my_lamps as &$my_lamp){
-            if($my_lamp==2)$my_lamp=1;
-        }
+        // ゴーストごとに、自分のランプが上の譜面数 - 下の譜面数 を数え、勝ち越したゴースト数 - 負け越したゴースト数 を求める
+        // ghost_lamps は数百万行あるため、PHP に読み込まず DB で集計する。自分の ASSIST (2) は FAILED (1) として比べる
         $GhostLamps = TableRegistry::getTableLocator()->get('GhostLamps');
-        $ghost_lamps = $GhostLamps->find();
-        $battle_counts = array_fill(0, $GHOST_NUM, 0);
-        foreach($ghost_lamps as $i => $ghost_lamp){
-            if(!array_key_exists($ghost_lamp->score_id, $my_lamps))continue;
-            if($my_lamps[$ghost_lamp->score_id] > $ghost_lamp->lamp) $battle_counts[$ghost_lamp->ghost_id - 1]++;
-            else if($my_lamps[$ghost_lamp->score_id] < $ghost_lamp->lamp) $battle_counts[$ghost_lamp->ghost_id - 1]--;
-            unset($ghost_lamp);
-        }
-        $win = 0;
-        foreach($battle_counts as $battle_count){
-            if($battle_count > 0) $win++;
-            if($battle_count < 0) $win--;
-        }
+        $UserLamps = TableRegistry::getTableLocator()->get('UserLamps');
+        $row = $GhostLamps->getConnection()->execute(
+            'SELECT COALESCE(SUM(SIGN(battle_count)), 0) AS win FROM (
+                SELECT SUM(SIGN(IF(user_lamps.lamp = 2, 1, user_lamps.lamp) - ghost_lamps.lamp)) AS battle_count
+                FROM ' . $GhostLamps->getTable() . ' AS ghost_lamps
+                JOIN ' . $UserLamps->getTable() . ' AS user_lamps
+                    ON user_lamps.score_id = ghost_lamps.score_id AND user_lamps.user_id = ?
+                GROUP BY ghost_lamps.ghost_id
+            ) AS battles',
+            [$user->id]
+        )->fetch('assoc');
+        $win = (int)$row['win'];
         //$new_standing = $GHOST_NUM - ($win + $GHOST_NUM)/2.0 + 1;
         $reswin = ($win + $GHOST_NUM + 1)/2.0;
         $new_rating = 400.00*log10( $reswin / ($GHOST_NUM + 1 - $reswin) ) + $AVERAGE;
 
         $Ghosts = TableRegistry::getTableLocator()->get('Ghosts');
-        $ghosts = $Ghosts->find();
+        $ghosts = $Ghosts->find()->select(['rating'])->disableHydration();
         $new_standing = 1;
         foreach($ghosts as $ghost){
-            if($ghost->rating > $new_rating) $new_standing+=1;
-            if($ghost->rating == $new_rating) $new_standing+=0.5;
+            if($ghost['rating'] > $new_rating) $new_standing+=1;
+            if($ghost['rating'] == $new_rating) $new_standing+=0.5;
         }
 
         $UserHistories = TableRegistry::getTableLocator()->get('UserHistories');
