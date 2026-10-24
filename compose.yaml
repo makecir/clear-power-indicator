@@ -1,0 +1,39 @@
+# 開発・検証用。本番では使わない。
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION:-7.4}
+    ports:
+      - "8765:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      # レーティング計算 (IndicatorComponent::setRating) は ghost_lamps を全件読み込むため、
+      # seed.sql のダミーデータでは PHP の既定値 128M では足りない
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
+    depends_on:
+      - db
+
+  db:
+    # 本番 (Xserver) は MySQL 5.7。5.7 の公式イメージは amd64 のみで Apple Silicon では
+    # エミュレーションで起動できないため 8.0 を使う。
+    # sql_mode は本番に合わせる。アプリは NOT NULL 列を空のまま INSERT する箇所があり
+    # (LampComponent::saveLamps の user_histories)、STRICT_TRANS_TABLES では失敗する
+    image: mysql:8.0.40
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cpi_db
+      MYSQL_USER: cpi
+      MYSQL_PASSWORD: cpi
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --sql-mode=${MYSQL_SQL_MODE:-NO_ENGINE_SUBSTITUTION}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/00-init.sql:ro
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-data:

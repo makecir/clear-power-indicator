@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Form\CSVForm;
 use Cake\ORM\TableRegistry;
-use Cake\I18n\Time;
+use Cake\I18n\FrozenTime;
 /**
  * Users Controller
  *
@@ -95,7 +95,6 @@ class UsersController extends AppController
             ],
         ]);
         
-        $this->loadModel('Scores');
         $this->loadComponent('Indicator');
         $this->loadComponent('Lamp');
         $this->loadComponent('Follow');
@@ -210,7 +209,7 @@ class UsersController extends AppController
                         }
                     }
                     $this->Indicator->setRating($user, $user_history);
-                    $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                    $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  FrozenTime::now()]]);
                     if($invalid)$this->Flash->warning(__('Contains inconsistent data.'));
                     if ($this->Users->save($user)) {
                         $this->Flash->success(__('The rating has been saved.'));
@@ -448,7 +447,7 @@ class UsersController extends AppController
             $user_history = $UserHistories->newEmptyEntity();
             $user_history->user_id = $user->id;
             if($this->Indicator->setRating($user, $user_history)){
-                $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  Time::now()]]);
+                $user = $this->Users->patchEntity($user, ['user_detail' => ['update_at' =>  FrozenTime::now()]]);
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The rating has been saved.'));
                     return $this->redirect(['controller'=>'UserHistories', 'action' => 'view', $user_history->id]);
